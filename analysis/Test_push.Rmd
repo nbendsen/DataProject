@@ -1,0 +1,9 @@
+---
+title: "How to create data subset"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+This is a test

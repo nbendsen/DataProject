@@ -1,0 +1,21 @@
+---
+title: "Calculating shannon index for plots"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r, include=FALSE}
+source("code/function_shannon.R")
+```
+
+To implement the proposed method we've created the following function. The function takes as input a cover dataset and a presence/absence dataset.
+<br>
+It is assumed that the first three columns in both cover data and presence/absence data is "site", "year" and "plot" as it is the case in the NOVANA dataset. The cover_data and freq_data is a subset of the input data without these columns. The two datasets have to match on rownames (e.i. must contain the same plots), however they do not have to contain the same colnames (species).
+<br><br>
+bla, bla, bla 
+```{r}
+shanon_index_v2
+```
+

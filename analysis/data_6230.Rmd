@@ -1,0 +1,33 @@
+---
+title: "How to create data subset"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+On this page we show have we have created the data we work with in the example. <br><br>
+We read in the following three datasets from the NOVANA dataset
+```{r, eval=FALSE}
+cover <- read.csv("alledata-cover.csv")
+
+frekvens <- read.csv("alledata-frekvens.csv")
+
+abiotiske <- read.csv("alledata-abiotiske.csv")
+```
+
+We are only interested in the terhabtype = 6230 and we only look at year 2014. We get this subset for each of three dataframes in the following way:
+```{r, eval = FALSE}
+cover <- cover[abiotiske$terhabtype == "{6230}" & abiotiske$year == 2014,]
+frekvens <- frekvens[abiotiske$terhabtype == "{6230}" & abiotiske$year == 2014,]
+abiotiske <- abiotiske[abiotiske$terhabtype == "{6230}" & abiotiske$year == 2014,]
+```
+
+Lastly we save these new dataframes.
+
+```{r, eval = FALSE}
+write.csv(cover, file = "cover_data_6230_year2014.csv", row.names=FALSE)
+write.csv(frekvens, file = "frekvens_data_6230_year2014.csv", row.names=FALSE)
+write.csv(abiotiske, file = "abiotiske_data_6230_year2014.csv", row.names=FALSE)
+```
+
+

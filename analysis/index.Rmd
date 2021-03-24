@@ -1,5 +1,5 @@
 ---
-title: "Home"
+title: "Main page"
 site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
@@ -7,5 +7,153 @@ output:
 editor_options:
   chunk_output_type: console
 ---
+```{r, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
 
-Welcome to my research website.
+<h1>Introduction</h1>
+Many methods for estimating the abundance of species within an area has been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and prensence/absence data. We will be working with a subset of the NOVANA dataset as an example to show how this new method can be applied.
+<br><br>
+The NOVANA dataset consists of several parts. We will be using data of cover and presence/absence of species within each plot and also further data about each plot. 
+<br>
+Cover data of species in a given area can be done in many ways. In the NOVANA dataset the pin-point method is used to estimate the abundance of species in a plot. In the center of each plot $n$ pins is placed and the number of pins each specie is hit by is recorded. As an example the below dataframe shows what cover data could look like
+```{r, include=FALSE}
+Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
+                       a2 = c(0,0,0,2,0,1,10),
+                       a3 = c(0,0,1,1,16,0,2),
+                       a4 = c(1,0,10,9,0,0,7),
+                       a5 = c(0,0,0,3,0,0,0),
+                       a6 = c(3,0,11,0,14,1,13),
+                       a7 = c(0,0,7,4,0,1,0),
+                       a8 = c(0,0,16,9,0,0,9),
+                       a9 = c(2,0,0,1,11,0,5),
+                       a10 = c(0,0,0,1,13,0,0))
+
+
+rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+```
+
+```{r}
+kable(Cover, "html") %>% kable_styling()
+```
+
+The other part we will use to estimate the abundance of species in each plot is the precense/absence data. Within each plot it is recorded whether a specie is to be found somewhere in the plot. This is indicated by a binary variable with found = 1. Below is an example of what this data could look like
+```{r, include=FALSE}
+PersenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
+                                 a2 = c(1,1,0,1,0,1,1),
+                                 a3 = c(0,0,1,1,1,0,1),
+                                 a4 = c(1,0,1,1,0,0,1),
+                                 a5 = c(0,0,0,1,0,0,1),
+                                 a6 = c(1,0,1,0,1,1,1),
+                                 a7 = c(1,0,1,1,0,1,0),
+                                 a8 = c(0,0,1,1,0,0,1),
+                                 a9 = c(1,0,0,1,1,0,1),
+                                 a10 = c(0,0,0,1,1,0,1))
+
+
+rownames(PersenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(PersenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+```
+
+
+```{r}
+kable(PersenceAbsence, "html") %>% kable_styling()
+```
+
+Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method.
+<br><br>
+The plant diversity is often calculated by only using the cover data. However, in this method we loose a lot of valuable information from the presence/absence data. In the following we propose a method that obtain an estimate of a specie's abundance in each plot that takes into account the spatial aggregation of the species. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model.
+<br><br>
+In the cover data each specie is hit by $y$ pins out of $n$ possible. To model this we apply the binomial distribution
+$$
+P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
+$$
+<br>
+In the bayesion framework the binomial model is used as a likelihood function when modeling the posterior distribution for a specie's abundance in each plot.
+<br>
+We can create a prior distribution $\theta$ for each specie by using both cover and presence/absence data. The beta model is a conjugacy prior for the binomial model and, thus, is ideal to use. The beta-model is given by 
+$$
+f(\theta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
+$$
+For each specie we fit a beta-prior using all the cover data where the corresponding presence/absence data is 1.  
+<br><br>
+Using the above we can form a posterior, that will be an updated beta distribution for each specie in each plot
+$$
+\theta | (Y = y) \sim Beta(\alpha + y, \beta + n-y)
+$$
+When the posterior distribution is found for a specie in a given plot, we use the mean posterior as a measure of the abundance for the specie in the plot. <br>
+
+The mean posterior for a beta-distribution is given by:
+
+$$
+\frac{\alpha + y}{\alpha + y+\beta + n-y}
+$$
+
+
+## An example
+
+We work with data only including the terhabtype = 6230 from the NOVANA dataset and we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
+
+```{r}
+cover <- read.csv("data/cover_data_6230_year2014.csv")
+
+freq <- read.csv("data/frekvens_data_6230_year2014.csv")
+
+abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
+
+```
+<br>
+
+```{r, include=FALSE}
+source("code/function_shannon.R")
+```
+
+The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. For further specifications of the function click [link](function_shannon.html)
+
+
+
+Apply our shannon function on the data
+```{r, message=FALSE, warning=FALSE}
+result <- shanon_index_v2(cover, freq)
+```
+
+
+
+```{r}
+kable(result, "html") %>%
+    kable_styling() %>%
+    scroll_box(width = "900px", height = "400px")
+```
+
+
+Look at connection between pH value of the soil and the shannon index for the plot.
+
+```{r}
+result$pH <- abiotiske$pHjord
+plot_result <- result[!(result$pH == "mv"),]
+plot_result$pH <- as.numeric(plot_result$pH)
+
+ggplot(plot_result, aes(pH, shannon))+
+  geom_point()+
+  xlim(3,6.5)+
+  theme_classic()+
+  labs(x = "pH value of the soil", y = "Shannon index")+
+  ggtitle("Shannon index and pH value of soil at each plot")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

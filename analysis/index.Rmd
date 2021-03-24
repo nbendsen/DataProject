@@ -124,7 +124,7 @@ result <- shanon_index_v2(cover, freq)
 ```{r}
 kable(result, "html") %>%
     kable_styling() %>%
-    scroll_box(width = "900px", height = "400px")
+    scroll_box(width = "800px", height = "400px")
 ```
 
 

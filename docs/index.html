@@ -513,16 +513,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreec1edf4a0c2471c9cf2bc6cfadf766097f58f997atargetblankc1edf4aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/c1edf4a0c2471c9cf2bc6cfadf766097f58f997a" target="_blank">c1edf4a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree7762b809485598946ef7325ffc8404efd623bbf3targetblank7762b80a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/7762b809485598946ef7325ffc8404efd623bbf3" target="_blank">7762b80</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreec1edf4a0c2471c9cf2bc6cfadf766097f58f997atargetblankc1edf4aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree7762b809485598946ef7325ffc8404efd623bbf3targetblank7762b80a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/c1edf4a0c2471c9cf2bc6cfadf766097f58f997a" target="_blank">c1edf4a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/7762b809485598946ef7325ffc8404efd623bbf3" target="_blank">7762b80</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -575,6 +575,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/7762b809485598946ef7325ffc8404efd623bbf3/analysis/index.Rmd" target="_blank">7762b80</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-03-24
+</td>
+<td>
+wflow_publish(c(“analysis/index.rmd”))
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/35cf5646eb7b26ced5488f6f5e85497b46d8dea9/docs/index.html" target="_blank">35cf564</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-03-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -18592,10 +18626,7 @@ shannon
 </tbody>
 </table>
 </div>
-</div>
-<div id="plot" class="section level2">
-<h2>Plot</h2>
-<p>Look at connection between pH value of the soil and the shannon index for the plot.</p>
+<p><br><br> ## Plot Look at connection between pH value of the soil and the shannon index for the plot.</p>
 <pre class="r"><code>result$pH &lt;- abiotiske$pHjord
 plot_result &lt;- result[!(result$pH == &quot;mv&quot;),]
 plot_result$pH &lt;- as.numeric(plot_result$pH)

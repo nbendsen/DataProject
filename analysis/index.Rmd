@@ -126,7 +126,7 @@ kable(result, "html") %>%
     kable_styling() %>%
     scroll_box(width = "800px", height = "400px")
 ```
-
+<br><br>
 ## Plot
 Look at connection between pH value of the soil and the shannon index for the plot.
 

@@ -92,7 +92,7 @@ $$
 $$
 
 
-## An example
+<h1>An example </h1>
 
 We work with data only including the terhabtype = 6230 from the NOVANA dataset and we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
 
@@ -127,7 +127,9 @@ kable(result, "html") %>%
     scroll_box(width = "800px", height = "400px")
 ```
 <br><br>
-## Plot
+
+<h1>Plot </h1>
+
 Look at connection between pH value of the soil and the shannon index for the plot.
 
 ```{r}

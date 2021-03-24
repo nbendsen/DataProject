@@ -17,7 +17,7 @@ Many methods for estimating the abundance of species within an area has been pro
 <br><br>
 The NOVANA dataset consists of several parts. We will be using data of cover and presence/absence of species within each plot and also further data about each plot. 
 <br>
-Cover data of species in a given area can be done in many ways. In the NOVANA dataset the pin-point method is used to estimate the abundance of species in a plot. In the center of each plot $n$ pins is placed and the number of pins each specie is hit by is recorded. As an example the below dataframe shows what cover data could look like where 16 pins are used in each plot
+Cover data of species in a given area can be done in many ways. In the NOVANA dataset the pin-point method is used to estimate the abundance of species in a plot. In the center of each plot $n$ pins is placed and the number of pins each specie is hit by is recorded. In the NOVANA dataset 16 pins are used. As an example the below dataframe shows what cover data could look like
 ```{r, include=FALSE}
 Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
                        a2 = c(0,0,0,2,0,1,10),

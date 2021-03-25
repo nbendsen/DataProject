@@ -147,8 +147,26 @@ ggplot(plot_result, aes(pH, shannon))+
 ```
 
 
+This is a test.
+
+```{r}
+result_merged <- merge(result, abiotiske, by = c("site", "plot", "year"))
+```
 
 
+```{r}
+plot_merge <- result[!(result$pH == "mv"),]
+plot_merge$pH <- as.numeric(plot_merge$pH)
+
+ggplot(plot_merge, aes(x = pH, y = shannon, color = factor(site)))+
+  geom_point()+
+  xlim(3,6.5)+
+  theme_classic()+
+  theme(legend.position = "none") +
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "pH value of the soil", y = "Shannon index")+
+  ggtitle("Shannon index and pH value of soil at each plot")
+```
 
 
 

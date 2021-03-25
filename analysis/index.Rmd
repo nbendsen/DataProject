@@ -64,7 +64,7 @@ kable(PersenceAbsence, "html") %>% kable_styling()
 
 Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method.
 <br><br>
-The plant diversity is often calculated by only using the cover data. However, in this method we loose a lot of valuable information from the presence/absence data. In the following we propose a method that obtain an estimate of a specie's abundance in each plot that takes into account the spatial aggregation of the species. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model.
+The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a specie's abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model.
 <br><br>
 In the cover data each specie is hit by $y$ pins out of $n$ possible. To model this we apply the binomial distribution
 $$

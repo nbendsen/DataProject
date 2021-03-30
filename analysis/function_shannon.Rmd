@@ -1,6 +1,8 @@
 ---
 title: "Calculating shannon index for plots"
-output: workflowr::wflow_html
+output:
+  workflowr::wflow_html:
+    toc: true
 editor_options:
   chunk_output_type: console
 ---
@@ -9,12 +11,93 @@ editor_options:
 ```{r, include=FALSE}
 source("code/function_shannon.R")
 ```
-
+<h1> Description of code </h1>
 To implement the proposed method we've created the following function. The function takes as input a cover dataset and a presence/absence dataset.
-<br>
-It is assumed that the first three columns in both cover data and presence/absence data is "site", "year" and "plot" as it is the case in the NOVANA dataset. The cover_data and freq_data is a subset of the input data without these columns. The two datasets have to match on rownames (e.i. must contain the same plots), however they do not have to contain the same colnames (species).
+It is assumed that the first three columns in both cover data and presence/absence data is "site", "year" and "plot" as it is the case in the NOVANA dataset. The two datasets have to match on rownames (e.i. must contain the same plots), however they do not have to contain the same colnames (species). The cover_data and freq_data is a subset of the input data without these columns. 
 <br><br>
-bla, bla, bla 
+A dataframe "beta_fit" is created. This dataframe will contain a column with each specie in the cover data and corresponding $a$ and $b$ values from the fitted beta-distribution for the given specie. As discussed on the main page we will fit a beta-distribution for each specie using all the cover data where the correspoding presence/absence data has a 1. This will give a prior belief of the spatial distribution of the specie. The first for-loop in the function will take care of this for all species. For each specie all the cover data is divided by 16 because in the NOVANA dataset the cover of a specie in a plot is given by a number between 0 and 16. Dividing by 16 we get cover values on the interval $[0,1]$ as this is the interval on which the beta-distribution is defined.
+<br>
+We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package "fitdistrplus" with method = "method of moments" because this method can handle the values of 0 and 1.
+<br><br>
+Below is a snippet of the part of the function descripted above
+```{r, eval = FALSE}
+library(fitdistrplus) #package used for fitting beta-distribution
+cover_data <- cover[,4:ncol(cover)]
+freq_data <- freq[,4:ncol(freq)]
+  
+  
+#create data frame to hold the fitted values for each species
+beta_fit <- data.frame(matrix(ncol = 3, nrow = 0))
+  
+colnames(beta_fit) <- c("species","a", "b")
+  
+# for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
+for (specie in colnames(cover_data)) {
+  beta_data <- cover_data[,specie]/16
+    
+  #remove all plots with 0 in presence/absence data
+  beta_data <- beta_data[freq_data[[specie]] == 1]
+    
+    
+  if (length(unique(beta_data)) > 1) {
+    beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
+    beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
+      
+    }
+  }
+```
+
+After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get updated abundance estimates for species in each plot. Following this we can also calculate the shannon index for each plot.
+<br><br>
+The vector "shannon_list" gets updated with the shannon index for each plot as we loop through them. The outer for-loop loops through all the plots. The mean_posterior vector is created and used when we in the inner loop loops through each specie that has a 1 in the presence/absence data for the given plot. For each of these species their updated mean posterior is calculated in accordance to the theoretical discusison on the main page.  
+<br>
+When the inner loop is done the shannon index for the plot is calculated in accordance to (link to diversity page). We only use the mean postorior values that are greater than 1e-05 because using values less than these can give numerical issues in the log-function used to calculate the shannon index.
+<br><br>
+Below is a snippet of the part of the function descripted above
+```{r, eval = FALSE}
+# create list for shannon index for each plot
+shannon_list <- c()
+  
+for (row in 1:nrow(cover_data)) {
+    
+  # Create an empty list for a given row
+  mean_posterior <- c()
+    
+    
+  # for a given row, find out what species is found in frequency data
+  species_spotted_in_frekvens <- colnames(freq_data[c(freq_data[row,]  == 1)])
+    
+  #For each species spotten in frequency, appends its posterior cover to the cover data for that row
+  for (species_spotted in species_spotted_in_frekvens ) {
+      
+      
+    alpha_post <- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) + as.numeric(cover_data[[species_spotted]][row]) ))
+      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + 16 - as.numeric(cover_data[[species_spotted]][row])
+      
+      mean_posterior <- append(mean_posterior, (alpha_post)/(alpha_post+beta_post))
+  }
+    
+#Calculate the shanon index value and append it to the list after normalizing and removing zeroes
+    
+  total_cover <- sum(mean_posterior)
+  mean_posterior <- mean_posterior[!(mean_posterior < 0.00001)]
+  shannon_index <- -sum(mean_posterior/total_cover * log((mean_posterior/total_cover))) 
+    
+  shannon_list <- append(shannon_list,shannon_index)  
+    
+  }
+```
+
+For the output we create a dataframe with "site", "plot" and "year" and "shannon index". 
+```{r, eval = FALSE}
+output <- cover[,1:3]
+output$shannon_index <- shannon_list
+return(output)
+```
+
+Alternatively one can modify the code if the output should be in another form. 
+<h1>The function </h1>
+Below is the entire function in one code chunk
 ```{r}
 shanon_index_v2
 ```

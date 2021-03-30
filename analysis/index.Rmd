@@ -110,7 +110,7 @@ abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 source("code/function_shannon.R")
 ```
 
-The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. For further specifications of the function click [link](function_shannon.html)
+The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. The function takes as input a cover dataset and a presence/absence dataset and output a dataframe with each plot and its corresponding shannon index. For further specifications of the function click [link](function_shannon.html)
 
 
 
@@ -137,7 +137,7 @@ result$pH <- abiotiske$pHjord
 plot_result <- result[!(result$pH == "mv"),]
 plot_result$pH <- as.numeric(plot_result$pH)
 
-ggplot(plot_result, aes(pH, shannon))+
+ggplot(plot_result, aes(pH, shannon_index))+
   geom_point()+
   xlim(3,6.5)+
   theme_classic()+

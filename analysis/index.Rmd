@@ -130,43 +130,29 @@ kable(result, "html") %>%
 
 <h1>Plot </h1>
 
-Look at connection between pH value of the soil and the shannon index for the plot.
+Look at connection between pH value of the soil and the shannon index for the plot. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documnetation is [Here](function_simple_shannon.Rmd).
 
 ```{r}
 result$pH <- abiotiske$pHjord
-plot_result <- result[!(result$pH == "mv"),]
-plot_result$pH <- as.numeric(plot_result$pH)
-
-ggplot(plot_result, aes(pH, shannon))+
-  geom_point()+
-  xlim(3,6.5)+
-  theme_classic()+
-  labs(x = "pH value of the soil", y = "Shannon index")+
-  ggtitle("Shannon index and pH value of soil at each plot")
-
-```
-
-
-This is a test.
-
-```{r}
-result_merged <- merge(result, abiotiske, by = c("site", "plot", "year"))
+result$row_shannon <- row_shannon(cover_data = cover, species_indicator = "X")
+result$species_richness <- species_richness(freq, species_indicator = "X")
+result$hills_number <- exp(result$row_shannon)
 ```
 
 
 ```{r}
-plot_merge <- result[!(result$pH == "mv"),]
-plot_merge$pH <- as.numeric(plot_merge$pH)
-
-ggplot(plot_merge, aes(x = pH, y = shannon, color = factor(site)))+
-  geom_point()+
-  xlim(3,6.5)+
-  theme_classic()+
-  theme(legend.position = "none") +
-  geom_smooth(method = "lm", se = FALSE) + 
-  labs(x = "pH value of the soil", y = "Shannon index")+
-  ggtitle("Shannon index and pH value of soil at each plot")
+head(result)
 ```
+
+
+
+```{r, message=FALSE, warning=FALSE}
+plot_index_gradient(result ,c("shannon", "row_shannon","species_richness", "hills_number"), "pH", gradient_text = "The PH value of the soil for each plot")
+```
+
+
+
+
 
 
 

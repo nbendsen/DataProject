@@ -376,12 +376,6 @@ div.tocify {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -425,7 +419,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-03-25
+<strong>Last updated:</strong> 2021-03-30
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -516,16 +510,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreea90c239b5c4054e976c560d4750a857d387ba527targetblanka90c239a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/a90c239b5c4054e976c560d4750a857d387ba527" target="_blank">a90c239</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreea90c239b5c4054e976c560d4750a857d387ba527targetblanka90c239a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/a90c239b5c4054e976c560d4750a857d387ba527" target="_blank">a90c239</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -543,6 +537,10 @@ Untracked files:
     Untracked:  data/frekvens_data_5130.csv
     Untracked:  data/frekvens_data_6230.csv
     Untracked:  test project/
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+    Modified:   code/function_shannon.R
 
 </code></pre>
 <p>
@@ -581,6 +579,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/b8765a56946b12f6b3e0f505d015e6e6fa27c08b/analysis/index.Rmd" target="_blank">b8765a5</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-03-30
+</td>
+<td>
+wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/96ffa9e1c45d05cdefbf34050dfc7bf45ff9ad8f/docs/index.html" target="_blank">96ffa9e</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-03-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1493,7 +1525,7 @@ freq &lt;- read.csv(&quot;data/frekvens_data_6230_year2014.csv&quot;)
 
 abiotiske &lt;- read.csv(&quot;data/abiotiske_data_6230_year2014.csv&quot;)</code></pre>
 <p><br></p>
-<p>The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. For further specifications of the function click <a href="function_shannon.html">link</a></p>
+<p>The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. The function takes as input a cover dataset and a presence/absence dataset and output a dataframe with each plot and its corresponding shannon index. For further specifications of the function click <a href="function_shannon.html">link</a></p>
 <p>Apply our shannon function on the data</p>
 <pre class="r"><code>result &lt;- shanon_index_v2(cover, freq)</code></pre>
 <pre class="r"><code>kable(result, &quot;html&quot;) %&gt;%
@@ -1513,7 +1545,7 @@ plot
 year
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-shannon
+shannon_index
 </th>
 </tr>
 </thead>
@@ -18778,7 +18810,7 @@ Plot
 plot_result &lt;- result[!(result$pH == &quot;mv&quot;),]
 plot_result$pH &lt;- as.numeric(plot_result$pH)
 
-ggplot(plot_result, aes(pH, shannon))+
+ggplot(plot_result, aes(pH, shannon_index))+
   geom_point()+
   xlim(3,6.5)+
   theme_classic()+

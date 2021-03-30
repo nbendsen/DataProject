@@ -1,0 +1,21 @@
+---
+title: "documentation for the plot_index_gradient function"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+```{r, include= FALSE}
+source("code/function_shannon.R")
+```
+
+The function takes in arguments:
+
+* data: A data frame with the different indexes to be compared and the gradient to compare them against
+* indexes: A list of the column names for the indexes as strings.
+* gradient:The column name for the gradient as a string.
+* gradient_text: A description of the gradient as a string.
+
+```{r, echo = FALSE}
+plot_index_gradient
+```
+

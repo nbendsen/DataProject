@@ -1,0 +1,30 @@
+---
+title: "Documentation for different ways of calculating diversity"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+  toc: TRUE
+---
+
+```{r, include=FALSE}
+source("code/function_shannon.R")
+```
+
+Functions for calculating a simpler shannon index and species richness
+
+<h1>Row_shannon </h1>
+
+The simpler shannon index only uses cover data.
+
+```{r, echo = FALSE}
+row_shannon
+```
+
+<h1>species_richness </h1>
+
+Species richness is the number of observed species in a given plot.
+
+
+```{r, echo = FALSE}
+species_richness
+```

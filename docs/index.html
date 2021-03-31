@@ -13,6 +13,7 @@
 
 <title>Main page</title>
 
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -37,6 +38,8 @@ div.section {
   padding-top: 12px;
 }
 </style>
+
+
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -371,12 +374,6 @@ div.tocify {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -515,12 +512,17 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </p>
 </div>
 <div id="strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1treea2dddd64cb2bf6618893ba57672cc98b5b0a4f4btargetblanka2dddd6a" class="panel-collapse collapse">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version <a href="https://github.com/MHPHP/DataProject-1/tree/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b" target="_blank">a2dddd6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -528,11 +530,17 @@ Note that you need to be careful to ensure that all relevant files for the analy
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
+
     Ignored:    .Rproj.user/
+
 
 Untracked files:
     Untracked:  analysis/function_simple_shannon.Rmd
     Untracked:  analysis/gradient_plot.Rmd
+
+Unstaged changes:
+    Modified:   analysis/_site.yml
+    Modified:   code/function_shannon.R
 
 </code></pre>
 <p>
@@ -576,6 +584,7 @@ Message
 Rmd
 </td>
 <td>
+
 <a href="https://github.com/MHPHP/DataProject-1/blob/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b/analysis/index.Rmd" target="_blank">a2dddd6</a>
 </td>
 <td>
@@ -596,13 +605,22 @@ html
 <a href="https://rawcdn.githack.com/MHPHP/DataProject-1/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b/docs/index.html" target="_blank">a2dddd6</a>
 </td>
 <td>
-MHPHP
+
+
+<a href="https://github.com/nbendsen/DataProject/blob/b8765a56946b12f6b3e0f505d015e6e6fa27c08b/analysis/index.Rmd" target="_blank">b8765a5</a>
+</td>
+<td>
+
 </td>
 <td>
 2021-03-30
 </td>
 <td>
+
 wflow_publish(all = TRUE)
+
+wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
+
 </td>
 </tr>
 <tr>
@@ -613,7 +631,11 @@ html
 <a href="https://rawcdn.githack.com/MHPHP/DataProject-1/f3968f6ccbe4c14006c638c8d58094a22049b592/docs/index.html" target="_blank">f3968f6</a>
 </td>
 <td>
-MHPHP
+
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/96ffa9e1c45d05cdefbf34050dfc7bf45ff9ad8f/docs/index.html" target="_blank">96ffa9e</a>
+</td>
+<td>
+
 </td>
 <td>
 2021-03-25
@@ -630,13 +652,18 @@ Rmd
 <a href="https://github.com/MHPHP/DataProject-1/blob/2d04d269a2bdee7023a8a9079d724bf3b175880c/analysis/index.Rmd" target="_blank">2d04d26</a>
 </td>
 <td>
-MHPHP
+
+<a href="https://github.com/nbendsen/DataProject/blob/a90c239b5c4054e976c560d4750a857d387ba527/analysis/index.Rmd" target="_blank">a90c239</a>
+</td>
+<td>
+
 </td>
 <td>
 2021-03-25
 </td>
 <td>
 wflow_publish(“analysis/index.Rmd”)
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -645,9 +672,9 @@ html
 </td>
 <td>
 <a href="https://rawcdn.githack.com/MHPHP/DataProject-1/475c26bdce0676e0012e3c833391c7299ea0f022/docs/index.html" target="_blank">475c26b</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/475c26bdce0676e0012e3c833391c7299ea0f022/docs/index.html" target="_blank">475c26b</a>
 </td>
 <td>
-nbendsen
 </td>
 <td>
 2021-03-24
@@ -662,15 +689,17 @@ Rmd
 </td>
 <td>
 <a href="https://github.com/MHPHP/DataProject-1/blob/47a03be70bbc76b4878bc53f1011dddbe5e4f141/analysis/index.Rmd" target="_blank">47a03be</a>
+
+<a href="https://github.com/nbendsen/DataProject/blob/47a03be70bbc76b4878bc53f1011dddbe5e4f141/analysis/index.Rmd" target="_blank">47a03be</a>
 </td>
 <td>
-nbendsen
+
 </td>
 <td>
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -704,7 +733,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -738,7 +767,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -772,7 +801,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -806,7 +835,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -840,7 +869,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -874,7 +903,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c(“analysis/index.rmd”))
+wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
 <tr>
@@ -1512,7 +1541,7 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method. <br><br> The plant diversity is often calculated by only using the cover data. However, in this method we loose a lot of valuable information from the presence/absence data. In the following we propose a method that obtain an estimate of a specie’s abundance in each plot that takes into account the spatial aggregation of the species. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible. To model this we apply the binomial distribution <span class="math display">\[
+<p>Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method. <br><br> The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a specie’s abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible. To model this we apply the binomial distribution <span class="math display">\[
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
 \]</span> <br> In the bayesion framework the binomial model is used as a likelihood function when modeling the posterior distribution for a specie’s abundance in each plot. <br> We can create a prior distribution <span class="math inline">\(\theta\)</span> for each specie by using both cover and presence/absence data. The beta model is a conjugacy prior for the binomial model and, thus, is ideal to use. The beta-model is given by <span class="math display">\[
 f(\theta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
@@ -1534,7 +1563,7 @@ freq &lt;- read.csv(&quot;data/frekvens_data_6230_year2014.csv&quot;)
 
 abiotiske &lt;- read.csv(&quot;data/abiotiske_data_6230_year2014.csv&quot;)</code></pre>
 <p><br></p>
-<p>The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. For further specifications of the function click <a href="function_shannon.html">link</a></p>
+<p>The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. The function takes as input a cover dataset and a presence/absence dataset and output a dataframe with each plot and its corresponding shannon index. For further specifications of the function click <a href="function_shannon.html">link</a></p>
 <p>Apply our shannon function on the data</p>
 <pre class="r"><code>result &lt;- shanon_index_v2(cover, freq)</code></pre>
 <pre class="r"><code>kable(result, &quot;html&quot;) %&gt;%
@@ -1554,7 +1583,7 @@ plot
 year
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-shannon
+shannon_index
 </th>
 </tr>
 </thead>
@@ -18829,6 +18858,16 @@ result$hills_number &lt;- exp(result$row_shannon)</code></pre>
 6   14 488384 2014 2.353535  4.    2.120045               33     8.331510</code></pre>
 <pre class="r"><code>plot_index_gradient(result ,c(&quot;shannon&quot;, &quot;row_shannon&quot;,&quot;species_richness&quot;, &quot;hills_number&quot;), &quot;pH&quot;, gradient_text = &quot;The PH value of the soil for each plot&quot;)</code></pre>
 <p><img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+plot_result &lt;- result[!(result$pH == &quot;mv&quot;),]
+plot_result$pH &lt;- as.numeric(plot_result$pH)
+
+ggplot(plot_result, aes(pH, shannon_index))+
+  geom_point()+
+  xlim(3,6.5)+
+  theme_classic()+
+  labs(x = &quot;pH value of the soil&quot;, y = &quot;Shannon index&quot;)+
+  ggtitle(&quot;Shannon index and pH value of soil at each plot&quot;)</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -18892,6 +18931,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 </div>

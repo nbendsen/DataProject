@@ -26,8 +26,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -50,7 +48,7 @@ div.section {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-    </style>
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -425,7 +423,7 @@ div.tocify {
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject-index/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -510,6 +508,10 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1treea2dddd64cb2bf6618893ba57672cc98b5b0a4f4btargetblanka2dddd6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/MHPHP/DataProject-1/tree/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b" target="_blank">a2dddd6</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1treea2dddd64cb2bf6618893ba57672cc98b5b0a4f4btargetblanka2dddd6a" class="panel-collapse collapse">
 <a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a> </a>
 </p>
 </div>
@@ -519,6 +521,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
+The results in this page were generated with repository version <a href="https://github.com/MHPHP/DataProject-1/tree/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b" target="_blank">a2dddd6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
@@ -528,15 +531,12 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
 
+    Ignored:    .Rproj.user/
+
+
 Untracked files:
-    Untracked:  analysis/New_data.Rmd
-    Untracked:  analysis/data_5130.Rmd
-    Untracked:  data/abiotiske_data_6230.csv
-    Untracked:  data/cover_data_5130.csv
-    Untracked:  data/cover_data_6230.csv
-    Untracked:  data/frekvens_data_5130.csv
-    Untracked:  data/frekvens_data_6230.csv
-    Untracked:  test project/
+    Untracked:  analysis/function_simple_shannon.Rmd
+    Untracked:  analysis/gradient_plot.Rmd
 
 Unstaged changes:
     Modified:   analysis/_site.yml
@@ -584,16 +584,17 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/b8765a56946b12f6b3e0f505d015e6e6fa27c08b/analysis/index.Rmd" target="_blank">b8765a5</a>
+
+<a href="https://github.com/MHPHP/DataProject-1/blob/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b/analysis/index.Rmd" target="_blank">a2dddd6</a>
 </td>
 <td>
-nbendsen
+MHPHP
 </td>
 <td>
 2021-03-30
 </td>
 <td>
-wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
+wflow_publish(all = TRUE)
 </td>
 </tr>
 <tr>
@@ -601,10 +602,40 @@ wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
 html
 </td>
 <td>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b/docs/index.html" target="_blank">a2dddd6</a>
+</td>
+<td>
+
+
+<a href="https://github.com/nbendsen/DataProject/blob/b8765a56946b12f6b3e0f505d015e6e6fa27c08b/analysis/index.Rmd" target="_blank">b8765a5</a>
+</td>
+<td>
+
+</td>
+<td>
+2021-03-30
+</td>
+<td>
+
+wflow_publish(all = TRUE)
+
+wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
+
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/f3968f6ccbe4c14006c638c8d58094a22049b592/docs/index.html" target="_blank">f3968f6</a>
+</td>
+<td>
+
 <a href="https://rawcdn.githack.com/nbendsen/DataProject/96ffa9e1c45d05cdefbf34050dfc7bf45ff9ad8f/docs/index.html" target="_blank">96ffa9e</a>
 </td>
 <td>
-nbendsen
+
 </td>
 <td>
 2021-03-25
@@ -618,15 +649,20 @@ Build site.
 Rmd
 </td>
 <td>
+<a href="https://github.com/MHPHP/DataProject-1/blob/2d04d269a2bdee7023a8a9079d724bf3b175880c/analysis/index.Rmd" target="_blank">2d04d26</a>
+</td>
+<td>
+
 <a href="https://github.com/nbendsen/DataProject/blob/a90c239b5c4054e976c560d4750a857d387ba527/analysis/index.Rmd" target="_blank">a90c239</a>
 </td>
 <td>
-nbendsen
+
 </td>
 <td>
 2021-03-25
 </td>
 <td>
+wflow_publish(“analysis/index.Rmd”)
 wflow_publish(c("analysis/index.rmd"))
 </td>
 </tr>
@@ -635,10 +671,10 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/475c26bdce0676e0012e3c833391c7299ea0f022/docs/index.html" target="_blank">475c26b</a>
 <a href="https://rawcdn.githack.com/nbendsen/DataProject/475c26bdce0676e0012e3c833391c7299ea0f022/docs/index.html" target="_blank">475c26b</a>
 </td>
 <td>
-nbendsen
 </td>
 <td>
 2021-03-24
@@ -652,10 +688,12 @@ Build site.
 Rmd
 </td>
 <td>
+<a href="https://github.com/MHPHP/DataProject-1/blob/47a03be70bbc76b4878bc53f1011dddbe5e4f141/analysis/index.Rmd" target="_blank">47a03be</a>
+
 <a href="https://github.com/nbendsen/DataProject/blob/47a03be70bbc76b4878bc53f1011dddbe5e4f141/analysis/index.Rmd" target="_blank">47a03be</a>
 </td>
 <td>
-nbendsen
+
 </td>
 <td>
 2021-03-24
@@ -669,7 +707,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/9ed2be6c051eab8cfb21fb43e910167147209e41/docs/index.html" target="_blank">9ed2be6</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/9ed2be6c051eab8cfb21fb43e910167147209e41/docs/index.html" target="_blank">9ed2be6</a>
 </td>
 <td>
 nbendsen
@@ -686,7 +724,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/d7b7e47f10ef5470ab469830c37c6d61ba56af16/analysis/index.Rmd" target="_blank">d7b7e47</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/d7b7e47f10ef5470ab469830c37c6d61ba56af16/analysis/index.Rmd" target="_blank">d7b7e47</a>
 </td>
 <td>
 nbendsen
@@ -703,7 +741,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/a7199316d7615a795ab1afd80e255e6d32a7c81a/docs/index.html" target="_blank">a719931</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/a7199316d7615a795ab1afd80e255e6d32a7c81a/docs/index.html" target="_blank">a719931</a>
 </td>
 <td>
 nbendsen
@@ -720,7 +758,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/8ec6fcf64c588efcef7cf34deed12ab4902630bc/analysis/index.Rmd" target="_blank">8ec6fcf</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/8ec6fcf64c588efcef7cf34deed12ab4902630bc/analysis/index.Rmd" target="_blank">8ec6fcf</a>
 </td>
 <td>
 nbendsen
@@ -737,7 +775,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/774387922d826b6d45b6073266c0557f25b38353/docs/index.html" target="_blank">7743879</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/774387922d826b6d45b6073266c0557f25b38353/docs/index.html" target="_blank">7743879</a>
 </td>
 <td>
 nbendsen
@@ -754,7 +792,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/7762b809485598946ef7325ffc8404efd623bbf3/analysis/index.Rmd" target="_blank">7762b80</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/7762b809485598946ef7325ffc8404efd623bbf3/analysis/index.Rmd" target="_blank">7762b80</a>
 </td>
 <td>
 nbendsen
@@ -771,7 +809,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/35cf5646eb7b26ced5488f6f5e85497b46d8dea9/docs/index.html" target="_blank">35cf564</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/35cf5646eb7b26ced5488f6f5e85497b46d8dea9/docs/index.html" target="_blank">35cf564</a>
 </td>
 <td>
 nbendsen
@@ -788,7 +826,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/c1edf4a0c2471c9cf2bc6cfadf766097f58f997a/analysis/index.Rmd" target="_blank">c1edf4a</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/c1edf4a0c2471c9cf2bc6cfadf766097f58f997a/analysis/index.Rmd" target="_blank">c1edf4a</a>
 </td>
 <td>
 nbendsen
@@ -805,7 +843,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/97bf5d58f4aaeb9a5622895ba5ac221700fbb8fe/docs/index.html" target="_blank">97bf5d5</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/97bf5d58f4aaeb9a5622895ba5ac221700fbb8fe/docs/index.html" target="_blank">97bf5d5</a>
 </td>
 <td>
 nbendsen
@@ -822,7 +860,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/103a23787b436b8f58a4ef9c767e3ad9765e5665/analysis/index.Rmd" target="_blank">103a237</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/103a23787b436b8f58a4ef9c767e3ad9765e5665/analysis/index.Rmd" target="_blank">103a237</a>
 </td>
 <td>
 nbendsen
@@ -839,7 +877,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/3967bb22651350199fca19176e10d80ffea3765a/docs/index.html" target="_blank">3967bb2</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/3967bb22651350199fca19176e10d80ffea3765a/docs/index.html" target="_blank">3967bb2</a>
 </td>
 <td>
 nbendsen
@@ -856,7 +894,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/1bc1c06134313c3676324a43120ffcec49c1d3c5/analysis/index.Rmd" target="_blank">1bc1c06</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/1bc1c06134313c3676324a43120ffcec49c1d3c5/analysis/index.Rmd" target="_blank">1bc1c06</a>
 </td>
 <td>
 nbendsen
@@ -873,7 +911,7 @@ wflow_publish(c("analysis/index.rmd"))
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/7fcbf352293c663adf1a0a698a26436a4551fad3/docs/index.html" target="_blank">7fcbf35</a>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/7fcbf352293c663adf1a0a698a26436a4551fad3/docs/index.html" target="_blank">7fcbf35</a>
 </td>
 <td>
 nbendsen
@@ -890,7 +928,7 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/e6d72580b2372fbe6752b9031fb20d0730d9e1c4/analysis/index.Rmd" target="_blank">e6d7258</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/e6d72580b2372fbe6752b9031fb20d0730d9e1c4/analysis/index.Rmd" target="_blank">e6d7258</a>
 </td>
 <td>
 nbendsen
@@ -907,7 +945,7 @@ wflow_publish(all = TRUE)
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/fed4b63fd34b0a8a2d557fa0ed377332568632ca/analysis/index.Rmd" target="_blank">fed4b63</a>
+<a href="https://github.com/MHPHP/DataProject-1/blob/fed4b63fd34b0a8a2d557fa0ed377332568632ca/analysis/index.Rmd" target="_blank">fed4b63</a>
 </td>
 <td>
 bendsen
@@ -18805,8 +18843,21 @@ shannon_index
 <h1>
 Plot
 </h1>
-<p>Look at connection between pH value of the soil and the shannon index for the plot.</p>
+<p>Look at connection between pH value of the soil and the shannon index for the plot. The function <a href="gradient_plot.html">plot_index_gradient</a> is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documnetation is <a href="function_simple_shannon.Rmd">Here</a>.</p>
 <pre class="r"><code>result$pH &lt;- abiotiske$pHjord
+result$row_shannon &lt;- row_shannon(cover_data = cover, species_indicator = &quot;X&quot;)
+result$species_richness &lt;- species_richness(freq, species_indicator = &quot;X&quot;)
+result$hills_number &lt;- exp(result$row_shannon)</code></pre>
+<pre class="r"><code>head(result)</code></pre>
+<pre><code>  site   plot year  shannon  pH row_shannon species_richness hills_number
+1   14 488364 2014 2.539748 3.9    2.403190               29    11.058392
+2   14 488369 2014 2.886017  mv    2.772694               45    16.001687
+3   14 488373 2014 1.640941  mv    1.387410               27     4.004465
+4   14 488374 2014 2.274057  mv    2.134948               33     8.456608
+5   14 488383 2014 2.496082  mv    2.308465               34    10.058969
+6   14 488384 2014 2.353535  4.    2.120045               33     8.331510</code></pre>
+<pre class="r"><code>plot_index_gradient(result ,c(&quot;shannon&quot;, &quot;row_shannon&quot;,&quot;species_richness&quot;, &quot;hills_number&quot;), &quot;pH&quot;, gradient_text = &quot;The PH value of the soil for each plot&quot;)</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 plot_result &lt;- result[!(result$pH == &quot;mv&quot;),]
 plot_result$pH &lt;- as.numeric(plot_result$pH)
 
@@ -18827,14 +18878,16 @@ ggplot(plot_result, aes(pH, shannon_index))+
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>R version 4.0.3 (2020-10-10)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19042)
+Running under: Windows 10 x64 (build 18363)
 
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=Danish_Denmark.1252  LC_CTYPE=Danish_Denmark.1252   
-[3] LC_MONETARY=Danish_Denmark.1252 LC_NUMERIC=C                   
-[5] LC_TIME=Danish_Denmark.1252    
+[1] LC_COLLATE=English_United Kingdom.1252 
+[2] LC_CTYPE=English_United Kingdom.1252   
+[3] LC_MONETARY=English_United Kingdom.1252
+[4] LC_NUMERIC=C                           
+[5] LC_TIME=English_United Kingdom.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -18846,23 +18899,24 @@ other attached packages:
 [13] tidyverse_1.3.0    workflowr_1.6.2   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5        lattice_0.20-41   svglite_2.0.0     lubridate_1.7.9  
- [5] ps_1.4.0          assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.27    
- [9] R6_2.5.0          cellranger_1.1.0  backports_1.1.10  reprex_0.3.0     
-[13] evaluate_0.14     highr_0.8         httr_1.4.2        pillar_1.4.6     
-[17] rlang_0.4.8       readxl_1.3.1      rstudioapi_0.11   whisker_0.4      
-[21] blob_1.2.1        Matrix_1.2-18     rmarkdown_2.5     labeling_0.4.2   
-[25] splines_4.0.3     webshot_0.5.2     munsell_0.5.0     broom_0.7.2      
-[29] compiler_4.0.3    httpuv_1.5.5      modelr_0.1.8      xfun_0.18        
-[33] pkgconfig_2.0.3   systemfonts_1.0.1 htmltools_0.5.0   tidyselect_1.1.0 
-[37] fansi_0.4.1       viridisLite_0.3.0 crayon_1.3.4      dbplyr_1.4.4     
-[41] withr_2.3.0       later_1.1.0.1     grid_4.0.3        jsonlite_1.7.1   
-[45] gtable_0.3.0      lifecycle_0.2.0   DBI_1.1.0         git2r_0.28.0     
-[49] magrittr_1.5      scales_1.1.1      cli_2.1.0         stringi_1.5.3    
-[53] farver_2.0.3      fs_1.5.0          promises_1.2.0.1  xml2_1.3.2       
-[57] ellipsis_0.3.1    generics_0.1.0    vctrs_0.3.4       tools_4.0.3      
-[61] glue_1.4.2        hms_0.5.3         yaml_2.2.1        colorspace_1.4-1 
-[65] rvest_0.3.6       knitr_1.30        haven_2.3.1      </code></pre>
+ [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 splines_4.0.3    
+ [5] modelr_0.1.8      assertthat_0.2.1  highr_0.8         blob_1.2.1       
+ [9] cellranger_1.1.0  yaml_2.2.1        pillar_1.4.6      backports_1.1.10 
+[13] lattice_0.20-41   glue_1.4.2        digest_0.6.25     promises_1.1.1   
+[17] rvest_0.3.6       colorspace_1.4-1  htmltools_0.5.0   httpuv_1.5.5     
+[21] Matrix_1.2-18     pkgconfig_2.0.3   broom_0.7.2       haven_2.3.1      
+[25] scales_1.1.1      webshot_0.5.2     svglite_2.0.0     whisker_0.4      
+[29] later_1.1.0.1     git2r_0.28.0      mgcv_1.8-33       generics_0.0.2   
+[33] farver_2.0.3      ellipsis_0.3.1    withr_2.3.0       cli_2.1.0        
+[37] magrittr_1.5      crayon_1.3.4      readxl_1.3.1      evaluate_0.14    
+[41] ps_1.4.0          fs_1.5.0          fansi_0.4.1       nlme_3.1-149     
+[45] xml2_1.3.2        tools_4.0.3       hms_0.5.3         lifecycle_0.2.0  
+[49] munsell_0.5.0     reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1
+[53] rlang_0.4.8       grid_4.0.3        rstudioapi_0.11   labeling_0.4.2   
+[57] rmarkdown_2.4     gtable_0.3.0      DBI_1.1.0         R6_2.4.1         
+[61] lubridate_1.7.9   knitr_1.30        rprojroot_1.3-2   stringi_1.5.3    
+[65] Rcpp_1.0.5        vctrs_0.3.4       dbplyr_1.4.4      tidyselect_1.1.0 
+[69] xfun_0.18        </code></pre>
 </div>
 
 
@@ -18890,7 +18944,7 @@ footer is added to webpages before the MathJax javascript. -->
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

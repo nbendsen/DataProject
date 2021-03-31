@@ -130,7 +130,7 @@ kable(result, "html") %>%
 
 <h1>Plot </h1>
 
-Look at connection between pH value of the soil and the shannon index for the plot. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documnetation is [Here](function_simple_shannon.Rmd).
+Look at connection between pH value of the soil and the shannon index for the plot. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documnetation is [Here](function_simple_shannon.html).
 
 ```{r}
 result$pH <- abiotiske$pHjord
@@ -150,6 +150,12 @@ head(result)
 plot_index_gradient(result ,c("shannon", "row_shannon","species_richness", "hills_number"), "pH", gradient_text = "The PH value of the soil for each plot")
 ```
 
+An other way of comparing two indexes is to plot them against each other.
+
+```{r, echo = FALSE}
+ggplot(data = result, mapping = aes(x = row_shannon, y = shannon))+
+  geom_point()
+```
 
 
 

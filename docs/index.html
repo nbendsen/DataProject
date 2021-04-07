@@ -405,7 +405,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -414,7 +414,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -423,10 +423,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-06
+<strong>Last updated:</strong> 2021-04-07
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject-index/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -442,12 +442,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -514,28 +514,29 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1tree64faa3fd831f69031147162fc5bdb56c9bc06f53targetblank64faa3fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/MHPHP/DataProject-1/tree/64faa3fd831f69031147162fc5bdb56c9bc06f53" target="_blank">64faa3f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1tree68e5d49189e4424db3f80065db4473a67fe4672ctargetblank68e5d49a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/MHPHP/DataProject-1/tree/68e5d49189e4424db3f80065db4473a67fe4672c" target="_blank">68e5d49</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1tree64faa3fd831f69031147162fc5bdb56c9bc06f53targetblank64faa3fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomMHPHPDataProject1tree68e5d49189e4424db3f80065db4473a67fe4672ctargetblank68e5d49a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/MHPHP/DataProject-1/tree/64faa3fd831f69031147162fc5bdb56c9bc06f53" target="_blank">64faa3f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/MHPHP/DataProject-1/tree/68e5d49189e4424db3f80065db4473a67fe4672c" target="_blank">68e5d49</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Unstaged changes:
-    Modified:   analysis/index.Rmd
-    Modified:   code/function_shannon.R
+Untracked files:
+    Untracked:  data/6230_year2014_scale.csv
+    Untracked:  figure/
 
 </code></pre>
 <p>
@@ -574,6 +575,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/MHPHP/DataProject-1/blob/68e5d49189e4424db3f80065db4473a67fe4672c/analysis/index.Rmd" target="_blank">68e5d49</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-07
+</td>
+<td>
+wflow_publish(all = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/MHPHP/DataProject-1/68e5d49189e4424db3f80065db4473a67fe4672c/docs/index.html" target="_blank">68e5d49</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-07
+</td>
+<td>
+wflow_publish(all = TRUE)
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -18919,7 +18954,7 @@ result$hills_number &lt;- exp(result$row_shannon)</code></pre>
 <p><img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>An other way of comparing two indexes is to plot them against each other.</p>
 <p><img src="figure/index.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>It can be seen in this example, that our way of calculating the shannon index gives a slightly higher value for most plots, but two plots with similar shannon index value with the simple way will still have compareple values with our way. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculatin the shannon index.</p>
+<p>It can be seen in this example, that our way of calculating the shannon index gives a slightly higher value for most plots, but two plots with similar shannon index value with the simple way will still have comparable values with our way. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -18952,23 +18987,23 @@ other attached packages:
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5        lattice_0.20-41   svglite_2.0.0     lubridate_1.7.9  
- [5] assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.25     R6_2.4.1         
- [9] cellranger_1.1.0  backports_1.1.10  reprex_0.3.0      evaluate_0.14    
-[13] httr_1.4.2        highr_0.8         pillar_1.4.6      rlang_0.4.8      
-[17] readxl_1.3.1      rstudioapi_0.11   whisker_0.4       blob_1.2.1       
-[21] Matrix_1.2-18     rmarkdown_2.4     labeling_0.4.2    splines_4.0.3    
-[25] webshot_0.5.2     munsell_0.5.0     broom_0.7.2       compiler_4.0.3   
-[29] httpuv_1.5.5      modelr_0.1.8      xfun_0.18         pkgconfig_2.0.3  
-[33] systemfonts_1.0.1 mgcv_1.8-33       htmltools_0.5.0   tidyselect_1.1.0 
-[37] workflowr_1.6.2   fansi_0.4.1       viridisLite_0.3.0 crayon_1.3.4     
-[41] dbplyr_1.4.4      withr_2.3.0       later_1.1.0.1     grid_4.0.3       
-[45] nlme_3.1-149      jsonlite_1.7.1    gtable_0.3.0      lifecycle_0.2.0  
-[49] DBI_1.1.0         git2r_0.28.0      magrittr_1.5      scales_1.1.1     
-[53] cli_2.1.0         stringi_1.5.3     farver_2.0.3      fs_1.5.0         
-[57] promises_1.1.1    xml2_1.3.2        ellipsis_0.3.1    generics_0.0.2   
-[61] vctrs_0.3.4       tools_4.0.3       glue_1.4.2        hms_0.5.3        
-[65] yaml_2.2.1        colorspace_1.4-1  rvest_0.3.6       knitr_1.30       
-[69] haven_2.3.1      </code></pre>
+ [5] ps_1.4.0          assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.25    
+ [9] R6_2.4.1          cellranger_1.1.0  backports_1.1.10  reprex_0.3.0     
+[13] evaluate_0.14     httr_1.4.2        highr_0.8         pillar_1.4.6     
+[17] rlang_0.4.8       readxl_1.3.1      rstudioapi_0.11   whisker_0.4      
+[21] blob_1.2.1        Matrix_1.2-18     rmarkdown_2.4     labeling_0.4.2   
+[25] splines_4.0.3     webshot_0.5.2     munsell_0.5.0     broom_0.7.2      
+[29] compiler_4.0.3    httpuv_1.5.5      modelr_0.1.8      xfun_0.18        
+[33] pkgconfig_2.0.3   systemfonts_1.0.1 mgcv_1.8-33       htmltools_0.5.0  
+[37] tidyselect_1.1.0  workflowr_1.6.2   fansi_0.4.1       viridisLite_0.3.0
+[41] crayon_1.3.4      dbplyr_1.4.4      withr_2.3.0       later_1.1.0.1    
+[45] grid_4.0.3        nlme_3.1-149      jsonlite_1.7.1    gtable_0.3.0     
+[49] lifecycle_0.2.0   DBI_1.1.0         git2r_0.28.0      magrittr_1.5     
+[53] scales_1.1.1      cli_2.1.0         stringi_1.5.3     farver_2.0.3     
+[57] fs_1.5.0          promises_1.1.1    xml2_1.3.2        ellipsis_0.3.1   
+[61] generics_0.0.2    vctrs_0.3.4       tools_4.0.3       glue_1.4.2       
+[65] hms_0.5.3         yaml_2.2.1        colorspace_1.4-1  rvest_0.3.6      
+[69] knitr_1.30        haven_2.3.1      </code></pre>
 </div>
 
 

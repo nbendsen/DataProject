@@ -1,6 +1,13 @@
+---
+title: "Animation"
+site: workflowr::wflow_site
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
 
 
-```{r include=FALSE}
+```{r, include=FALSE}
 library(tidyverse)
 library(gifski)
 library(png)
@@ -101,25 +108,34 @@ test_long <- merge(test_long, test[c("plot", "scale_1")])
 
 
 ```{r}
-animation <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index)) + 
+animation <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, group = plot)) + 
   geom_point() +
   geom_abline(colour = "blue") +
-  transition_states(factor(scale), transition_length = 1, state_length = 1) +
+  xlab("unmodified shannon index") + 
+  ylab("Modified shannon index") +
+  transition_states(factor(scale), transition_length = 3, state_length = 0) +
   labs(title = "scale: {next_state}")
 
 
-animate(animation,  nframes = 2*length(unique(test_long$scale)), duration = 20)
+test22 <-  animate(animation,  nframes = 2*length(unique(test_long$scale)))
+dir.create(file.path("docs/figure/Animation.rmd"))
+anim_save("unnamed-chunk-8-1.gif", animation = test22, path = "docs/figure/Animation.rmd")
 ```
+
 
 
 
 ```{r}
-animation2 <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, group = plot)) + 
-  geom_point() +
-  geom_abline(colour = "blue") +
-  transition_states(factor(scale), transition_length = 2, state_length = 0) +
-  labs(title = "scale: {next_state}")
-
-animation2
+animation
 ```
+
+
+
+
+
+
+
+
+
+
 

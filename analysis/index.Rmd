@@ -64,7 +64,7 @@ kable(PersenceAbsence, "html") %>% kable_styling()
 
 Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method.
 <br><br>
-The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a specie's abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model.
+The plant diversity is often calculated by only using the cover data. However, in this method we loose a lot of valuable information from the presence/absence data. In the following we propose a method that obtain an estimate of a specie's abundance in each plot that takes into account the spatial aggregation of the species. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model.
 <br><br>
 In the cover data each specie is hit by $y$ pins out of $n$ possible. To model this we apply the binomial distribution
 $$
@@ -110,7 +110,7 @@ abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 source("code/function_shannon.R")
 ```
 
-The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. The function takes as input a cover dataset and a presence/absence dataset and output a dataframe with each plot and its corresponding shannon index. For further specifications of the function click [link](function_shannon.html)
+The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. For further specifications of the function click [link](function_shannon.html)
 
 
 
@@ -130,7 +130,7 @@ kable(result, "html") %>%
 
 <h1>Plot </h1>
 
-Look at connection between pH value of the soil and the shannon index for the plot. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documnetation is [Here](function_simple_shannon.html).
+Look at connection between pH value of the soil and the shannon index for the plot. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documentation is [Here](function_simple_shannon.html).
 
 ```{r}
 result$pH <- abiotiske$pHjord
@@ -145,24 +145,23 @@ head(result)
 ```
 
 
-```{r, include=FALSE, eval=FALSE}
-ggplot(plot_result, aes(pH, shannon_index))+
-  geom_point()+
-  xlim(3,6.5)+
-  theme_classic()+
-  labs(x = "pH value of the soil", y = "Shannon index")+
-  ggtitle("Shannon index and pH value of soil at each plot")
-
-```
-
-
 
 ```{r, message=FALSE, warning=FALSE}
 plot_index_gradient(result ,c("shannon", "row_shannon","species_richness", "hills_number"), "pH", gradient_text = "The PH value of the soil for each plot")
 ```
 
+An other way of comparing two indexes is to plot them against each other.
 
+```{r, echo = FALSE}
+ggplot(data = result, mapping = aes(x = row_shannon, y = shannon))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("Our shannon index") +
+  xlab("Simple row shannon index") +
+  ggtitle("Our shannon index compared with the simple row shannon")
+```
 
+It can be seen in this example, that our way of calculating the shannon index gives a slightly higher value for most plots, but two plots with similar shannon index value with the simple way will still have comparable values with our way. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.
 
 
 

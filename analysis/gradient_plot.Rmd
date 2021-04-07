@@ -8,7 +8,13 @@ editor_options:
 source("code/function_shannon.R")
 ```
 
-The function takes in arguments:
+A function to plot a variable against different indexes to see how the indexes compare against each other.
+
+**Usage:**
+
+plot_index_gradient(data, indexes, gradient ,gradient_text = NULL)
+
+**Arguments:**
 
 * data: A data frame with the different indexes to be compared and the gradient to compare them against
 * indexes: A list of the column names for the indexes as strings.

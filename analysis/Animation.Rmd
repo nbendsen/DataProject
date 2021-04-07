@@ -1,9 +1,4 @@
----
-title: "Animation for model validation"
-output: workflowr::wflow_html
-editor_options:
-  chunk_output_type: console
----
+
 
 ```{r include=FALSE}
 library(tidyverse)
@@ -35,7 +30,7 @@ shanon_index_v2_animation <- function(cover, freq) {
 
 
     if (length(unique(beta_data)) > 1) {
-      beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
+      beta_data_fitted <- fitdist(beta_data, "beta", method = wflow)
       beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
 
     }
@@ -117,6 +112,7 @@ animate(animation,  nframes = 2*length(unique(test_long$scale)), duration = 20)
 ```
 
 
+
 ```{r}
 animation2 <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, group = plot)) + 
   geom_point() +
@@ -124,6 +120,6 @@ animation2 <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, grou
   transition_states(factor(scale), transition_length = 2, state_length = 0) +
   labs(title = "scale: {next_state}")
 
-plot(animation2)
+animation2
 ```
 

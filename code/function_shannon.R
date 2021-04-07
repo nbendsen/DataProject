@@ -111,5 +111,5 @@ plot_index_gradient <- function(data, indexes, gradient ,gradient_text = NULL) {
     geom_smooth(method = "loess", se = FALSE) +
     facet_wrap(vars(type),scales = "free_y") +
     xlab(gradient_text) +
-    theme(strip.background = element_blank(), strip.placement = "outside")
+    theme(strip.background = element_blank(), strip.placement = "outside", strip.text.x = element_text(face = "bold"), title = element_text(face = "bold"))
 }

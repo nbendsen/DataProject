@@ -505,16 +505,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree32f0ec7853d2015a28565cea8185f4f76132f2c7targetblank32f0ec7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/32f0ec7853d2015a28565cea8185f4f76132f2c7" target="_blank">32f0ec7</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree059ac5866b4b3c3299ae08401bf0ac95a16e3a4btargetblank059ac58a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/059ac5866b4b3c3299ae08401bf0ac95a16e3a4b" target="_blank">059ac58</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree32f0ec7853d2015a28565cea8185f4f76132f2c7targetblank32f0ec7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree059ac5866b4b3c3299ae08401bf0ac95a16e3a4btargetblank059ac58a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/32f0ec7853d2015a28565cea8185f4f76132f2c7" target="_blank">32f0ec7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/059ac5866b4b3c3299ae08401bf0ac95a16e3a4b" target="_blank">059ac58</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -560,6 +560,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/059ac5866b4b3c3299ae08401bf0ac95a16e3a4b/analysis/index.Rmd" target="_blank">059ac58</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-07
+</td>
+<td>
+wflow_publish(all = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/51449f1a4fa61c9feffdb53c4e137eb42a0f1e3e/docs/index.html" target="_blank">51449f1</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1688,7 +1722,7 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method. <br><br> The plant diversity is often calculated by only using the cover data. However, in this method we loose a lot of valuable information from the presence/absence data. In the following we propose a method that obtain an estimate of a specie’s abundance in each plot that takes into account the spatial aggregation of the species. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible. To model this we apply the binomial distribution <span class="math display">\[
+<p>Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method. <br><br> The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a specie’s abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible. To model this we apply the binomial distribution <span class="math display">\[
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
 \]</span> <br> In the bayesion framework the binomial model is used as a likelihood function when modeling the posterior distribution for a specie’s abundance in each plot. <br> We can create a prior distribution <span class="math inline">\(\theta\)</span> for each specie by using both cover and presence/absence data. The beta model is a conjugacy prior for the binomial model and, thus, is ideal to use. The beta-model is given by <span class="math display">\[
 f(\theta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
@@ -1710,7 +1744,7 @@ freq &lt;- read.csv(&quot;data/frekvens_data_6230_year2014.csv&quot;)
 
 abiotiske &lt;- read.csv(&quot;data/abiotiske_data_6230_year2014.csv&quot;)</code></pre>
 <p><br></p>
-<p>The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. For further specifications of the function click <a href="function_shannon.html">link</a></p>
+<p>The above theoretical discussions of the beta-binomial model are implemented in the function shanon_index_v2. The function takes as input a cover dataset and a presence/absence dataset and output a dataframe with each plot and its corresponding shannon index. For further specifications of the function click <a href="function_shannon.html">link</a></p>
 <p>Apply our shannon function on the data</p>
 <pre class="r"><code>result &lt;- shanon_index_v2(cover, freq)</code></pre>
 <pre class="r"><code>kable(result, &quot;html&quot;) %&gt;%
@@ -19004,9 +19038,9 @@ result$hills_number &lt;- exp(result$row_shannon)</code></pre>
 5   14 488383 2014 2.496082  mv    2.308465               34    10.058969
 6   14 488384 2014 2.353535  4.    2.120045               33     8.331510</code></pre>
 <pre class="r"><code>plot_index_gradient(result ,c(&quot;shannon&quot;, &quot;row_shannon&quot;,&quot;species_richness&quot;, &quot;hills_number&quot;), &quot;pH&quot;, gradient_text = &quot;The PH value of the soil for each plot&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>An other way of comparing two indexes is to plot them against each other.</p>
 <p><img src="figure/index.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>An other way of comparing two indexes is to plot them against each other.</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>It can be seen in this example, that our way of calculating the shannon index gives a slightly higher value for most plots, but two plots with similar shannon index value with the simple way will still have comparable values with our way. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.</p>
 <br>
 <p>

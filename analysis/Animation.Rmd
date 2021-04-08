@@ -1,0 +1,141 @@
+---
+title: "Animation"
+site: workflowr::wflow_site
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(gifski)
+library(png)
+library(ggplot2)
+library(gganimate)
+```
+
+```{r, eval=FALSE, include=FALSE}
+shanon_index_v2_animation <- function(cover, freq) {
+  library(fitdistrplus)
+  out <- cover[,1:3]
+  cover_data <- cover[,4:ncol(cover)]
+  freq_data <- freq[,4:ncol(freq)]
+
+
+  #create data frame to hold the fitted values for each species
+  beta_fit <- data.frame(matrix(ncol = 3, nrow = 0))
+
+  colnames(beta_fit) <- c("species","a", "b")
+
+  # for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
+  for (specie in colnames(cover_data)) {
+    beta_data <- cover_data[,specie]/16
+
+    #remove all plots with 0 in frekvens.
+    beta_data <- beta_data[freq_data[[specie]] == 1]
+
+
+    if (length(unique(beta_data)) > 1) {
+      beta_data_fitted <- fitdist(beta_data, "beta", method = wflow)
+      beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
+
+    }
+  }
+  for (scale in seq(0.5 ,2, 0.1)) {
+  print(scale)
+
+  # create list for shannon index for each plot
+  shanon_list <- c()
+
+  for (row in 1:nrow(cover_data)) {
+
+    # Create an empty list for a given row
+    mean_posterior <- c()
+
+
+    # for a given row, find out what species is found in frekvens
+    species_spotted_in_frekvens <- colnames(freq_data[c(freq_data[row,]  == 1)])
+
+    #For each species spotten in frekvens, appends its posterior cover to the cover data for that row
+    for (species_spotted in species_spotted_in_frekvens ) {
+
+
+      alpha_post <- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a)*scale +
+                                  as.numeric(cover_data[[species_spotted]][row]) ))
+      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b)*scale + 16 - as.numeric(cover_data[[species_spotted]][row])
+
+      mean_posterior <- append(mean_posterior, (alpha_post)/(alpha_post+beta_post))
+
+
+
+
+    }
+
+    #Calculate the shanon index value and append it to the list after normalizing and removing zeroes
+
+    total_cover <- sum(mean_posterior)
+    mean_posterior <- mean_posterior[!(mean_posterior < 0.00001)]
+    shanon_value <- -sum(mean_posterior/total_cover * log((mean_posterior/total_cover)))
+
+    shanon_list <- append(shanon_list,shanon_value)
+
+  }
+  out[, ncol(out) + 1] <- shanon_list
+  colnames(out)[ncol(out)] <- paste0("scale_", scale)
+  }
+  return(out)
+}
+```
+
+```{r, eval=FALSE, include=FALSE}
+test <-  shanon_index_v2_animation(cover, freq)
+```
+
+```{r, eval=FALSE, include=FALSE}
+write.csv(test, "data/6230_year2014_scale.csv", row.names =  FALSE)
+```
+
+```{r}
+test <-  read.csv("data/6230_year2014_scale.csv")
+```
+
+
+```{r, include=FALSE}
+test_long <-  gather(test, key = "scale", value= "index", colnames(test)[grep("scale", names(test))])
+test_long <- merge(test_long, test[c("plot", "scale_1")])
+```
+
+
+```{r}
+animation <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, group = plot)) + 
+  geom_point() +
+  geom_abline(colour = "blue") +
+  xlab("unmodified shannon index") + 
+  ylab("Modified shannon index") +
+  transition_states(factor(scale), transition_length = 3, state_length = 0) +
+  labs(title = "scale: {next_state}")
+
+
+test22 <-  animate(animation,  nframes = 2*length(unique(test_long$scale)))
+dir.create(file.path("docs/figure/Animation.rmd"))
+anim_save("unnamed-chunk-8-1.gif", animation = test22, path = "docs/figure/Animation.rmd")
+```
+
+
+
+
+```{r}
+animation
+```
+
+
+
+
+
+
+
+
+
+
+

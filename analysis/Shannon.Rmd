@@ -1,6 +1,5 @@
 ---
-title: "Shannon"
-author: "Ditte Mikkelsen"
+title: "Different ways to estimate diversity"
 date: "2021-03-28"
 output:
   workflowr::wflow_html:
@@ -9,47 +8,69 @@ editor_options:
   chunk_output_type: console
 ---
 
-<h1> Shannon </h1>
+<h1> Introduction </h1>
 
-Shannon diversity is a measure of how many species that is present in an area. The diversity can be calculated in various ways, using different approaches. We have beloe described, some of the often used ways to calculate a diversity measure. 
+In ecology an important aspect of a plot is the diversity. The diversity is a meassure of the number of different types of species within the plot and also how the individuals are distributed among the species A diversity index can be computed in several different ways and puts weight on different aspects of the species within the plot. As an example, one could be interested in diversity meassure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the plot. 
+<br><br>
+On the main page we will give some examples of how our method perform on the NOVANA dataset with respect to different diversity meassures. We will calculate a diversity index for each plot. For this reason, we will define the diversity indexes we have used in our examples below. 
 
 
 <h2> Shannon index</h2>
+A diversity index that traditionally is often used is the shannon index. The shannon index is calculated by the following formula:
+$$\text{shannon index =}-\sum_{i=1}^S p_i \ln (p_i)$$
+where $S$ is the number of species and $p_i$ is the proportion of all individuals that belong to specie $i$. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins specie $i$ is hit by divided by the total number of pins that hit some specie in the plot. 
+<br><br>
+However, as it is pointed out in both [1] and [2] the shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [2].
+<br>
+We can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number og species.
+When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity. It can instead be seen as the uncertainty in the species identity of a sample.
 
-The shannon index is calculated using the pin-point data. It is calculated for each plot in each site, using the equation:
-$$-\sum_{i=1}^S p_i ln (p_i)$$
-where $S$ is the number of species and $p_i$ is the number of pins the i'te specie is hit by in a plot devided by the total number og pins placed in that plot. This means that $p_i$ is normalised. The calculation is then done for each plot we have data from. 
-
-When we have the shannon index we can get the shannon diversity by taking the exponential function of the shannon index. The shannon diversity, using the shannon index, is therefore given by 
-$$exp(-\sum_{i=1}^S p_i ln (p_i)).$$
-
-When using the row shannon we weight all the species by their frequrncy. This means that we do not favor common or rare species. This is diversity of order one 
-
-To give an example we can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number og species.
-When calculating the row shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity, hence not the number of species in the community. It can instead be seen as the uncertainty in the species identity of a sample. 
-
+<h2> Simpson index</h2>
+Another commonly used diversity index is the simpson index. This is given by
+$$
+\text{simpson index = }\Sigma_{i = 1}^S(p_i)^2
+$$
+where the symbols mean the same as before. A high diversity corresponds to a low simpson index and a low diversity corresponds to a high simpson index. As described in [1] the simpson index gives the probability that two individuals, drawn randomly from a sample, will be of same specie. Again, this is not a true diversity.
 
 <h2> Spicies richness </h2>
+A third method for meassuring diversity is the species richness. This is simply given by
+$$
+\text{species richness = }\Sigma_{i=1}^S1
+$$
+where $S$ is the number of species in our precense/absence data having a one. This means that the species richness is just a count of how many species that is present in the plot without taking into account the distribution of the individuals among the specie types. This meassure is very influenced by rare species.
 
-The species richness is calculated using the presence-absence data. The equation used is:
-$$\sum_{i=1}^S 1$$
-where $S$ is the number of species present in the plot, which is given by the presence-absence data.  
-This means that the species richness is just a count of how many species that is present in the plot. 
 
+<h2> Hill diversity </h2>
+To account for the problemes with the shannon index and the simpson index both [1] and [2] introduce the Hill diversity as a solution. Following the notation from [1] we get that
+$$
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+$$
+The symbols of $S$ and $p_i$ are the same as previous, while $r_i$ is how rare the i'th specie is in a plot. We can calculate how rare a specie is by using the equation
+$$r_i = \frac{1}{p_i}$$
+The Hill diversity calculates the mean of the rarities of the species in the plot. A plot with many species, all rare, has a high mean rarity, while a plot with few species, non of them rare, has a low mean rarity and low diversity. The $l$ determines the rarity scale, which is how we calculate the mean rarity, and by adjusting this we get different Hill diversities. The different ways we can calculate the mean rarity differs in the way we scale the values of the common and rare species, i.e. the different values of $l$ emphasize common or rare species. As an example the Hill-Shannon (defined below) uses the arithmetic mean while the Hill-Simpson (defined below) uses the geometric mean.
+<br>
 
+<h2> Hill-Shannon diversity </h2>
+If we let $l$ approch 0 then in the limit we get the exponential function taken on the shannon index
+$$
+\text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
+$$
 
-<h2> Hill Diversity </h2>
+Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species.
 
-The hill diversity is a more general form, and is calculated by using the equation:
-$$\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}$$
-where $S$ is the number of species and $p_i$ is the number of pins the i'te specie is hit by in a plot devided by the total number og pins placed in that plot, $r_i$ is how rare the i'te specie is in a plot. $l$ determines the rarity scale, where the mean is taken. We can calculate how rare a specie is by using the equation
-$$r_i = \frac{1}{p_i}.$$
-
-Shannon is just a special cases of the hill diversity where $l=0$. Shannon has the advantage that it can respond strongly to both very high and very low rarity values, because when using the geometric mean, the extreme values will affect the result  according to their proportional difference from the mean and not from the absolute diffrence from the mean. Another argument in the favor of the Shannon is that the abundance of many species are approximately log-normal distributed, and hence the central might be very well dicribed by the geometric mean. 
-
+<h2> Hill-Simpson diversity </h2>
+If we instead let $l = -1$ in the formula for Hill diversity we get the inverse of the simpson index
+$$
+\text{Hill-Simpson =} \frac{1}{\Sigma_{i=1}^S(p_i)^2}
+$$
+The Hill-Simpson diversity emphasizes the common species more than the rare species. Furthermore, the Hill-Simpson diversity has the more intuitive interpretation that a plot with high diversity has a high value of Hill-Simpson as oppose to the traditional simpson index.
+<br><br>
+As a final note it should also be mentioned, that if we let $l = 1$ in the formula for Hill diversity we get the standard species richness which was also described further above.
+<br><br><br>
 
 We have used the articles:
 <ul>
-<li>"A conceptual guide to measuring species diversity" by Michael Roswell, Jonathan Dushoff and Rachael Winfree, 2021.</li>
-<li>"Entropy and diversity"  by Lou Jost , Ban˜os, Tungurahua, Ecuador (loujost@yahoo.com), 2006.</li>
+<li> [1] "A conceptual guide to measuring species diversity" by Michael Roswell, Jonathan Dushoff and Rachael Winfree, 2021.</li>
+<li> [2] "Entropy and diversity"  by Lou Jost , Ban˜os, Tungurahua, Ecuador (loujost@yahoo.com), 2006.</li>
+<li> [3] https://en.wikipedia.org/wiki/Diversity_index</li>
 </ul>

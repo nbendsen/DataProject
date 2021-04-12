@@ -503,16 +503,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree35b9091d518dcafe2ead6436f6bad27bec226539targetblank35b9091a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/35b9091d518dcafe2ead6436f6bad27bec226539" target="_blank">35b9091</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreee13d988c8a874300a610ce9a8942baa07206d6e6targetblanke13d988a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/e13d988c8a874300a610ce9a8942baa07206d6e6" target="_blank">e13d988</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree35b9091d518dcafe2ead6436f6bad27bec226539targetblank35b9091a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreee13d988c8a874300a610ce9a8942baa07206d6e6targetblanke13d988a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/35b9091d518dcafe2ead6436f6bad27bec226539" target="_blank">35b9091</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/e13d988c8a874300a610ce9a8942baa07206d6e6" target="_blank">e13d988</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -522,7 +522,6 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  data/6230_year2014_scale.csv
     Untracked:  figure/
 
 </code></pre>
@@ -564,6 +563,23 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/16286b460c07a565c4e155ff746410edeaa6dd9a/docs/Animation.html" target="_blank">16286b4</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -597,8 +613,10 @@ wflow_publish(“analysis/Animation.rmd”)
 
 
 test22 &lt;-  animate(animation,  nframes = 2*length(unique(test_long$scale)))
-dir.create(file.path(&quot;docs/figure/Animation.rmd&quot;))
-anim_save(&quot;unnamed-chunk-8-1.gif&quot;, animation = test22, path = &quot;docs/figure/Animation.rmd&quot;)</code></pre>
+dir.create(file.path(&quot;docs/figure/Animation.rmd&quot;))</code></pre>
+<pre><code>Warning in dir.create(file.path(&quot;docs/figure/Animation.rmd&quot;)):
+&#39;docs\figure\Animation.rmd&#39; already exists</code></pre>
+<pre class="r"><code>anim_save(&quot;unnamed-chunk-8-1.gif&quot;, animation = test22, path = &quot;docs/figure/Animation.rmd&quot;)</code></pre>
 <pre class="r"><code>animation</code></pre>
 <p><img src="figure/Animation.Rmd/unnamed-chunk-8-1.gif" style="display: block; margin: auto;" /></p>
 <br>
@@ -629,17 +647,16 @@ other attached packages:
  [1] gganimate_1.0.7 png_0.1-7       gifski_0.8.6    forcats_0.5.0  
  [5] stringr_1.4.0   dplyr_1.0.2     purrr_0.3.4     readr_1.4.0    
  [9] tidyr_1.1.2     tibble_3.0.4    ggplot2_3.3.2   tidyverse_1.3.0
-[13] workflowr_1.6.2
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5        lubridate_1.7.9   prettyunits_1.1.1 ps_1.4.0         
- [5] assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.25     plyr_1.8.6       
- [9] R6_2.4.1          cellranger_1.1.0  backports_1.1.10  reprex_0.3.0     
-[13] evaluate_0.14     httr_1.4.2        pillar_1.4.6      rlang_0.4.8      
-[17] progress_1.2.2    readxl_1.3.1      rstudioapi_0.11   whisker_0.4      
-[21] blob_1.2.1        rmarkdown_2.4     labeling_0.4.2    munsell_0.5.0    
-[25] broom_0.7.2       compiler_4.0.3    httpuv_1.5.5      modelr_0.1.8     
-[29] xfun_0.18         pkgconfig_2.0.3   htmltools_0.5.0   tidyselect_1.1.0 
+ [1] Rcpp_1.0.5        lubridate_1.7.9   prettyunits_1.1.1 assertthat_0.2.1 
+ [5] rprojroot_1.3-2   digest_0.6.25     plyr_1.8.6        R6_2.4.1         
+ [9] cellranger_1.1.0  backports_1.1.10  reprex_0.3.0      evaluate_0.14    
+[13] httr_1.4.2        pillar_1.4.6      rlang_0.4.8       progress_1.2.2   
+[17] readxl_1.3.1      rstudioapi_0.11   whisker_0.4       blob_1.2.1       
+[21] rmarkdown_2.4     labeling_0.4.2    munsell_0.5.0     broom_0.7.2      
+[25] compiler_4.0.3    httpuv_1.5.5      modelr_0.1.8      xfun_0.18        
+[29] pkgconfig_2.0.3   htmltools_0.5.0   tidyselect_1.1.0  workflowr_1.6.2  
 [33] fansi_0.4.1       crayon_1.3.4      dbplyr_1.4.4      withr_2.3.0      
 [37] later_1.1.0.1     grid_4.0.3        jsonlite_1.7.1    gtable_0.3.0     
 [41] lifecycle_0.2.0   DBI_1.1.0         git2r_0.28.0      magrittr_1.5     

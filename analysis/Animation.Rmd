@@ -1,5 +1,5 @@
 ---
-title: "Animation"
+title: "Model sensitivity validation"
 site: workflowr::wflow_site
 output: workflowr::wflow_html
 editor_options:
@@ -96,7 +96,7 @@ test <-  shanon_index_v2_animation(cover, freq)
 write.csv(test, "data/6230_year2014_scale.csv", row.names =  FALSE)
 ```
 
-```{r}
+```{r, include=FALSE}
 test <-  read.csv("data/6230_year2014_scale.csv")
 ```
 
@@ -107,12 +107,12 @@ test_long <- merge(test_long, test[c("plot", "scale_1")])
 ```
 
 
-```{r}
+```{r, include=FALSE}
 animation <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, group = plot)) + 
   geom_point() +
   geom_abline(colour = "blue") +
-  xlab("unmodified shannon index") + 
-  ylab("Modified shannon index") +
+  xlab("unmodified prior") + 
+  ylab("Modified prior") +
   transition_states(factor(scale), transition_length = 3, state_length = 0) +
   labs(title = "scale: {next_state}")
 
@@ -123,13 +123,14 @@ anim_save("unnamed-chunk-8-1.gif", animation = test22, path = "docs/figure/Anima
 ```
 
 
+One way to do model validation is to compare results with slight modifications to test the robustness of our model. We did this by multiplying different constants to the alpha and beta values of our prior beta models. We then compared the results against our standard model without any multiplications. If our model is robust we expect that the calculated shannon index for each plot is roughly the same before and after changing the prior. To check if this was the case, we plotted the shannon index after changing the prior against the shannon index before changing it. We used the NOVANA dataset for the test with all the plot from terhabtype 6230 in year 2014.
 
 
 ```{r}
 animation
 ```
 
-
+As it can be seen in the plot, most plots stay close their original value when we multiply a constant to their prior.
 
 
 

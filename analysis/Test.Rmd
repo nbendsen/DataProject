@@ -1,0 +1,136 @@
+
+```{r}
+update_abundance_data <- function(abundance_data, present_data, n = 1 , remove_column = 0) {
+ library(fitdistrplus)
+  saved_columns <- abundance_data[,0:remove_column, drop = FALSE]
+  abundance_data <- abundance_data[,(1 + remove_column):ncol(abundance_data)]
+  present_data <- present_data[,(1 + remove_column):ncol(present_data)]
+
+
+  #create data frame to hold the fitted values for each species
+  beta_fit <- data.frame(matrix(ncol = 3, nrow = 0))
+
+  colnames(beta_fit) <- c("species","a", "b")
+
+  # for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
+  for (specie in colnames(abundance_data)) {
+    beta_data <- abundance_data[,specie]/n
+
+    #remove all plots with 0 in frekvens.
+    beta_data <- beta_data[present_data[[specie]] == 1]
+
+
+    if (length(unique(beta_data)) > 1) {
+      beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
+      beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
+
+    }
+  }
+  
+  #output <-  data.frame(matrix(ncol = ncol(abundance_data), nrow = nrow(abundance_data)))
+  #colnames(output) <- colnames(abundance_data[remove_column: ncol(abundance_data)])
+  
+  for (row in 1:nrow(present_data)) {
+
+    # Create an empty list for a given row
+    mean_posterior <- c()
+
+
+    # for a given row, find out what species is found in present
+    species_spotted_in_present <- colnames(present_data[c(present_data[row,]  == 1)])
+
+    #For each species spotted in present, appends its posterior abundance_data to the abundance_data data for that row
+    for (species_spotted in species_spotted_in_present ) {
+  
+      alpha_post <- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) +
+                                  as.numeric(abundance_data[[species_spotted]][row]) ))
+      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + n - as.numeric(abundance_data[[species_spotted]][row])
+      
+      if (length(alpha_post) == 1 && length(beta_post) == 1) {
+        
+        abundance_data[row, species_spotted] <- ((alpha_post)/(alpha_post+beta_post))
+      }
+      else if(!is.null(abundance_data[row, species_spotted]) && abundance_data[row, species_spotted] > 0) { 
+        abundance_data[row, species_spotted] <- 0
+      }
+
+    }
+  }
+
+  return(cbind(saved_columns ,abundance_data))
+}
+```
+
+```{r}
+diversity_index <- function(abundance_data, remove_columns = 0, l = 1) {
+
+  abundance_data <- abundance_data[,(1 + remove_columns):ncol(abundance_data)]
+  
+  
+  shannon_list <- c()
+  
+  if (l == 1) {
+    for (row in 1:nrow(abundance_data)) {
+    
+    all_obs <- abundance_data[row,]
+    total_cover <- sum(all_obs)
+    all_obs <- all_obs[(all_obs > 0.00001)]
+    shannon_value <- -sum(all_obs/total_cover * log((all_obs/total_cover)))
+    shannon_list <- append(shannon_list,shannon_value)  
+    }
+  }
+  else{
+    for (row in 1:nrow(abundance_data)) {
+      
+    all_obs <- abundance_data[row,]
+    total_cover <- sum(all_obs)
+    all_obs <- all_obs[!(all_obs == 0)]
+    shannon_value <- log((sum((all_obs/total_cover) * (1/(all_obs/total_cover))^l))^(1/l))
+    shannon_list <- append(shannon_list, shannon_value)  
+    }
+  }
+  return(shannon_list)
+}
+```
+
+
+
+
+```{r}
+test33 <- update_abundance_data(cover, freq, 16 ,3)
+```
+
+```{r}
+dd <-  diversity_index(test33, remove_columns = 3, l = 1)
+```
+
+```{r}
+print(dd)
+```
+
+
+```{r}
+print(dd[!dd == result$shannon])
+print(result$shannon[!dd == result$shannon])
+```
+
+```{r}
+print(dd[94])
+print(result$shannon[94])
+```
+```{r}
+as.numeric(test33[93,])
+```
+
+```{r}
+x <- 708
+as.numeric(test33[x,as.numeric(test33[x,]) > 0])
+```
+
+
+```{r}
+which(!dd == result$shannon )
+```
+
+
+

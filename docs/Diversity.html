@@ -10,8 +10,9 @@
 
 
 
+<meta name="date" content="2021-03-28" />
 
-<title>Model validation: Sensitivity of the prior</title>
+<title>Different ways to estimate diversity</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -395,7 +396,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Model validation: Sensitivity of the prior</h1>
+<h1 class="title toc-ignore">Different ways to estimate diversity</h1>
+<h4 class="date">2021-03-28</h4>
 
 </div>
 
@@ -420,10 +422,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-14
+<strong>Last updated:</strong> 2021-04-13
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -444,67 +446,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
-</p>
-</div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210322code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210322)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
-</p>
-</div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -527,13 +469,11 @@ Note that you need to be careful to ensure that all relevant files for the analy
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.Rhistory
 
 Untracked files:
     Untracked:  analysis/Diversity.Rmd
-    Untracked:  code/function.R
     Untracked:  data/6230_year2014_scale1.csv
     Untracked:  data/result for plot.csv
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
@@ -545,7 +485,6 @@ Unstaged changes:
     Deleted:    analysis/Shannon.Rmd
     Modified:   analysis/_site.yml
     Modified:   analysis/index.Rmd
-    Deleted:    code/function_shannon.R
     Deleted:    figure/Animation.Rmd/unnamed-chunk-8-1.gif
 
 </code></pre>
@@ -559,165 +498,64 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Animation.Rmd</code>) and HTML (<code>docs/Animation.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/90d283e445fc9438acc5c419ea7ae75e7235ade2/analysis/Animation.Rmd" target="_blank">90d283e</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-12
-</td>
-<td>
-Added text To model validation animation
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/90d283e445fc9438acc5c419ea7ae75e7235ade2/docs/Animation.html" target="_blank">90d283e</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-12
-</td>
-<td>
-Added text To model validation animation
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/16286b460c07a565c4e155ff746410edeaa6dd9a/docs/Animation.html" target="_blank">16286b4</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-08
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/35b9091d518dcafe2ead6436f6bad27bec226539/analysis/Animation.Rmd" target="_blank">35b9091</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-08
-</td>
-<td>
-wflow_publish("analysis/Animation.rmd")
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<p>On this page we will look at one aspect of the robustness of the method we have created. To create our method we have used a bayesian framework. One of the difficult tasks of applying a bayesian framework is how to decide on the prior distribution. In our method we decided on the beta distribution as this is very flexible and well suited for the kind of data our method should be able to handle. <span class="math display">\[
-Beta(a, b) \sim \frac{\Gamma (a+b)}{\Gamma (a) \Gamma(b)}\theta^{a -1}(1-\theta)^{b-1}
+<h1>
+Introduction
+</h1>
+<p>In ecology an important aspect of a plot is the diversity. The diversity is a meassure of the number of different types of species within the plot and also how the individuals are distributed among the species A diversity index can be computed in several different ways and puts weight on different aspects of the species within the plot. As an example, one could be interested in diversity meassure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the plot. <br><br> On the main page we will give some examples of how our method perform on the NOVANA dataset with respect to different diversity meassures. We will calculate a diversity index for each plot. For this reason, we will define the diversity indexes we have used in our examples below.</p>
+<h2>
+Shannon index
+</h2>
+<p>A diversity index that traditionally is often used is the shannon index. The shannon index is calculated by the following formula: <span class="math display">\[\text{shannon index =}-\sum_{i=1}^S p_i \ln (p_i)\]</span> where <span class="math inline">\(S\)</span> is the number of species and <span class="math inline">\(p_i\)</span> is the proportion of all individuals that belong to specie <span class="math inline">\(i\)</span>. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins specie <span class="math inline">\(i\)</span> is hit by divided by the total number of pins that hit some specie in the plot. <br><br> However, as it is pointed out in both [1] and [2] the shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [2]. <br> We can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number og species. When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity. It can instead be seen as the uncertainty in the species identity of a sample.</p>
+<h2>
+Simpson index
+</h2>
+<p>Another commonly used diversity index is the simpson index. This is given by <span class="math display">\[
+\text{simpson index = }\Sigma_{i = 1}^S(p_i)^2
+\]</span> where the symbols mean the same as before. A high diversity corresponds to a low simpson index and a low diversity corresponds to a high simpson index. As described in [1] the simpson index gives the probability that two individuals, drawn randomly from a sample, will be of same specie. Again, this is not a true diversity.</p>
+<h2>
+Spicies richness
+</h2>
+<p>A third method for meassuring diversity is the species richness. This is simply given by <span class="math display">\[
+\text{species richness = }\Sigma_{i=1}^S1
+\]</span> where <span class="math inline">\(S\)</span> is the number of species in our precense/absence data having a one. This means that the species richness is just a count of how many species that is present in the plot without taking into account the distribution of the individuals among the specie types. This meassure is very influenced by rare species.</p>
+<h2>
+Hill diversity
+</h2>
+<p>To account for the problemes with the shannon index and the simpson index both [1] and [2] introduce the Hill diversity as a solution. Following the notation from [1] we get that <span class="math display">\[
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+\]</span> The symbols of <span class="math inline">\(S\)</span> and <span class="math inline">\(p_i\)</span> are the same as previous, while <span class="math inline">\(r_i\)</span> is how rare the i’th specie is in a plot. We can calculate how rare a specie is by using the equation <span class="math display">\[r_i = \frac{1}{p_i}\]</span> The Hill diversity calculates the mean of the rarities of the species in the plot. A plot with many species, all rare, has a high mean rarity, while a plot with few species, non of them rare, has a low mean rarity and low diversity. The <span class="math inline">\(l\)</span> determines the rarity scale, which is how we calculate the mean rarity, and by adjusting this we get different Hill diversities. The different ways we can calculate the mean rarity differs in the way we scale the values of the common and rare species, i.e. the different values of <span class="math inline">\(l\)</span> emphasize common or rare species. As an example the Hill-Shannon (defined below) uses the arithmetic mean while the Hill-Simpson (defined below) uses the geometric mean. <br></p>
+<h2>
+Hill-Shannon diversity
+</h2>
+<p>If we let <span class="math inline">\(l\)</span> approch 0 then in the limit we get the exponential function taken on the shannon index <span class="math display">\[
+\text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
 \]</span></p>
-<p>However, when deciding on the initial parameters of the beta distribution, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, this can be a topic of much greater debate. <br> In out method we decided on an empirical bayesian approach where we used the data to fit our initial parameters for each specie. As in the example on the main page this resulted in the scatterplot below, where the updated shannon index is mapped agains the observed shannon index</p>
-<pre class="r"><code>plot1</code></pre>
-<p><img src="figure/Animation.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>An aspect we would like from the method we have created is that the outcome of our method does not change much if there are small changes to the inital parameters in the prior distributions. If the outcome turns out to be very much influenced by the choices of parameters in our beta distribution this would cause some concerns regarding the method because errors in the data collection or removing some plots in the dataset could generate very different abundance measures for species in other plots in the dataset. <br><br> We have done a graphic exploration of this subject illustrated in the animation below. Here we have used the same subset of the dataset as in the example generating the above plot and the example on the main page. Before updating the abundance for each specie in each plot we have multiplied <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values in the beta distribution for the given specie with some constant value <span class="math inline">\(c\)</span> so that the new prior distribution for each specie is given by <span class="math display">\[
-\text{prior}\sim beta(c\cdot a, c\cdot b)
-\]</span> For each value of <span class="math inline">\(c\)</span> we choose we calculate the shannon indexes for all plots and plot them against the shannon index we get when <span class="math inline">\(c = 1\)</span>, i.e when we don’t modify the prior. We let <span class="math inline">\(c\)</span> take values between 0.7 and 1.3</p>
-<pre class="r"><code>animation </code></pre>
-<p><img src="figure/Animation.Rmd/unnamed-chunk-11-1.gif" style="display: block; margin: auto;" /></p>
-<p>As it can be seen in the animation, the shannon index of most of the plots stay close their original shannon index value when we modify the prior distribution of the species. A few plots change bit more than others. This is probably the plots with rare species as these will be more affected by the inital parameters in the prior distribution. However, from the animation above the method we have created seems pretty robust to small changes in the prior.</p>
-<br>
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
-</button>
-</p>
-<div id="workflowr-sessioninfo" class="collapse">
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19042)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=Danish_Denmark.1252  LC_CTYPE=Danish_Denmark.1252   
-[3] LC_MONETARY=Danish_Denmark.1252 LC_NUMERIC=C                   
-[5] LC_TIME=Danish_Denmark.1252    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
- [1] magick_2.7.1    gganimate_1.0.7 png_0.1-7       gifski_0.8.7.1 
- [5] forcats_0.5.0   stringr_1.4.0   dplyr_1.0.2     purrr_0.3.4    
- [9] readr_1.4.0     tidyr_1.1.2     tibble_3.0.4    ggplot2_3.3.2  
-[13] tidyverse_1.3.0 workflowr_1.6.2
-
-loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5        lubridate_1.7.9   prettyunits_1.1.1 ps_1.4.0         
- [5] assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.27     plyr_1.8.6       
- [9] R6_2.5.0          cellranger_1.1.0  backports_1.1.10  reprex_0.3.0     
-[13] evaluate_0.14     httr_1.4.2        pillar_1.4.6      rlang_0.4.8      
-[17] progress_1.2.2    readxl_1.3.1      rstudioapi_0.11   whisker_0.4      
-[21] blob_1.2.1        rmarkdown_2.5     labeling_0.4.2    munsell_0.5.0    
-[25] broom_0.7.2       compiler_4.0.3    httpuv_1.5.5      modelr_0.1.8     
-[29] xfun_0.18         pkgconfig_2.0.3   htmltools_0.5.0   tidyselect_1.1.0 
-[33] fansi_0.4.1       crayon_1.3.4      dbplyr_1.4.4      withr_2.3.0      
-[37] later_1.1.0.1     grid_4.0.3        jsonlite_1.7.1    gtable_0.3.0     
-[41] lifecycle_0.2.0   DBI_1.1.0         git2r_0.28.0      magrittr_1.5     
-[45] scales_1.1.1      cli_2.1.0         stringi_1.5.3     farver_2.0.3     
-[49] fs_1.5.0          promises_1.2.0.1  xml2_1.3.2        ellipsis_0.3.1   
-[53] generics_0.1.0    vctrs_0.3.4       tools_4.0.3       glue_1.4.2       
-[57] tweenr_1.0.1      hms_0.5.3         yaml_2.2.1        colorspace_1.4-1 
-[61] rvest_0.3.6       knitr_1.30        haven_2.3.1      </code></pre>
-</div>
+<p>Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species.</p>
+<h2>
+Hill-Simpson diversity
+</h2>
+<p>If we instead let <span class="math inline">\(l = -1\)</span> in the formula for Hill diversity we get the inverse of the simpson index <span class="math display">\[
+\text{Hill-Simpson =} \frac{1}{\Sigma_{i=1}^S(p_i)^2}
+\]</span> The Hill-Simpson diversity emphasizes the common species more than the rare species. Furthermore, the Hill-Simpson diversity has the more intuitive interpretation that a plot with high diversity has a high value of Hill-Simpson as oppose to the traditional simpson index. <br><br> As a final note it should also be mentioned, that if we let <span class="math inline">\(l = 1\)</span> in the formula for Hill diversity we get the standard species richness which was also described further above. <br><br><br></p>
+We have used the articles:
+<ul>
+<li>
+[1] “A conceptual guide to measuring species diversity” by Michael Roswell, Jonathan Dushoff and Rachael Winfree, 2021.
+</li>
+<li>
+[2] “Entropy and diversity” by Lou Jost , Ban˜os, Tungurahua, Ecuador (<a href="mailto:loujost@yahoo.com" class="email">loujost@yahoo.com</a>), 2006.
+</li>
+<li>
+[3] <a href="https://en.wikipedia.org/wiki/Diversity_index" class="uri">https://en.wikipedia.org/wiki/Diversity_index</a>
+</li>
+</ul>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using

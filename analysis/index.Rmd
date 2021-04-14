@@ -170,7 +170,8 @@ ggplot(data = result, mapping = aes(x = row_shannon, y = shannon))+
   geom_abline(color = "blue") +
   ylab("Our shannon index") +
   xlab("Simple row shannon index") +
-  ggtitle("Our shannon index compared with the simple row shannon")
+  ggtitle("Our shannon index compared with the simple row shannon") +
+  geom_smooth(lm = "smooth", col = "red")
 ```
 
 It can be seen in this example, that our way of calculating the shannon index gives a slightly higher value for most plots, but two plots with similar shannon index value with the simple way will still have comparable values with our way. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.

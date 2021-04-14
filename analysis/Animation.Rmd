@@ -1,5 +1,5 @@
 ---
-title: "Model sensitivity validation"
+title: "Model validation: Sensitivity of the prior"
 site: workflowr::wflow_site
 output: workflowr::wflow_html
 editor_options:
@@ -13,6 +13,7 @@ library(gifski)
 library(png)
 library(ggplot2)
 library(gganimate)
+library(magick)
 ```
 
 ```{r, eval=FALSE, include=FALSE}
@@ -37,12 +38,12 @@ shanon_index_v2_animation <- function(cover, freq) {
 
 
     if (length(unique(beta_data)) > 1) {
-      beta_data_fitted <- fitdist(beta_data, "beta", method = wflow)
+      beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
       beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
 
     }
   }
-  for (scale in seq(0.5 ,2, 0.1)) {
+  for (scale in seq(0.7 ,1.3, 0.05)) {
   print(scale)
 
   # create list for shannon index for each plot
@@ -93,11 +94,11 @@ test <-  shanon_index_v2_animation(cover, freq)
 ```
 
 ```{r, eval=FALSE, include=FALSE}
-write.csv(test, "data/6230_year2014_scale.csv", row.names =  FALSE)
+write.csv(test, "data/6230_year2014_scale1.csv", row.names =  FALSE)
 ```
 
 ```{r, include=FALSE}
-test <-  read.csv("data/6230_year2014_scale.csv")
+test <-  read.csv("data/6230_year2014_scale1.csv")
 ```
 
 
@@ -117,22 +118,52 @@ animation <- ggplot(data = test_long, mapping = aes(x= scale_1, y = index, group
   labs(title = "scale: {next_state}")
 
 
-test22 <-  animate(animation,  nframes = 2*length(unique(test_long$scale)))
+test22 <-  animate(animation,  nframes = 2*length(unique(test_long$scale)),renderer = magick_renderer())
 dir.create(file.path("docs/figure/Animation.rmd"))
 anim_save("unnamed-chunk-8-1.gif", animation = test22, path = "docs/figure/Animation.rmd")
 ```
 
 
-One way to do model validation is to compare results with slight modifications to test the robustness of our model. We did this by multiplying different constants to the alpha and beta values of our prior beta models. We then compared the results against our standard model without any multiplications. If our model is robust we expect that the calculated shannon index for each plot is roughly the same before and after changing the prior. To check if this was the case, we plotted the shannon index after changing the prior against the shannon index before changing it. We used the NOVANA dataset for the test with all the plot from terhabtype 6230 in year 2014.
+On this page we will look at one aspect of the robustness of the method we have created. To create our method we have used a bayesian framework. One of the difficult tasks of applying a bayesian framework is how to decide on the prior distribution. In our method we decided on the beta distribution as this is very flexible and well suited for the kind of data our method should be able to handle.
+$$
+Beta(a, b) \sim \frac{\Gamma (a+b)}{\Gamma (a) \Gamma(b)}\theta^{a -1}(1-\theta)^{b-1}
+$$
 
+However, when deciding on the initial parameters of the beta distribution, $a$ and $b$, this can be a topic of much greater debate. 
+<br>
+In out method we decided on an empirical bayesian approach where we used the data to fit our initial parameters for each specie. As in the example on the main page this resulted in the scatterplot below, where the updated shannon index is mapped agains the observed shannon index
 
-```{r}
-animation
+```{r, include=FALSE}
+result_for_plot <- read.csv("data/result for plot.csv")
 ```
 
-As it can be seen in the plot, most plots stay close their original value when we multiply a constant to their prior.
+```{r, echo = FALSE, include = FALSE}
+plot1 <- ggplot(data = result_for_plot, mapping = aes(x = row_shannon, y = shannon))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("Updated shannon index") +
+  xlab("Observed shannon index") +
+  ggtitle("Updated shannon index compared with the observed shannon index")
+```
+
+```{r}
+plot1
+```
+
+An aspect we would like from the method we have created is that the outcome of our method does not change much if there are small changes to the inital parameters in the prior distributions. If the outcome turns out to be very much influenced by the choices of parameters in our beta distribution this would cause some concerns regarding the method because errors in the data collection or removing some plots in the dataset could generate very different abundance measures for species in other plots in the dataset. 
+<br><br>
+We have done a graphic exploration of this subject illustrated in the animation below. Here we have used the same subset of the dataset as in the example generating the above plot and the example on the main page. Before updating the abundance for each specie in each plot we have multiplied $a$ and $b$ values in the beta distribution for the given specie with some constant value $c$ so that the new prior distribution for each specie is given by
+$$
+\text{prior}\sim beta(c\cdot a, c\cdot b)
+$$
+For each value of $c$ we choose we calculate the shannon indexes for all plots and plot them against the shannon index we get when $c = 1$, i.e when we don't modify the prior. We let $c$ take values between 0.7 and 1.3 
+
+```{r}
+test22
+```
 
 
+As it can be seen in the animation, the shannon index of most of the plots stay close their original shannon index value when we modify the prior distribution of the species. A few plots change bit more than others. This is probably the plots with rare species as these will be more affected by the inital parameters in the prior distribution. However, from the animation above the method we have created seems pretty robust to small changes in the prior. One could do further sensitivity analysis of the prior by, as an example, multiply different constants to the $a$ and $b$ values in the prior distribution.
 
 
 

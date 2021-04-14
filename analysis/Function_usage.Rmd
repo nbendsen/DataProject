@@ -1,0 +1,144 @@
+---
+title: "Using functions"
+site: workflowr::wflow_site
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+
+This page will have a list of all our functions, together with a short description and guide in how to use them. It will also include a link for further documentation for each function.
+
+
+<h1> Row_shannon </h1>
+------
+
+The simpler shannon index only uses cover data.
+
+**Usage:**
+
+row_shannon(cover_data ,species_indicator = NULL)
+
+**Arguments:**
+
+* **Cover_data**: A data frame with plots as rows and the cover data for each specie as columns.
+
+* **species_indicator**: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in cover_data will be assumed to be for species.
+
+**output:**
+
+* A vector with the shannon index for each row, ordered with the first row as the first value.
+
+[Further documentation](function_simple_shannon.html#row_shannon)
+ 
+<h1>species_richness </h1>
+------
+Species richness is the number of observed species in a given plot.
+
+
+**Usage:**
+
+species_richness(frequency_data ,species_indicator = NULL)
+
+**Arguments:**
+
+* **frequency_data**: A data frame with plots as rows and the frequency data for each specie as columns (1 if the species is spotted, 0 if not).
+
+* **species_indicator**: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in frequency_data will be assumed to be for species.
+
+**output:**
+
+* The function return a vector with the speciess richness for each plot, in the same order that the columns were in.
+
+[Further documentation](function_simple_shannon.html#species_richness)
+
+
+<h1>Our_shannon</h1>
+------
+A function to calculate the shannon index using the baysian methods. (our_shannon is a working title)
+
+
+**Usage:**
+
+our_shannon(cover, freq)
+
+**Arguments:**
+
+* **cover**: A data frame with the abundance dataset as a dataframe.
+
+* **freq**: A the presence/absence data as a data frame, it is assummed that the first three columns is plot site and year.
+
+
+**output:**
+
+* A dataframe with with the first three columns of plot, site and year, and the fourth column is our shannon index.
+
+[Further documentation](function_shannon.html)
+
+<h1>plot_index_gradient</h1>
+------
+
+A function to plot a variable against different diversity measures to see how they compare against each other.
+
+**Usage:**
+
+plot_index_gradient(data, indexes, gradient ,gradient_text = NULL)
+
+**Arguments:**
+
+* **data**: A data frame with the different indexes to be compared and the gradient to compare them against
+* **indexes**: A list of the column names for the indexes as strings.
+* **gradient**:The column name for the gradient as a string.
+* **gradient_text**: A description of the gradient as a string.
+
+**Output**
+
+Four plot with different diversity measures plottet against a variable.
+
+[Further documentation](gradient_plot.html)
+
+
+<h1>update_abundance_data</h1>
+------
+
+A function taking in abundance and prensent/absent data, and returning the abundance data after we have taken into account the present/absent data using our baysian method.
+
+**Usage:**
+
+update_abundance_data(abundance_data, present_data, n = 16 , remove_column = 0)
+
+**Arguments:**
+
+* **abundance_data**: Abundance data in a data frame, with plots as rows and species as columns.
+* **present_data**:  present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.
+* **n**: If cover data is not between 0 and 1, what should it be divide with to fit.
+* **remove_column**: Exclude n column from the data analysis. i.e if the first 3 columns include data about the plot, and is not data about a species can they be excluded.
+
+**Output**
+
+A data frame with the excluded columns and abundace data taking present/absent data into account.
+
+
+<h1>diversity_index</h1>
+------
+
+A function using abundance data to calculate a diversity index using:
+
+$$
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+$$
+
+**Usage:**
+
+diversity_index(abundance_data, remove_columns = 0, l = 1)
+
+**Arguments:**
+
+* **abundance_data**: Abundance data in a data frame, with plots as rows and species as columns.
+* **remove_columns**: Exclude n column from the data analysis. i.e if the first 3 columns include data about the plot, and is not data about a species can they be excluded.
+* **l**: A number that specifies l in the formula.
+
+**Output**
+
+A vector with the diversity for each row in the abundance data.
+

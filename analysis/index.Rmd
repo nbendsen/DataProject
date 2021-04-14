@@ -213,6 +213,17 @@ plot_index_gradient(result ,c("shannon", "row_shannon","species_richness", "hill
 An other way of comparing two indexes is to plot them against each other.
 
 
+```{r, echo = FALSE}
+ggplot(data = result, mapping = aes(x = row_shannon, y = shannon))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("Our shannon index") +
+  xlab("Simple row shannon index") +
+  ggtitle("Our shannon index compared with the simple row shannon") +
+  geom_smooth(lm = "smooth", col = "red")
+```
+
+
 
 
 

@@ -13,9 +13,7 @@ source("code/function_shannon.R")
 Functions for calculating a simpler shannon index and species richness
 
 
-
-<h1>Row_shannon </h1>
-
+## Row_shannon
 
 
 The simpler shannon index only uses cover data.
@@ -36,7 +34,7 @@ row_shannon
 
 
  
-<h1>species_richness </h1>
+## species_richness
 
 Species richness is the number of observed species in a given plot.
 
@@ -55,3 +53,6 @@ species_richness(frequency_data ,species_indicator = NULL)
 ```{r, echo = FALSE}
 species_richness
 ```
+
+
+

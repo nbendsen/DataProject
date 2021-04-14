@@ -11,7 +11,7 @@
 
 
 
-<title>Documentation for different ways of calculating diversity</title>
+<title>Using functions</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -390,14 +390,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Documentation for different ways of calculating diversity</h1>
+<h1 class="title toc-ignore">Using functions</h1>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -406,7 +406,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -415,10 +415,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-12
+<strong>Last updated:</strong> 2021-04-14
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject-Animation/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -434,88 +434,28 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree6df1c173b37d25d8aa0f66fed1436495c654b4f8targetblank6df1c17a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/6df1c173b37d25d8aa0f66fed1436495c654b4f8" target="_blank">6df1c17</a> </a>
 </p>
 </div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210322code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210322)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
-</p>
-</div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4d21cd766c63ca7d5b576ed37445f8724153c57atargetblank4d21cd7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/4d21cd766c63ca7d5b576ed37445f8724153c57a" target="_blank">4d21cd7</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4d21cd766c63ca7d5b576ed37445f8724153c57atargetblank4d21cd7a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree6df1c173b37d25d8aa0f66fed1436495c654b4f8targetblank6df1c17a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/4d21cd766c63ca7d5b576ed37445f8724153c57a" target="_blank">4d21cd7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/6df1c173b37d25d8aa0f66fed1436495c654b4f8" target="_blank">6df1c17</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -528,12 +468,11 @@ Ignored files:
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
 
-Untracked files:
-    Untracked:  analysis/Function_usage.Rmd
-
 Unstaged changes:
     Modified:   analysis/_site.yml
     Modified:   analysis/function_simple_shannon.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   code/function_shannon.R
 
 </code></pre>
 <p>
@@ -548,7 +487,7 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/function_simple_shannon.Rmd</code>) and HTML (<code>docs/function_simple_shannon.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Function_usage.Rmd</code>) and HTML (<code>docs/Function_usage.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -574,36 +513,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/51449f1a4fa61c9feffdb53c4e137eb42a0f1e3e/docs/function_simple_shannon.html" target="_blank">51449f1</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/32f0ec7853d2015a28565cea8185f4f76132f2c7/analysis/function_simple_shannon.Rmd" target="_blank">32f0ec7</a>
+<a href="https://github.com/nbendsen/DataProject/blob/6df1c173b37d25d8aa0f66fed1436495c654b4f8/analysis/Function_usage.Rmd" target="_blank">6df1c17</a>
 </td>
 <td>
 MHPHP
 </td>
 <td>
-2021-04-07
+2021-04-14
 </td>
 <td>
-wflow_publish(all = TRUE)
+Added function usage
 </td>
 </tr>
 <tr>
@@ -611,33 +533,16 @@ wflow_publish(all = TRUE)
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/18a9c290a8725eacd5279dfc4e1905af530d9f29/docs/function_simple_shannon.html" target="_blank">18a9c29</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/6df1c173b37d25d8aa0f66fed1436495c654b4f8/docs/Function_usage.html" target="_blank">6df1c17</a>
 </td>
 <td>
 MHPHP
 </td>
 <td>
-2021-03-30
+2021-04-14
 </td>
 <td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/b1728cbc7e0686a4b0df325766a1e09d4cbb5285/analysis/function_simple_shannon.Rmd" target="_blank">b1728cb</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-wflow_publish(c(“analysis/function_simple_shannon.Rmd”, “analysis/gradient_plot.Rmd”))
+Added function usage
 </td>
 </tr>
 </tbody>
@@ -647,91 +552,109 @@ wflow_publish(c(“analysis/function_simple_shannon.Rmd”, “analysis/gradient
 </div>
 </div>
 </div>
-<p>Functions for calculating a simpler shannon index and species richness</p>
-<div id="row_shannon" class="section level2">
-<h2>Row_shannon</h2>
+<p>This page will have a list of all our functions, together with a short description and guide in how to use them. It will also include a link for further documentation for each function.</p>
+<h1>
+Row_shannon
+</h1>
+<hr />
 <p>The simpler shannon index only uses cover data.</p>
 <p><strong>Usage:</strong></p>
 <p>row_shannon(cover_data ,species_indicator = NULL)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><p>Cover_data: A data frame with plots as rows and the cover data for each specie as columns.</p></li>
-<li><p>species_indicator: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring. If left empty all columns in cover_data will be assumed to be for species.</p></li>
+<li><p><strong>Cover_data</strong>: A data frame with plots as rows and the cover data for each specie as columns.</p></li>
+<li><p><strong>species_indicator</strong>: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring. If left empty all columns in cover_data will be assumed to be for species.</p></li>
 </ul>
-<pre><code>function (cover_data, species_indicator = NULL) 
-{
-    if (is.null(species_indicator)) {
-        shannon &lt;- rowSums(-cover_data/(rowSums(cover_data)) * 
-            log(cover_data/(rowSums(cover_data))), na.rm = TRUE)
-    }
-    else {
-        shannon &lt;- rowSums(-cover_data[, grep(species_indicator, 
-            names(cover_data))]/(rowSums(cover_data[, grep(species_indicator, 
-            names(cover_data))])) * log(cover_data[, grep(species_indicator, 
-            names(cover_data))]/(rowSums(cover_data[, grep(species_indicator, 
-            names(cover_data))]))), na.rm = TRUE)
-    }
-    return(shannon)
-}</code></pre>
-</div>
-<div id="species_richness" class="section level2">
-<h2>species_richness</h2>
+<p><strong>output:</strong></p>
+<ul>
+<li>A vector with the shannon index for each row, ordered with the first row as the first value.</li>
+</ul>
+<p><a href="function_simple_shannon.html#row_shannon">Further documentation</a></p>
+<h1>
+species_richness
+</h1>
+<hr />
 <p>Species richness is the number of observed species in a given plot.</p>
 <p><strong>Usage:</strong></p>
 <p>species_richness(frequency_data ,species_indicator = NULL)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><p>frequency_data: A data frame with plots as rows and the frequency data for each specie as columns (1 if the species is spotted, 0 if not).</p></li>
-<li><p>species_indicator: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring. If left empty all columns in frequency_data will be assumed to be for species.</p></li>
+<li><p><strong>frequency_data</strong>: A data frame with plots as rows and the frequency data for each specie as columns (1 if the species is spotted, 0 if not).</p></li>
+<li><p><strong>species_indicator</strong>: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring. If left empty all columns in frequency_data will be assumed to be for species.</p></li>
 </ul>
-<pre><code>function (frequency_data, species_indicator = NULL) 
-{
-    if (is.null(species_indicator)) {
-        species_richness &lt;- rowSums(frequency_data)
-    }
-    else {
-        species_richness &lt;- rowSums(frequency_data[, grep(species_indicator, 
-            names(frequency_data))])
-    }
-    return(species_richness)
-}</code></pre>
-<p><a href="#species_richness">test</a></p>
-<br>
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
-<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
-</button>
-</p>
-<div id="workflowr-sessioninfo" class="collapse">
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 18363)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=English_United Kingdom.1252 
-[2] LC_CTYPE=English_United Kingdom.1252   
-[3] LC_MONETARY=English_United Kingdom.1252
-[4] LC_NUMERIC=C                           
-[5] LC_TIME=English_United Kingdom.1252    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     workflowr_1.6.2  R6_2.4.1         rlang_0.4.8     
- [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
-[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.25   
-[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
-[21] later_1.1.0.1    vctrs_0.3.4      promises_1.1.1   fs_1.5.0        
-[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.4    stringi_1.5.3   
-[29] compiler_4.0.3   pillar_1.4.6     backports_1.1.10 httpuv_1.5.5    
-[33] pkgconfig_2.0.3 </code></pre>
-</div>
-</div>
+<p><strong>output:</strong></p>
+<ul>
+<li>The function return a vector with the speciess richness for each plot, in the same order that the columns were in.</li>
+</ul>
+<p><a href="function_simple_shannon.html#species_richness">Further documentation</a></p>
+<h1>
+Our_shannon
+</h1>
+<hr />
+<p>A function to calculate the shannon index using the baysian methods. (our_shannon is a working title)</p>
+<p><strong>Usage:</strong></p>
+<p>our_shannon(cover, freq)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><p><strong>cover</strong>: A data frame with the abundance dataset as a dataframe.</p></li>
+<li><p><strong>freq</strong>: A the presence/absence data as a data frame, it is assummed that the first three columns is plot site and year.</p></li>
+</ul>
+<p><strong>output:</strong></p>
+<ul>
+<li>A dataframe with with the first three columns of plot, site and year, and the fourth column is our shannon index.</li>
+</ul>
+<p><a href="function_shannon.html">Further documentation</a></p>
+<h1>
+plot_index_gradient
+</h1>
+<hr />
+<p>A function to plot a variable against different diversity measures to see how they compare against each other.</p>
+<p><strong>Usage:</strong></p>
+<p>plot_index_gradient(data, indexes, gradient ,gradient_text = NULL)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>data</strong>: A data frame with the different indexes to be compared and the gradient to compare them against</li>
+<li><strong>indexes</strong>: A list of the column names for the indexes as strings.</li>
+<li><strong>gradient</strong>:The column name for the gradient as a string.</li>
+<li><strong>gradient_text</strong>: A description of the gradient as a string.</li>
+</ul>
+<p><strong>Output</strong></p>
+<p>Four plot with different diversity measures plottet against a variable.</p>
+<p><a href="gradient_plot.html">Further documentation</a></p>
+<h1>
+update_abundance_data
+</h1>
+<hr />
+<p>A function taking in abundance and prensent/absent data, and returning the abundance data after we have taken into account the present/absent data using our baysian method.</p>
+<p><strong>Usage:</strong></p>
+<p>update_abundance_data(abundance_data, present_data, n = 16 , remove_column = 0)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>abundance_data</strong>: Abundance data in a data frame, with plots as rows and species as columns.</li>
+<li><strong>present_data</strong>: present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.</li>
+<li><strong>n</strong>: If cover data is not between 0 and 1, what should it be divide with to fit.</li>
+<li><strong>remove_column</strong>: Exclude n column from the data analysis. i.e if the first 3 columns include data about the plot, and is not data about a species can they be excluded.</li>
+</ul>
+<p><strong>Output</strong></p>
+<p>A data frame with the excluded columns and abundace data taking present/absent data into account.</p>
+<h1>
+diversity_index
+</h1>
+<hr />
+<p>A function using abundance data to calculate a diversity index using:</p>
+<p><span class="math display">\[
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+\]</span></p>
+<p><strong>Usage:</strong></p>
+<p>diversity_index(abundance_data, remove_columns = 0, l = 1)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>abundance_data</strong>: Abundance data in a data frame, with plots as rows and species as columns.</li>
+<li><strong>remove_columns</strong>: Exclude n column from the data analysis. i.e if the first 3 columns include data about the plot, and is not data about a species can they be excluded.</li>
+<li><strong>l</strong>: A number that specifies l in the formula.</li>
+</ul>
+<p><strong>Output</strong></p>
+<p>A vector with the diversity for each row in the abundance data.</p>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using

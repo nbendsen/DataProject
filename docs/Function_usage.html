@@ -13,6 +13,7 @@
 
 <title>Using functions</title>
 
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -25,6 +26,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -36,6 +39,8 @@ div.section {
 }
 </style>
 
+
+
 <style type="text/css">
   code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -43,7 +48,7 @@ div.section {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -370,7 +375,13 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
+  <a href="Diversity.html">Diversity</a>
+</li>
+<li>
   <a href="Function_usage.html">Functions</a>
+</li>
+<li>
+  <a href="model_validering.html">Model validation</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -421,7 +432,7 @@ div.tocify {
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject-Animation/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -446,33 +457,32 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree6df1c173b37d25d8aa0f66fed1436495c654b4f8targetblank6df1c17a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/6df1c173b37d25d8aa0f66fed1436495c654b4f8" target="_blank">6df1c17</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4c85ee55ee5ef158088c38abfd3bd925515efe56targetblank4c85ee5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/4c85ee55ee5ef158088c38abfd3bd925515efe56" target="_blank">4c85ee5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree6df1c173b37d25d8aa0f66fed1436495c654b4f8targetblank6df1c17a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4c85ee55ee5ef158088c38abfd3bd925515efe56targetblank4c85ee5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/6df1c173b37d25d8aa0f66fed1436495c654b4f8" target="_blank">6df1c17</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/4c85ee55ee5ef158088c38abfd3bd925515efe56" target="_blank">4c85ee5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
 
 Unstaged changes:
     Modified:   analysis/_site.yml
+    Deleted:    analysis/function_shannon.Rmd
     Modified:   analysis/function_simple_shannon.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   code/function_shannon.R
+    Modified:   analysis/gradient_plot.Rmd
+    Modified:   figure/Animation.Rmd/unnamed-chunk-11-1.gif
 
 </code></pre>
 <p>
@@ -516,16 +526,16 @@ Message
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/6df1c173b37d25d8aa0f66fed1436495c654b4f8/analysis/Function_usage.Rmd" target="_blank">6df1c17</a>
+<a href="https://github.com/nbendsen/DataProject/blob/4c85ee55ee5ef158088c38abfd3bd925515efe56/analysis/Function_usage.Rmd" target="_blank">4c85ee5</a>
 </td>
 <td>
-MHPHP
+nbendsen
 </td>
 <td>
 2021-04-14
 </td>
 <td>
-Added function usage
+func usage
 </td>
 </tr>
 <tr>
@@ -533,16 +543,16 @@ Added function usage
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/6df1c173b37d25d8aa0f66fed1436495c654b4f8/docs/Function_usage.html" target="_blank">6df1c17</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/4c85ee55ee5ef158088c38abfd3bd925515efe56/docs/Function_usage.html" target="_blank">4c85ee5</a>
 </td>
 <td>
-MHPHP
+nbendsen
 </td>
 <td>
 2021-04-14
 </td>
 <td>
-Added function usage
+func usage
 </td>
 </tr>
 </tbody>
@@ -670,6 +680,8 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
+
+
 </div>
 </div>
 
@@ -679,7 +691,7 @@ footer is added to webpages before the MathJax javascript. -->
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

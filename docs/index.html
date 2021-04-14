@@ -519,16 +519,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4c85ee55ee5ef158088c38abfd3bd925515efe56targetblank4c85ee5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/4c85ee55ee5ef158088c38abfd3bd925515efe56" target="_blank">4c85ee5</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreecbfa507b382a2a6d545e94a2da1751971e23422dtargetblankcbfa507a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/cbfa507b382a2a6d545e94a2da1751971e23422d" target="_blank">cbfa507</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4c85ee55ee5ef158088c38abfd3bd925515efe56targetblank4c85ee5a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreecbfa507b382a2a6d545e94a2da1751971e23422dtargetblankcbfa507a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/4c85ee55ee5ef158088c38abfd3bd925515efe56" target="_blank">4c85ee5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/cbfa507b382a2a6d545e94a2da1751971e23422d" target="_blank">cbfa507</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -540,11 +540,7 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Unstaged changes:
-    Modified:   analysis/_site.yml
-    Deleted:    analysis/function_shannon.Rmd
-    Modified:   analysis/function_simple_shannon.Rmd
-    Modified:   analysis/gradient_plot.Rmd
-    Modified:   figure/Animation.Rmd/unnamed-chunk-11-1.gif
+    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -583,6 +579,74 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/cbfa507b382a2a6d545e94a2da1751971e23422d/analysis/index.Rmd" target="_blank">cbfa507</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+wflow_publish("analysis/*.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/874ebd61e4023505e0b01aa625b5492ac9207a35/docs/index.html" target="_blank">874ebd6</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/db9541104fda58f4106b66c3b0ac04004f353adf/analysis/index.Rmd" target="_blank">db95411</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+wflow_publish("analysis/*.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/8b9283511d0f747e4ed2174ab6ef00412982ba55/docs/index.html" target="_blank">8b92835</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Updates part 2
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1804,7 +1868,7 @@ Theoretical discussion
 P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
 \]</span> where <span class="math inline">\(P(Y=y|\theta)\)</span> is the likelihood function and <span class="math inline">\(\pi(\theta)\)</span> is the prior distribution. We are interested in the posterior distribution <span class="math inline">\(P(\theta|Y=y)\)</span> which we can use to estimate the abundance of a specie in a plot. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible in each plot. A natural distribution to model this is the binomial distribution <span class="math display">\[
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
-\]</span> <br> In the bayesion framework the binomial model is used as a likelihood function. <br> We can create a prior distribution <span class="math inline">\(\pi(\theta)\)</span> for each specie by using both cover and presence/absence data. This is really the key idea in this method because this makes it possible to get a prior belief of a species spatial aggregation in a plot when we know that the specie is present. <br><br> The beta model is a conjugacy prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by <span class="math display">\[
+\]</span> <br> We use the binomial model as the likelihood function in the bayesian framework that we apply. <br> We can create a prior distribution <span class="math inline">\(\pi(\theta)\)</span> for each specie by using both cover and presence/absence data. This is really the key idea in this method because this makes it possible to get a prior belief of a species spatial aggregation in a plot when we know that the specie is present. <br><br> The beta model is a conjugacy prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by <span class="math display">\[
 \pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
 \]</span> When working with the bayesian framework, one has to decide on the paramters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. However, this can be difficult and instead we apply the empirical bayes method: For each specie we fit a beta-prior using all the cover data where the corresponding presence/absence data is 1. <br><br> From the likelihood function and the prior distribution we get that the posterior will be an updated beta distribution for each specie in each plot <span class="math display">\[
 P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
@@ -1817,7 +1881,19 @@ E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
 <h1>
 Implementation
 </h1>
-<p>The above theoretical discussions of the beta-binomial model are implemented in the function “method”. The function takes as input a cover dataset and a presence/absence dataset and output a dataframe with the updated abundances for each specie in each plot of the input cover dataset. For further specifications of the function click <a href="function_shannon.html">link</a></p>
+<p>The above theoretical discussions of the beta-binomial model are implemented in the function “bayesian_method”.</p>
+<p><strong>Usage:</strong></p>
+<p>bayesian_method(cover_data, present/absence_data, n = 16 , remove_column = 0)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>Cover_data</strong>: Cover data in a data frame, with plots as rows and species as columns.</li>
+<li><strong>present/absence_data</strong>: present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.</li>
+<li><strong>n</strong>: If cover data is not between 0 and 1, what should it be divide with to be in the interval <span class="math inline">\([0,1]\)</span>.</li>
+<li><strong>remove_column</strong>: Exclude first n column from the data analysis. In the NOVANA dataset this we would remove the first 3 columns as they include data about the plot, site and year.</li>
+</ul>
+<p>
+</p>
+<p>The function returns a dataframe with updated abundance data. <br><br> For further specifications of the function click <a href="function_shannon.html">link</a></p>
 <h1>
 An example
 </h1>
@@ -1828,9 +1904,9 @@ freq &lt;- read.csv(&quot;data/frekvens_data_6230_year2014.csv&quot;)
 
 abiotiske &lt;- read.csv(&quot;data/abiotiske_data_6230_year2014.csv&quot;)</code></pre>
 <p><br> We apply the method function to the cover and freq datasets.</p>
-<pre class="r"><code>result &lt;- method(cover, freq)</code></pre>
+<pre class="r"><code>result &lt;- bayesian_method(cover, freq, n = 16, 4)</code></pre>
 <p>To get a sense of what the method has done, first we have plotted the prior distribution for the specie = “X116”</p>
-<pre class="r"><code>curve(dbeta(x,a,b), xlab = &quot;relative abundance&quot;)</code></pre>
+<pre class="r"><code>curve(dbeta(x,a,b), xlab = &quot;relative cover&quot;)</code></pre>
 <p><img src="figure/index.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Below is histograms of the specie = “X116” in the observed cover dataset and in the updated abundance dataset where the above prior distrbution is used.</p>
 <pre class="r"><code>hist(cover[,&quot;X116&quot;], probability = TRUE, xlab = &quot;Number of pins&quot;, main = &quot;Histogram of specie X116 in the observed cover dataset&quot;)</code></pre>
@@ -1845,9 +1921,25 @@ Plot
 <pre class="r"><code>updated_shannon &lt;- shannon(result)</code></pre>
 <p>We plot the shannon indexes against each other <img src="figure/index.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>It can be seen in this example, that the shannon index for the updated dataset gives a slightly higher value for most plots. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.</p>
-<p><br> <br> <br> <br></p>
-<p>Look at connection between pH value of the soil and the shannon index for the plot. The function <a href="gradient_plot.html">plot_index_gradient</a> is used to visualize how different ways of calculating the shannon index compares against each other. We will be comparing different shannon indexes as well as the hills number by plotting them against a gradient for each plot. In this example the gradient will be the pH value of the soil. We used the functions row_shannon and species_richness. Their documentation is <a href="function_simple_shannon.html">Here</a>.</p>
-<p>An other way of comparing two indexes is to plot them against each other.</p>
+<p><br> <br></p>
+<p>An interesting aspect of the data we work with in this example is how the diversity of a plot is correlated with the pH value of the soil at the plot. The function <a href="gradient_plot.html">plot_index_gradient</a> is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values. <br> First we see the shannon index from the updated dataset relates to the pH values</p>
+<pre class="r"><code>result$pH &lt;- as.numeric(abiotiske$pHjord)</code></pre>
+<pre><code>Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>result$observed_shannon &lt;- observed_shannon
+result$updated_shannon &lt;- updated_shannon
+result$hill_shannon &lt;- exp(result$updated_shannon)
+result$species_richness &lt;- species_richness(freq, species_indicator = &quot;X&quot;)</code></pre>
+<pre class="r"><code>ggplot(result, aes(pH, updated_shannon))+
+  geom_point()+
+  xlim(3,6.5)+
+  theme_classic()+
+  labs(x = &quot;pH value of the soil&quot;, y = &quot;Updated shannon index&quot;)+
+  ggtitle(&quot;Shannon index and pH value of soil at each plot&quot;)</code></pre>
+<pre><code>Warning: Removed 861 rows containing missing values (geom_point).</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Next we show how different diversity measures relates to the pH value</p>
+<pre class="r"><code>plot_index_gradient(result ,c(&quot;updated_shannon&quot;, &quot;observed_shannon&quot;,&quot;species_richness&quot;, &quot;hill_shannon&quot;), &quot;pH&quot;, gradient_text = &quot;The PH value of the soil for each plot&quot;)</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1877,23 +1969,24 @@ other attached packages:
 [13] tidyverse_1.3.0    workflowr_1.6.2   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5        lattice_0.20-41   svglite_2.0.0     lubridate_1.7.9  
- [5] ps_1.4.0          assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.27    
- [9] R6_2.5.0          cellranger_1.1.0  backports_1.1.10  reprex_0.3.0     
-[13] evaluate_0.14     highr_0.8         httr_1.4.2        pillar_1.4.6     
-[17] rlang_0.4.8       readxl_1.3.1      rstudioapi_0.11   whisker_0.4      
-[21] blob_1.2.1        Matrix_1.2-18     rmarkdown_2.5     labeling_0.4.2   
-[25] splines_4.0.3     webshot_0.5.2     munsell_0.5.0     broom_0.7.2      
-[29] compiler_4.0.3    httpuv_1.5.5      modelr_0.1.8      xfun_0.18        
-[33] pkgconfig_2.0.3   systemfonts_1.0.1 htmltools_0.5.0   tidyselect_1.1.0 
-[37] fansi_0.4.1       viridisLite_0.3.0 crayon_1.3.4      dbplyr_1.4.4     
-[41] withr_2.3.0       later_1.1.0.1     grid_4.0.3        jsonlite_1.7.1   
-[45] gtable_0.3.0      lifecycle_0.2.0   DBI_1.1.0         git2r_0.28.0     
-[49] magrittr_1.5      scales_1.1.1      cli_2.1.0         stringi_1.5.3    
-[53] farver_2.0.3      fs_1.5.0          promises_1.2.0.1  xml2_1.3.2       
-[57] ellipsis_0.3.1    generics_0.1.0    vctrs_0.3.4       tools_4.0.3      
-[61] glue_1.4.2        hms_0.5.3         yaml_2.2.1        colorspace_1.4-1 
-[65] rvest_0.3.6       knitr_1.30        haven_2.3.1      </code></pre>
+ [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 splines_4.0.3    
+ [5] modelr_0.1.8      assertthat_0.2.1  highr_0.8         blob_1.2.1       
+ [9] cellranger_1.1.0  yaml_2.2.1        pillar_1.4.6      backports_1.1.10 
+[13] lattice_0.20-41   glue_1.4.2        digest_0.6.27     promises_1.2.0.1 
+[17] rvest_0.3.6       colorspace_1.4-1  htmltools_0.5.0   httpuv_1.5.5     
+[21] Matrix_1.2-18     pkgconfig_2.0.3   broom_0.7.2       haven_2.3.1      
+[25] scales_1.1.1      webshot_0.5.2     svglite_2.0.0     whisker_0.4      
+[29] later_1.1.0.1     git2r_0.28.0      mgcv_1.8-33       generics_0.1.0   
+[33] farver_2.0.3      ellipsis_0.3.1    withr_2.3.0       cli_2.1.0        
+[37] magrittr_1.5      crayon_1.3.4      readxl_1.3.1      evaluate_0.14    
+[41] ps_1.4.0          fs_1.5.0          fansi_0.4.1       nlme_3.1-149     
+[45] xml2_1.3.2        tools_4.0.3       hms_0.5.3         lifecycle_0.2.0  
+[49] munsell_0.5.0     reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1
+[53] rlang_0.4.8       grid_4.0.3        rstudioapi_0.11   labeling_0.4.2   
+[57] rmarkdown_2.5     gtable_0.3.0      DBI_1.1.0         R6_2.5.0         
+[61] lubridate_1.7.9   knitr_1.30        rprojroot_1.3-2   stringi_1.5.3    
+[65] Rcpp_1.0.5        vctrs_0.3.4       dbplyr_1.4.4      tidyselect_1.1.0 
+[69] xfun_0.18        </code></pre>
 </div>
 
 

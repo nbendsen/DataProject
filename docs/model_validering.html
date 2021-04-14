@@ -517,16 +517,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4c85ee55ee5ef158088c38abfd3bd925515efe56targetblank4c85ee5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/4c85ee55ee5ef158088c38abfd3bd925515efe56" target="_blank">4c85ee5</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree4c85ee55ee5ef158088c38abfd3bd925515efe56targetblank4c85ee5a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/4c85ee55ee5ef158088c38abfd3bd925515efe56" target="_blank">4c85ee5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -537,15 +537,8 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.Rhistory
 
-Untracked files:
-    Untracked:  code/model_val.R
-
 Unstaged changes:
-    Modified:   analysis/_site.yml
-    Deleted:    analysis/function_shannon.Rmd
-    Modified:   analysis/function_simple_shannon.Rmd
-    Modified:   analysis/gradient_plot.Rmd
-    Modified:   figure/Animation.Rmd/unnamed-chunk-11-1.gif
+    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -586,6 +579,91 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/abe9fd9c3c3d6ba0888cbbfd35a7f527f44644d4/docs/model_validering.html" target="_blank">abe9fd9</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/4d2bd91320179b71c1c4161219e166a5f8728f60/analysis/model_validering.rmd" target="_blank">4d2bd91</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+wflow_publish("analysis/model_validering.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/c3513761231267c3b54e6cbec4cf633f312806f6/docs/model_validering.html" target="_blank">c351376</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/b938d164bdae77e77287c9a9e5b7e168f2770ebe/analysis/model_validering.rmd" target="_blank">b938d16</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+wflow_publish("analysis/model_validering.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/8b9283511d0f747e4ed2174ab6ef00412982ba55/docs/model_validering.html" target="_blank">8b92835</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Updates part 2
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -611,7 +689,7 @@ add model validering
 <h1>
 Assumption
 </h1>
-<p>Before going in to the detailt with this validation, it is important to state that one huge assumptions made, for this validation to make sense, is that we assume that the result comming from our model, do not lie far away from the result coming from the mthod, which only used cover data. Hence we assume that we can use the measure of the privious method, to validate our model, and if the measure of the privious models, in general are in an acceptable interval for our model, we will accept it.</p>
+<p>Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result comming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model.</p>
 <h1>
 Posterior predictive checks
 </h1>
@@ -620,15 +698,15 @@ Posterior predictive checks
 <p>For a given specie in a given plot the posterior distribution is given by the equation:</p>
 <p><span class="math display">\[
 \text{posterior} \sim Beta(a+y,b+n-y)
-\]</span> <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the parameters from the prior distribution for that specie. <span class="math inline">\(y\)</span> is taken from the cover data, and is, together with <span class="math inline">\(n\)</span>, the parameters from the likelihood for that given specie in that given plot. Hence <span class="math inline">\(y\)</span> is number of pins the given specie is hit by in the given plot, and n is the total number of pins used in the plot. In the NOVANA dataset <span class="math inline">\(n=16\)</span>. <br/></p>
-Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the postrior distrbution for each specie that we know are present in the plot. This is that for each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/> After this we will apply some T-statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/> The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the choosen test statistic. </br> Below we visually inspect the first three plots in the dataset to see if the observed test statistic is extreme.
+\]</span> <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the parameters from the prior distribution for that specie. <span class="math inline">\(y\)</span> is taken from the cover data, and is, together with <span class="math inline">\(n\)</span>, the parameters from the likelihood for a given specie in a given plot. Hence <span class="math inline">\(y\)</span> is number of pins the specie is hit by in the plot, and n is the total number of pins used in the plot. In the NOVANA dataset <span class="math inline">\(n=16\)</span>. <br/></p>
+Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the postrior distrbution for each specie that we know are present in the plot. For each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/> After this we will apply some test statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/> The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the choosen test statistic. </br> Below we visually inspect the first three plots in the dataset to see if the observed test statistic is extreme.
 <p>
 <p/>
 <p>Besides doing visually inspections of the histograms we also calculate the tail-area probability which we call the posterior predictive p-value [3]. If we let <span class="math inline">\(T(y)\)</span> be the observed test statistic and <span class="math inline">\(T(y^{rep})\)</span> be the test statistics of the generated data we calculate the posterior predictive p-value as <span class="math display">\[
 \text{posterior predictive p-value} = 2\cdot \min\Big(P(T(y^{rep}) \geq T(y))\text{ ,  } P(T(y^{rep}) \leq T(y))\Big)
 \]</span> Small p-value close to zero indicate that the obsersed test statistic is not very likely relative to the generated data and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. In our case, we have choosen a threshold at <span class="math inline">\(0.05\)</span> meaning that if the p-value is above 0.05, the model is said to be apropiat for the given plot. <br><br> As test statistic we use the shannon index: <span class="math display">\[
 \text{shannon index = }- \Sigma_{i = 1}^Sp_i\cdot \ln(p_i)
-\]</span> and we work with the same data as previous (<strong>make link</strong>).</p>
+\]</span> and we work with the same data as previous <a href="data_6230.html">link</a>.</p>
 <pre class="r"><code>#Here we load the datasets for habitat 6230 in year 2014
 
 cover &lt;- read.csv(&quot;data/cover_data_6230_year2014.csv&quot;)
@@ -652,7 +730,6 @@ ppc(3, freq_data, cover_data)</code></pre>
 <p>All posterior predicitve p-values are big in the above histograms which suggests that the model is appropriate for the first three plots. If we run the posterior predictive check on all plots we get the number of posterioir predictive p-values that are less than 0.05 to be</p>
 <pre class="r"><code>sum(pval &lt; 0.05)</code></pre>
 <pre><code>[1] 102</code></pre>
-<p>…</p>
 <p>Total number of plots</p>
 <pre class="r"><code>nrow(cover)</code></pre>
 <pre><code>[1] 1232</code></pre>

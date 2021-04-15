@@ -5,7 +5,7 @@ editor_options:
   chunk_output_type: console
 ---
 ```{r, include= FALSE}
-source("code/function_shannon.R")
+source("code/function.R")
 ```
 
 A function to plot a variable against different indexes to see how the indexes compare against each other.

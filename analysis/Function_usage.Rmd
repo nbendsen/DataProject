@@ -10,10 +10,29 @@ editor_options:
 This page will have a list of all our functions, together with a short description and guide in how to use them. It will also include a link for further documentation for each function.
 
 
-<h1> Row_shannon </h1>
+<h1>Bayesian method</h1>
+Implementatin of method described on main page.
+**Usage:**
+
+bayesian_method(cover_data, present/absence_data, n = 16 , remove_column = 0)
+
+**Arguments:**
+
+* **Cover_data**: Cover data in a data frame, with plots as rows and species as columns.
+* **present/absence_data**:  present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.
+* **n**: If cover data is not between 0 and 1, what should it be divide with to be in the interval $[0,1]$.
+* **remove_column**: Exclude first n column from the data analysis. In the NOVANA dataset this we would remove the first 3 columns as they include data about the plot, site and year.
+
+**Output** The function returns a dataframe with updated abundance data.
+
+For further specifications of the function click [link](bayesian_method_describtion.html)
+
+
+
+<h1> Shannon index</h1>
 ------
 
-The simpler shannon index only uses cover data.
+The shannon index only uses cover data.
 
 **Usage:**
 
@@ -31,7 +50,7 @@ row_shannon(cover_data ,species_indicator = NULL)
 
 [Further documentation](function_simple_shannon.html#row_shannon)
  
-<h1>species_richness </h1>
+<h1>Species_richness </h1>
 ------
 Species richness is the number of observed species in a given plot.
 
@@ -53,27 +72,7 @@ species_richness(frequency_data ,species_indicator = NULL)
 [Further documentation](function_simple_shannon.html#species_richness)
 
 
-<h1>Our_shannon</h1>
-------
-A function to calculate the shannon index using the baysian methods. (our_shannon is a working title)
 
-
-**Usage:**
-
-our_shannon(cover, freq)
-
-**Arguments:**
-
-* **cover**: A data frame with the abundance dataset as a dataframe.
-
-* **freq**: A the presence/absence data as a data frame, it is assummed that the first three columns is plot site and year.
-
-
-**output:**
-
-* A dataframe with with the first three columns of plot, site and year, and the fourth column is our shannon index.
-
-[Further documentation](function_shannon.html)
 
 <h1>plot_index_gradient</h1>
 ------
@@ -97,26 +96,6 @@ Four plot with different diversity measures plottet against a variable.
 
 [Further documentation](gradient_plot.html)
 
-
-<h1>update_abundance_data</h1>
-------
-
-A function taking in abundance and prensent/absent data, and returning the abundance data after we have taken into account the present/absent data using our baysian method.
-
-**Usage:**
-
-update_abundance_data(abundance_data, present_data, n = 16 , remove_column = 0)
-
-**Arguments:**
-
-* **abundance_data**: Abundance data in a data frame, with plots as rows and species as columns.
-* **present_data**:  present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.
-* **n**: If cover data is not between 0 and 1, what should it be divide with to fit.
-* **remove_column**: Exclude n column from the data analysis. i.e if the first 3 columns include data about the plot, and is not data about a species can they be excluded.
-
-**Output**
-
-A data frame with the excluded columns and abundace data taking present/absent data into account.
 
 
 <h1>diversity_index</h1>

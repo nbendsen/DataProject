@@ -5,12 +5,12 @@ navbar:
   left:
   - text: Home
     href: index.html
-
   - text: Diversity
     href: Diversity.html
   - text: Functions
     href: Function_usage.html
-
+  - text: Model validation
+    href: model_validering.html
   right:
   - icon: fa-github
     text: Source code

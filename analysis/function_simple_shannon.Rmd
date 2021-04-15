@@ -7,13 +7,15 @@ editor_options:
 ---
 
 ```{r, include=FALSE}
-source("code/function_shannon.R")
+source("code/function.R")
 ```
 
 Functions for calculating a simpler shannon index and species richness
 
 
-## Row_shannon
+
+<h1>Row_shannon </h1>
+
 
 
 The simpler shannon index only uses cover data.
@@ -29,12 +31,12 @@ row_shannon(cover_data ,species_indicator = NULL)
 * species_indicator: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in cover_data will be assumed to be for species.
 
 ```{r, echo = FALSE}
-row_shannon
+shannon
 ```
 
 
  
-## species_richness
+<h1>species_richness </h1>
 
 Species richness is the number of observed species in a given plot.
 
@@ -50,9 +52,6 @@ species_richness(frequency_data ,species_indicator = NULL)
 
 * species_indicator: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in frequency_data will be assumed to be for species.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = FALSE}
 species_richness
 ```
-
-
-

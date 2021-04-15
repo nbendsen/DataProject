@@ -1,0 +1,308 @@
+---
+title: "Model validation"
+site: workflowr::wflow_site
+output:
+  workflowr::wflow_html:
+    toc: true
+editor_options:
+  chunk_output_type: console
+---
+
+---
+title: "Model validation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+library(MASS)
+library(survival)
+```
+
+<h1>Assumption</h1>
+
+Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result comming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model. 
+
+
+<h1>Posterior predictive checks</h1>
+To validate our model we will apply the technique of posterior predictive checks [2]. In a given plot we have obtained a posterior distribution for each specie that have a $1$ in the corresponding presence/absence data for this plot. These posterior distributions are estimated using the observed data. 
+
+</br>
+
+For a given specie in a given plot the posterior distribution is given by the equation:
+
+$$
+\text{posterior} \sim Beta(a+y,b+n-y)
+$$
+$a$ and $b$ are the parameters from the prior distribution for that specie. $y$ is taken from the cover data, and is, together with $n$, the parameters from the likelihood for a given specie in a given plot. Hence $y$ is number of pins the  specie is hit by in the plot, and n is the total number of pins used in the plot. In the NOVANA dataset $n=16$.
+<br/>
+
+Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the postrior distrbution for each specie that we know are present in the plot. For each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/>
+After this we will apply some test statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/>
+The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the choosen test statistic. </br>
+Below we visually inspect the first three plots in the dataset to see if the observed test statistic is extreme.
+<p><p/>
+Besides doing visually inspections of the histograms we also calculate the tail-area probability which we call the posterior predictive p-value [3]. If we let $T(y)$ be the observed test statistic and $T(y^{rep})$ be the test statistics of the generated data we calculate the posterior predictive p-value as
+$$
+\text{posterior predictive p-value} = 2\cdot \min\Big(P(T(y^{rep}) \geq T(y))\text{ ,  } P(T(y^{rep}) \leq T(y))\Big)
+$$
+Small p-value close to zero indicate that the obsersed test statistic is not very likely relative to the generated data and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. In our case, we have choosen a threshold at $0.05$ meaning that if the p-value is above 0.05, the model is said to be apropiat for the given plot.
+<br><br>
+As test statistic we use the shannon index:
+$$
+\text{shannon index = }- \Sigma_{i = 1}^Sp_i\cdot \ln(p_i)
+$$
+and we work with the same data as previous [link](data_6230.html).
+
+```{r}
+#Here we load the datasets for habitat 6230 in year 2014
+
+cover <- read.csv("data/cover_data_6230_year2014.csv")
+
+freq <- read.csv("data/frekvens_data_6230_year2014.csv")
+
+abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
+
+```
+
+```{r}
+#We remove the first 4 columns, as they are not species
+cover_data <- cover[,4:ncol(cover)]
+freq_data <- freq[,4:ncol(freq)]
+
+```
+
+
+
+
+
+
+```{r, include= FALSE}
+#We load the function for used for the validation
+source("code/model_val.R")
+```
+
+Examples:
+```{r, warning=FALSE}
+#First plot
+ppc(1, freq_data, cover_data)
+```
+
+```{r, warning=FALSE}
+#Second plot
+ppc(2, freq_data, cover_data)
+```
+
+```{r, warning=FALSE}
+#Third plot
+ppc(3, freq_data, cover_data)
+```
+
+```{r, include=FALSE}
+#Calculating the p-value for all of the plots in the data.
+pval <- 2*read.csv("data/pvalues.csv")
+```
+
+
+All posterior predicitve p-values are big in the above histograms which suggests that the model is appropriate for the first three plots. If we run the posterior predictive check on all plots we get the number of posterioir predictive p-values that are less than 0.05 to be
+```{r}
+sum(pval < 0.05)
+```
+
+
+Total number of plots
+```{r}
+nrow(cover)
+```
+
+We can then calculate the proportion of plots, with a p-vlaue less than 0.05
+```{r}
+sum(pval < 0.05)/nrow(cover)
+```
+
+
+<br><br>
+
+In each iteration for each blot we calculated a shanon index and a simpsons index with respect to our model. 
+```{r}
+generated_shannon <- read.csv("data/shannon_df.csv")[,1:1000]
+```
+
+```{r}
+generated_simpson <- read.csv("data/simpson_df.csv")[,1:1000]
+```
+
+
+We can now calculate the mean values for each plot, wihch is done by taking the mean for each row. This is done for both simpson and shannon index. 
+```{r}
+generated_shannon$mean <- rowMeans(generated_shannon)
+```
+
+```{r}
+generated_simpson$mean <- rowMeans(generated_simpson)
+```
+
+
+For each plot we calculate the sum of the rows in the cover data set:
+```{r}
+cover_data$total <- rowSums(cover_data)
+```
+
+Using the sum for each plot we can now calculate the shannon index for each plot, just using the observed data. 
+```{r}
+cover_data$shannon <- rowSums(-cover_data[,1:ncol(cover_data)-1]/cover_data$total*log(cover_data[,1:ncol(cover_data)-1]/cover_data$tota),na.rm = TRUE)
+```
+
+We now plot the shannon indexes calculated using only the observed data agains the mean shannon index calculated using our model:
+```{r}
+plot(cover_data$shannon, generated_shannon$mean)
+abline(0,1, lwd = 3, col = "blue")
+```
+
+
+Using the sum for each plot we can now calculate the shasimpsons index for each plot, just using the observed data. 
+```{r}
+cover_data$simpson <- rowSums((cover_data[,1:(ncol(cover_data)-2)]/cover_data$total)^2)
+```
+
+We now plot the simpsons indexes calculated using only the observed data agains the mean shannon index calculated using our model:
+```{r}
+plot(cover_data$simpson, generated_simpson$mean)
+abline(0,1, lwd = 3, col = "blue")
+```
+
+
+
+
+<h1>Code implementation </h1>
+```{r, eval=FALSE}
+library(fitdistrplus)
+```
+
+```{r, eval = FALSE}
+#We read the cover data and the presence/absense data without the first 4 columns, as they do not cotains information on species
+
+cover_data <- cover[,4:ncol(cover)]
+freq_data <- freq[,4:ncol(freq)]
+  
+#We make a dataframa for the parameters of the prior distribution for each plot, so it is possible to save the parameteres, and not calculate them when making the posteriror for each plot. Each row will contain the number/name of the specie and its corresponding parameters for the prior 
+
+beta_fit <- data.frame(matrix(ncol = 3, nrow = 0))
+
+# We name the columns in the 
+colnames(beta_fit) <- c("species","a", "b")
+```
+
+
+```{r, eval = FALSE}
+#Here we calculate the parameters for the priror distributions of each specie:
+for (specie in colnames(cover_data)) {
+  #First we normalise. Since there is in total used 16 pins for each plot, we will devide the entries in the cover data by 16
+  beta_data <- cover_data[,specie]/16
+  
+  #Now we remove the plots where the specie is not present. This can be done by using the information from the presence, absense data. If it        contains a 1, then the specie is present in the plot, if 0 it is absent. 
+  beta_data <- beta_data[freq_data[[specie]] == 1]
+    
+  #If the specie is not present in any of the plots, we do not have information to make a prior distribution for it, and will just give it parameters a=0 and b=0 as seen in the else clause.
+  if (length(unique(beta_data)) > 1) {
+    #We use the method of moments to fit the prior beta distribution
+    beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
+    
+    #The parameters are added to the dataframe
+    beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
+      
+  }
+  else {
+    beta_fit[nrow(beta_fit) + 1,] <- c(specie, 0,0)
+    
+  }
+}
+
+```
+
+```{r, eval = FALSE}
+#n is the row number of the plot we are working with
+n <- 1
+
+#We define which species are in present in the plot
+species_spotted_in_frekvens <- colnames(freq_data[c(freq_data[n,]  == 1)])
+
+#We define which species are present in the present/absent dataset but are not seen in the cover dataset
+not_in_cover <- setdiff(species_spotted_in_frekvens,colnames(cover_data))
+
+#We remove the species, that at present in the plots in the present/absent data, but are not observed in any plots in the cover data
+species_spotted_in_frekvens <- setdiff(species_spotted_in_frekvens, not_in_cover)
+
+# we remove the columns, that are not representing species
+observed <- cover_data[n,c(species_spotted_in_frekvens)]
+
+tmp <- observed[observed > 0]
+T_static <- -sum(tmp/sum(observed) * log((tmp/sum(observed))))
+
+#We make a dataframe to save the parameters of the posterior for each spotted specie in the plot
+new_beta <- data.frame(matrix(ncol = 3, nrow = 0))
+  
+colnames(new_beta) <- c("species","a", "b") 
+
+for (species_spotted in species_spotted_in_frekvens ) {
+      
+  #We define the parameters for the posterior 
+      alpha_post <- as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) + cover_data[[species_spotted]][n] 
+    beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + 16 - cover_data[[species_spotted]][n]
+    
+      #If the parameters are to small, we change them to 0, since R has a hard time working with them
+      alpha_post <- ifelse(alpha_post < 1e-10, 0, alpha_post)
+      beta_post <- ifelse(beta_post < 1e-10,0, beta_post)
+      
+      #We add the parameters to the dataframe
+      new_beta[nrow(new_beta) + 1,] <- c(species_spotted, alpha_post, beta_post)}
+
+#We make a vector, to save the shannon indexes produces in each iteration
+shannon <- c()
+
+for (i in 1:1000){
+  
+  #Vector for saving the random generated values from the posterior of each specie
+  values <- c()
+  for (ele in species_spotted_in_frekvens){
+    #These are the parameters, for the posterior of the specie
+    a <- as.numeric(new_beta[new_beta$species == ele,]$a)
+    b <- as.numeric(new_beta[new_beta$species ==ele,]$b)
+    
+    # We draw a random number from a beta distribution with the parameters for that specie and add it to the vector
+    values <- c(values, rbeta(1,a,b))
+    
+    
+  }
+  #We remove the values that are to small
+  tmp <- values[ values > 0.00001]
+  total <- sum(tmp)
+  
+  #We calculate the shannon index
+  shannon <- c(shannon,-sum(tmp/total * log((tmp/total)))) 
+  
+}
+
+min_val <- min(T_static, min(shannon)) - 0.1
+max_val <- max(T_static, max(shannon)) + 0.1
+
+n <- length(shannon)
+pvalue <- min(sum(shannon>= T_static)/n, sum(shannon<= T_static)/n)
+
+#This is the code that produces the histogram over the generated data
+hist(shannon, xlim = c(min_val, max_val), main = sprintf("Histogram of simulated shannon indexes for plot %d", n), xlab = "Shannon indexes")
+legend("topright", legend = "Red line is observed shannon index")
+abline(v = T_static, col = "red" )
+```
+
+<h1>References </h1>
+<ul>
+<li>[1] https://www.pnas.org/content/112/26/E3441#ref-19 </li>
+<li>[2] POSTERIOR PREDICTIVE ASSESSMENT OF MODEL FITNESS VIA REALIZED DISCREPANCIES by Andrew Gelman, Xiao-Li Meng and Hal Stern </li>
+</ul>
+<br><br><br><br>
+
+

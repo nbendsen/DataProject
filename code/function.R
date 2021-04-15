@@ -1,7 +1,7 @@
-method <- function(cover, freq) {
+bayesian_method <- function(cover, freq, n, c) {
   library(fitdistrplus)
-  cover_data <- cover[,4:ncol(cover)]
-  freq_data <- freq[,4:ncol(freq)]
+  cover_data <- cover[,c:ncol(cover)]
+  freq_data <- freq[,c:ncol(freq)]
 
 
   for (ele in colnames(cover_data)){
@@ -19,7 +19,7 @@ method <- function(cover, freq) {
 
   # for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
   for (specie in colnames(cover_data)) {
-    beta_data <- cover_data[,specie]/16
+    beta_data <- cover_data[,specie]/n
 
     #remove all plots with 0 in frekvens.
     beta_data <- beta_data[freq_data[[specie]] == 1]
@@ -130,7 +130,7 @@ plot_index_gradient <- function(data, indexes, gradient ,gradient_text = NULL) {
     geom_smooth(method = "loess", se = FALSE) +
     facet_wrap(vars(type),scales = "free_y") +
     xlab(gradient_text) +
-    theme(strip.background = element_blank(), strip.placement = "outside")
+    theme(strip.background = element_blank(), strip.placement = "outside", strip.text.x = element_text(face = "bold"), title = element_text(face = "bold"))
 }
 
 
@@ -138,12 +138,14 @@ plot_index_gradient <- function(data, indexes, gradient ,gradient_text = NULL) {
 shannon <- function(data){
   data <- data[,4:ncol(data)]
 
-
   total <- rowSums(data)
 
   shannon_index <- rowSums(-data[,1:ncol(data)]/total *log(data[,1:ncol(data)]/total), na.rm = TRUE )
   return(shannon_index)
 }
+
+
+
 
 
 beta <- function(cover, freq) {

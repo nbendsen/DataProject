@@ -1,13 +1,13 @@
-bayesian_method <- function(cover, freq, n, c) {
+bayesian_method <- function(cover, presence_absence_data, n, remove_column) {
   library(fitdistrplus)
-  cover_data <- cover[,c:ncol(cover)]
-  freq_data <- freq[,c:ncol(freq)]
+  cover_data <- cover[,(remove_column+1):ncol(cover)]
+  freq_data <- presence_absence_data[,(remove_column+1):ncol(presence_absence_data)]
 
 
-  for (ele in colnames(cover_data)){
-    if (sum(freq_data[,ele]) == 0){
-      cover = cover[,!(names(cover) %in% ele)]
-      cover_data <- cover_data[,!(names(cover_data) %in% ele)]
+  for (species in colnames(cover_data)){
+    if (sum(freq_data[,species]) == 0){
+      cover = cover[,!(names(cover) %in% species)]
+      cover_data <- cover_data[,!(names(cover_data) %in% species)]
     }
 
   }
@@ -18,64 +18,59 @@ bayesian_method <- function(cover, freq, n, c) {
   colnames(beta_fit) <- c("species","a", "b")
 
   # for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
-  for (specie in colnames(cover_data)) {
-    beta_data <- cover_data[,specie]/n
+  for (name in colnames(cover_data)) {
+    species <- cover_data[,name]/n
 
     #remove all plots with 0 in frekvens.
-    beta_data <- beta_data[freq_data[[specie]] == 1]
+    beta_data <- species[freq_data[[name]] == 1]
 
 
     if (length(unique(beta_data)) > 1) {
       beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
-      beta_fit[nrow(beta_fit) + 1,] <- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
+      beta_fit[nrow(beta_fit) + 1,] <- c(name, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
 
     }
     else {
-      beta_fit[nrow(beta_fit) + 1,] <- c(specie, 0,0)
+      beta_fit[nrow(beta_fit) + 1,] <- c(name, 0,0)
 
     }
   }
 
 
-  for (row in 1:nrow(cover_data)) {
+  #For each cell in the input cover data we find the new abundance estimate and save it to this data frame
+  for (plot in 1:nrow(cover_data)) {
+
+    #For each row we find the species that has a 1 in the presence/absence data
+    species_spotted_in_freq <- colnames(freq_data[c(freq_data[plot,]  == 1)])
+
+    not_in_cover <- setdiff(species_spotted_in_freq,colnames(cover_data))
+
+    species_spotted_in_freq <- setdiff(species_spotted_in_freq, not_in_cover)
 
 
-
-
-    # for a given row, find out what species is found in frekvens
-    species_spotted_in_frekvens <- colnames(freq_data[c(freq_data[row,]  == 1)])
-
-    not_in_cover <- setdiff(species_spotted_in_frekvens,colnames(cover_data))
-
-    species_spotted_in_frekvens <- setdiff(species_spotted_in_frekvens, not_in_cover)
-
-
-
-    #For each species spotten in frekvens, appends its posterior cover to the cover data for that row
-    for (species_spotted in species_spotted_in_frekvens ) {
+    #We calculate new abundance estimate for each spotted species in the plot
+    for (species_spotted in species_spotted_in_freq ) {
 
 
       alpha_post <- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) +
-                                  as.numeric(cover_data[[species_spotted]][row]) ))
-      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + 16 - as.numeric(cover_data[[species_spotted]][row])
+                                  as.numeric(cover_data[[species_spotted]][plot]) ))
+      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + n - as.numeric(cover_data[[species_spotted]][row])
 
       mean_posterior <- (alpha_post)/(alpha_post+beta_post)
 
-      if (mean_posterior < 0.00001){
-        cover[row,species_spotted] <- 0
-
+      if(mean_posterior < 0.00001){
+        cover[plot,species_spotted] <- 0
       }
-
       else{
-        cover[row,species_spotted] <- mean_posterior*16
+        cover[plot,species_spotted] <- mean_posterior * n
       }
 
     }
   }
 
-  for (ele in colnames(cover_data)){
-    if (sum(cover[,ele]) == 0){
-      cover = cover[,!(names(cover) %in% ele)]
+  for (species in colnames(cover_data)){
+    if (sum(cover[,species]) == 0){
+      cover = cover[,!(names(cover) %in% species)]
     }
 
   }
@@ -90,58 +85,93 @@ bayesian_method <- function(cover, freq, n, c) {
 #the species indicator is a substring that is present in only the the columns
 # with data for species. i.e not plot, site or year. If species indicator is left empty, all columns will be treated as species columns.
 
-species_richness <- function(frequency_data ,species_indicator = NULL) {
+species_richness <- function(presence_absence_data, remove_column = NULL) {
 
-  if (is.null(species_indicator)) {
-    species_richness <- rowSums(frequency_data)
+  if (is.null(remove_column)) {
+    species_richness <- rowSums(presence_absence_data)
   }
   else {
-    species_richness <- rowSums(frequency_data[, grep(species_indicator, names(frequency_data))])
+    species_richness <- rowSums(presence_absence_data[, (remove_column+1):ncol(presence_absence_data)])
   }
   return(species_richness)
 }
 
-#Function for the simple shannon index only using the cover data.
-#the species indicator is a substring that is present in only the the columns
-# with data for species. i.e not plot, site or year. If species indicator is left empty, all columns will be treated as species columns.
 
-row_shannon <- function(cover_data ,species_indicator = NULL) {
 
-  if (is.null(species_indicator)) {
-    shannon <- rowSums(-cover_data/(rowSums(cover_data)) *log(cover_data/(rowSums(cover_data))), na.rm = TRUE  )
+shannon <- function(cover_data, remove_column = NULL){
+
+  if(is.null(remove_column)){
+    data <- cover_data[,1:ncol(cover_data)]
+  }
+  else{
+    data <- cover_data[,(remove_column+1):ncol(cover_data)]
   }
 
-  else {
-    shannon <- rowSums(-cover_data[, grep(species_indicator, names(cover_data))]/
-                         (rowSums(cover_data[,grep(species_indicator, names(cover_data))])) *
-                         log(cover_data[, grep(species_indicator, names(cover_data))]/
-                               (rowSums(cover_data[,grep(species_indicator, names(cover_data))]))), na.rm = TRUE  ) }
-  return(shannon)
+
+  total <- rowSums(data)
+
+  shannon_index <- rowSums(-data[,1:ncol(data)]/total *log(data[,1:ncol(data)]/total), na.rm = TRUE)
+  return(shannon_index)
+}
+
+hill_shannon <- function(cover_data, remove_column = NULL){
+  if(is.null(remove_column)){
+
+    vector <- shannon(cover_data)
+    return(exp(vector))
+
+  }
+  else{
+    vector <- shannon(cover_data, remove_column = remove_column)
+    return(exp(vector))
+  }
+
+
+}
+
+simpson <- function(cover_data, remove_column = NULL){
+
+  if(is.null(remove_column)){
+    data <- data[,remove_column+1:ncol(data)]
+  }
+  else{
+    data <- data[,1:ncol(data)]
+  }
+
+
+  total <- rowSums(data)
+
+  simpson_index <- rowSums((data[,1:ncol(data)]/total)^2)
+
+  return(simpson_index)
+}
+
+hill_simpson <- function(cover_data, remove_column = NULL){
+  if(is.null(remove_column)){
+
+    vector <- simpson(cover_data)
+    return(1/vector)
+
+  }
+  else{
+    vector <- simpson(cover_data, remove_column = remove_column)
+    return(1/vector)
+  }
+
+
 }
 
 
 #A function to plot the different ways of measuring diversity against a gradient, i.e ph value,  for each plot.
-
-
-plot_index_gradient <- function(data, indexes, gradient ,gradient_text = NULL) {
-  long_data <-  gather(data, key = "type", value = "index", indexes)
-  ggplot(data = long_data, mapping = aes(x = as.numeric(long_data[[gradient]]), y = index)) +
+plot_diversity <- function(data, diversities, plot_info, description = NULL) {
+  plot_data <-  gather(data, key = "type", value = "Diversity", diversities)
+  ggplot(data = plot_data, mapping = aes(x = as.numeric(plot_data[[plot_info]]), y = Diversity)) +
     geom_point()+
     geom_smooth(method = "loess", se = FALSE) +
     facet_wrap(vars(type),scales = "free_y") +
-    xlab(gradient_text) +
-    theme(strip.background = element_blank(), strip.placement = "outside", strip.text.x = element_text(face = "bold"), title = element_text(face = "bold"))
-}
-
-
-
-shannon <- function(data){
-  data <- data[,4:ncol(data)]
-
-  total <- rowSums(data)
-
-  shannon_index <- rowSums(-data[,1:ncol(data)]/total *log(data[,1:ncol(data)]/total), na.rm = TRUE )
-  return(shannon_index)
+    xlab(description) +
+    ylab("Diversity estimates") +
+    theme_update(strip.placement = "outside", strip.text.x = element_text(face = "bold"), title = element_text(face = "bold"))
 }
 
 

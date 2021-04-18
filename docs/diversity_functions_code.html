@@ -10,8 +10,9 @@
 
 
 
+<meta name="date" content="2021-04-17" />
 
-<title>Presentation of functions</title>
+<title>Functions for diversity estimates</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -401,7 +402,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Presentation of functions</h1>
+<h1 class="title toc-ignore">Functions for diversity estimates</h1>
+<h4 class="date">2021-04-17</h4>
 
 </div>
 
@@ -450,7 +452,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -559,259 +561,94 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Function_usage.Rmd</code>) and HTML (<code>docs/Function_usage.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/523d22907d751a8d0706f5b0b024bff0d4569b42/docs/Function_usage.html" target="_blank">523d229</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/cbfa507b382a2a6d545e94a2da1751971e23422d/analysis/Function_usage.Rmd" target="_blank">cbfa507</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-wflow_publish("analysis/*.Rmd")
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/874ebd61e4023505e0b01aa625b5492ac9207a35/docs/Function_usage.html" target="_blank">874ebd6</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/8b9283511d0f747e4ed2174ab6ef00412982ba55/docs/Function_usage.html" target="_blank">8b92835</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Updates part 2
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/4c85ee55ee5ef158088c38abfd3bd925515efe56/analysis/Function_usage.Rmd" target="_blank">4c85ee5</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-func usage
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/4c85ee55ee5ef158088c38abfd3bd925515efe56/docs/Function_usage.html" target="_blank">4c85ee5</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-func usage
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<p>This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.</p>
+<p>This page includes code implementation of all the functions that are used to calculate different diversity estimates.</p>
 <h1>
-Bayesian method
-</h1>
-<p>Main function of this vignette. The function is an implementation of the method outlined on the home page.</p>
-<p><strong>Usage:</strong></p>
-<p>bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
-<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
-<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
-</li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
-</ul>
-<p><strong>Output</strong></p>
-<ul>
-<li>The function returns a dataframe with new abundance data.</li>
-</ul>
-<p>For further specifications of the function click <a href="bayesian_method_describtion.html">link</a></p>
-<h1>
-Functions for diversity estimates
-</h1>
-<hr />
-<p>The functions below implement the different diversity estimates defined at <a href="Diversity.html">Diversity</a>. The code implementations of the functions can be found at <a href="diversity_functions_code.html">link</a></p>
-<h3>
 Shannon index
-</h3>
-<p><strong>Usage:</strong></p>
-<p>shannon(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.</li>
-</ul>
-<h3>
-Simpson’s index
-</h3>
-<hr />
-<p><strong>Usage:</strong></p>
-<p>simpson(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with simpson’s index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.</li>
-</ul>
-<h3>
-Species richness
-</h3>
-<hr />
-<p><strong>Usage:</strong></p>
-<p>species_richness(presence_absence_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data.</li>
-</ul>
-<h3>
-Hill shannon diveristy
-</h3>
-<hr />
-<p><strong>Usage:</strong></p>
-<p>hill_shannon(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.</li>
-</ul>
-<h3>
-Hill Simpson diversity
-</h3>
-<hr />
-<p><strong>Usage:</strong></p>
-<p>hill_simpson(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.</li>
-</ul>
-<h1>
-Plot of different diversities
 </h1>
-<hr />
-<p>This function plots different diversity estimates of a plot against some information of interest about the plot.</p>
-<p><strong>Usage:</strong></p>
-<p>plot_diversity(data, diversities, plot_info, description = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><strong>data</strong>: A data frame. Contains one or more columns of different diversity estimates of plots and also a column with some information about the plots.</li>
-<li><strong>diversities</strong>: A list of strings. The names of the columns in the data that contain diversity estimates.</li>
-<li><strong>plot_info</strong>: A string. The column name in the data that contains the plot information one wants to plot the diversities against.</li>
-<li><strong>description</strong>: A string. The description of the plot information.</li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>Plots with different diversity estimates mapped against the plot information of interest.</li>
-</ul>
-<p>Further documentaion and code implementation at <a href="gradient_plot.html">link</a></p>
+<pre class="r"><code>shannon</code></pre>
+<pre><code>function (cover_data, remove_column = NULL) 
+{
+    if (is.null(remove_column)) {
+        data &lt;- cover_data[, 1:ncol(cover_data)]
+    }
+    else {
+        data &lt;- cover_data[, (remove_column + 1):ncol(cover_data)]
+    }
+    total &lt;- rowSums(data)
+    shannon_index &lt;- rowSums(-data[, 1:ncol(data)]/total * log(data[, 
+        1:ncol(data)]/total), na.rm = TRUE)
+    return(shannon_index)
+}</code></pre>
+<p>When calculating the shannon indexes the “na.rm = TRUE” is necessary to take care of the cells where the cover data is 0. The reason for this is that we use the logarithmic function and the log(0) is not defined, which is why R will give a NA when it is asked to calculate log(0). The “na.rm = TRUE” makes sure that when we sum the rows we don’t take into account the NAs produced by log(0).</p>
+<h1>
+Simpson’s index
+</h1>
+<pre class="r"><code>simpson</code></pre>
+<pre><code>function (cover_data, remove_column = NULL) 
+{
+    if (is.null(remove_column)) {
+        data &lt;- data[, remove_column + 1:ncol(data)]
+    }
+    else {
+        data &lt;- data[, 1:ncol(data)]
+    }
+    total &lt;- rowSums(data)
+    simpson_index &lt;- rowSums((data[, 1:ncol(data)]/total)^2)
+    return(simpson_index)
+}</code></pre>
+<h1>
+Species richness
+</h1>
+<pre class="r"><code>species_richness</code></pre>
+<pre><code>function (presence_absence_data, remove_column = NULL) 
+{
+    if (is.null(remove_column)) {
+        species_richness &lt;- rowSums(presence_absence_data)
+    }
+    else {
+        species_richness &lt;- rowSums(presence_absence_data[, (remove_column + 
+            1):ncol(presence_absence_data)])
+    }
+    return(species_richness)
+}</code></pre>
+<h1>
+Hill Shannon diversity
+</h1>
+<pre class="r"><code>hill_shannon</code></pre>
+<pre><code>function (cover_data, remove_column = NULL) 
+{
+    if (is.null(remove_column)) {
+        vector &lt;- shannon(cover_data)
+        return(exp(vector))
+    }
+    else {
+        vector &lt;- shannon(cover_data, remove_column = remove_column)
+        return(exp(vector))
+    }
+}</code></pre>
+<h1>
+Hill Simpson diversity
+</h1>
+<pre class="r"><code>hill_simpson</code></pre>
+<pre><code>function (cover_data, remove_column = NULL) 
+{
+    if (is.null(remove_column)) {
+        vector &lt;- simpson(cover_data)
+        return(1/vector)
+    }
+    else {
+        vector &lt;- simpson(cover_data, remove_column = remove_column)
+        return(1/vector)
+    }
+}</code></pre>
+<p><br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -835,15 +672,14 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     workflowr_1.6.2  R6_2.5.0         rlang_0.4.8     
- [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
-[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27   
-[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
-[21] later_1.1.0.1    vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0        
-[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.5    stringi_1.5.3   
-[29] compiler_4.0.3   pillar_1.4.6     backports_1.1.10 httpuv_1.5.5    
-[33] pkgconfig_2.0.3 </code></pre>
+ [1] Rcpp_1.0.5       rstudioapi_0.11  knitr_1.30       magrittr_1.5    
+ [5] workflowr_1.6.2  R6_2.5.0         rlang_0.4.8      stringr_1.4.0   
+ [9] tools_4.0.3      xfun_0.18        git2r_0.28.0     htmltools_0.5.0 
+[13] ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27    rprojroot_1.3-2 
+[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
+[21] vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0         glue_1.4.2      
+[25] evaluate_0.14    rmarkdown_2.5    stringi_1.5.3    compiler_4.0.3  
+[29] pillar_1.4.6     backports_1.1.10 httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
 </div>
 
 

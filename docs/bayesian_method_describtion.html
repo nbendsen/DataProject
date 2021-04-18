@@ -11,7 +11,7 @@
 
 
 
-<title>Bayesian method</title>
+<title>Code implementation of bayesian method</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -401,14 +401,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Bayesian method</h1>
+<h1 class="title toc-ignore">Code implementation of bayesian method</h1>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -417,7 +417,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -426,10 +426,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-14
+<strong>Last updated:</strong> 2021-04-18
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -445,12 +445,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -517,16 +517,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreecbfa507b382a2a6d545e94a2da1751971e23422dtargetblankcbfa507a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/cbfa507b382a2a6d545e94a2da1751971e23422d" target="_blank">cbfa507</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreecbfa507b382a2a6d545e94a2da1751971e23422dtargetblankcbfa507a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/cbfa507b382a2a6d545e94a2da1751971e23422d" target="_blank">cbfa507</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -536,8 +536,16 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.Rhistory
+    Ignored:    code/.Rhistory
+
+Untracked files:
+    Untracked:  analysis/diversity_functions_code.Rmd
 
 Unstaged changes:
+    Modified:   analysis/Function_usage.Rmd
+    Modified:   analysis/bayesian_method_describtion.Rmd
+    Modified:   analysis/gradient_plot.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   code/function.R
 
 </code></pre>
@@ -579,6 +587,23 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/523d22907d751a8d0706f5b0b024bff0d4569b42/docs/bayesian_method_describtion.html" target="_blank">523d229</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -602,127 +627,151 @@ wflow_publish("analysis/*.Rmd")
 </div>
 </div>
 <h1>
+Introduction
+</h1>
+<p>To implement the proposed method from the home page we’ve created the bayesian_method function. We have the following input arguments and output: <br> <strong>Usage:</strong></p>
+<p>bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
+<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
+<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
+</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li>The function returns a dataframe with the new abundance data.</li>
+</ul>
+<h1>
 Description of code
 </h1>
-<p>To implement the proposed method we’ve created the following function. The function takes as input a cover dataset and a presence/absence dataset. It is assumed that the first three columns in both cover data and presence/absence data is “site”, “year” and “plot” as it is the case in the NOVANA dataset. The two datasets have to match on rownames (e.i. must contain the same plots), however they do not have to contain the same colnames (species). The cover_data and freq_data is a subset of the input data without these columns. <br><br> A dataframe “beta_fit” is created. This dataframe will contain a column with each specie in the cover data and corresponding <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values from the fitted beta-distribution for the given specie. As discussed on the main page we will fit a beta-distribution for each specie using all the cover data where the correspoding presence/absence data has a 1. This will give a prior belief of the spatial distribution of the specie. The first for-loop in the function will take care of this for all species. For each specie all the cover data is divided by 16 because in the NOVANA dataset the cover of a specie in a plot is given by a number between 0 and 16. Dividing by 16 we get cover values on the interval <span class="math inline">\([0,1]\)</span> as this is the interval on which the beta-distribution is defined. <br> We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package “fitdistrplus” with method = “method of moments” because this method can handle the values of 0 and 1. <br><br> Below is a snippet of the part of the function descripted above</p>
-<pre class="r"><code>library(fitdistrplus) #package used for fitting beta-distribution
-cover_data &lt;- cover[,4:ncol(cover)]
-freq_data &lt;- freq[,4:ncol(freq)]
-  
-  
-#create data frame to hold the fitted values for each species
-beta_fit &lt;- data.frame(matrix(ncol = 3, nrow = 0))
-  
-colnames(beta_fit) &lt;- c(&quot;species&quot;,&quot;a&quot;, &quot;b&quot;)
-  
-# for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
-for (specie in colnames(cover_data)) {
-  beta_data &lt;- cover_data[,specie]/16
-    
-  #remove all plots with 0 in presence/absence data
-  beta_data &lt;- beta_data[freq_data[[specie]] == 1]
-    
-    
-  if (length(unique(beta_data)) &gt; 1) {
-    beta_data_fitted &lt;- fitdist(beta_data, &quot;beta&quot;, method = &quot;mme&quot;)
-    beta_fit[nrow(beta_fit) + 1,] &lt;- c(specie, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
-      
+<p>First, two subsets of the input datasets are created without the columns that need to be removed. These are called cover_data and freq_data. Next we loop through the species in the cover_data and remove the species that has no presence in any plot in the freq_data. Both the input cover dataset and the cover_data are updated accordingly. This way we get rid of some of the data that is of no use, which will make the function run faster. <br><br> A dataframe “beta_fit” is created. This dataframe will contain a column with each species in the cover data and corresponding <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values from the fitted beta-distribution for the species. Every cell in the cover_data is divided with the input constant <span class="math inline">\(n\)</span>. This ensures that every cell is on the interval <span class="math inline">\([0,1]\)</span> as this is the interval on which the beta distribution is defined. In the NOVANA dataset we let <span class="math inline">\(n = 16\)</span>. <br></p>
+<pre class="r"><code> library(fitdistrplus)
+  cover_data &lt;- cover[,(remove_column+1):ncol(cover)]
+  freq_data &lt;- presence_absence_data[,(remove_column+1):ncol(presence_absence_data)]
+
+
+  for (species in colnames(cover_data)){
+    if (sum(freq_data[,species]) == 0){
+      cover = cover[,!(names(cover) %in% species)]
+      cover_data &lt;- cover_data[,!(names(cover_data) %in% species)]
     }
   }</code></pre>
-<p>After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get updated abundance estimates for species in each plot. Following this we can also calculate the shannon index for each plot. <br><br> The vector “shannon_list” gets updated with the shannon index for each plot as we loop through them. The outer for-loop loops through all the plots. The mean_posterior vector is created and used when we in the inner loop loops through each specie that has a 1 in the presence/absence data for the given plot. For each of these species their updated mean posterior is calculated in accordance to the theoretical discusison on the main page.<br />
-<br> When the inner loop is done the shannon index for the plot is calculated in accordance to (link to diversity page). We only use the mean postorior values that are greater than 1e-05 because using values less than these can give numerical issues in the log-function used to calculate the shannon index. <br><br> Below is a snippet of the part of the function descripted above</p>
-<pre class="r"><code># create list for shannon index for each plot
-shannon_list &lt;- c()
-  
-for (row in 1:nrow(cover_data)) {
-    
-  # Create an empty list for a given row
-  mean_posterior &lt;- c()
-    
-    
-  # for a given row, find out what species is found in frequency data
-  species_spotted_in_frekvens &lt;- colnames(freq_data[c(freq_data[row,]  == 1)])
-    
-  #For each species spotten in frequency, appends its posterior cover to the cover data for that row
-  for (species_spotted in species_spotted_in_frekvens ) {
-      
-      
-    alpha_post &lt;- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) + as.numeric(cover_data[[species_spotted]][row]) ))
-      beta_post &lt;-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + 16 - as.numeric(cover_data[[species_spotted]][row])
-      
-      mean_posterior &lt;- append(mean_posterior, (alpha_post)/(alpha_post+beta_post))
-  }
-    
-#Calculate the shanon index value and append it to the list after normalizing and removing zeroes
-    
-  total_cover &lt;- sum(mean_posterior)
-  mean_posterior &lt;- mean_posterior[!(mean_posterior &lt; 0.00001)]
-  shannon_index &lt;- -sum(mean_posterior/total_cover * log((mean_posterior/total_cover))) 
-    
-  shannon_list &lt;- append(shannon_list,shannon_index)  
-    
+<p>As discussed on the home page we will fit a beta-distribution for each species using all the cover data where the correspoding presence/absence data has a 1. This is saved in the beta_data vector. <br> We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package “fitdistrplus” with method = “method of moments” because this method can handle the values of 0 and 1. In some few special cases we can have a species that is only present in one plot. For these species we let the <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values be zero because cannot fit a prior beta distribution for these. Later in the code when we calculate the updated beta distribution, the prior will have no effect on this posterior distribution. <br></p>
+<pre class="r"><code>#For each species we save the shape parameters from the fitted beta distribution in a data frame.
+  beta_fit &lt;- data.frame(matrix(ncol = 3, nrow = 0))
+
+  colnames(beta_fit) &lt;- c(&quot;species&quot;,&quot;a&quot;, &quot;b&quot;)
+
+  for (name in colnames(cover_data)) {
+    species &lt;- cover_data[,name]/n
+
+    #Remove all plots with 0 in presence/absence data
+    beta_data &lt;- species[freq_data[[name]] == 1]
+
+    if (length(unique(beta_data)) &gt; 1) {
+      beta_data_fitted &lt;- fitdist(beta_data, &quot;beta&quot;, method = &quot;mme&quot;)
+      beta_fit[nrow(beta_fit) + 1,] &lt;- c(name, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
+
+    }
+    else {
+      beta_fit[nrow(beta_fit) + 1,] &lt;- c(name, 0,0)
+
+    }
   }</code></pre>
-<p>For the output we create a dataframe with “site”, “plot” and “year” and “shannon index”.</p>
-<pre class="r"><code>output &lt;- cover[,1:3]
-output$shannon_index &lt;- shannon_list
-return(output)</code></pre>
-Alternatively one can modify the code if the output should be in another form.
+<p>After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get a new abundance estimate for each species in each plot. <br><br> We have an outer loop where we loop through each plot in the cover_data. In each plot we want the species that are spotted in this plot. However, some species have a 1 in the presence/absence data but now data in the cover data. We have decided to exclude these species. This is done with use of the setdiff() function. After this is done, we loop trough the spotted species in the plot and create the new abundance estimate. These are saved in the corresponding cells in the input cover dataset. Because of some numerical issues, we let the abundance estimate be zero if the mean_posterior is below some threshold that we have set at 0.00001. <br></p>
+<pre class="r"><code>  #For each cell in the input cover data we find the new abundance estimate and save it to this data frame
+  for (plot in 1:nrow(cover_data)) {
+
+    #For each row we find the species that has a 1 in the presence/absence data
+    species_spotted_in_freq &lt;- colnames(freq_data[c(freq_data[plot,]  == 1)])
+
+    not_in_cover &lt;- setdiff(species_spotted_in_freq,colnames(cover_data))
+
+    species_spotted_in_freq &lt;- setdiff(species_spotted_in_freq, not_in_cover)
+
+    #We calculate new abundance estimate for each spotted species in the plot
+    for (species_spotted in species_spotted_in_freq ) {
+
+      alpha_post &lt;- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) +
+                                  as.numeric(cover_data[[species_spotted]][plot]) ))
+      beta_post &lt;-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + n - as.numeric(cover_data[[species_spotted]][plot])
+
+      mean_posterior &lt;- (alpha_post)/(alpha_post+beta_post)
+
+      if(mean_posterior &lt; 0.00001){
+        cover[plot,species_spotted] &lt;- 0
+      }
+      else{
+        cover[plot,species_spotted] &lt;- mean_posterior * n
+      }
+
+    }
+  }</code></pre>
+<p><br> Before we return the dataframe with the new abundance estimates, we remove all the columns (species) that have a zero in all plots. This makes output dataset lesser and thereby easier to work with in the following analysis. If one wants to include the these species, the for-loop can just be omitted.</p>
+<pre class="r"><code>  for (species in colnames(cover_data)){
+    if (sum(cover[,species]) == 0){
+      cover = cover[,!(names(cover) %in% species)]
+    }
+  }
+
+  return(cover)</code></pre>
 <h1>
-The function
+Full code
 </h1>
 <p>Below is the entire function in one code chunk</p>
 <pre class="r"><code>bayesian_method</code></pre>
-<pre><code>function (cover, freq, n, c) 
+<pre><code>function (cover, presence_absence_data, n, remove_column) 
 {
     library(fitdistrplus)
-    cover_data &lt;- cover[, c:ncol(cover)]
-    freq_data &lt;- freq[, c:ncol(freq)]
-    for (ele in colnames(cover_data)) {
-        if (sum(freq_data[, ele]) == 0) {
-            cover = cover[, !(names(cover) %in% ele)]
+    cover_data &lt;- cover[, (remove_column + 1):ncol(cover)]
+    freq_data &lt;- presence_absence_data[, (remove_column + 1):ncol(presence_absence_data)]
+    for (species in colnames(cover_data)) {
+        if (sum(freq_data[, species]) == 0) {
+            cover = cover[, !(names(cover) %in% species)]
             cover_data &lt;- cover_data[, !(names(cover_data) %in% 
-                ele)]
+                species)]
         }
     }
     beta_fit &lt;- data.frame(matrix(ncol = 3, nrow = 0))
     colnames(beta_fit) &lt;- c(&quot;species&quot;, &quot;a&quot;, &quot;b&quot;)
-    for (specie in colnames(cover_data)) {
-        beta_data &lt;- cover_data[, specie]/n
-        beta_data &lt;- beta_data[freq_data[[specie]] == 1]
+    for (name in colnames(cover_data)) {
+        species &lt;- cover_data[, name]/n
+        beta_data &lt;- species[freq_data[[name]] == 1]
         if (length(unique(beta_data)) &gt; 1) {
             beta_data_fitted &lt;- fitdist(beta_data, &quot;beta&quot;, method = &quot;mme&quot;)
-            beta_fit[nrow(beta_fit) + 1, ] &lt;- c(specie, beta_data_fitted$estimate[1], 
+            beta_fit[nrow(beta_fit) + 1, ] &lt;- c(name, beta_data_fitted$estimate[1], 
                 beta_data_fitted$estimate[2])
         }
         else {
-            beta_fit[nrow(beta_fit) + 1, ] &lt;- c(specie, 0, 0)
+            beta_fit[nrow(beta_fit) + 1, ] &lt;- c(name, 0, 0)
         }
     }
-    for (row in 1:nrow(cover_data)) {
-        species_spotted_in_frekvens &lt;- colnames(freq_data[c(freq_data[row, 
+    for (plot in 1:nrow(cover_data)) {
+        species_spotted_in_freq &lt;- colnames(freq_data[c(freq_data[plot, 
             ] == 1)])
-        not_in_cover &lt;- setdiff(species_spotted_in_frekvens, 
-            colnames(cover_data))
-        species_spotted_in_frekvens &lt;- setdiff(species_spotted_in_frekvens, 
+        not_in_cover &lt;- setdiff(species_spotted_in_freq, colnames(cover_data))
+        species_spotted_in_freq &lt;- setdiff(species_spotted_in_freq, 
             not_in_cover)
-        for (species_spotted in species_spotted_in_frekvens) {
+        for (species_spotted in species_spotted_in_freq) {
             alpha_post &lt;- as.numeric((as.numeric(beta_fit[beta_fit$species == 
-                species_spotted, ]$a) + as.numeric(cover_data[[species_spotted]][row])))
+                species_spotted, ]$a) + as.numeric(cover_data[[species_spotted]][plot])))
             beta_post &lt;- as.numeric(beta_fit[beta_fit$species == 
-                species_spotted, ]$b) + 16 - as.numeric(cover_data[[species_spotted]][row])
+                species_spotted, ]$b) + n - as.numeric(cover_data[[species_spotted]][row])
             mean_posterior &lt;- (alpha_post)/(alpha_post + beta_post)
             if (mean_posterior &lt; 1e-05) {
-                cover[row, species_spotted] &lt;- 0
+                cover[plot, species_spotted] &lt;- 0
             }
             else {
-                cover[row, species_spotted] &lt;- mean_posterior * 
-                  16
+                cover[plot, species_spotted] &lt;- mean_posterior * 
+                  n
             }
         }
     }
-    for (ele in colnames(cover_data)) {
-        if (sum(cover[, ele]) == 0) {
-            cover = cover[, !(names(cover) %in% ele)]
+    for (species in colnames(cover_data)) {
+        if (sum(cover[, species]) == 0) {
+            cover = cover[, !(names(cover) %in% species)]
         }
     }
     return(cover)
@@ -749,18 +798,16 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
-other attached packages:
-[1] workflowr_1.6.2
-
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     R6_2.5.0         rlang_0.4.8      stringr_1.4.0   
- [9] tools_4.0.3      xfun_0.18        git2r_0.28.0     htmltools_0.5.0 
-[13] ellipsis_0.3.1   rprojroot_1.3-2  yaml_2.2.1       digest_0.6.27   
-[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
-[21] vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0         glue_1.4.2      
-[25] evaluate_0.14    rmarkdown_2.5    stringi_1.5.3    compiler_4.0.3  
-[29] pillar_1.4.6     backports_1.1.10 httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [5] magrittr_1.5     workflowr_1.6.2  R6_2.5.0         rlang_0.4.8     
+ [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
+[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27   
+[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
+[21] later_1.1.0.1    vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0        
+[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.5    stringi_1.5.3   
+[29] compiler_4.0.3   pillar_1.4.6     backports_1.1.10 httpuv_1.5.5    
+[33] pkgconfig_2.0.3 </code></pre>
 </div>
 
 

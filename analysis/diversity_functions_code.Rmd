@@ -1,0 +1,61 @@
+---
+title: "Functions for diversity estimates"
+
+date: "2021-04-17"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+source("code/function.R")
+```
+
+This page includes code implementation of all the functions that are used to calculate different diversity estimates.
+
+<h1> Shannon index </h1>
+```{r}
+shannon
+```
+
+When calculating the shannon indexes the "na.rm = TRUE" is necessary to take care of the cells where the cover data is 0. The reason for this is that we use the logarithmic function and the log(0) is not defined, which is why R will give a NA when it is asked to calculate log(0). The "na.rm = TRUE" makes sure that when we sum the rows we don't take into account the NAs produced by log(0).
+
+
+<h1> Simpson's index</h1>
+```{r}
+simpson
+```
+
+
+<h1> Species richness </h1>
+```{r}
+species_richness
+```
+
+<h1> Hill Shannon diversity </h1>
+
+```{r}
+hill_shannon
+```
+
+<h1> Hill Simpson diversity </h1>
+```{r}
+hill_simpson
+```
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+

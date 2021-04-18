@@ -1,103 +1,160 @@
 ---
-title: "Using functions"
+title: "Presentation of functions"
 site: workflowr::wflow_site
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
 ---
 
-
-This page will have a list of all our functions, together with a short description and guide in how to use them. It will also include a link for further documentation for each function.
+This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
 
 
 <h1>Bayesian method</h1>
-Implementatin of method described on main page.
+Main function of this vignette. The function is an implementation of the method outlined on the home page.
+
 **Usage:**
 
-bayesian_method(cover_data, present/absence_data, n = 16 , remove_column = 0)
+bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 **Arguments:**
 
-* **Cover_data**: Cover data in a data frame, with plots as rows and species as columns.
-* **present/absence_data**:  present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.
-* **n**: If cover data is not between 0 and 1, what should it be divide with to be in the interval $[0,1]$.
-* **remove_column**: Exclude first n column from the data analysis. In the NOVANA dataset this we would remove the first 3 columns as they include data about the plot, site and year.
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
+* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
+* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this datasat is applied.
 
-**Output** The function returns a dataframe with updated abundance data.
+**Output** 
+
+* The function returns a dataframe with new abundance data.
 
 For further specifications of the function click [link](bayesian_method_describtion.html)
 
 
 
-<h1> Shannon index</h1>
+<h1> Functions for diversity estimates</h1>
 ------
 
-The shannon index only uses cover data.
+The functions below implement the different diversity estimates defined at [Diversity](Diversity.html). The code implementations of the functions can be found at [link](diversity_functions_code.html)
+
+<h3> Shannon index </h3>
 
 **Usage:**
 
-row_shannon(cover_data ,species_indicator = NULL)
+shannon(cover_data, remove_column = NULL)
 
 **Arguments:**
 
-* **Cover_data**: A data frame with plots as rows and the cover data for each specie as columns.
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
 
-* **species_indicator**: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in cover_data will be assumed to be for species.
+* **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
-**output:**
+**Output:**
 
-* A vector with the shannon index for each row, ordered with the first row as the first value.
+* A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
 
-[Further documentation](function_simple_shannon.html#row_shannon)
+
+<h3> Simpson's index</h3>
+------
+
+**Usage:**
+
+simpson(cover_data, remove_column = NULL)
+
+**Arguments:**
+
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+
+* **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
+
+**Output:**
+
+* A vector with simpson's index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
+
+
+
  
-<h1>Species_richness </h1>
+<h3>Species richness </h3>
 ------
-Species richness is the number of observed species in a given plot.
-
 
 **Usage:**
 
-species_richness(frequency_data ,species_indicator = NULL)
+species_richness(presence_absence_data, remove_column = NULL)
 
 **Arguments:**
 
-* **frequency_data**: A data frame with plots as rows and the frequency data for each specie as columns (1 if the species is spotted, 0 if not).
+* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
 
-* **species_indicator**: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in frequency_data will be assumed to be for species.
+* **remove_column**: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
-**output:**
+**Output:**
 
-* The function return a vector with the speciess richness for each plot, in the same order that the columns were in.
-
-[Further documentation](function_simple_shannon.html#species_richness)
+* A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data.
 
 
-
-
-<h1>plot_index_gradient</h1>
+<h3> Hill shannon diveristy </h3>
 ------
-
-A function to plot a variable against different diversity measures to see how they compare against each other.
 
 **Usage:**
 
-plot_index_gradient(data, indexes, gradient ,gradient_text = NULL)
+hill_shannon(cover_data, remove_column = NULL)
 
 **Arguments:**
 
-* **data**: A data frame with the different indexes to be compared and the gradient to compare them against
-* **indexes**: A list of the column names for the indexes as strings.
-* **gradient**:The column name for the gradient as a string.
-* **gradient_text**: A description of the gradient as a string.
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
 
-**Output**
+* **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
-Four plot with different diversity measures plottet against a variable.
+**Output:**
 
-[Further documentation](gradient_plot.html)
+* A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
 
 
+<h3> Hill Simpson diversity</h3>
+------
 
+**Usage:**
+
+hill_simpson(cover_data, remove_column = NULL)
+
+**Arguments:**
+
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+
+* **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
+
+**Output:**
+
+* A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
+
+
+
+
+<h1>Plot of different diversities</h1>
+------
+
+This function plots different diversity estimates of a plot against some information of interest about the plot. 
+
+**Usage:**
+
+plot_diversity(data, diversities, plot_info, description = NULL)
+
+**Arguments:**
+
+* **data**: A data frame. Contains one or more columns of different diversity estimates of plots and also a column with some information about the plots.
+* **diversities**: A list of strings. The names of the columns in the data that contain diversity estimates.
+* **plot_info**: A string. The column name in the data that contains the plot information one wants to plot the diversities against.
+* **description**: A string. The description of the plot information.
+
+**Output:**
+
+* Plots with different diversity estimates mapped against the plot information of interest.
+
+Further documentaion and code implementation at [link](gradient_plot.html)
+
+
+
+
+```{r, include=FALSE, eval=FALSE}
 <h1>diversity_index</h1>
 ------
 
@@ -120,4 +177,8 @@ diversity_index(abundance_data, remove_columns = 0, l = 1)
 **Output**
 
 A vector with the diversity for each row in the abundance data.
+
+```
+
+
 

@@ -1,5 +1,5 @@
 ---
-title: "documentation for the plot_index_gradient function"
+title: "Code implementation of plot_diversity function"
 output: workflowr::wflow_html
 editor_options:
   chunk_output_type: console
@@ -8,20 +8,22 @@ editor_options:
 source("code/function.R")
 ```
 
-A function to plot a variable against different indexes to see how the indexes compare against each other.
+The plot_diversity function makes use of the ggplot2 library. Especially, the plot_diversity function makes use of the facet_wrap function from the ggplot2 library. For further reading on this specific funtion vist [link](https://ggplot2.tidyverse.org/reference/facet_wrap.html)
 
-**Usage:**
-
-plot_index_gradient(data, indexes, gradient ,gradient_text = NULL)
-
-**Arguments:**
-
-* data: A data frame with the different indexes to be compared and the gradient to compare them against
-* indexes: A list of the column names for the indexes as strings.
-* gradient:The column name for the gradient as a string.
-* gradient_text: A description of the gradient as a string.
+Below is the implementaion of the function
 
 ```{r, echo = FALSE}
-plot_index_gradient
+plot_diversity
 ```
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 

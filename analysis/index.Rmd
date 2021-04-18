@@ -120,7 +120,7 @@ bayesian_method(cover_data, present/absence_data, n = 16 , remove_column = 0)
 * **remove_column**: Exclude first n column from the data analysis. In the NOVANA dataset this we would remove the first 3 columns as they include data about the plot, site and year.
 
 <p></p>
-The function returns a dataframe with updated abundance data.
+The function returns a dataframe, similar to the cover dafa, but now containing updated abundance data. So in each entry for a given plot and a given specie, there is a mean value for the posterior distribution of that plot and that specie. This value is then used to calculate diversity measures.
 <br><br>
 For further specifications of the function click [link](function_shannon.html)
 
@@ -134,8 +134,10 @@ cover <- read.csv("data/cover_data_6230_year2014.csv")
 
 freq <- read.csv("data/frekvens_data_6230_year2014.csv")
 
-abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
+abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv", header = FALSE)
 
+names(abiotiske) <- as.matrix(abiotiske[1, ])
+abiotiske <- abiotiske[-1, ]
 ```
 <br>
 We apply the method function to the cover and freq datasets. 
@@ -149,20 +151,25 @@ a <- as.numeric(beta_fit[beta_fit$species == "X116",]$a)
 b <- as.numeric(beta_fit[beta_fit$species == "X116",]$b)
 ```
 
-To get a sense of what the method has done, first we have plotted the prior distribution for the specie = "X116"
+To get a sense of what the method has done, first we have plotted the prior distribution for the specie "Agrostis capillaris"
 
 ```{r}
 curve(dbeta(x,a,b), xlab = "relative cover")
 ```
 
-Below is histograms of the specie = "X116" in the observed cover dataset and in the updated abundance dataset where the above prior distrbution is used.
+It is seen that there it high probability of being either around 0 or around 1. This is because a lot of species are grouped in a way, that if they are present, they will be present a lot, or they are not present at all. So some species are either not present, or are present a lot. 
+
+Below is histograms of the specie "Agrostis capillaris" in the observed cover dataset and in the updated abundance dataset where the above prior distrbution is used.
 ```{r}
-hist(cover[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of specie X116 in the observed cover dataset")
+hist(cover[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of specie Agrostis capillaris in the observed cover dataset")
 ```
+Here it is seen that the specie is not observed in a lot of plot the plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. They are around the same hight, there is though, a bit more hight on the bars from 7-16 than 1-7, meaning that it is more often observed that the specie is hit by 7-16 pins, than 1-7 pins. 
 
 ```{r}
-hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of specie X116 in the updated dataset")
+hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of specie Agrostis capillaris in the updated dataset")
 ```
+Here it is seen that bars from 1-16 are in genereal a bit higher.
+
 
 <h1>Plot </h1>
 As described on [link](Diversity.html) we can calculate different diveristy measures using the updated abundance data. In the below we have calculated the shannon index each plot in both the observed cover dataset and in the updated dataset:
@@ -200,6 +207,7 @@ First we see the shannon index from the updated dataset relates to the pH values
 
 ```{r}
 result$pH <- as.numeric(abiotiske$pHjord)
+result$N <- as.numeric(abiotiske$Nijord)
 result$observed_shannon <- observed_shannon
 result$updated_shannon <- updated_shannon
 result$hill_shannon <- exp(result$updated_shannon)
@@ -226,6 +234,11 @@ plot_index_gradient(result ,c("updated_shannon", "observed_shannon","species_ric
 
 
 
+We will also show how different diversity measures relates to the nitrogen value, since we know that a higher nitrogen level can cause changes in the specie diversity.
+
+```{r, message=FALSE, warning=FALSE}
+plot_index_gradient(result ,c("updated_shannon", "observed_shannon","species_richness", "hill_shannon"), "N", gradient_text = "The nitrogen value of the soil for each plot")
+```
 
 
 

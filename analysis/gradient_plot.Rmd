@@ -16,6 +16,7 @@ Below is the implementaion of the function
 plot_diversity
 ```
 
+"description" is the label of the x-axis. It is set to NULL by default, so if you dont add a discribtion, there will be nothing put as the label of your x-axis.  
 
 <br>
 <br>

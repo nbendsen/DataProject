@@ -10,7 +10,7 @@ editor_options:
 
 <h1> Introduction </h1>
 
-In ecology an important aspect of a plot is the diversity. The diversity is a meassure of the number of different types of species within the plot and also how the individuals are distributed among the species A diversity index can be computed in several different ways and puts weight on different aspects of the species within the plot. As an example, one could be interested in diversity meassure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the plot. 
+In ecology an important aspect of a plot is the diversity. The diversity is a meassure of the number of different types of species within the plot and also how the individuals are distributed among the species a diversity index can be computed in several different ways and puts weight on different aspects of the species within the plot. As an example, one could be interested in diversity meassure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the plot. 
 <br><br>
 On the main page we will give some examples of how our method perform on the NOVANA dataset with respect to different diversity meassures. We will calculate a diversity index for each plot. For this reason, we will define the diversity indexes we have used in our examples below. 
 
@@ -18,12 +18,12 @@ On the main page we will give some examples of how our method perform on the NOV
 <h2> Shannon index</h2>
 A diversity index that traditionally is often used is the shannon index. The shannon index is calculated by the following formula:
 $$\text{shannon index =}-\sum_{i=1}^S p_i \ln (p_i)$$
-where $S$ is the number of species and $p_i$ is the proportion of all individuals that belong to specie $i$. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins specie $i$ is hit by divided by the total number of pins that hit some specie in the plot. 
+where $S$ is the number of species and $p_i$ is the proportion of all individuels that belong to specie $i$. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins specie $i$ is hit by divided by the total number of pins used to hit some specie in the plot. 
 <br><br>
-However, as it is pointed out in both [1] and [2] the shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [2].
+However, as it is pointed out in both [1] and [2] the shannon index is not a diversity, but rather an entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [2].
 <br>
 We can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number og species.
-When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity. It can instead be seen as the uncertainty in the species identity of a sample.
+When calculating the shannon index we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity. It can instead be seen as the uncertainty in the species identity of a sample.
 
 <h2> Simpson index</h2>
 Another commonly used diversity index is the simpson index. This is given by
@@ -37,7 +37,7 @@ A third method for meassuring diversity is the species richness. This is simply 
 $$
 \text{species richness = }\Sigma_{i=1}^S1
 $$
-where $S$ is the number of species in our precense/absence data having a one. This means that the species richness is just a count of how many species that is present in the plot without taking into account the distribution of the individuals among the specie types. This meassure is very influenced by rare species.
+where $S$ is the number of species in our precense/absence data having a one. This means that the species richness is just a count of how many species that is present in the plot without taking into account the distribution of the individuals among the specie types. This meassure is very influenced by rare species, since they will weight just as much as common species. 
 
 
 <h2> Hill diversity </h2>
@@ -56,7 +56,7 @@ $$
 \text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
 $$
 
-Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species.
+Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity measure. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species.
 
 <h2> Hill-Simpson diversity </h2>
 If we instead let $l = -1$ in the formula for Hill diversity we get the inverse of the simpson index

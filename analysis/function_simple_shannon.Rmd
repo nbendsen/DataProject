@@ -28,7 +28,7 @@ row_shannon(cover_data ,species_indicator = NULL)
 
 * Cover_data: A data frame with plots as rows and the cover data for each specie as columns.
 
-* species_indicator: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring.  If left empty all columns in cover_data will be assumed to be for species.
+* species_indicator: A string. Is used to specify which columns contain species data. It will use all columns which contain the string as a substring. If left empty all columns in cover_data will be assumed to be for species.
 
 ```{r, echo = FALSE}
 shannon

@@ -1,6 +1,5 @@
 ---
 title: "Functions for diversity estimates"
-
 date: "2021-04-17"
 output: workflowr::wflow_html
 editor_options:

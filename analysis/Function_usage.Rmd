@@ -20,12 +20,12 @@ bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 * **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
 * **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
-* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
+* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1. n is the number of pins used in each blot, so by dividing each entry with n, we normalize the data.
 * **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this datasat is applied.
 
 **Output** 
 
-* The function returns a dataframe with new abundance data.
+* The function returns a dataframe with plots as rows and species as columns, and where each entry contain new abundance data for a specie in a plot.
 
 For further specifications of the function click [link](bayesian_method_describtion.html)
 
@@ -50,7 +50,7 @@ shannon(cover_data, remove_column = NULL)
 
 **Output:**
 
-* A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
+* A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 
 <h3> Simpson's index</h3>
@@ -68,7 +68,7 @@ simpson(cover_data, remove_column = NULL)
 
 **Output:**
 
-* A vector with simpson's index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
+* A vector with simpson's index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.
 
 
 
@@ -88,7 +88,7 @@ species_richness(presence_absence_data, remove_column = NULL)
 
 **Output:**
 
-* A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data.
+* A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 
 <h3> Hill shannon diveristy </h3>
@@ -106,7 +106,7 @@ hill_shannon(cover_data, remove_column = NULL)
 
 **Output:**
 
-* A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
+* A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 
 <h3> Hill Simpson diversity</h3>
@@ -124,7 +124,7 @@ hill_simpson(cover_data, remove_column = NULL)
 
 **Output:**
 
-* A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data.
+* A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 
 
@@ -140,7 +140,7 @@ plot_diversity(data, diversities, plot_info, description = NULL)
 
 **Arguments:**
 
-* **data**: A data frame. Contains one or more columns of different diversity estimates of plots and also a column with some information about the plots.
+* **data**: A data frame. Contains one or more columns of different diversity estimates of plots and also a column with some information about the plots, could be a plot ID or something like it.
 * **diversities**: A list of strings. The names of the columns in the data that contain diversity estimates.
 * **plot_info**: A string. The column name in the data that contains the plot information one wants to plot the diversities against.
 * **description**: A string. The description of the plot information.

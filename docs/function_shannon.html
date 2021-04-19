@@ -13,21 +13,27 @@
 
 <title>Calculating shannon index for plots</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -39,8 +45,6 @@ div.section {
 }
 </style>
 
-
-
 <style type="text/css">
   code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -51,11 +55,6 @@ div.section {
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -68,32 +67,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -103,10 +77,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -123,40 +93,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -184,7 +127,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -196,7 +139,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -207,10 +150,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -222,7 +178,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -348,13 +303,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -374,11 +329,20 @@ div.tocify {
         <li>
   <a href="index.html">Home</a>
 </li>
+<li>
+  <a href="Diversity.html">Diversity</a>
+</li>
+<li>
+  <a href="Function_usage.html">Functions</a>
+</li>
+<li>
+  <a href="model_validering.html">Model validation</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nbendsen/DataProject">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
     Source code
   </a>
@@ -388,7 +352,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -399,7 +363,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -408,7 +372,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -417,13 +381,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-03-30
+<strong>Last updated:</strong> 2021-04-19
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject_git/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -436,12 +400,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -465,7 +429,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -508,37 +472,38 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeadacf32ea1d24e5d7c23447e9b182c1834248654targetblankadacf32a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/adacf32ea1d24e5d7c23447e9b182c1834248654" target="_blank">adacf32</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb8765a56946b12f6b3e0f505d015e6e6fa27c08btargetblankb8765a5a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeadacf32ea1d24e5d7c23447e9b182c1834248654targetblankadacf32a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/b8765a56946b12f6b3e0f505d015e6e6fa27c08b" target="_blank">b8765a5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/adacf32ea1d24e5d7c23447e9b182c1834248654" target="_blank">adacf32</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
-
-Untracked files:
-    Untracked:  analysis/New_data.Rmd
-    Untracked:  analysis/data_5130.Rmd
-    Untracked:  data/abiotiske_data_6230.csv
-    Untracked:  data/cover_data_5130.csv
-    Untracked:  data/cover_data_6230.csv
-    Untracked:  data/frekvens_data_5130.csv
-    Untracked:  data/frekvens_data_6230.csv
-    Untracked:  test project/
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
+    Ignored:    code/.Rhistory
 
 Unstaged changes:
-    Modified:   analysis/_site.yml
-    Modified:   code/function_shannon.R
+    Modified:   analysis/Function_usage.Rmd
+    Modified:   analysis/Shannon.Rmd
+    Modified:   analysis/bayesian_method_describtion.Rmd
+    Modified:   analysis/diversity_functions_code.Rmd
+    Modified:   analysis/function_shannon.Rmd
+    Modified:   analysis/function_simple_shannon.Rmd
+    Modified:   analysis/gradient_plot.Rmd
 
 </code></pre>
 <p>
@@ -579,6 +544,57 @@ Message
 <tbody>
 <tr>
 <td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/function_shannon.html" target="_blank">f173714</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/29e6e6f87214780226bf6328573463611ce371ce/docs/function_shannon.html" target="_blank">29e6e6f</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Added docs for functions
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/d94576094dcd1862d850337eb93af37f95ec3be8/docs/function_shannon.html" target="_blank">d945760</a>
+</td>
+<td>
+nbendsen
+</td>
+<td>
+2021-03-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
 Rmd
 </td>
 <td>
@@ -591,7 +607,7 @@ nbendsen
 2021-03-30
 </td>
 <td>
-wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
+wflow_publish(c(“analysis/index.rmd”, “analysis/function_shannon.rmd”))
 </td>
 </tr>
 <tr>
@@ -625,7 +641,7 @@ nbendsen
 2021-03-24
 </td>
 <td>
-wflow_publish(c("analysis/license.Rmd", "analysis/data_6230.Rmd",
+wflow_publish(c(“analysis/license.Rmd”, “analysis/data_6230.Rmd”,
 </td>
 </tr>
 </tbody>
@@ -638,18 +654,19 @@ wflow_publish(c("analysis/license.Rmd", "analysis/data_6230.Rmd",
 <h1>
 Description of code
 </h1>
-<p>To implement the proposed method we’ve created the following function. The function takes as input a cover dataset and a presence/absence dataset. It is assumed that the first three columns in both cover data and presence/absence data is “site”, “year” and “plot” as it is the case in the NOVANA dataset. The two datasets have to match on rownames (e.i. must contain the same plots), however they do not have to contain the same colnames (species). The cover_data and freq_data is a subset of the input data without these columns. <br><br> A dataframe “beta_fit” is created. This dataframe will contain a column with each specie in the cover data and corresponding <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values from the fitted beta-distribution for the given specie. As discussed on the main page we will fit a beta-distribution for each specie using all the cover data where the correspoding presence/absence data has a 1. This will give a prior belief of the spatial distribution of the specie. The first for-loop in the function will take care of this for all species. For each specie all the cover data is divided by 16 because in the NOVANA dataset the cover of a specie in a plot is given by a number between 0 and 16. Dividing by 16 we get cover values on the interval <span class="math inline">\([0,1]\)</span> as this is the interval on which the beta-distribution is defined. <br> We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package “fitdistrplus” with method = “method of moments” because this method can handle the values of 0 and 1. <br><br> Below is a snippet of the part of the function descripted above</p>
-<pre class="r"><code>library(fitdistrplus) #package used for fitting beta-distribution
+<p>To implement the proposed method we’ve created the following function. The function takes as input a cover dataset and a presence/absence dataset. It is assumed that the first three columns in both cover data and presence/absence data is “site”, “year” and “plot” as it is the case in the NOVANA dataset. The two datasets have to match on rownames (e.i. must contain the same plots), however they do not have to contain the same colnames (species). The cover_data and freq_data is a subset of the input data without these columns. <br><br> A dataframe “beta_fit” is created. This dataframe will contain a column with each specie in the cover data and corresponding <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values from the fitted prior beta-distribution for the given specie. As discussed on the main page we will fit a prior beta-distribution for each specie using all the cover data where the correspoding presence/absence data has a 1. This will give a prior belief of the spatial distribution of the specie. The first for-loop in the function will take care of this for all species. For each specie all the cover data is divided by 16 because in the NOVANA dataset the cover of a specie in a plot is given by a number between 0 and 16. Dividing by 16 we get cover values on the interval <span class="math inline">\([0,1]\)</span> as this is the interval on which the beta-distribution is defined. <br> We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package “fitdistrplus” with method = “method of moments” because this method can handle the values of 0 and 1. <br><br> Below is a snippet of the part of the function descripted above</p>
+<pre class="r"><code>library(fitdistrplus) #Package used for fitting beta-distribution
+#Choosing the right columns
 cover_data &lt;- cover[,4:ncol(cover)]
 freq_data &lt;- freq[,4:ncol(freq)]
   
   
-#create data frame to hold the fitted values for each species
+#Create data frame to hold the fitted values for each species
 beta_fit &lt;- data.frame(matrix(ncol = 3, nrow = 0))
   
 colnames(beta_fit) &lt;- c(&quot;species&quot;,&quot;a&quot;, &quot;b&quot;)
   
-# for Each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
+#For each species calculate the shape parameter for the fitted beta distribution and save them in a data frame.
 for (specie in colnames(cover_data)) {
   beta_data &lt;- cover_data[,specie]/16
     
@@ -663,18 +680,18 @@ for (specie in colnames(cover_data)) {
       
     }
   }</code></pre>
-<p>After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get updated abundance estimates for species in each plot. Following this we can also calculate the shannon index for each plot. <br><br> The vector “shannon_list” gets updated with the shannon index for each plot as we loop through them. The outer for-loop loops through all the plots. The mean_posterior vector is created and used when we in the inner loop loops through each specie that has a 1 in the presence/absence data for the given plot. For each of these species their updated mean posterior is calculated in accordance to the theoretical discusison on the main page.<br />
+<p>After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get updated abundance estimates for species in each plot. Following this we can also calculate the shannon index for each plot. <br><br> The vector “shannon_list” gets updated with the shannon index for each plot as we loop through them. The outer for-loop loops through all the plots. The mean_posterior vector is created and used when we in the inner loop, loops through each specie that has a 1 in the presence/absence data for the given plot. For each of these species their updated mean posterior is calculated in accordance to the theoretical discusison on the main page.<br />
 <br> When the inner loop is done the shannon index for the plot is calculated in accordance to (link to diversity page). We only use the mean postorior values that are greater than 1e-05 because using values less than these can give numerical issues in the log-function used to calculate the shannon index. <br><br> Below is a snippet of the part of the function descripted above</p>
-<pre class="r"><code># create list for shannon index for each plot
+<pre class="r"><code>#Create list for shannon index for each plot
 shannon_list &lt;- c()
   
 for (row in 1:nrow(cover_data)) {
     
-  # Create an empty list for a given row
+  #Create an empty list for a given row
   mean_posterior &lt;- c()
     
     
-  # for a given row, find out what species is found in frequency data
+  #For a given row, find out what species is found in frequency data
   species_spotted_in_frekvens &lt;- colnames(freq_data[c(freq_data[row,]  == 1)])
     
   #For each species spotten in frequency, appends its posterior cover to the cover data for that row
@@ -722,7 +739,7 @@ The function
                 beta_data_fitted$estimate[2])
         }
     }
-    shannon_list &lt;- c()
+    shanon_list &lt;- c()
     for (row in 1:nrow(cover_data)) {
         mean_posterior &lt;- c()
         species_spotted_in_frekvens &lt;- colnames(freq_data[c(freq_data[row, 
@@ -737,12 +754,12 @@ The function
         }
         total_cover &lt;- sum(mean_posterior)
         mean_posterior &lt;- mean_posterior[!(mean_posterior &lt; 1e-05)]
-        shannon_index &lt;- -sum(mean_posterior/total_cover * log((mean_posterior/total_cover)))
-        shannon_list &lt;- append(shannon_list, shannon_index)
+        shanon_value &lt;- -sum(mean_posterior/total_cover * log((mean_posterior/total_cover)))
+        shanon_list &lt;- append(shanon_list, shanon_value)
     }
-    output &lt;- cover[, 1:3]
-    output$shannon_index &lt;- shannon_list
-    return(output)
+    out &lt;- cover[, 1:3]
+    out$shannon &lt;- shanon_list
+    return(out)
 }</code></pre>
 <br>
 <p>
@@ -752,32 +769,30 @@ The function
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19042)
+<pre><code>R version 4.0.4 (2021-02-15)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
 
 Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
 
 locale:
-[1] LC_COLLATE=Danish_Denmark.1252  LC_CTYPE=Danish_Denmark.1252   
-[3] LC_MONETARY=Danish_Denmark.1252 LC_NUMERIC=C                   
-[5] LC_TIME=Danish_Denmark.1252    
+[1] da_DK.UTF-8/da_DK.UTF-8/da_DK.UTF-8/C/da_DK.UTF-8/da_DK.UTF-8
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
-other attached packages:
-[1] workflowr_1.6.2
-
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     R6_2.5.0         rlang_0.4.8      stringr_1.4.0   
- [9] tools_4.0.3      xfun_0.18        git2r_0.28.0     htmltools_0.5.0 
-[13] ellipsis_0.3.1   rprojroot_1.3-2  yaml_2.2.1       digest_0.6.27   
-[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
-[21] vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0         glue_1.4.2      
-[25] evaluate_0.14    rmarkdown_2.5    stringi_1.5.3    compiler_4.0.3  
-[29] pillar_1.4.6     backports_1.1.10 httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [1] Rcpp_1.0.6        whisker_0.4       knitr_1.31        magrittr_2.0.1   
+ [5] workflowr_1.6.2   R6_2.5.0          rlang_0.4.10      fansi_0.4.2      
+ [9] stringr_1.4.0     tools_4.0.4       xfun_0.21         utf8_1.1.4       
+[13] git2r_0.28.0      htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2  
+[17] yaml_2.2.1        digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0  
+[21] crayon_1.4.1      later_1.1.0.1     vctrs_0.3.6       promises_1.2.0.1 
+[25] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
+[29] stringi_1.5.3     compiler_4.0.4    pillar_1.5.0      httpuv_1.5.5     
+[33] pkgconfig_2.0.3  </code></pre>
 </div>
 
 
@@ -792,8 +807,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-
 
 
 </div>
@@ -823,7 +836,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

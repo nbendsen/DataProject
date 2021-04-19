@@ -13,21 +13,27 @@
 
 <title>Code implementation of bayesian method</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -39,8 +45,6 @@ div.section {
 }
 </style>
 
-
-
 <style type="text/css">
   code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -51,11 +55,6 @@ div.section {
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -68,32 +67,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -103,10 +77,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -123,40 +93,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -184,7 +127,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -196,7 +139,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -207,10 +150,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -222,7 +178,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -348,13 +303,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -387,7 +342,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nbendsen/DataProject">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
     Source code
   </a>
@@ -397,7 +352,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -426,13 +381,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-18
+<strong>Last updated:</strong> 2021-04-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject_git/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -474,7 +429,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -517,36 +472,38 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeadacf32ea1d24e5d7c23447e9b182c1834248654targetblankadacf32a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/adacf32ea1d24e5d7c23447e9b182c1834248654" target="_blank">adacf32</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeadacf32ea1d24e5d7c23447e9b182c1834248654targetblankadacf32a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/adacf32ea1d24e5d7c23447e9b182c1834248654" target="_blank">adacf32</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
     Ignored:    code/.Rhistory
 
-Untracked files:
-    Untracked:  analysis/diversity_functions_code.Rmd
-
 Unstaged changes:
     Modified:   analysis/Function_usage.Rmd
+    Modified:   analysis/Shannon.Rmd
     Modified:   analysis/bayesian_method_describtion.Rmd
+    Modified:   analysis/diversity_functions_code.Rmd
+    Modified:   analysis/function_shannon.Rmd
+    Modified:   analysis/function_simple_shannon.Rmd
     Modified:   analysis/gradient_plot.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -590,16 +547,16 @@ Message
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/523d22907d751a8d0706f5b0b024bff0d4569b42/docs/bayesian_method_describtion.html" target="_blank">523d229</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/b12e7eecd12498845ae6d3dc42556a4f95113e87/docs/bayesian_method_describtion.html" target="_blank">b12e7ee</a>
 </td>
 <td>
-nbendsen
+GitHub
 </td>
 <td>
-2021-04-14
+2021-04-18
 </td>
 <td>
-Build site.
+Add files via upload
 </td>
 </tr>
 <tr>
@@ -607,16 +564,50 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/cbfa507b382a2a6d545e94a2da1751971e23422d/analysis/bayesian_method_describtion.Rmd" target="_blank">cbfa507</a>
+<a href="https://github.com/nbendsen/DataProject/blob/df33abbf44fc1993433b6c591b9a97ccb2e65c29/analysis/bayesian_method_describtion.Rmd" target="_blank">df33abb</a>
 </td>
 <td>
-nbendsen
+GitHub
+</td>
+<td>
+2021-04-18
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/bayesian_method_describtion.Rmd" target="_blank">6c0e88a</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-15
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/bayesian_method_describtion.html" target="_blank">1bfbb02</a>
+</td>
+<td>
+GitHub
 </td>
 <td>
 2021-04-14
 </td>
 <td>
-wflow_publish("analysis/*.Rmd")
+Add files via upload
 </td>
 </tr>
 </tbody>
@@ -635,18 +626,17 @@ Introduction
 <ul>
 <li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
 <li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
-<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
-</li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
+<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1. n is the number of pins used in each blot, so by dividing each entry with n, we normalize the data.</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year&quot; so remove_column = 3 when this datasat is applied.</li>
 </ul>
 <p><strong>Output</strong></p>
 <ul>
-<li>The function returns a dataframe with the new abundance data.</li>
+<li>The function returns a dataframe with plots as rows and species as columns, and where each entry contain new abundance data for a specie in a plot.</li>
 </ul>
 <h1>
 Description of code
 </h1>
-<p>First, two subsets of the input datasets are created without the columns that need to be removed. These are called cover_data and freq_data. Next we loop through the species in the cover_data and remove the species that has no presence in any plot in the freq_data. Both the input cover dataset and the cover_data are updated accordingly. This way we get rid of some of the data that is of no use, which will make the function run faster. <br><br> A dataframe “beta_fit” is created. This dataframe will contain a column with each species in the cover data and corresponding <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values from the fitted beta-distribution for the species. Every cell in the cover_data is divided with the input constant <span class="math inline">\(n\)</span>. This ensures that every cell is on the interval <span class="math inline">\([0,1]\)</span> as this is the interval on which the beta distribution is defined. In the NOVANA dataset we let <span class="math inline">\(n = 16\)</span>. <br></p>
+<p>First, two subsets of the input datasets are created without the columns that need to be removed. These are called cover_data and freq_data. Next we loop through the species in the cover_data and remove the species that has no presence in any plot in the freq_data. Both the input cover dataset and the cover_data are updated accordingly. This way we get rid of some of the data that is of no use, which will make the function run faster. <br><br> A dataframe “beta_fit” is created. This dataframe will contain a column for each species in the cover data and corresponding <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values from the fitted beta-distribution for the prior distribution of the species. Every cell in the cover_data is divided with the input constant <span class="math inline">\(n\)</span>. This ensures that every cell is on the interval <span class="math inline">\([0,1]\)</span> as this is the interval on which the beta distribution is defined. In the NOVANA dataset we let <span class="math inline">\(n = 16\)</span>, because the total number of pins used in each plot is 16. <br></p>
 <pre class="r"><code> library(fitdistrplus)
   cover_data &lt;- cover[,(remove_column+1):ncol(cover)]
   freq_data &lt;- presence_absence_data[,(remove_column+1):ncol(presence_absence_data)]
@@ -658,8 +648,8 @@ Description of code
       cover_data &lt;- cover_data[,!(names(cover_data) %in% species)]
     }
   }</code></pre>
-<p>As discussed on the home page we will fit a beta-distribution for each species using all the cover data where the correspoding presence/absence data has a 1. This is saved in the beta_data vector. <br> We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package “fitdistrplus” with method = “method of moments” because this method can handle the values of 0 and 1. In some few special cases we can have a species that is only present in one plot. For these species we let the <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values be zero because cannot fit a prior beta distribution for these. Later in the code when we calculate the updated beta distribution, the prior will have no effect on this posterior distribution. <br></p>
-<pre class="r"><code>#For each species we save the shape parameters from the fitted beta distribution in a data frame.
+<p>As discussed on the home page we will fit a beta-distribution as the prior distribution for each species using all the cover data where the correspoding presence/absence data has a 1. This is saved in the beta_data vector. <br> We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package “fitdistrplus” with method = “method of moments” because this method can handle the values of 0 and 1. In some few special cases we can have a species that is only present in one plot. For these species we let the <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> values be zero because we cannot fit a prior beta distribution for these. Later in the code when we calculate the updated beta distribution, the prior will have no effect on this posterior distribution, hence the posterior will just be made by the coverdata, since this is the likelohood. <br></p>
+<pre class="r"><code>#For each species we save the shape parameters from the fitted prior beta distribution in a data frame.
   beta_fit &lt;- data.frame(matrix(ncol = 3, nrow = 0))
 
   colnames(beta_fit) &lt;- c(&quot;species&quot;,&quot;a&quot;, &quot;b&quot;)
@@ -680,7 +670,7 @@ Description of code
 
     }
   }</code></pre>
-<p>After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get a new abundance estimate for each species in each plot. <br><br> We have an outer loop where we loop through each plot in the cover_data. In each plot we want the species that are spotted in this plot. However, some species have a 1 in the presence/absence data but now data in the cover data. We have decided to exclude these species. This is done with use of the setdiff() function. After this is done, we loop trough the spotted species in the plot and create the new abundance estimate. These are saved in the corresponding cells in the input cover dataset. Because of some numerical issues, we let the abundance estimate be zero if the mean_posterior is below some threshold that we have set at 0.00001. <br></p>
+<p>After creating this dataframe of prior distributions, we can now combine the cover data and presence/absence data to get a new abundance estimate for each species in each plot. <br><br> We have an outer loop where we loop through each plot in the cover_data. In each plot we want the species that are spotted in this plot. However, some species have a 1 in the presence/absence data but no data in the cover data. We have decided to exclude these species. This is done with use of the setdiff() function. After this is done, we loop trough the spotted species in the plot and create the new abundance estimate. These are saved in the corresponding cells in the input cover dataset. Because of some numerical issues, we let the abundance estimate be zero if the mean_posterior is below some threshold that we have set at 0.00001. <br></p>
 <pre class="r"><code>  #For each cell in the input cover data we find the new abundance estimate and save it to this data frame
   for (plot in 1:nrow(cover_data)) {
 
@@ -784,30 +774,30 @@ Full code
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.3 (2020-10-10)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19042)
+<pre><code>R version 4.0.4 (2021-02-15)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur 10.16
 
 Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
 
 locale:
-[1] LC_COLLATE=Danish_Denmark.1252  LC_CTYPE=Danish_Denmark.1252   
-[3] LC_MONETARY=Danish_Denmark.1252 LC_NUMERIC=C                   
-[5] LC_TIME=Danish_Denmark.1252    
+[1] da_DK.UTF-8/da_DK.UTF-8/da_DK.UTF-8/C/da_DK.UTF-8/da_DK.UTF-8
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     workflowr_1.6.2  R6_2.5.0         rlang_0.4.8     
- [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
-[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27   
-[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
-[21] later_1.1.0.1    vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0        
-[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.5    stringi_1.5.3   
-[29] compiler_4.0.3   pillar_1.4.6     backports_1.1.10 httpuv_1.5.5    
-[33] pkgconfig_2.0.3 </code></pre>
+ [1] Rcpp_1.0.6        whisker_0.4       knitr_1.31        magrittr_2.0.1   
+ [5] workflowr_1.6.2   R6_2.5.0          rlang_0.4.10      fansi_0.4.2      
+ [9] stringr_1.4.0     tools_4.0.4       xfun_0.21         utf8_1.1.4       
+[13] git2r_0.28.0      htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2  
+[17] yaml_2.2.1        digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0  
+[21] crayon_1.4.1      later_1.1.0.1     vctrs_0.3.6       promises_1.2.0.1 
+[25] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
+[29] stringi_1.5.3     compiler_4.0.4    pillar_1.5.0      httpuv_1.5.5     
+[33] pkgconfig_2.0.3  </code></pre>
 </div>
 
 
@@ -822,8 +812,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-
 
 
 </div>
@@ -853,7 +841,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

@@ -13,7 +13,6 @@
 
 <title>Model validation</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -26,8 +25,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -39,8 +36,6 @@ div.section {
 }
 </style>
 
-
-
 <style type="text/css">
   code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -48,7 +43,7 @@ div.section {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-    </style>
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -408,7 +403,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -417,7 +412,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -426,13 +421,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-14
+<strong>Last updated:</strong> 2021-04-19
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject - model validation/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -445,12 +440,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -517,16 +512,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree596ee03dc06e2f2351093ec0b3f562377a5cdad7targetblank596ee03a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/596ee03dc06e2f2351093ec0b3f562377a5cdad7" target="_blank">596ee03</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree523d22907d751a8d0706f5b0b024bff0d4569b42targetblank523d229a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree596ee03dc06e2f2351093ec0b3f562377a5cdad7targetblank596ee03a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/523d22907d751a8d0706f5b0b024bff0d4569b42" target="_blank">523d229</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/596ee03dc06e2f2351093ec0b3f562377a5cdad7" target="_blank">596ee03</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -537,8 +532,12 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.Rhistory
 
+Untracked files:
+    Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
+
 Unstaged changes:
-    Modified:   code/function.R
+    Modified:   analysis/Animation.Rmd
+    Modified:   analysis/model_validering.rmd
 
 </code></pre>
 <p>
@@ -579,36 +578,19 @@ Message
 <tbody>
 <tr>
 <td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/abe9fd9c3c3d6ba0888cbbfd35a7f527f44644d4/docs/model_validering.html" target="_blank">abe9fd9</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
 Rmd
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/4d2bd91320179b71c1c4161219e166a5f8728f60/analysis/model_validering.rmd" target="_blank">4d2bd91</a>
+<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/model_validering.rmd" target="_blank">6c0e88a</a>
 </td>
 <td>
-nbendsen
+GitHub
 </td>
 <td>
-2021-04-14
+2021-04-15
 </td>
 <td>
-wflow_publish("analysis/model_validering.Rmd")
+Add files via upload
 </td>
 </tr>
 <tr>
@@ -616,33 +598,16 @@ wflow_publish("analysis/model_validering.Rmd")
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/c3513761231267c3b54e6cbec4cf633f312806f6/docs/model_validering.html" target="_blank">c351376</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/model_validering.html" target="_blank">1bfbb02</a>
 </td>
 <td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/b938d164bdae77e77287c9a9e5b7e168f2770ebe/analysis/model_validering.rmd" target="_blank">b938d16</a>
-</td>
-<td>
-nbendsen
+GitHub
 </td>
 <td>
 2021-04-14
 </td>
 <td>
-wflow_publish("analysis/model_validering.Rmd")
+Add files via upload
 </td>
 </tr>
 <tr>
@@ -650,33 +615,16 @@ wflow_publish("analysis/model_validering.Rmd")
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/8b9283511d0f747e4ed2174ab6ef00412982ba55/docs/model_validering.html" target="_blank">8b92835</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/model_validering.html" target="_blank">f173714</a>
 </td>
 <td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Updates part 2
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/25fa38eb2040a159690caf91c2c4494881c98b9a/analysis/model_validering.rmd" target="_blank">25fa38e</a>
-</td>
-<td>
-nbendsen
+GitHub
 </td>
 <td>
 2021-04-14
 </td>
 <td>
-add model validering
+Add files via upload
 </td>
 </tr>
 </tbody>
@@ -689,7 +637,7 @@ add model validering
 <h1>
 Assumption
 </h1>
-<p>Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result comming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model.</p>
+<p>Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result coming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model.</p>
 <h1>
 Posterior predictive checks
 </h1>
@@ -699,12 +647,12 @@ Posterior predictive checks
 <p><span class="math display">\[
 \text{posterior} \sim Beta(a+y,b+n-y)
 \]</span> <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the parameters from the prior distribution for that specie. <span class="math inline">\(y\)</span> is taken from the cover data, and is, together with <span class="math inline">\(n\)</span>, the parameters from the likelihood for a given specie in a given plot. Hence <span class="math inline">\(y\)</span> is number of pins the specie is hit by in the plot, and n is the total number of pins used in the plot. In the NOVANA dataset <span class="math inline">\(n=16\)</span>. <br/></p>
-Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the postrior distrbution for each specie that we know are present in the plot. For each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/> After this we will apply some test statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/> The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the choosen test statistic. </br> Below we visually inspect the first three plots in the dataset to see if the observed test statistic is extreme.
+Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the posterior distribution for each specie that we know are present in the plot. For each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/> After this will we apply some test statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/> The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the chosen test statistic. </br> Below we visually inspect the first three plots in the dataset to see if the observed test statistic is extreme.
 <p>
 <p/>
 <p>Besides doing visually inspections of the histograms we also calculate the tail-area probability which we call the posterior predictive p-value [3]. If we let <span class="math inline">\(T(y)\)</span> be the observed test statistic and <span class="math inline">\(T(y^{rep})\)</span> be the test statistics of the generated data we calculate the posterior predictive p-value as <span class="math display">\[
 \text{posterior predictive p-value} = 2\cdot \min\Big(P(T(y^{rep}) \geq T(y))\text{ ,  } P(T(y^{rep}) \leq T(y))\Big)
-\]</span> Small p-value close to zero indicate that the obsersed test statistic is not very likely relative to the generated data and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. In our case, we have choosen a threshold at <span class="math inline">\(0.05\)</span> meaning that if the p-value is above 0.05, the model is said to be apropiat for the given plot. <br><br> As test statistic we use the shannon index: <span class="math display">\[
+\]</span> Small p-value close to zero indicate that the observed test statistic is not very likely relative to the generated data and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. In our case, we have chosen a threshold at <span class="math inline">\(0.05\)</span> meaning that if the p-value is above 0.05, the model is said to be appropriate for the given plot. <br><br> As test statistic we use the shannon index: <span class="math display">\[
 \text{shannon index = }- \Sigma_{i = 1}^Sp_i\cdot \ln(p_i)
 \]</span> and we work with the same data as previous <a href="data_6230.html">link</a>.</p>
 <pre class="r"><code>#Here we load the datasets for habitat 6230 in year 2014
@@ -727,36 +675,49 @@ ppc(2, freq_data, cover_data)</code></pre>
 <pre class="r"><code>#Third plot
 ppc(3, freq_data, cover_data)</code></pre>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>All posterior predicitve p-values are big in the above histograms which suggests that the model is appropriate for the first three plots. If we run the posterior predictive check on all plots we get the number of posterioir predictive p-values that are less than 0.05 to be</p>
+<p>All posterior predictive p-values are big in the above histograms which suggests that the model is appropriate for the first three plots. If we run the posterior predictive check on all plots we get the number of posterior predictive p-values that are less than 0.05 to be</p>
 <pre class="r"><code>sum(pval &lt; 0.05)</code></pre>
 <pre><code>[1] 102</code></pre>
 <p>Total number of plots</p>
 <pre class="r"><code>nrow(cover)</code></pre>
 <pre><code>[1] 1232</code></pre>
-<p>We can then calculate the proportion of plots, with a p-vlaue less than 0.05</p>
+<p>We can then calculate the proportion of plots, with a p-value less than 0.05</p>
 <pre class="r"><code>sum(pval &lt; 0.05)/nrow(cover)</code></pre>
 <pre><code>[1] 0.08279221</code></pre>
+<p>The proportion of p-values that is less than 0.05 is 0.0827 for this dataset, and that is not a lot higher than the expected 0.05. This indicates that our model does lie too far from the observed test static which means, under the assumptions stated in beginning, our model is valid.</p>
 <p><br><br></p>
 <p>In each iteration for each blot we calculated a shanon index and a simpsons index with respect to our model.</p>
 <pre class="r"><code>generated_shannon &lt;- read.csv(&quot;data/shannon_df.csv&quot;)[,1:1000]</code></pre>
 <pre class="r"><code>generated_simpson &lt;- read.csv(&quot;data/simpson_df.csv&quot;)[,1:1000]</code></pre>
-<p>We can now calculate the mean values for each plot, wihch is done by taking the mean for each row. This is done for both simpson and shannon index.</p>
+<p>We can now calculate the mean values for each plot, witch is done by taking the mean for each row. This is done for both simpson and shannon index.</p>
 <pre class="r"><code>generated_shannon$mean &lt;- rowMeans(generated_shannon)</code></pre>
 <pre class="r"><code>generated_simpson$mean &lt;- rowMeans(generated_simpson)</code></pre>
 <p>For each plot we calculate the sum of the rows in the cover data set:</p>
 <pre class="r"><code>cover_data$total &lt;- rowSums(cover_data)</code></pre>
 <p>Using the sum for each plot we can now calculate the shannon index for each plot, just using the observed data.</p>
 <pre class="r"><code>cover_data$shannon &lt;- rowSums(-cover_data[,1:ncol(cover_data)-1]/cover_data$total*log(cover_data[,1:ncol(cover_data)-1]/cover_data$tota),na.rm = TRUE)</code></pre>
-<p>We now plot the shannon indexes calculated using only the observed data agains the mean shannon index calculated using our model:</p>
-<pre class="r"><code>plot(cover_data$shannon, generated_shannon$mean)
-abline(0,1, lwd = 3, col = &quot;blue&quot;)</code></pre>
-<p><img src="figure/model_validering.rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Using the sum for each plot we can now calculate the shasimpsons index for each plot, just using the observed data.</p>
+<p>We now plot the shannon indexes calculated using only the observed data against the mean shannon index from the generated data calculated using our model:</p>
+<pre class="r"><code>pval$cover_data_shannon &lt;- cover_data$shannon
+pval$generated_shannon_mean &lt;- generated_shannon$mean </code></pre>
+<p><img src="figure/model_validering.rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>It can be seen here that the mean of the generated data is higher than that of shannon index calculated only on the cover data for most of the plots. This effect is largest for the plots with the lowest shannon index, and seems to disappear for the plots with the largest shannon index. The colour in the plot indicated whether or not the posterior predictive p-val is less than 0.05 for a given plot. This again shows us that our model changes the shannon index the most for plot with a low shannon index. A reason for this could be that the shannon index is not linear, so to go from 2 to 3 in the shannon index requires a bigger change than to go from 1 to 2, as described in <a href="diversity.html">diversity</a>. To account for this will we try to plot the hill number calculated using the shannon index. The hill-shannon diversity account for this problem so we can try to look at that instead.</p>
+<p>To calculate the hill-shannon diversity we use the Hill-diversity with <span class="math inline">\(l\)</span> approching 0 for the shannon index, as described in <a href="diversity.html">diversity</a>.</p>
+<p><span class="math display">\[
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+\]</span></p>
+<p>We calculate this for all the generated shannon indexes and then take their mean value to compare against the observed cover hill-shannon diversity. This gives us the plot:</p>
+<pre class="r"><code>pval$hill_mean &lt;- hill_number$mean2
+pval$hill_cover &lt;- exp(cover_data$shannon)</code></pre>
+<p><img src="figure/model_validering.rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>When looking at the same plot, but with hill-shannon diversity instead of shannon index, can it be seen that the large variation that were in the lower end of the shannon index is gone. This can indicate that when comparing our method against the observed cover data, we don’t see a larger change at lower diversity that at higher diversity. The disparity we can see in the plot with shannon index can therefor more be attributed to the non linearity of the shannon index than our model.</p>
+<p>Users who wish to use our method for updating the cover data using presence/absence data, should be aware that our method can give significant higher shannon index values for plot with a small shannon index.</p>
+<p>Using the sum for each plot we can now calculate the simpsons index for each plot, just using the observed data.</p>
 <pre class="r"><code>cover_data$simpson &lt;- rowSums((cover_data[,1:(ncol(cover_data)-2)]/cover_data$total)^2)</code></pre>
-<p>We now plot the simpsons indexes calculated using only the observed data agains the mean shannon index calculated using our model:</p>
+<p>We now plot the simpsons indexes calculated using only the observed data against the mean shannon index calculated using our model:</p>
 <pre class="r"><code>plot(cover_data$simpson, generated_simpson$mean)
 abline(0,1, lwd = 3, col = &quot;blue&quot;)</code></pre>
-<p><img src="figure/model_validering.rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/model_validering.rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The simpson index looks similar to the shannon index, with the values in one end being close to the observed cover simpson index, while there is greater variance in the other end.</p>
 <h1>
 Code implementation
 </h1>
@@ -893,26 +854,37 @@ Running under: Windows 10 x64 (build 19042)
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=Danish_Denmark.1252  LC_CTYPE=Danish_Denmark.1252   
-[3] LC_MONETARY=Danish_Denmark.1252 LC_NUMERIC=C                   
-[5] LC_TIME=Danish_Denmark.1252    
+[1] LC_COLLATE=English_United Kingdom.1252 
+[2] LC_CTYPE=English_United Kingdom.1252   
+[3] LC_MONETARY=English_United Kingdom.1252
+[4] LC_NUMERIC=C                           
+[5] LC_TIME=English_United Kingdom.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53        workflowr_1.6.2   
+ [1] forcats_0.5.0      stringr_1.4.0      dplyr_1.0.2        purrr_0.3.4       
+ [5] readr_1.4.0        tidyr_1.1.2        tibble_3.0.4       ggplot2_3.3.2     
+ [9] tidyverse_1.3.0    fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53       
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     splines_4.0.3    lattice_0.20-41  R6_2.5.0        
- [9] rlang_0.4.8      stringr_1.4.0    tools_4.0.3      grid_4.0.3      
-[13] xfun_0.18        git2r_0.28.0     htmltools_0.5.0  ellipsis_0.3.1  
-[17] rprojroot_1.3-2  yaml_2.2.1       digest_0.6.27    tibble_3.0.4    
-[21] lifecycle_0.2.0  crayon_1.3.4     Matrix_1.2-18    later_1.1.0.1   
-[25] vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0         glue_1.4.2      
-[29] evaluate_0.14    rmarkdown_2.5    stringi_1.5.3    compiler_4.0.3  
-[33] pillar_1.4.6     backports_1.1.10 httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [1] tidyselect_1.1.0 xfun_0.18        splines_4.0.3    haven_2.3.1     
+ [5] lattice_0.20-41  colorspace_1.4-1 vctrs_0.3.4      generics_0.0.2  
+ [9] htmltools_0.5.0  yaml_2.2.1       blob_1.2.1       rlang_0.4.8     
+[13] later_1.1.0.1    pillar_1.4.6     withr_2.3.0      glue_1.4.2      
+[17] DBI_1.1.0        dbplyr_1.4.4     readxl_1.3.1     modelr_0.1.8    
+[21] lifecycle_0.2.0  cellranger_1.1.0 munsell_0.5.0    gtable_0.3.0    
+[25] workflowr_1.6.2  rvest_0.3.6      evaluate_0.14    labeling_0.4.2  
+[29] knitr_1.30       httpuv_1.5.5     fansi_0.4.1      broom_0.7.2     
+[33] Rcpp_1.0.5       promises_1.1.1   backports_1.1.10 scales_1.1.1    
+[37] jsonlite_1.7.1   farver_2.0.3     fs_1.5.0         hms_0.5.3       
+[41] digest_0.6.25    stringi_1.5.3    grid_4.0.3       rprojroot_1.3-2 
+[45] cli_2.1.0        tools_4.0.3      magrittr_1.5     crayon_1.3.4    
+[49] whisker_0.4      pkgconfig_2.0.3  ellipsis_0.3.1   Matrix_1.2-18   
+[53] xml2_1.3.2       reprex_0.3.0     lubridate_1.7.9  httr_1.4.2      
+[57] assertthat_0.2.1 rmarkdown_2.4    rstudioapi_0.11  R6_2.4.1        
+[61] git2r_0.28.0     compiler_4.0.3  </code></pre>
 </div>
 
 
@@ -929,8 +901,6 @@ footer is added to webpages before the MathJax javascript. -->
 </script>
 
 
-
-
 </div>
 </div>
 
@@ -940,7 +910,7 @@ footer is added to webpages before the MathJax javascript. -->
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

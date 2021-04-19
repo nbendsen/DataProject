@@ -24,7 +24,7 @@ library(survival)
 
 <h1>Assumption</h1>
 
-Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result comming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model. 
+Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result coming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model. 
 
 
 <h1>Posterior predictive checks</h1>
@@ -40,16 +40,16 @@ $$
 $a$ and $b$ are the parameters from the prior distribution for that specie. $y$ is taken from the cover data, and is, together with $n$, the parameters from the likelihood for a given specie in a given plot. Hence $y$ is number of pins the  specie is hit by in the plot, and n is the total number of pins used in the plot. In the NOVANA dataset $n=16$.
 <br/>
 
-Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the postrior distrbution for each specie that we know are present in the plot. For each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/>
-After this we will apply some test statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/>
-The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the choosen test statistic. </br>
+Using the distributions we can generate a new cover dataset for the given plot by drawing one sample from the posterior distribution for each specie that we know are present in the plot. For each specie we draw a sample, which is in this case a number of how many pins the specie is hit by in the given plot. <br/>
+After this will we apply some test statistic on the generated cover data for the plot. We repeat this process a 1000 times, and compare the test statistic on the observed cover data (not applying our model) to the distribution of the test statistics of the generated data. <br/>
+The idea behind posterior predictive checks is that, if the model assumption are appropriate, the generated data will look like the observed data viewed through the chosen test statistic. </br>
 Below we visually inspect the first three plots in the dataset to see if the observed test statistic is extreme.
 <p><p/>
 Besides doing visually inspections of the histograms we also calculate the tail-area probability which we call the posterior predictive p-value [3]. If we let $T(y)$ be the observed test statistic and $T(y^{rep})$ be the test statistics of the generated data we calculate the posterior predictive p-value as
 $$
 \text{posterior predictive p-value} = 2\cdot \min\Big(P(T(y^{rep}) \geq T(y))\text{ ,  } P(T(y^{rep}) \leq T(y))\Big)
 $$
-Small p-value close to zero indicate that the obsersed test statistic is not very likely relative to the generated data and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. In our case, we have choosen a threshold at $0.05$ meaning that if the p-value is above 0.05, the model is said to be apropiat for the given plot.
+Small p-value close to zero indicate that the observed test statistic is not very likely relative to the generated data and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. In our case, we have chosen a threshold at $0.05$ meaning that if the p-value is above 0.05, the model is said to be appropriate for the given plot.
 <br><br>
 As test statistic we use the shannon index:
 $$
@@ -107,7 +107,7 @@ pval <- 2*read.csv("data/pvalues.csv")
 ```
 
 
-All posterior predicitve p-values are big in the above histograms which suggests that the model is appropriate for the first three plots. If we run the posterior predictive check on all plots we get the number of posterioir predictive p-values that are less than 0.05 to be
+All posterior predictive p-values are big in the above histograms which suggests that the model is appropriate for the first three plots. If we run the posterior predictive check on all plots we get the number of posterior predictive p-values that are less than 0.05 to be
 ```{r}
 sum(pval < 0.05)
 ```
@@ -118,11 +118,12 @@ Total number of plots
 nrow(cover)
 ```
 
-We can then calculate the proportion of plots, with a p-vlaue less than 0.05
+We can then calculate the proportion of plots, with a p-value less than 0.05
 ```{r}
 sum(pval < 0.05)/nrow(cover)
 ```
 
+The proportion of p-values that is less than 0.05 is 0.0827 for this dataset, and that is not a lot higher than the expected 0.05. This indicates that our model does lie too far from the observed test static which means, under the assumptions stated in beginning, our model is valid.
 
 <br><br>
 
@@ -136,7 +137,7 @@ generated_simpson <- read.csv("data/simpson_df.csv")[,1:1000]
 ```
 
 
-We can now calculate the mean values for each plot, wihch is done by taking the mean for each row. This is done for both simpson and shannon index. 
+We can now calculate the mean values for each plot, witch is done by taking the mean for each row. This is done for both simpson and shannon index. 
 ```{r}
 generated_shannon$mean <- rowMeans(generated_shannon)
 ```
@@ -156,24 +157,85 @@ Using the sum for each plot we can now calculate the shannon index for each plot
 cover_data$shannon <- rowSums(-cover_data[,1:ncol(cover_data)-1]/cover_data$total*log(cover_data[,1:ncol(cover_data)-1]/cover_data$tota),na.rm = TRUE)
 ```
 
-We now plot the shannon indexes calculated using only the observed data agains the mean shannon index calculated using our model:
+We now plot the shannon indexes calculated using only the observed data against the mean shannon index from the generated data calculated using our model:
+
 ```{r}
+pval$cover_data_shannon <- cover_data$shannon
+pval$generated_shannon_mean <- generated_shannon$mean 
+```
+
+```{r, include= FALSE}
+library(tidyverse)
+```
+
+```{r, echo = FALSE}
+ggplot(data = pval, mapping = aes(x = cover_data_shannon, y = generated_shannon_mean )) +
+  #geom_point(mapping = aes(col = x))+
+  geom_point(mapping = aes(col = ifelse(x > 0.05,'less','greater')))+
+  ylab("generated shannon mean")+
+  xlab("cover data shannon") +
+  guides(color=guide_legend("p-value less than or greater than 0,05")) +
+  ggtitle("Generated shannon index vs cover shannon index") +
+  geom_abline()
+```
+
+
+```{r, include=FALSE}
 plot(cover_data$shannon, generated_shannon$mean)
 abline(0,1, lwd = 3, col = "blue")
 ```
 
 
-Using the sum for each plot we can now calculate the shasimpsons index for each plot, just using the observed data. 
+It can be seen here that the mean of the generated data is higher than that of shannon index calculated only on the cover data for most of the plots. This effect is largest for the plots with the lowest shannon index, and seems to disappear for the plots with the largest shannon index. The colour in the plot indicated whether or not the posterior predictive p-val is less than 0.05 for a given plot. This again shows us that our model changes the shannon index the most for plot with a low shannon index. A reason for this could be that the shannon index is not linear, so to go from 2 to 3 in the shannon index requires a bigger change than to go from 1 to 2, as described in [diversity](diversity.html). To account for this will we try to plot the hill number calculated using the shannon index. The hill-shannon diversity account for this problem so we can try to look at that instead.
+
+To calculate the hill-shannon diversity we use the Hill-diversity with $l$ approching 0 for the shannon index, as described in [diversity](diversity.html). 
+
+$$
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+$$
+
+We calculate this for all the generated shannon indexes and then take their mean value to compare against the observed cover hill-shannon diversity. This gives us the plot:
+
+```{r, include = FALSE}
+hill_number <- exp(generated_shannon)
+hill_number$mean2 <- rowMeans(hill_number[1:1000])
+```
+
+```{r, include}
+pval$hill_mean <- hill_number$mean2
+pval$hill_cover <- exp(cover_data$shannon)
+```
+
+```{r, echo = FALSE}
+ggplot(data = pval, mapping = aes(x = hill_cover, y = hill_mean )) +
+  #geom_point(mapping = aes(col = x))+
+  geom_point(mapping = aes(col = ifelse(x > 0.05, 'less','greater')))+
+  #geom_point() +
+  ylab("generated hill-shannon")+
+  xlab("cover hill-shannon") +
+  guides(color=guide_legend("p-value less than or greater than 0,05")) +
+  ggtitle("Generated hill-shannon diveristy vs cover hill-shannon-diversity") +
+  geom_abline()
+```
+
+When looking at the same plot, but with hill-shannon diversity instead of shannon index, can it be seen that the large variation that were in the lower end of the shannon index is gone. This can indicate that when comparing our method against the observed cover data, we don't see a larger change at lower diversity that at higher diversity. The disparity we can see in the plot with shannon index can therefor more be attributed to the non linearity of the shannon index than our model.
+
+Users who wish to use our method for updating the cover data using presence/absence data, should be aware that our method can give significant higher shannon index values for plot with a small shannon index.
+
+
+Using the sum for each plot we can now calculate the simpsons index for each plot, just using the observed data. 
 ```{r}
 cover_data$simpson <- rowSums((cover_data[,1:(ncol(cover_data)-2)]/cover_data$total)^2)
 ```
 
-We now plot the simpsons indexes calculated using only the observed data agains the mean shannon index calculated using our model:
+We now plot the simpsons indexes calculated using only the observed data against the mean shannon index calculated using our model:
+
 ```{r}
 plot(cover_data$simpson, generated_simpson$mean)
 abline(0,1, lwd = 3, col = "blue")
 ```
 
+The simpson index looks similar to the shannon index, with the values in one end being close to the observed cover simpson index, while there is greater variance in the other end. 
 
 
 
@@ -297,6 +359,10 @@ hist(shannon, xlim = c(min_val, max_val), main = sprintf("Histogram of simulated
 legend("topright", legend = "Red line is observed shannon index")
 abline(v = T_static, col = "red" )
 ```
+
+
+
+
 
 <h1>References </h1>
 <ul>

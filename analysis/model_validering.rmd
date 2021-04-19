@@ -175,7 +175,7 @@ ggplot(data = pval, mapping = aes(x = cover_data_shannon, y = generated_shannon_
   ylab("generated shannon mean")+
   xlab("cover data shannon") +
   guides(color=guide_legend("p-value less than or greater than 0,05")) +
-  ggtitle("Generated hill-shannon diveristy vs cover hill-shannon-diversity") +
+  ggtitle("Generated shannon index vs cover shannon index") +
   geom_abline()
 ```
 

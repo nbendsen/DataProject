@@ -54,7 +54,7 @@ bayesian_method <- function(cover, presence_absence_data, n, remove_column) {
 
       alpha_post <- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) +
                                   as.numeric(cover_data[[species_spotted]][plot]) ))
-      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + n - as.numeric(cover_data[[species_spotted]][row])
+      beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + n - as.numeric(cover_data[[species_spotted]][plot])
 
       mean_posterior <- (alpha_post)/(alpha_post+beta_post)
 
@@ -132,10 +132,12 @@ hill_shannon <- function(cover_data, remove_column = NULL){
 simpson <- function(cover_data, remove_column = NULL){
 
   if(is.null(remove_column)){
-    data <- data[,remove_column+1:ncol(data)]
+    data <- cover_data[,1:ncol(cover_data)]
   }
   else{
-    data <- data[,1:ncol(data)]
+    n <- remove_column+1
+
+    data <- cover_data[,n:ncol(cover_data)]
   }
 
 
@@ -218,4 +220,124 @@ beta <- function(cover, freq) {
 
   }
   return(beta_fit)
+}
+
+
+
+
+
+
+
+
+different_diversities <- function(data_observed, data_new, plot, remove_column = NULL){
+  observed <- data_observed[plot,(remove_column+1):ncol(data_observed)]
+  update <- data_new[plot,(remove_column+1):ncol(data_new)]
+
+  df <- data.frame(matrix(ncol = 3, nrow = 0))
+  colnames(df) <- c("l", "Observed", "Updated")
+
+  total_o <- rowSums(observed)
+  total_u <- rowSums(update)
+
+  for (l in seq(-1, -0.1, 0.1)){
+    obs <- 0
+    upt <- 0
+    for (ele in 1:ncol(observed)){
+      p <- observed[ele]/total_o
+      if(p>0){
+        r <- 1/p
+        obs <- obs + p*(r^l)
+
+      }
+    }
+
+    for (ele in 1:ncol(update)){
+      p <- update[ele]/total_u
+      if(p>0){
+        r <- 1/p
+        upt <- upt + p*(r^l)
+
+      }
+    }
+
+    obs <- obs^(1/l)
+    upt <- upt^(1/l)
+    df[nrow(df)+1, ] <- c(l, obs, upt)
+
+  }
+
+  df[nrow(df)+1, ] <- c(0,hill_shannon(observed,0), hill_shannon(update,0))
+
+  for (l in seq(0.1, 1, 0.1)){
+    obs <- 0
+    upt <- 0
+    for (ele in 1:ncol(observed)){
+      p <- observed[ele]/total_o
+      if(p>0){
+        r <- 1/p
+        obs <- obs + p*(r^l)
+
+      }
+    }
+
+    for (ele in 1:ncol(update)){
+      p <- update[ele]/total_u
+      if(p>0){
+        r <- 1/p
+        upt <- upt + p*(r^l)
+
+      }
+    }
+
+    obs <- obs^(1/l)
+    upt <- upt^(1/l)
+    df[nrow(df)+1, ] <- c(l, obs, upt)
+
+  }
+
+  ggplot(data = df, aes(x = l)) +
+    geom_line(aes(y = Observed, colour = "Observed cover data"))+
+    geom_line(aes(y = Updated, colour = "New dataset"))+
+    scale_colour_manual("",
+                        values = c("Observed cover data"="red",
+                                   "New dataset"="blue")) +
+
+    labs(y = "Diversity", x = "Exponent l in Hill diveristy formula")+
+    ggtitle(sprintf("Comparison of diversity estimates for plot %d", plot))
+
+
+
+
+}
+
+different_diversities2 <- function(data_observed, data_new, remove_column = NULL){
+  observed <- data_observed[,(remove_column+1):ncol(data_observed)]
+  update <- data_new[,(remove_column+1):ncol(data_new)]
+
+  df <- data.frame(matrix(ncol = 3, nrow = 0))
+  colnames(df) <- c("l", "Observed", "Updated")
+
+  for (plot in 1:nrow(data_observed)) {
+    for (l in seq(-1, 1, 0.1)){
+    df[nrow(df)+1, ] <- c(l, diversity_index(observed[plot,],l = l) , diversity_index(update[plot,], l = l) )
+    }
+  }
+  # Aggregating for all the different point
+  df <- aggregate(df, list(df$l), mean )
+  points <- df[df$l %in% c(-1,0,1),]
+  ggplot(data = df, aes(x = l)) +
+    geom_line(aes(y = Observed, colour = "Observed cover data"))+
+    geom_line(aes(y = Updated, colour = "New dataset"))+
+    geom_point(data = points, mapping = aes(x = as.numeric(l), y = Updated),
+               fill = "blue", shape=15,  size = 2, colour = "blue") +
+    geom_point(data = points, mapping = aes(x = as.numeric(l), y = Observed),
+               fill = "red", shape=17, size = 2, colour = "red") +
+    scale_colour_manual("",
+                        values = c("Observed cover data"="red",
+                                   "New dataset"="blue")) +
+
+    labs(y = "Diversity", x = "Exponent l in Hill diveristy formula")+
+    ggtitle(sprintf("Comparison of diversity estimates for %d plots", plot))
+
+
 }

@@ -146,7 +146,7 @@ To get a sense of what the method has done, we plot the prior distribution of th
 ```{r}
 curve(dbeta(x,a,b), xlab = "relative cover", main = "Prior distribution of Agrostis capillaris")
 ```
-It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for the species. This is because a lot of species are grouped in a way, such that if they are present, they will be present a lot, or else they are not present at all. 
+It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for all the species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. 
 <br><br>
 Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data
 ```{r}
@@ -158,7 +158,7 @@ Below we plot the distributions of pins the species is hit by in the new "result
 ```{r}
 hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the new dataset")
 ```
-Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. ... 
+Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. 
 <br><br>
 <h3>Plot level</h3>
 We can also see some of the effects the method has had on the data at plot level. From the [Diversity](Diversity.html) page we have defined the Hill diversity as 

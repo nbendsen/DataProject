@@ -24,7 +24,16 @@ library(survival)
 
 <h1>Assumption</h1>
 
-Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result coming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model. 
+When we presented the new method to obtain better diversity estimates
+at the home page, we made an implicit assumption. We assumed that the model 
+we had created with the use of an empirical bayes framework describes the data well.
+Especially, we assume that the diversity estimates we would get by using our method
+do not differ too much from the diversity estimates we would achieve by only using 
+the observed cover data. 
+
+However, this is only an assumption and not necessarily true. The intention of this page is to 
+validate whether this assumption is acceptable. It will be done by using the ideas of
+posterior predictive checks, which are presented below and further described in [1] and [2].
 
 
 <h1>Posterior predictive checks</h1>

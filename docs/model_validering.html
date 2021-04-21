@@ -421,7 +421,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-19
+<strong>Last updated:</strong> 2021-04-21
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -512,16 +512,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree596ee03dc06e2f2351093ec0b3f562377a5cdad7targetblank596ee03a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/596ee03dc06e2f2351093ec0b3f562377a5cdad7" target="_blank">596ee03</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree33269f8eecabd8062aded6acb660f99301b496edtargetblank33269f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/33269f8eecabd8062aded6acb660f99301b496ed" target="_blank">33269f8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree596ee03dc06e2f2351093ec0b3f562377a5cdad7targetblank596ee03a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree33269f8eecabd8062aded6acb660f99301b496edtargetblank33269f8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/596ee03dc06e2f2351093ec0b3f562377a5cdad7" target="_blank">596ee03</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/33269f8eecabd8062aded6acb660f99301b496ed" target="_blank">33269f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -533,10 +533,12 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
+    Untracked:  data/frekvens_data_6210_year2009(1).csv
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
 
 Unstaged changes:
     Modified:   analysis/Animation.Rmd
+    Modified:   analysis/index.Rmd
     Modified:   analysis/model_validering.rmd
 
 </code></pre>
@@ -576,6 +578,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/8568f450ab91355243e8d27e4f53f89cdcaeedfb/analysis/model_validering.rmd" target="_blank">8568f45</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+HTML of model-validatoin
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/8568f450ab91355243e8d27e4f53f89cdcaeedfb/docs/model_validering.html" target="_blank">8568f45</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+HTML of model-validatoin
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/ae04bc6307c75a33266dbd1e55b0ff16b05603fb/analysis/model_validering.rmd" target="_blank">ae04bc6</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+Changes model_validering.rmd
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -637,7 +690,8 @@ Add files via upload
 <h1>
 Assumption
 </h1>
-<p>Before going into the details of this validation, it is important to state that one huge assumption is made. For this validation to make sense we assume that the result coming from our model does not lie far away from the result coming from the observed cover data. Hence, we assume that we can use a test statistic of the observed cover data to validate our model. If the test statistic from the observed cover data in general are in an acceptable interval from the test statistics we would get when applying our method, we will accept the model.</p>
+<p>When we presented the new method to obtain better diversity estimates at the home page, we made an implicit assumption. We assumed that the model we had created with the use of an empirical bayes framework describes the data well. Especially, we assume that the diversity estimates we would get by using our method do not differ too much from the diversity estimates we would achieve by only using the observed cover data.</p>
+<p>However, this is only an assumption and not necessarily true. The intention of this page is to validate whether this assumption is acceptable. It will be done by using the ideas of posterior predictive checks, which are presented below and further described in [1] and [2].</p>
 <h1>
 Posterior predictive checks
 </h1>

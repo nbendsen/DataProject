@@ -514,16 +514,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree1d17be46ed57a7d00aa5692ba83630535abfdb3etargetblank1d17be4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/1d17be46ed57a7d00aa5692ba83630535abfdb3e" target="_blank">1d17be4</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree33269f8eecabd8062aded6acb660f99301b496edtargetblank33269f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/33269f8eecabd8062aded6acb660f99301b496ed" target="_blank">33269f8</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree1d17be46ed57a7d00aa5692ba83630535abfdb3etargetblank1d17be4a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree33269f8eecabd8062aded6acb660f99301b496edtargetblank33269f8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/1d17be46ed57a7d00aa5692ba83630535abfdb3e" target="_blank">1d17be4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/33269f8eecabd8062aded6acb660f99301b496ed" target="_blank">33269f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -533,20 +533,15 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.Rhistory
-    Ignored:    analysis/figure/
 
 Untracked files:
-    Untracked:  data/abiotiske_data_6210_year2009.csv
-    Untracked:  data/cover_data_6210_year2009.csv
     Untracked:  data/frekvens_data_6210_year2009(1).csv
-    Untracked:  data/frekvens_data_6210_year2009.csv
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
 
 Unstaged changes:
     Modified:   analysis/Animation.Rmd
     Modified:   analysis/index.Rmd
-    Modified:   code/function.R
-    Modified:   code/function_shannon.R
+    Modified:   analysis/model_validering.rmd
 
 </code></pre>
 <p>
@@ -585,6 +580,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/33269f8eecabd8062aded6acb660f99301b496ed/analysis/index.Rmd" target="_blank">33269f8</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-21
+</td>
+<td>
+Index changes, and functions changes.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/33269f8eecabd8062aded6acb660f99301b496ed/docs/index.html" target="_blank">33269f8</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-21
+</td>
+<td>
+Index changes, and functions changes.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -2000,11 +2029,11 @@ Species level
 </h3>
 <p>To get a sense of what the method has done, we plot the prior distribution of the species “Agrostis capillaris”</p>
 <pre class="r"><code>curve(dbeta(x,a,b), xlab = &quot;relative cover&quot;, main = &quot;Prior distribution of Agrostis capillaris&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for the species. This is because a lot of species are grouped in a way, such that if they are present, they will be present a lot, or else they are not present at all. <br><br> Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for all the species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. <br><br> Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data</p>
 <pre class="r"><code>hist(cover[,&quot;X116&quot;], probability = TRUE, xlab = &quot;Number of pins&quot;, main = &quot;Histogram of the species Agrostis capillaris in the observed cover dataset&quot;)</code></pre>
 <p><img src="figure/index.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /> It is seen that the species is not observed in a lot of plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. However, the bars get a bit higher towards the higher number of pins. This is in line with the grouping of a species described above. <br><br> Below we plot the distributions of pins the species is hit by in the new “result” dataset</p>
 <pre class="r"><code>hist(result[,&quot;X116&quot;], probability = TRUE, xlab = &quot;Number of pins&quot;, main = &quot;Histogram of the species Agrostis capillaris in the new dataset&quot;)</code></pre>
-<img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /> Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. … <br><br>
+<img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /> Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. <br><br>
 <h3>
 Plot level
 </h3>

@@ -182,20 +182,20 @@ update_abundance_data <- function(abundance_data, present_data, n = 1 , remove_c
 
 
 
-diversity_index <- function(abundance_data, remove_columns = 0, l = 1) {
+diversity_index <- function(abundance_data, remove_columns = 0, l = 0) {
 
   abundance_data <- abundance_data[,(1 + remove_columns):ncol(abundance_data)]
 
 
   shannon_list <- c()
 
-  if (l == 1) {
+  if (l == 0) {
     for (row in 1:nrow(abundance_data)) {
 
       all_obs <- abundance_data[row,]
       total_cover <- sum(all_obs)
       all_obs <- all_obs[(all_obs > 0.00001)]
-      shannon_value <- -sum(all_obs/total_cover * log((all_obs/total_cover)))
+      shannon_value <- exp(-sum(all_obs/total_cover * log((all_obs/total_cover))))
       shannon_list <- append(shannon_list,shannon_value)
     }
   }
@@ -205,7 +205,7 @@ diversity_index <- function(abundance_data, remove_columns = 0, l = 1) {
       all_obs <- abundance_data[row,]
       total_cover <- sum(all_obs)
       all_obs <- all_obs[!(all_obs == 0)]
-      shannon_value <- log((sum((all_obs/total_cover) * (1/(all_obs/total_cover))^l))^(1/l))
+      shannon_value <- (sum((all_obs/total_cover) * (1/(all_obs/total_cover))^l))^(1/l)
       shannon_list <- append(shannon_list, shannon_value)
     }
   }

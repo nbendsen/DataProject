@@ -92,159 +92,240 @@ $$
 P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
 $$
 When the posterior distribution is found for a specie in a given plot, we use the mean posterior as a measure of the abundance for the specie in the plot. <br>
-
 The mean posterior for a beta-distribution is given by:
-
 $$
 E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
 $$
-
 From the above theoretical discussion we get a new dataset with updated abundances for each specie in each plot. The next step for users of this method will be, as an xample, to apply some diversity measures for the plots in the new updated dataset. Some of commonly used diversity measures are described in [link](Shannon.html) and will be used in the examples below.
-
 <h1> Implementation </h1>
 ```{r, include=FALSE}
+source("code/function_shannon.R")
 source("code/function.R")
 ```
-
 The above theoretical discussions of the beta-binomial model are implemented in the function "bayesian_method". 
 
 **Usage:**
 
-bayesian_method(cover_data, present/absence_data, n = 16 , remove_column = 0)
+bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 **Arguments:**
 
-* **Cover_data**: Cover data in a data frame, with plots as rows and species as columns.
-* **present/absence_data**:  present/absent data in a data frame, with plots as rows and species as columns. 1 for present and 0 for absent.
-* **n**: If cover data is not between 0 and 1, what should it be divide with to be in the interval $[0,1]$.
-* **remove_column**: Exclude first n column from the data analysis. In the NOVANA dataset this we would remove the first 3 columns as they include data about the plot, site and year.
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
+* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
+* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this datasat is applied.
 
-<p></p>
-The function returns a dataframe, similar to the cover dafa, but now containing updated abundance data. So in each entry for a given plot and a given specie, there is a mean value for the posterior distribution of that plot and that specie. This value is then used to calculate diversity measures.
-<br><br>
-For further specifications of the function click [link](function_shannon.html)
+**Output** 
 
+* The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above. 
 
-<h1>An example </h1>
+For further specifications of the function click [link](bayesian_method_describtion.html)
 
-We work with data only including the terhabtype = 6230 from the NOVANA dataset and we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
+<br>
 
+<h1>First example </h1>
+In the this first example we only work with data including the terhabtype = 6230 from the NOVANA dataset and we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
 ```{r}
 cover <- read.csv("data/cover_data_6230_year2014.csv")
-
 freq <- read.csv("data/frekvens_data_6230_year2014.csv")
-
-abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv", header = FALSE)
-
-names(abiotiske) <- as.matrix(abiotiske[1, ])
-abiotiske <- abiotiske[-1, ]
+abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 ```
 <br>
-We apply the method function to the cover and freq datasets. 
+We apply the method function to the cover and freq datasets and obtain a "result" dataset with new abundace values for each species in each plot. 
 ```{r message=FALSE, warning=FALSE}
-result <- bayesian_method(cover, freq, n = 16, 4)
+result <- bayesian_method(cover, freq, n = 16, 3)
 ```
 
+<h3>Species level </h3>
 ```{r, include=FALSE}
 beta_fit <- beta(cover, freq)
 a <- as.numeric(beta_fit[beta_fit$species == "X116",]$a)
 b <- as.numeric(beta_fit[beta_fit$species == "X116",]$b)
 ```
-
-To get a sense of what the method has done, first we have plotted the prior distribution for the specie "Agrostis capillaris"
-
+To get a sense of what the method has done, we plot the prior distribution of the species "Agrostis capillaris"
 ```{r}
-curve(dbeta(x,a,b), xlab = "relative cover")
+curve(dbeta(x,a,b), xlab = "relative cover", main = "Prior distribution of Agrostis capillaris")
+```
+It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for all the species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. 
+<br><br>
+Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data
+```{r}
+hist(cover[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the observed cover dataset")
+```
+It is seen that the species is not observed in a lot of plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. However, the bars get a bit higher towards the higher number of pins. This is in line with the grouping of a species described above. 
+<br><br>
+Below we plot the distributions of pins the species is hit by in the new "result" dataset
+```{r}
+hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the new dataset")
+```
+Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. 
+<br><br>
+<h3>Plot level</h3>
+We can also see some of the effects the method has had on the data at plot level. From the [Diversity](Diversity.html) page we have defined the Hill diversity as 
+$$
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+$$
+In the below, we look at some plot in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in both the observed cover dataset and the new "result" dataset. This can help to give a feeling for which aspects of the the plot our method has changed. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
+<br><br>
+
+
+
+For plot 1
+```{r, warning=FALSE}
+different_diversities(cover, result, plot = 1,  remove_column = 3)
 ```
 
-It is seen that there it high probability of being either around 0 or around 1. This is because a lot of species are grouped in a way, that if they are present, they will be present a lot, or they are not present at all. So some species are either not present, or are present a lot. 
-
-Below is histograms of the specie "Agrostis capillaris" in the observed cover dataset and in the updated abundance dataset where the above prior distrbution is used.
-```{r}
-hist(cover[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of specie Agrostis capillaris in the observed cover dataset")
+For plot 100
+```{r, warning=FALSE}
+different_diversities(cover, result, plot = 100, remove_column = 3)
 ```
-Here it is seen that the specie is not observed in a lot of plot the plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. They are around the same hight, there is though, a bit more hight on the bars from 7-16 than 1-7, meaning that it is more often observed that the specie is hit by 7-16 pins, than 1-7 pins. 
 
-```{r}
-hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of specie Agrostis capillaris in the updated dataset")
-```
-Here it is seen that bars from 1-16 are in genereal a bit higher.
+In both plots we see how the diversity estimates drift apart when $l$ increases. For values of $l$ below zero we emphasize common species higher while values of $l$ above zero emphasize rare species higer.
+<br>
+
+To get an idea for how the whole data set is we also plot the average for multiple plots.
 
 
-<h1>Plot </h1>
-As described on [link](Diversity.html) we can calculate different diveristy measures using the updated abundance data. In the below we have calculated the shannon index each plot in both the observed cover dataset and in the updated dataset:
-
-```{r}
-observed_shannon <- shannon(cover)
+```{r, warning=FALSE}
+different_diversities2(cover[1:5,], result[1:5,],  remove_column = 3)
 ```
 
 
+...
+
+<h3> Different diversity estimates compared </h3>
+
+We can also compare how different diversity estimates differ throughout all the plots in the observed cover data and the new dataset respectively. All the used diversity estimates are defined at [link](Diversity.html).
+In the below we have calculated the shannon index each plot in both the observed cover dataset and in the "result" dataset
+
 ```{r}
-updated_shannon <- shannon(result)
+observed_shannon <- shannon(cover, 3)
 ```
 
+```{r}
+updated_shannon <- shannon(result, 3)
+```
 
 We plot the shannon indexes against each other
 ```{r, echo = FALSE}
-ggplot(data = result, mapping = aes(x = observed_shannon, y = updated_shannon))+
+ggplot(mapping = aes(x = observed_shannon, y = updated_shannon))+
   geom_point() +
   geom_abline(color = "blue") +
   ylab("Updated shannon index") +
   xlab("Observed shannon index") +
   ggtitle("Our shannon index compared with the observed shannon index")
 ```
-
 It can be seen in this example, that the shannon index for the updated dataset gives a slightly higher value for most plots. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.
-
-
 <br>
 <br>
+Another often used diversity estimate is the simpson's index. We create a similar plot as above
+```{r}
+observed_simpson <- simpson(cover, 3)
+```
 
-An interesting aspect of the data we work with in this example is how the diversity of a plot is correlated with the pH value of the soil at the plot. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values. 
+```{r}
+updated_simpson <- simpson(result, 3)
+```
+
+```{r, echo = FALSE}
+ggplot(mapping = aes(x = observed_simpson, y = updated_simpson))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("Updated simpson index") +
+  xlab("Observed simpson index") +
+  ggtitle("Our simpson index compared with the observed shannon index")
+```
+
+Small values of simpson index indicate a high diveristy for a plot. It is worth to notice that for plots with high diversity our method does not seem to change the data as much as it did in the plot of the shannon indexes. 
+<br><br>
+...
+
+<h3>Species diversity and pH value </h3>
+
+An interesting aspect of the data we work with in this example is how the diversity of a plot is correlated with the pH value of the soil at the plot. 
 <br>
 First we see the shannon index from the updated dataset relates to the pH values
 
-
-```{r}
-result$pH <- as.numeric(abiotiske$pHjord)
-result$N <- as.numeric(abiotiske$Nijord)
-result$observed_shannon <- observed_shannon
-result$updated_shannon <- updated_shannon
-result$hill_shannon <- exp(result$updated_shannon)
-result$species_richness <- species_richness(freq, species_indicator = "X")
-```
-
-
-```{r}
-ggplot(result, aes(pH, updated_shannon))+
+```{r, warning = FALSE}
+ggplot(mapping = aes(x = as.numeric(abiotiske$pHjord), y = updated_shannon)) +
   geom_point()+
   xlim(3,6.5)+
   theme_classic()+
   labs(x = "pH value of the soil", y = "Updated shannon index")+
   ggtitle("Shannon index and pH value of soil at each plot")
-
 ```
 
-Next we show how different diversity measures relates to the pH value
+Next we show how different diversity measures relates to the pH value. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values. 
+
+```{r, warning = FALSE, include = FALSE}
+data_for_plot <- as.data.frame(as.numeric(abiotiske$pHjord))
+colnames(data_for_plot) <- "pH"
+data_for_plot$'Shannon index' <- shannon(result, 3)
+data_for_plot$'Hill Shannon' <- hill_shannon(result, 3)
+data_for_plot$'Species richness' <- species_richness(freq, remove_column = 3)
+data_for_plot$'Simpson index' <- simpson(result, 3)
+data_for_plot$'Hill Simpson' <- hill_simpson(result, 3)
+```
 
 ```{r, message=FALSE, warning=FALSE}
-plot_index_gradient(result ,c("updated_shannon", "observed_shannon","species_richness", "hill_shannon"), "pH", gradient_text = "The PH value of the soil for each plot")
+plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "pH", description = "The PH value of the soil for each plot")
+```
+
+Comments ... 
+
+<h1> Second example  </h1>
+In the second example we look at terhabtype = 6210 in year 2009 from the NOVANA dataset.
+```{r}
+cover_6210 <- read.csv("data/cover_data_6210_year2009.csv")
+freq_6210 <- read.csv("data/frekvens_data_6210_year2009.csv")
+abiotiske_6210 <- read.csv("data/abiotiske_data_6210_year2009.csv")
 ```
 
 
 
-
-We will also show how different diversity measures relates to the nitrogen value, since we know that a higher nitrogen level can cause changes in the specie diversity.
-
-```{r, message=FALSE, warning=FALSE}
-plot_index_gradient(result ,c("updated_shannon", "observed_shannon","species_richness", "hill_shannon"), "N", gradient_text = "The nitrogen value of the soil for each plot")
+With this data, we are especially interested in how the diversity change when plotted against different values of nitrogen in the soil. It is known that increased nitrogen supply can cause changes to the species composition. 
+<br><br>
+We apply our function to the data. 
+```{r}
+new_data <- bayesian_method(cover_6210, freq_6210, n = 16, remove_column = 3)
 ```
 
 
+```{r, warning = FALSE, include = FALSE}
+data_for_plot <- as.data.frame(as.numeric(abiotiske_6210$Nijord))
+colnames(data_for_plot) <- "N"
+data_for_plot$'Shannon index' <- shannon(new_data, 3)
+data_for_plot$'Hill Shannon' <- hill_shannon(new_data, 3)
+data_for_plot$'Species richness' <- species_richness(freq_6210, remove_column = 3)
+data_for_plot$'Simpson index' <- simpson(new_data, 3)
+data_for_plot$'Hill Simpson' <- hill_simpson(new_data, 3)
+```
+
+We map the shannon index of the new dataset against the nitrogen value of the soil 
+```{r, echo = FALSE, warning=FALSE}
+ggplot(data_for_plot, mapping = aes(x = N, y = `Shannon index`))+
+  geom_point() +
+  ylab("Shannon index") +
+  xlab("Nitrogen in soil") +
+  ggtitle("Our shannon index compared to nitrogen value in the soil")
+```
+
+```{r, warning=FALSE}
+ggplot(data_for_plot, mapping = aes(x = N, y = `Hill Simpson`))+
+  geom_point() +
+  ylab("Hill Simpson") +
+  xlab("Nitrogen in soil") +
+  ggtitle("Hill Simpson compared to nitrogen value in the soil")
+
+```
 
 
+```{r, warning=FALSE}
+ggplot(data_for_plot, mapping = aes(x = N, y = `Species richness`))+
+  geom_point() +
+  ylab("Species Richness") +
+  xlab("Nitrogen in soil") +
+  ggtitle("Species richness compared to nitrogen value in the soil")
 
-
-
-
+```
 

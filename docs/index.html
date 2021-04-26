@@ -423,7 +423,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-21
+<strong>Last updated:</strong> 2021-04-26
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -514,16 +514,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree33269f8eecabd8062aded6acb660f99301b496edtargetblank33269f8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/33269f8eecabd8062aded6acb660f99301b496ed" target="_blank">33269f8</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree89a6ceedd8ce7a35157069a635bd0b8b5f8ba860targetblank89a6ceea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/89a6ceedd8ce7a35157069a635bd0b8b5f8ba860" target="_blank">89a6cee</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree33269f8eecabd8062aded6acb660f99301b496edtargetblank33269f8a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree89a6ceedd8ce7a35157069a635bd0b8b5f8ba860targetblank89a6ceea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/33269f8eecabd8062aded6acb660f99301b496ed" target="_blank">33269f8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/89a6ceedd8ce7a35157069a635bd0b8b5f8ba860" target="_blank">89a6cee</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -533,15 +533,21 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/figure/
 
 Untracked files:
+    Untracked:  analysis/Map.Rmd
     Untracked:  data/frekvens_data_6210_year2009(1).csv
+    Untracked:  data/hill_plot_data.csv
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
+    Untracked:  figure/index.Rmd/
+    Untracked:  figure/plot4.PNG
+    Untracked:  figure/plot41.PNG
 
 Unstaged changes:
     Modified:   analysis/Animation.Rmd
     Modified:   analysis/index.Rmd
-    Modified:   analysis/model_validering.rmd
+    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -580,6 +586,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/bb6ab8559f940dac2d89c46ee532a8ab75fa214c/analysis/index.Rmd" target="_blank">bb6ab85</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-21
+</td>
+<td>
+Commited index again and changes in model_validering of the assumptions
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/bb6ab8559f940dac2d89c46ee532a8ab75fa214c/docs/index.html" target="_blank">bb6ab85</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-21
+</td>
+<td>
+Commited index again and changes in model_validering of the assumptions
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1693,7 +1733,7 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>The other part we will use to estimate the abundance of species in each plot is the precense/absence data. Within each plot it is recorded whether a specie is to be found somewhere in the plot. This is indicated by a binary variable with found = 1. Below is an example of what this data could look like</p>
+<p>The other part we will use to estimate the abundance of species in each plot is the presence/absence data. Within each plot it is recorded whether a specie is to be found somewhere in the plot. This is indicated by a binary variable with found = 1. Below is an example of what this data could look like</p>
 <pre class="r"><code>kable(PersenceAbsence, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1981,6 +2021,23 @@ Plot 7
 </tbody>
 </table>
 <p>Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method.</p>
+<div id="novana-data" class="section level2">
+<h2>NOVANA data</h2>
+<p>The NOVANA data sets consist of information for different “sites” across Denmark. A site is a nature area, where information of that site is collected as samples on a plot level. A plot is a circle with radius 5 meters, where information of which species exists inside the circle is collected. Various other metrics, such as pH level of the earth might also be collected. This is where the presence/ absence is from. In the center of the 5 meter circle, is 16 pins placed in a square with side length 0.5 meters, where the percentage of pins a specie is hit by determines the cover for that specie. A habitat type is also given to the plot, either determined in the field or by the plants observed in the 5 meter circle.</p>
+<p>As an example will we here focus on a single habitat 6230 (“Surt overdrev”), where we first plotted the sites in Denmark contain a plot of this type, to give an idea of how the site are distributed across Denmark.</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We have the zoomed in on a single site, where each of the plots can be seen as a red dot.</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>For a single plot have we made a drawing that illustrates what a plot looks like.</p>
+<pre><code>Linking to ImageMagick 6.9.12.3
+Enabled features: cairo, freetype, fftw, ghostscript, heic, lcms, pango, raw, rsvg, webp
+Disabled features: fontconfig, x11</code></pre>
+<pre><code># A tibble: 1 x 7
+  format width height colorspace matte filesize density
+  &lt;chr&gt;  &lt;int&gt;  &lt;int&gt; &lt;chr&gt;      &lt;lgl&gt;    &lt;int&gt; &lt;chr&gt;  
+1 PNG     1135    662 sRGB       TRUE    182948 47x47  </code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /></p>
+<p>Each colour represent a single specie. In this example will the brown specie not be observed in either presence/absence data or cover data since it is outside the 5 meter circle, and will therefor have an 0 in presence/absence data and 0 in cover data. The purple species, is present inside the circle so it will be present in the plot and have a 1 in the presence/absence data. But since it is not inside the 0.5 m square, will we not record any cover data for it, so its value in the cover data will be 0. The yellow specie also has a 1 recorded in the presence/absence data, and since a single pin is hitting it will the cover data for it be 1. This means that the recorded cover for this specie is 1/16 of the total area. The green specie is similar, but is hit by 9 pins so it has 9 in cover and its recorded cover of the area is 9/16. It is possible for multiple specie to overlap and for a pin to hit more than one specie, which we have indicated by the red overlapping with the green and yellow. Is this example is the red specie hit by all 16 pins, which means that it will have 16 in the cover data.</p>
 <h1>
 Theoretical discussion
 </h1>
@@ -2029,27 +2086,34 @@ Species level
 </h3>
 <p>To get a sense of what the method has done, we plot the prior distribution of the species “Agrostis capillaris”</p>
 <pre class="r"><code>curve(dbeta(x,a,b), xlab = &quot;relative cover&quot;, main = &quot;Prior distribution of Agrostis capillaris&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /> It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for all the species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. <br><br> Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /> It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for all the species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. <br><br> Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data</p>
 <pre class="r"><code>hist(cover[,&quot;X116&quot;], probability = TRUE, xlab = &quot;Number of pins&quot;, main = &quot;Histogram of the species Agrostis capillaris in the observed cover dataset&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /> It is seen that the species is not observed in a lot of plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. However, the bars get a bit higher towards the higher number of pins. This is in line with the grouping of a species described above. <br><br> Below we plot the distributions of pins the species is hit by in the new “result” dataset</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /> It is seen that the species is not observed in a lot of plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. However, the bars get a bit higher towards the higher number of pins. This is in line with the grouping of a species described above.</p>
+<p><br><br></p>
+<p>Below we plot the distributions of pins the species is hit by in the new “result” dataset</p>
 <pre class="r"><code>hist(result[,&quot;X116&quot;], probability = TRUE, xlab = &quot;Number of pins&quot;, main = &quot;Histogram of the species Agrostis capillaris in the new dataset&quot;)</code></pre>
-<img src="figure/index.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /> Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. <br><br>
+<p><img src="figure/index.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /> Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data.</p>
+<br><br>
 <h3>
-Plot level
+Hill Diversity comparison
 </h3>
-<p>We can also see some of the effects the method has had on the data at plot level. From the <a href="Diversity.html">Diversity</a> page we have defined the Hill diversity as <span class="math display">\[
+<p>We will in this section use the Hill diversity that is described in <a href="Diversity.html">Diversity</a>, to compare the Beta Binomial Cover Updated data with just the cover data. This will highlight how using our Beta Binomial Cover Update method will change the result depending on how much weight rarity is given. Hill diversity is given as</p>
+<p><span class="math display">\[
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
-\]</span> In the below, we look at some plot in the dataset. We see how the diversity of the plot changes as a function of the exponent <span class="math inline">\(l\)</span>. We do this for the plot in both the observed cover dataset and the new “result” dataset. This can help to give a feeling for which aspects of the the plot our method has changed. For <span class="math inline">\(l = -1\)</span> we have the Hill Simpson diversity, for <span class="math inline">\(l = 0\)</span> we have the Hill Shannon diversity and for <span class="math inline">\(l = 1\)</span> we have the species richness. <br><br></p>
+\]</span></p>
+<p>where the <span class="math inline">\(l\)</span> exponent determines how much weight rare specie is given, where the higher the <span class="math inline">\(l\)</span> value the more weight is rare species given. For <span class="math inline">\(l = -1\)</span> we have the Hill Simpson diversity, for <span class="math inline">\(l = 0\)</span> we have the Hill Shannon diversity and for <span class="math inline">\(l = 1\)</span> we have the species richness.</p>
+<p>In the below, we look at some plots in the dataset. We see how the diversity of the plots changes as a function of the exponent <span class="math inline">\(l\)</span>. We do this for the plot in both the observed cover dataset and the Beta Binomial Cover Updated data. This can help to give a feeling for which aspects of the the plot our method has changed. <br><br></p>
 <p>For plot 1</p>
 <pre class="r"><code>different_diversities(cover, result, plot = 1,  remove_column = 3)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>For plot 100</p>
 <pre class="r"><code>different_diversities(cover, result, plot = 100, remove_column = 3)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>In both plots we see how the diversity estimates drift apart when <span class="math inline">\(l\)</span> increases. For values of <span class="math inline">\(l\)</span> below zero we emphasize common species higher while values of <span class="math inline">\(l\)</span> above zero emphasize rare species higer. <br></p>
-<p>To get an idea for how the whole data set is we also plot the average for multiple plots.</p>
-<pre class="r"><code>different_diversities2(cover[1:5,], result[1:5,],  remove_column = 3)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>When we updated the data using th beta binomial method, will all specie that is observed in the presence/absence data of the plot, get a small value in the Beta Binomial Cover Updated data, even though they are not present in the cover data. Because a high <span class="math inline">\(l\)</span> value emphasizes rare specie more, will we see how the diversity estimates drift apart when <span class="math inline">\(l\)</span> increases in both plots. At the specie richness <span class="math inline">\(l = 1\)</span>, are we comparing the number of specie found in the cover data i.e the small square, vs the number of specie found in the presence/absence data i.e the 5 meter circle.</p>
+<p><br></p>
+<p>The same can be found if we instead of looking at single plots, look at the average for all plots of the habitat type 6230 (“Surt overdrev”) together with the standar deviation.</p>
+<p><img src="figure/index.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>It is clear from the plot above, that using the Beta Binomial Cover Updated data will change the result more the higher <span class="math inline">\(l\)</span> value is used.</p>
 <p>…</p>
 <h3>
 Different diversity estimates compared
@@ -2057,10 +2121,10 @@ Different diversity estimates compared
 <p>We can also compare how different diversity estimates differ throughout all the plots in the observed cover data and the new dataset respectively. All the used diversity estimates are defined at <a href="Diversity.html">link</a>. In the below we have calculated the shannon index each plot in both the observed cover dataset and in the “result” dataset</p>
 <pre class="r"><code>observed_shannon &lt;- shannon(cover, 3)</code></pre>
 <pre class="r"><code>updated_shannon &lt;- shannon(result, 3)</code></pre>
-<p>We plot the shannon indexes against each other <img src="figure/index.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /> It can be seen in this example, that the shannon index for the updated dataset gives a slightly higher value for most plots. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index. <br> <br> Another often used diversity estimate is the simpson’s index. We create a similar plot as above</p>
+<p>We plot the shannon indexes against each other <img src="figure/index.Rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /> It can be seen in this example, that the shannon index for the updated dataset gives a slightly higher value for most plots. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index. <br> <br> Another often used diversity estimate is the simpson’s index. We create a similar plot as above</p>
 <pre class="r"><code>observed_simpson &lt;- simpson(cover, 3)</code></pre>
 <pre class="r"><code>updated_simpson &lt;- simpson(result, 3)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Small values of simpson index indicate a high diveristy for a plot. It is worth to notice that for plots with high diversity our method does not seem to change the data as much as it did in the plot of the shannon indexes. <br><br> …</p>
 <h3>
 Species diversity and pH value
@@ -2072,10 +2136,12 @@ Species diversity and pH value
   theme_classic()+
   labs(x = &quot;pH value of the soil&quot;, y = &quot;Updated shannon index&quot;)+
   ggtitle(&quot;Shannon index and pH value of soil at each plot&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Next we show how different diversity measures relates to the pH value. The function <a href="gradient_plot.html">plot_index_gradient</a> is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values.</p>
 <pre class="r"><code>plot_diversity(data_for_plot ,c(&quot;Hill Shannon&quot;,&quot;Species richness&quot;, &quot;Hill Simpson&quot;), &quot;pH&quot;, description = &quot;The PH value of the soil for each plot&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot_diversity(data_for_plot ,c(&quot;Hill Shannon&quot;,&quot;Species richness&quot;, &quot;Hill Simpson&quot;), &quot;Ndep&quot;, description = &quot;The Ndep value of the soil for each plot&quot;)</code></pre>
+<p><img src="figure/index.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Comments …</p>
 <h1>
 Second example
@@ -2086,19 +2152,19 @@ freq_6210 &lt;- read.csv(&quot;data/frekvens_data_6210_year2009.csv&quot;)
 abiotiske_6210 &lt;- read.csv(&quot;data/abiotiske_data_6210_year2009.csv&quot;)</code></pre>
 <p>With this data, we are especially interested in how the diversity change when plotted against different values of nitrogen in the soil. It is known that increased nitrogen supply can cause changes to the species composition. <br><br> We apply our function to the data.</p>
 <pre class="r"><code>new_data &lt;- bayesian_method(cover_6210, freq_6210, n = 16, remove_column = 3)</code></pre>
-<p>We map the shannon index of the new dataset against the nitrogen value of the soil <img src="figure/index.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>We map the shannon index of the new dataset against the nitrogen value of the soil <img src="figure/index.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(data_for_plot, mapping = aes(x = N, y = `Hill Simpson`))+
   geom_point() +
   ylab(&quot;Hill Simpson&quot;) +
   xlab(&quot;Nitrogen in soil&quot;) +
   ggtitle(&quot;Hill Simpson compared to nitrogen value in the soil&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ggplot(data_for_plot, mapping = aes(x = N, y = `Species richness`))+
   geom_point() +
   ylab(&quot;Species Richness&quot;) +
   xlab(&quot;Nitrogen in soil&quot;) +
   ggtitle(&quot;Species richness compared to nitrogen value in the soil&quot;)</code></pre>
-<p><img src="figure/index.Rmd/unnamed-chunk-30-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/index.Rmd/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2124,30 +2190,34 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53        kableExtra_1.3.4  
- [5] forcats_0.5.0      stringr_1.4.0      dplyr_1.0.2        purrr_0.3.4       
- [9] readr_1.4.0        tidyr_1.1.2        tibble_3.0.4       ggplot2_3.3.2     
-[13] tidyverse_1.3.0   
+ [1] fitdistrplus_1.1-3  survival_3.2-7      MASS_7.3-53        
+ [4] magick_2.7.1        OpenStreetMap_0.3.4 sp_1.4-4           
+ [7] kableExtra_1.3.4    forcats_0.5.0       stringr_1.4.0      
+[10] dplyr_1.0.2         purrr_0.3.4         readr_1.4.0        
+[13] tidyr_1.1.2         tibble_3.0.4        ggplot2_3.3.2      
+[16] tidyverse_1.3.0    
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5        lattice_0.20-41   svglite_2.0.0     lubridate_1.7.9  
- [5] assertthat_0.2.1  rprojroot_1.3-2   digest_0.6.25     R6_2.4.1         
- [9] cellranger_1.1.0  backports_1.1.10  reprex_0.3.0      evaluate_0.14    
-[13] httr_1.4.2        highr_0.8         pillar_1.4.6      rlang_0.4.8      
-[17] readxl_1.3.1      rstudioapi_0.11   whisker_0.4       blob_1.2.1       
-[21] Matrix_1.2-18     rmarkdown_2.4     labeling_0.4.2    splines_4.0.3    
-[25] webshot_0.5.2     munsell_0.5.0     broom_0.7.2       compiler_4.0.3   
-[29] httpuv_1.5.5      modelr_0.1.8      xfun_0.18         pkgconfig_2.0.3  
-[33] systemfonts_1.0.1 mgcv_1.8-33       htmltools_0.5.0   tidyselect_1.1.0 
-[37] workflowr_1.6.2   fansi_0.4.1       viridisLite_0.3.0 crayon_1.3.4     
-[41] dbplyr_1.4.4      withr_2.3.0       later_1.1.0.1     grid_4.0.3       
-[45] nlme_3.1-149      jsonlite_1.7.1    gtable_0.3.0      lifecycle_0.2.0  
-[49] DBI_1.1.0         git2r_0.28.0      magrittr_1.5      scales_1.1.1     
-[53] cli_2.1.0         stringi_1.5.3     farver_2.0.3      fs_1.5.0         
-[57] promises_1.1.1    xml2_1.3.2        ellipsis_0.3.1    generics_0.0.2   
-[61] vctrs_0.3.4       tools_4.0.3       glue_1.4.2        hms_0.5.3        
-[65] yaml_2.2.1        colorspace_1.4-1  rvest_0.3.6       knitr_1.30       
-[69] haven_2.3.1      </code></pre>
+ [1] httr_1.4.2        maps_3.3.0        splines_4.0.3     jsonlite_1.7.1   
+ [5] viridisLite_0.3.0 modelr_0.1.8      assertthat_0.2.1  highr_0.8        
+ [9] blob_1.2.1        cellranger_1.1.0  yaml_2.2.1        pillar_1.4.6     
+[13] backports_1.1.10  lattice_0.20-41   glue_1.4.2        digest_0.6.25    
+[17] promises_1.1.1    rvest_0.3.6       colorspace_1.4-1  Matrix_1.2-18    
+[21] htmltools_0.5.0   httpuv_1.5.5      pkgconfig_2.0.3   broom_0.7.2      
+[25] raster_3.4-5      haven_2.3.1       scales_1.1.1      webshot_0.5.2    
+[29] svglite_2.0.0     whisker_0.4       later_1.1.0.1     git2r_0.28.0     
+[33] mgcv_1.8-33       generics_0.0.2    farver_2.0.3      ellipsis_0.3.1   
+[37] withr_2.3.0       cli_2.1.0         magrittr_1.5      crayon_1.3.4     
+[41] readxl_1.3.1      evaluate_0.14     fs_1.5.0          fansi_0.4.1      
+[45] nlme_3.1-149      xml2_1.3.2        tools_4.0.3       hms_0.5.3        
+[49] lifecycle_0.2.0   munsell_0.5.0     reprex_0.3.0      compiler_4.0.3   
+[53] systemfonts_1.0.1 rlang_0.4.8       grid_4.0.3        rstudioapi_0.11  
+[57] labeling_0.4.2    rmarkdown_2.4     gtable_0.3.0      codetools_0.2-16 
+[61] DBI_1.1.0         R6_2.4.1          lubridate_1.7.9   knitr_1.30       
+[65] rgdal_1.5-23      utf8_1.1.4        workflowr_1.6.2   rprojroot_1.3-2  
+[69] rJava_0.9-13      stringi_1.5.3     Rcpp_1.0.5        vctrs_0.3.4      
+[73] mapproj_1.2.7     dbplyr_1.4.4      tidyselect_1.1.0  xfun_0.18        </code></pre>
+</div>
 </div>
 
 

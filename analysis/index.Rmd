@@ -39,7 +39,7 @@ colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5",
 kable(Cover, "html") %>% kable_styling()
 ```
 
-The other part we will use to estimate the abundance of species in each plot is the precense/absence data. Within each plot it is recorded whether a specie is to be found somewhere in the plot. This is indicated by a binary variable with found = 1. Below is an example of what this data could look like
+The other part we will use to estimate the abundance of species in each plot is the presence/absence data. Within each plot it is recorded whether a specie is to be found somewhere in the plot. This is indicated by a binary variable with found = 1. Below is an example of what this data could look like
 ```{r, include=FALSE}
 PersenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
                                  a2 = c(1,1,0,1,0,1,1),
@@ -63,6 +63,126 @@ kable(PersenceAbsence, "html") %>% kable_styling()
 ```
 
 Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method.
+
+## NOVANA data
+
+
+```{r, include = FALSE, warning= FALSE}
+data_6230_2009 <- read.csv("data/abiotiske_data_6210_year2009.csv")
+
+convert_to_longlat <- function(data_frame_input, UTMx, UTMy, projection = "+proj=utm +zone=32 +ellps=intl +units=m +no_defs +datum=WGS84") {
+  #Load Libraries
+  library(sp)
+  
+  # Create a new data frame with only the UTM data
+  df <- data.frame(UTMx, UTMy)
+  # turn na to 0 for calculations and save which points are na
+  df_na <- df
+  df[is.na(df)] <- 0
+  
+  
+  #Make it a SP object and specify the projection
+  coordinates(df) <-  ~ UTMx + UTMy
+  proj4string(df) <- CRS(projection)
+  
+  #Transform the data to long lat
+  df1 <- spTransform(df, CRS("+init=epsg:4326"))
+  
+  # Write the long lat
+  data_frame_input$latitude <-  df1@coords[,2]
+  data_frame_input$longtitude <-  df1@coords[,1]
+  
+  # Turn na back to na
+  data_frame_input$latitude[is.na(df_na[1]) ] <- NA 
+  data_frame_input$longtitude[is.na(df_na[2]) ] <- NA 
+  
+  return(data_frame_input)
+}
+
+data_6230_2009 <- convert_to_longlat(data_6230_2009, data_6230_2009$UTMx, data_6230_2009$UTMy)
+
+world.map <- map_data ("world")
+map1 <- world.map %>% filter(region == "Denmark")
+
+mean_site_pos <-  data_6230_2009 %>%
+                group_by(site) %>% 
+                  summarise_at(vars(longtitude, latitude),mean,na.rm = TRUE)
+  
+  
+mean_site_pos <-  rename(mean_site_pos, longtitude_mean_site = longtitude, latitude_mean_site = latitude)
+
+data_6230_2009 <-left_join(data_6230_2009,mean_site_pos, by = "site")
+```
+
+The NOVANA data sets consist of information for different "sites" across Denmark. A site is a nature area, where information of that site is collected as samples on a plot level.  A plot is a circle with radius 5 meters, where information of which species exists inside the circle is collected. Various other metrics, such as pH level of the earth might also be collected. This is where  the presence/ absence is from. In the center of the 5 meter circle, is 16 pins placed in a square with side length 0.5 meters, where the percentage of pins a specie is hit by determines the cover for that specie. A habitat type is also given to the plot, either determined in the field or by the plants observed in the 5 meter circle.
+
+As an example will we here focus on a single habitat 6230 ("Surt overdrev"), where we first plotted the sites in Denmark contain a plot of this type, to give an idea of how the site are distributed across Denmark.
+
+
+```{r, echo = FALSE, warning= FALSE}
+ggplot(map1)+ 
+  geom_map(map = map1, aes(long, lat, map_id = region), fill="white", colour = "black") + 
+  coord_map() + 
+  geom_point(data = data_6230_2009, aes(y=latitude, x = longtitude), alpha = .9, size =1.5)
+```
+
+
+We have the zoomed in on a single site, where each of the plots can be seen as a red dot.
+
+
+```{r, echo = FALSE, warning= FALSE}
+library(OpenStreetMap)
+
+#Chose a site
+map_data <-  data_6230_2009[data_6230_2009$site == 1076,] %>%  dplyr::select(longtitude, latitude, longtitude_mean_site, latitude_mean_site)
+
+#Calculate dimensions for a rectangle a little bigger than the site.
+x_min <- min(map_data$longtitude)
+x_max <- max(map_data$longtitude)
+y_min <-  min(map_data$latitude)
+y_max <- max(map_data$latitude)
+
+x_min_proj <-  x_min - (x_max - x_min) *0.2
+x_max_proj <-  x_max + (x_max - x_min) *0.2
+
+y_min_proj <-  y_min - (y_max - y_min) *0.2
+y_max_proj <-  y_max + (y_max - y_min) *0.2
+
+lat_mean <-  map_data$latitude_mean_site[1]
+long_mean <- map_data$longtitude_mean_site[1]
+
+max_diff <- (max((x_max - x_min), (y_max - y_min)))/2
+
+x_min_proj2 <- min(x_min - (x_max - x_min) *0.2, long_mean- max_diff)
+x_max_proj2 <- max(x_max + (x_max - x_min) *0.2, long_mean + max_diff)
+
+y_min_proj2 <- min(y_min - (y_max - y_min) *0.2, lat_mean- max_diff)
+y_max_proj2 <-  max(y_max + (y_max - y_min) *0.2, lat_mean + max_diff)
+
+
+#Load the map
+map_test <- openmap(c(y_max_proj2,x_min_proj2),c(y_min_proj2,x_max_proj2),zoom = NULL, 'bing')
+
+#change the projection to lat/long.
+map_test2 <- openproj(map_test, projection = "+proj=longlat")
+
+#plot the map and add the points for each plot.
+OpenStreetMap::autoplot.OpenStreetMap(map_test2) + geom_point(data = map_data, mapping = aes(x = longtitude, y = latitude), color = "red", size = 2)
+```
+
+
+For a single plot have we made a drawing that illustrates what a plot looks like.
+
+```{r, echo = FALSE, warning= FALSE}
+library(magick)
+
+plot_img <-  image_read("docs/figure/index.Rmd/plot41.png")
+print(plot_img)
+```
+
+
+Each colour represent a single specie. In this example will the brown specie not be observed in either presence/absence data or cover data since it is outside the 5 meter circle, and will therefor have an 0 in presence/absence data and 0 in cover data. The purple species, is present inside the circle so it will be present in the plot and have a 1 in the presence/absence data. But since it is not inside the 0.5 m square, will we not record any cover data for it, so its value in the cover data will be 0. The yellow specie also has a 1 recorded in the presence/absence data, and since a single pin is hitting it will the cover data for it be 1. This means that the recorded cover for this specie is 1/16 of the total area. The green specie is similar, but is hit by 9 pins so it has 9 in cover and its recorded cover of the area is 9/16. It is possible for multiple specie to overlap and for a pin to hit more than one specie, which we have indicated by the red overlapping with the green and yellow. Is this example is the red specie hit by all 16 pins, which means that it will have 16 in the cover data.
+
 
 <h1>Theoretical discussion </h1>
 
@@ -153,21 +273,27 @@ Next we want to give a sense of how the the distributions of the number of pins 
 hist(cover[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the observed cover dataset")
 ```
 It is seen that the species is not observed in a lot of plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. However, the bars get a bit higher towards the higher number of pins. This is in line with the grouping of a species described above. 
+
 <br><br>
+
 Below we plot the distributions of pins the species is hit by in the new "result" dataset
 ```{r}
 hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the new dataset")
 ```
 Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. 
+
 <br><br>
-<h3>Plot level</h3>
-We can also see some of the effects the method has had on the data at plot level. From the [Diversity](Diversity.html) page we have defined the Hill diversity as 
+<h3>Hill Diversity comparison</h3>
+We will in this section use the Hill diversity that is described in [Diversity](Diversity.html), to compare the Beta Binomial Cover Updated data with just the cover data. This will highlight how using our Beta Binomial Cover Update method will change the result depending on how much weight rarity is given. Hill diversity is given as
+ 
 $$
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
-$$
-In the below, we look at some plot in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in both the observed cover dataset and the new "result" dataset. This can help to give a feeling for which aspects of the the plot our method has changed. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
-<br><br>
+$$ 
 
+where the $l$ exponent determines how much weight rare specie is given,  where the higher the $l$ value the more weight is rare species given. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
+
+In the below, we look at some plots in the dataset. We see how the diversity of the plots changes as a function of the exponent $l$. We do this for the plot in both the observed cover dataset and the Beta Binomial Cover Updated data. This can help to give a feeling for which aspects of the the plot our method has changed. 
+<br><br>
 
 
 For plot 1
@@ -180,16 +306,50 @@ For plot 100
 different_diversities(cover, result, plot = 100, remove_column = 3)
 ```
 
-In both plots we see how the diversity estimates drift apart when $l$ increases. For values of $l$ below zero we emphasize common species higher while values of $l$ above zero emphasize rare species higer.
+When we updated the data using th beta binomial method, will all specie that is observed in the presence/absence data of the plot, get a small value in the Beta Binomial Cover Updated data, even though they are not present in the cover data. Because a high $l$ value emphasizes rare specie more, will we see how the diversity estimates drift apart when $l$ increases in both plots. At the specie richness $l = 1$, are we comparing the number of specie found in the cover data i.e the small square, vs the number of specie found in the presence/absence data i.e the 5 meter circle. 
+
+
 <br>
 
-To get an idea for how the whole data set is we also plot the average for multiple plots.
+The same can be found if we instead of looking at single plots, look at the average for all plots of the habitat type 6230 ("Surt overdrev") together with the standar deviation.
 
 
-```{r, warning=FALSE}
-different_diversities2(cover[1:5,], result[1:5,],  remove_column = 3)
+```{r, warning=FALSE, eval = FALSE, echo = FALSE}
+hill_plot_data <-  different_diversities2(cover, result,  remove_column = 3)
 ```
 
+```{r,include = FALSE, eval = FALSE}
+write.csv(hill_plot_data, file = "data/hill_plot_data.csv")
+```
+
+```{r, include=FALSE}
+hill_plot_data <- read.csv("data/hill_plot_data.csv")
+```
+
+
+```{r, echo = FALSE}
+points <- hill_plot_data[hill_plot_data$l %in% c(-1,0,1),]
+ggplot(data = hill_plot_data, aes(x = l)) +
+geom_line(aes(y = Observed, colour = "Observed cover data"))+
+geom_line(aes(y = Updated, colour = "Beta Binomial Cover Updated data"))+
+geom_point(data = points, mapping = aes(x = as.numeric(l), y = Updated),
+           fill = "blue", shape=15,  size = 2, colour = "blue") +
+geom_point(data = points, mapping = aes(x = as.numeric(l), y = Observed),
+           fill = "red", shape=17, size = 2, colour = "red") +
+geom_ribbon(aes( y = Observed, ymin = Observed_down, ymax = Observed_up),
+            fill = "red", alpha = 0.2) +
+geom_ribbon(aes( y = Updated, ymin = Updated_down, ymax = Updated_up),
+            fill = "cyan", alpha = 0.2) +
+scale_colour_manual("",
+                    values = c("Observed cover data"="red",
+                               "Beta Binomial Cover Updated data"="blue")) +
+labs(y = "Diversity", x = "Exponent l in Hill diveristy formula")+
+ggtitle("Comparison of mean of diversity estimates for all plots")
+
+```
+
+
+It is clear from the plot above, that using the Beta Binomial Cover Updated data will change the result more the higher $l$ value is used. 
 
 ...
 
@@ -265,10 +425,15 @@ data_for_plot$'Hill Shannon' <- hill_shannon(result, 3)
 data_for_plot$'Species richness' <- species_richness(freq, remove_column = 3)
 data_for_plot$'Simpson index' <- simpson(result, 3)
 data_for_plot$'Hill Simpson' <- hill_simpson(result, 3)
+data_for_plot$Ndep <- as.numeric(abiotiske$Ndep)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
 plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "pH", description = "The PH value of the soil for each plot")
+```
+
+```{r, message=FALSE, warning=FALSE}
+plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "Ndep", description = "The Ndep value of the soil for each plot")
 ```
 
 Comments ... 

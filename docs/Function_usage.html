@@ -363,7 +363,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -372,7 +372,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -381,10 +381,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-19
+<strong>Last updated:</strong> 2021-04-28
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject_git/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -400,12 +400,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
@@ -472,16 +472,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeadacf32ea1d24e5d7c23447e9b182c1834248654targetblankadacf32a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/adacf32ea1d24e5d7c23447e9b182c1834248654" target="_blank">adacf32</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeccd531e034769cc7ca961ab82c282c328375d6adtargetblankccd531ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/ccd531e034769cc7ca961ab82c282c328375d6ad" target="_blank">ccd531e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeadacf32ea1d24e5d7c23447e9b182c1834248654targetblankadacf32a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeccd531e034769cc7ca961ab82c282c328375d6adtargetblankccd531ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/adacf32ea1d24e5d7c23447e9b182c1834248654" target="_blank">adacf32</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/ccd531e034769cc7ca961ab82c282c328375d6ad" target="_blank">ccd531e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -495,15 +495,7 @@ Ignored files:
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
     Ignored:    code/.Rhistory
-
-Unstaged changes:
-    Modified:   analysis/Function_usage.Rmd
-    Modified:   analysis/Shannon.Rmd
-    Modified:   analysis/bayesian_method_describtion.Rmd
-    Modified:   analysis/diversity_functions_code.Rmd
-    Modified:   analysis/function_shannon.Rmd
-    Modified:   analysis/function_simple_shannon.Rmd
-    Modified:   analysis/gradient_plot.Rmd
+    Ignored:    data/.DS_Store
 
 </code></pre>
 <p>
@@ -542,6 +534,57 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/ccd531e034769cc7ca961ab82c282c328375d6ad/analysis/Function_usage.Rmd" target="_blank">ccd531e</a>
+</td>
+<td>
+DitteM
+</td>
+<td>
+2021-04-28
+</td>
+<td>
+try
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/dae8962df6ddb419b925daa431bdf658f6451e1c/docs/Function_usage.html" target="_blank">dae8962</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/da6cf05516f9bb647cb04e2d76e408b24e9ed05a/analysis/Function_usage.Rmd" target="_blank">da6cf05</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -686,12 +729,15 @@ Added function usage
 </div>
 </div>
 <p>This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.</p>
+<p>When refering to cover_data, it is data of the form:</p>
+<p>When refering to presence_absence_data, it is data of the form:</p>
+<p>For each function we will use the above data to give an example of the usage of the function.</p>
 <h1>
 Bayesian method
 </h1>
 <p>Main function of this vignette. The function is an implementation of the method outlined on the home page.</p>
 <p><strong>Usage:</strong></p>
-<p>bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
+<p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
 <li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
@@ -704,6 +750,26 @@ Bayesian method
 <li>The function returns a dataframe with plots as rows and species as columns, and where each entry contain new abundance data for a specie in a plot.</li>
 </ul>
 <p>For further specifications of the function click <a href="bayesian_method_describtion.html">link</a></p>
+<p><strong>Calulated example</strong></p>
+<pre class="r"><code>beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
+<pre><code>Loading required package: MASS</code></pre>
+<pre><code>Loading required package: survival</code></pre>
+<pre><code>        Specie 1  Specie 2  Specie 3 Specie 4 Specie 5  Specie 6  Specie 7
+Plot 1  2.165401 0.2155853  0.000000 2.178135 0.000000  3.385214 0.6237624
+Plot 2  0.000000 0.2155853  0.000000 0.000000 0.000000  0.000000 0.0000000
+Plot 3  5.041350 0.0000000  1.087547 9.334098 0.000000 10.814527 6.1683168
+Plot 4  0.000000 2.0497504  1.087547 8.538991 2.472973  0.000000 3.7920792
+Plot 5  1.206751 0.0000000 15.759245 0.000000 0.000000 13.600519 0.0000000
+Plot 6  0.000000 1.1326678  0.000000 0.000000 0.000000  1.527886 1.4158416
+Plot 7 15.586498 9.3864112  2.065660 6.948777 0.527027 12.671855 0.0000000
+        Specie 8 Specie 9  Specie 10
+Plot 1  0.000000    2.374  0.0000000
+Plot 2  0.000000    0.000  0.0000000
+Plot 3 15.093525    0.000  0.0000000
+Plot 4  9.453237    1.510  1.1145391
+Plot 5  0.000000   10.150 12.7396838
+Plot 6  0.000000    0.000  0.0000000
+Plot 7  9.453237    4.966  0.1457771</code></pre>
 <h1>
 Functions for diversity estimates
 </h1>
@@ -723,6 +789,10 @@ Shannon index
 <ul>
 <li>A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
+<p><strong>Calulated example</strong></p>
+<pre class="r"><code>shannon(Cover, remove_column = 0)</code></pre>
+<pre><code>  Plot 1   Plot 2   Plot 3   Plot 4   Plot 5   Plot 6   Plot 7 
+1.320888 0.000000 1.603369 1.741952 1.443162 1.098612 1.811627 </code></pre>
 <h3>
 Simpson’s index
 </h3>
@@ -738,6 +808,10 @@ Simpson’s index
 <ul>
 <li>A vector with simpson’s index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.</li>
 </ul>
+<p><strong>Calulated example</strong></p>
+<pre class="r"><code>simpson(Cover, remove_column = 0)</code></pre>
+<pre><code>   Plot 1    Plot 2    Plot 3    Plot 4    Plot 5    Plot 6    Plot 7 
+0.2812500       NaN 0.2208000 0.2155556 0.2456198 0.3333333 0.1779396 </code></pre>
 <h3>
 Species richness
 </h3>
@@ -753,6 +827,10 @@ Species richness
 <ul>
 <li>A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
+<p><strong>Calulated example</strong></p>
+<pre class="r"><code>species_richness(PresenceAbsence, remove_column = 0)</code></pre>
+<pre><code>Plot 1 Plot 2 Plot 3 Plot 4 Plot 5 Plot 6 Plot 7 
+     6      1      6      8      5      3      9 </code></pre>
 <h3>
 Hill shannon diveristy
 </h3>
@@ -768,6 +846,10 @@ Hill shannon diveristy
 <ul>
 <li>A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
+<p><strong>Calulated example</strong></p>
+<pre class="r"><code>hill_shannon(Cover, remove_column = 0)</code></pre>
+<pre><code>  Plot 1   Plot 2   Plot 3   Plot 4   Plot 5   Plot 6   Plot 7 
+3.746748 1.000000 4.969749 5.708477 4.234063 3.000000 6.120394 </code></pre>
 <h3>
 Hill Simpson diversity
 </h3>
@@ -783,6 +865,10 @@ Hill Simpson diversity
 <ul>
 <li>A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
+<p><strong>Calulated example</strong></p>
+<pre class="r"><code>hill_simpson(Cover, remove_column = 0)</code></pre>
+<pre><code>  Plot 1   Plot 2   Plot 3   Plot 4   Plot 5   Plot 6   Plot 7 
+3.555556      NaN 4.528986 4.639175 4.071332 3.000000 5.619883 </code></pre>
 <h1>
 Plot of different diversities
 </h1>
@@ -824,16 +910,20 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53.1     
+
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.6        whisker_0.4       knitr_1.31        magrittr_2.0.1   
- [5] workflowr_1.6.2   R6_2.5.0          rlang_0.4.10      fansi_0.4.2      
- [9] stringr_1.4.0     tools_4.0.4       xfun_0.21         utf8_1.1.4       
-[13] git2r_0.28.0      htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2  
-[17] yaml_2.2.1        digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0  
-[21] crayon_1.4.1      later_1.1.0.1     vctrs_0.3.6       promises_1.2.0.1 
-[25] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
-[29] stringi_1.5.3     compiler_4.0.4    pillar_1.5.0      httpuv_1.5.5     
-[33] pkgconfig_2.0.3  </code></pre>
+ [5] workflowr_1.6.2   splines_4.0.4     lattice_0.20-41   R6_2.5.0         
+ [9] rlang_0.4.10      fansi_0.4.2       stringr_1.4.0     tools_4.0.4      
+[13] grid_4.0.4        xfun_0.21         utf8_1.1.4        git2r_0.28.0     
+[17] htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2   yaml_2.2.1       
+[21] digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0   crayon_1.4.1     
+[25] Matrix_1.3-2      later_1.1.0.1     vctrs_0.3.6       promises_1.2.0.1 
+[29] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
+[33] stringi_1.5.3     compiler_4.0.4    pillar_1.5.0      httpuv_1.5.5     
+[37] pkgconfig_2.0.3  </code></pre>
 </div>
 
 

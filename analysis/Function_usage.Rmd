@@ -6,15 +6,61 @@ editor_options:
   chunk_output_type: console
 ---
 
+```{r, include=FALSE}
+source("code/function.R")
+```
+
+
 This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
 
+When refering to cover_data, it is data of the form:
+
+```{r, include=FALSE}
+Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
+                       a2 = c(0,0,0,2,0,1,10),
+                       a3 = c(0,0,1,1,16,0,2),
+                       a4 = c(1,0,10,9,0,0,7),
+                       a5 = c(0,0,0,3,0,0,0),
+                       a6 = c(3,0,11,0,14,1,13),
+                       a7 = c(0,0,7,4,0,1,0),
+                       a8 = c(0,0,16,9,0,0,9),
+                       a9 = c(2,0,0,1,11,0,5),
+                       a10 = c(0,0,0,1,13,0,0))
+
+
+rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+```
+
+When refering to presence_absence_data, it is data of the form:
+
+```{r, include=FALSE}
+PresenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
+                                 a2 = c(1,1,0,1,0,1,1),
+                                 a3 = c(0,0,1,1,1,0,1),
+                                 a4 = c(1,0,1,1,0,0,1),
+                                 a5 = c(0,0,0,1,0,0,1),
+                                 a6 = c(1,0,1,0,1,1,1),
+                                 a7 = c(1,0,1,1,0,1,0),
+                                 a8 = c(0,0,1,1,0,0,1),
+                                 a9 = c(1,0,0,1,1,0,1),
+                                 a10 = c(0,0,0,1,1,0,1))
+
+
+rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(PresenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+```
+
+
+
+For each function we will use the above data to give an example of the usage of the function.
 
 <h1>Bayesian method</h1>
 Main function of this vignette. The function is an implementation of the method outlined on the home page.
 
 **Usage:**
 
-bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
+beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 **Arguments:**
 
@@ -29,6 +75,11 @@ bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 For further specifications of the function click [link](bayesian_method_describtion.html)
 
+**Calulated example** 
+
+```{r}
+beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
+```
 
 
 <h1> Functions for diversity estimates</h1>
@@ -52,6 +103,12 @@ shannon(cover_data, remove_column = NULL)
 
 * A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
+**Calulated example** 
+
+```{r}
+shannon(Cover, remove_column = 0)
+```
+
 
 <h3> Simpson's index</h3>
 ------
@@ -70,7 +127,11 @@ simpson(cover_data, remove_column = NULL)
 
 * A vector with simpson's index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.
 
+**Calulated example** 
 
+```{r}
+simpson(Cover, remove_column = 0)
+```
 
  
 <h3>Species richness </h3>
@@ -90,6 +151,12 @@ species_richness(presence_absence_data, remove_column = NULL)
 
 * A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
+**Calulated example** 
+
+```{r}
+species_richness(PresenceAbsence, remove_column = 0)
+```
+
 
 <h3> Hill shannon diveristy </h3>
 ------
@@ -107,6 +174,12 @@ hill_shannon(cover_data, remove_column = NULL)
 **Output:**
 
 * A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
+
+**Calulated example** 
+
+```{r}
+hill_shannon(Cover, remove_column = 0)
+```
 
 
 <h3> Hill Simpson diversity</h3>
@@ -126,6 +199,11 @@ hill_simpson(cover_data, remove_column = NULL)
 
 * A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
+**Calulated example** 
+
+```{r}
+hill_simpson(Cover, remove_column = 0)
+```
 
 
 

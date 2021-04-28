@@ -36,10 +36,15 @@ A dataframe "beta_fit" is created. This dataframe will contain a column for each
 <br>
 ```{r, eval = FALSE}
  library(fitdistrplus)
+  # We remove the columns that are not wantend, this is done by only selecting
+  # the columns from after the column number that the user want to remove. This is done for both
+  # the cover data and the present/absence data
   cover_data <- cover[,(remove_column+1):ncol(cover)]
   freq_data <- presence_absence_data[,(remove_column+1):ncol(presence_absence_data)]
 
-
+  # We now reomve the columns in cover data, that contain a specie, not present in any of the plots.
+  # This is done by finding the species not present in any plot in the presence/absence data, and then
+  # removing the corresponding columns from the cover data.
   for (species in colnames(cover_data)){
     if (sum(freq_data[,species]) == 0){
       cover = cover[,!(names(cover) %in% species)]
@@ -53,20 +58,32 @@ As discussed on the home page we will fit a beta-distribution as the prior distr
 We only fit a beta-distribution to species that have more than 1 unique cover data value. To do the fitting we use the package "fitdistrplus" with method = "method of moments" because this method can handle the values of 0 and 1. In some few special cases we can have a species that is only present in one plot. For these species we let the $a$ and $b$ values be zero because we cannot fit a prior beta distribution for these. Later in the code when we calculate the updated beta distribution, the prior will have no effect on this posterior distribution, hence the posterior will just be made by the coverdata, since this is the likelohood.
 <br>
 ```{r, eval = FALSE}
-#For each species we save the shape parameters from the fitted prior beta distribution in a data frame.
+  # We then create a data frame to hold the fitted parameter values for the prior distribution
+  # for each species
   beta_fit <- data.frame(matrix(ncol = 3, nrow = 0))
-
+  
+# We name the columns in the new data frame
   colnames(beta_fit) <- c("species","a", "b")
 
+  # For each species we calculate the parameters for the fitted prior beta distribution and save them
+  # in the data frame, beta_fit.
   for (name in colnames(cover_data)) {
+    # We devide by n, to normalize the data, so each entri in the cover data, contains values between
+    # 0 and 1.
     species <- cover_data[,name]/n
 
-    #Remove all plots with 0 in presence/absence data
+    # We remove all plots with 0 in frekvens for the given specie.
     beta_data <- species[freq_data[[name]] == 1]
 
 
+    # We now want to fit a prior bete distribution for the given speice. We can only fit a beta
+    # distribution if there is more than 1 unique value, and therefore we use the argument
+    # length(unique(beta_data)) > 1. If there is not more than 1 unique value, we make the parameters
+    # of the distribution 0. Else we use method og moment "mme" to fit a prior beta distribution.
     if (length(unique(beta_data)) > 1) {
+      # Here we fit a beta distribution
       beta_data_fitted <- fitdist(beta_data, "beta", method = "mme")
+      # We then save the parameters in the data frame
       beta_fit[nrow(beta_fit) + 1,] <- c(name, beta_data_fitted$estimate[1], beta_data_fitted$estimate[2])
 
     }
@@ -83,27 +100,33 @@ After creating this dataframe of prior distributions, we can now combine the cov
 We have an outer loop where we loop through each plot in the cover_data. In each plot we want the species that are spotted in this plot. However, some species have a 1 in the presence/absence data but no data in the cover data. We have decided to exclude these species. This is done with use of the setdiff() function. After this is done, we loop trough the spotted species in the plot and create the new abundance estimate. These are saved in the corresponding cells in the input cover dataset. Because of some numerical issues, we let the abundance estimate be zero if the mean_posterior is below some threshold that we have set at 0.00001.
 <br>
 ```{r, eval = FALSE}
-  #For each cell in the input cover data we find the new abundance estimate and save it to this data frame
+  #For each cell in the input cover data we find the new abundance estimate and save it to this data frame.
   for (plot in 1:nrow(cover_data)) {
 
-    #For each row we find the species that has a 1 in the presence/absence data
+    #For each row (plot) we find the species that has a 1 in the presence/absence data.
     species_spotted_in_freq <- colnames(freq_data[c(freq_data[plot,]  == 1)])
 
+    # We then find the species not in cover but is in the presence/absence data.
     not_in_cover <- setdiff(species_spotted_in_freq,colnames(cover_data))
 
+    # We then choose the species that are both in cover and presence absence data.
     species_spotted_in_freq <- setdiff(species_spotted_in_freq, not_in_cover)
 
 
-    #We calculate new abundance estimate for each spotted species in the plot
+    #We calculate new abundance estimates for each spotted species in the plot
     for (species_spotted in species_spotted_in_freq ) {
 
-
+      # We calculate the parameters of the posterior beta distribution for each specie in the plot
       alpha_post <- as.numeric((as.numeric(beta_fit[beta_fit$species == species_spotted,]$a) +
                                   as.numeric(cover_data[[species_spotted]][plot]) ))
       beta_post <-  as.numeric(beta_fit[beta_fit$species == species_spotted,]$b) + n - as.numeric(cover_data[[species_spotted]][plot])
 
+      # We find the mean value of the posteriro beta distribution for each specie in the plot,
+      # with the parameters calculated above.
       mean_posterior <- (alpha_post)/(alpha_post+beta_post)
 
+      # If the value is to small, we will change it to 0, else we time the value with n,
+      # to unnormalise the value
       if(mean_posterior < 0.00001){
         cover[plot,species_spotted] <- 0
       }
@@ -117,18 +140,20 @@ We have an outer loop where we loop through each plot in the cover_data. In each
 <br>
 Before we return the dataframe with the new abundance estimates, we remove all the columns (species) that have a zero in all plots. This makes output dataset lesser and thereby easier to work with in the following analysis. If one wants to include the these species, the for-loop can just be omitted.
 ```{r, eval = FALSE}
+#We then remove the columns from the cover data set, if the specie is not in any of the plots.
   for (species in colnames(cover_data)){
     if (sum(cover[,species]) == 0){
       cover = cover[,!(names(cover) %in% species)]
     }
   }
 
+# We return the updated cover data set which will be referenced to as beta binomial cover
   return(cover)
 ```
 
 <h1>Full code</h1>
 Below is the entire function in one code chunk
 ```{r}
-bayesian_method
+beta_binomial_cover_update
 ```
 

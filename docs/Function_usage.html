@@ -34,6 +34,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -363,7 +365,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -372,7 +374,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -384,7 +386,7 @@ div.tocify {
 <strong>Last updated:</strong> 2021-04-28
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject_git/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -400,12 +402,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -496,6 +498,9 @@ Ignored files:
     Ignored:    analysis/.Rhistory
     Ignored:    code/.Rhistory
     Ignored:    data/.DS_Store
+
+Unstaged changes:
+    Modified:   analysis/Function_usage.Rmd
 
 </code></pre>
 <p>
@@ -730,7 +735,531 @@ Added function usage
 </div>
 <p>This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.</p>
 <p>When refering to cover_data, it is data of the form:</p>
+<pre class="r"><code>kable(Cover, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Specie 1
+</th>
+<th style="text-align:right;">
+Specie 2
+</th>
+<th style="text-align:right;">
+Specie 3
+</th>
+<th style="text-align:right;">
+Specie 4
+</th>
+<th style="text-align:right;">
+Specie 5
+</th>
+<th style="text-align:right;">
+Specie 6
+</th>
+<th style="text-align:right;">
+Specie 7
+</th>
+<th style="text-align:right;">
+Specie 8
+</th>
+<th style="text-align:right;">
+Specie 9
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
 <p>When refering to presence_absence_data, it is data of the form:</p>
+<pre class="r"><code>kable(PresenceAbsence, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Specie 1
+</th>
+<th style="text-align:right;">
+Specie 2
+</th>
+<th style="text-align:right;">
+Specie 3
+</th>
+<th style="text-align:right;">
+Specie 4
+</th>
+<th style="text-align:right;">
+Specie 5
+</th>
+<th style="text-align:right;">
+Specie 6
+</th>
+<th style="text-align:right;">
+Specie 7
+</th>
+<th style="text-align:right;">
+Specie 8
+</th>
+<th style="text-align:right;">
+Specie 9
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
 <p>For each function we will use the above data to give an example of the usage of the function.</p>
 <h1>
 Bayesian method
@@ -751,25 +1280,276 @@ Bayesian method
 </ul>
 <p>For further specifications of the function click <a href="bayesian_method_describtion.html">link</a></p>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
+<pre class="r"><code>res1 &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
 <pre><code>Loading required package: MASS</code></pre>
+<pre><code>
+Attaching package: &#39;MASS&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:dplyr&#39;:
+
+    select</code></pre>
 <pre><code>Loading required package: survival</code></pre>
-<pre><code>        Specie 1  Specie 2  Specie 3 Specie 4 Specie 5  Specie 6  Specie 7
-Plot 1  2.165401 0.2155853  0.000000 2.178135 0.000000  3.385214 0.6237624
-Plot 2  0.000000 0.2155853  0.000000 0.000000 0.000000  0.000000 0.0000000
-Plot 3  5.041350 0.0000000  1.087547 9.334098 0.000000 10.814527 6.1683168
-Plot 4  0.000000 2.0497504  1.087547 8.538991 2.472973  0.000000 3.7920792
-Plot 5  1.206751 0.0000000 15.759245 0.000000 0.000000 13.600519 0.0000000
-Plot 6  0.000000 1.1326678  0.000000 0.000000 0.000000  1.527886 1.4158416
-Plot 7 15.586498 9.3864112  2.065660 6.948777 0.527027 12.671855 0.0000000
-        Specie 8 Specie 9  Specie 10
-Plot 1  0.000000    2.374  0.0000000
-Plot 2  0.000000    0.000  0.0000000
-Plot 3 15.093525    0.000  0.0000000
-Plot 4  9.453237    1.510  1.1145391
-Plot 5  0.000000   10.150 12.7396838
-Plot 6  0.000000    0.000  0.0000000
-Plot 7  9.453237    4.966  0.1457771</code></pre>
+<pre class="r"><code>kable(res1, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Specie 1
+</th>
+<th style="text-align:right;">
+Specie 2
+</th>
+<th style="text-align:right;">
+Specie 3
+</th>
+<th style="text-align:right;">
+Specie 4
+</th>
+<th style="text-align:right;">
+Specie 5
+</th>
+<th style="text-align:right;">
+Specie 6
+</th>
+<th style="text-align:right;">
+Specie 7
+</th>
+<th style="text-align:right;">
+Specie 8
+</th>
+<th style="text-align:right;">
+Specie 9
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+2.165401
+</td>
+<td style="text-align:right;">
+0.2155853
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+2.178135
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+3.385214
+</td>
+<td style="text-align:right;">
+0.6237624
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+2.374
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.2155853
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+5.041350
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+1.087547
+</td>
+<td style="text-align:right;">
+9.334098
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+10.814527
+</td>
+<td style="text-align:right;">
+6.1683168
+</td>
+<td style="text-align:right;">
+15.093525
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+2.0497504
+</td>
+<td style="text-align:right;">
+1.087547
+</td>
+<td style="text-align:right;">
+8.538991
+</td>
+<td style="text-align:right;">
+2.472973
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+3.7920792
+</td>
+<td style="text-align:right;">
+9.453237
+</td>
+<td style="text-align:right;">
+1.510
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+1.206751
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+15.759245
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+13.600519
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+10.150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+1.1326678
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+1.527886
+</td>
+<td style="text-align:right;">
+1.4158416
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+15.586498
+</td>
+<td style="text-align:right;">
+9.3864112
+</td>
+<td style="text-align:right;">
+2.065660
+</td>
+<td style="text-align:right;">
+6.948777
+</td>
+<td style="text-align:right;">
+0.527027
+</td>
+<td style="text-align:right;">
+12.671855
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+9.453237
+</td>
+<td style="text-align:right;">
+4.966
+</td>
+</tr>
+</tbody>
+</table>
 <h1>
 Functions for diversity estimates
 </h1>
@@ -790,9 +1570,78 @@ Shannon index
 <li>A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>shannon(Cover, remove_column = 0)</code></pre>
-<pre><code>  Plot 1   Plot 2   Plot 3   Plot 4   Plot 5   Plot 6   Plot 7 
-1.320888 0.000000 1.603369 1.741952 1.443162 1.098612 1.811627 </code></pre>
+<pre class="r"><code>res2 &lt;- shannon(Cover, remove_column = 0)
+
+kable(res2, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+1.320888
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+0.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+1.603369
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+1.650835
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+1.173739
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+1.098612
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+1.811627
+</td>
+</tr>
+</tbody>
+</table>
 <h3>
 Simpson’s index
 </h3>
@@ -809,9 +1658,78 @@ Simpson’s index
 <li>A vector with simpson’s index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.</li>
 </ul>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>simpson(Cover, remove_column = 0)</code></pre>
-<pre><code>   Plot 1    Plot 2    Plot 3    Plot 4    Plot 5    Plot 6    Plot 7 
-0.2812500       NaN 0.2208000 0.2155556 0.2456198 0.3333333 0.1779396 </code></pre>
+<pre class="r"><code>res3 &lt;- simpson(Cover, remove_column = 0)
+
+kable(res3, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+0.2812500
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+0.2208000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+0.2294887
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+0.3253968
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+0.3333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+0.1779396
+</td>
+</tr>
+</tbody>
+</table>
 <h3>
 Species richness
 </h3>
@@ -828,9 +1746,78 @@ Species richness
 <li>A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>species_richness(PresenceAbsence, remove_column = 0)</code></pre>
-<pre><code>Plot 1 Plot 2 Plot 3 Plot 4 Plot 5 Plot 6 Plot 7 
-     6      1      6      8      5      3      9 </code></pre>
+<pre class="r"><code>res4 &lt;- species_richness(PresenceAbsence, remove_column = 0)
+
+kable(res4, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+</tbody>
+</table>
 <h3>
 Hill shannon diveristy
 </h3>
@@ -847,9 +1834,78 @@ Hill shannon diveristy
 <li>A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>hill_shannon(Cover, remove_column = 0)</code></pre>
-<pre><code>  Plot 1   Plot 2   Plot 3   Plot 4   Plot 5   Plot 6   Plot 7 
-3.746748 1.000000 4.969749 5.708477 4.234063 3.000000 6.120394 </code></pre>
+<pre class="r"><code>res5 &lt;- hill_shannon(Cover, remove_column = 0)
+
+kable(res5, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+3.746748
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+1.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+4.969749
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+5.211332
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+3.234063
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+3.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+6.120394
+</td>
+</tr>
+</tbody>
+</table>
 <h3>
 Hill Simpson diversity
 </h3>
@@ -866,9 +1922,78 @@ Hill Simpson diversity
 <li>A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>hill_simpson(Cover, remove_column = 0)</code></pre>
-<pre><code>  Plot 1   Plot 2   Plot 3   Plot 4   Plot 5   Plot 6   Plot 7 
-3.555556      NaN 4.528986 4.639175 4.071332 3.000000 5.619883 </code></pre>
+<pre class="r"><code>res6 &lt;- hill_simpson(Cover, remove_column = 0)
+
+kable(res6, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+x
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+3.555556
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+NaN
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+4.528986
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+4.357513
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+3.073171
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+3.000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+5.619883
+</td>
+</tr>
+</tbody>
+</table>
 <h1>
 Plot of different diversities
 </h1>
@@ -911,19 +2036,29 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53.1     
+ [1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53.1      kableExtra_1.3.4  
+ [5] forcats_0.5.1      stringr_1.4.0      dplyr_1.0.4        purrr_0.3.4       
+ [9] readr_1.4.0        tidyr_1.1.2        tibble_3.1.0       ggplot2_3.3.3     
+[13] tidyverse_1.3.0   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.6        whisker_0.4       knitr_1.31        magrittr_2.0.1   
- [5] workflowr_1.6.2   splines_4.0.4     lattice_0.20-41   R6_2.5.0         
- [9] rlang_0.4.10      fansi_0.4.2       stringr_1.4.0     tools_4.0.4      
-[13] grid_4.0.4        xfun_0.21         utf8_1.1.4        git2r_0.28.0     
-[17] htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2   yaml_2.2.1       
-[21] digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0   crayon_1.4.1     
-[25] Matrix_1.3-2      later_1.1.0.1     vctrs_0.3.6       promises_1.2.0.1 
-[29] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
-[33] stringi_1.5.3     compiler_4.0.4    pillar_1.5.0      httpuv_1.5.5     
-[37] pkgconfig_2.0.3  </code></pre>
+ [1] Rcpp_1.0.6        lattice_0.20-41   svglite_2.0.0     lubridate_1.7.10 
+ [5] assertthat_0.2.1  rprojroot_2.0.2   digest_0.6.27     utf8_1.1.4       
+ [9] R6_2.5.0          cellranger_1.1.0  backports_1.2.1   reprex_1.0.0     
+[13] evaluate_0.14     highr_0.8         httr_1.4.2        pillar_1.5.0     
+[17] rlang_0.4.10      readxl_1.3.1      rstudioapi_0.13   whisker_0.4      
+[21] Matrix_1.3-2      rmarkdown_2.7     splines_4.0.4     webshot_0.5.2    
+[25] munsell_0.5.0     broom_0.7.5       compiler_4.0.4    httpuv_1.5.5     
+[29] modelr_0.1.8      xfun_0.21         pkgconfig_2.0.3   systemfonts_1.0.1
+[33] htmltools_0.5.1.1 tidyselect_1.1.0  workflowr_1.6.2   viridisLite_0.3.0
+[37] fansi_0.4.2       crayon_1.4.1      dbplyr_2.1.0      withr_2.4.1      
+[41] later_1.1.0.1     grid_4.0.4        jsonlite_1.7.2    gtable_0.3.0     
+[45] lifecycle_1.0.0   DBI_1.1.1         git2r_0.28.0      magrittr_2.0.1   
+[49] scales_1.1.1      cli_2.3.1         stringi_1.5.3     fs_1.5.0         
+[53] promises_1.2.0.1  xml2_1.3.2        ellipsis_0.3.1    generics_0.1.0   
+[57] vctrs_0.3.6       tools_4.0.4       glue_1.4.2        hms_1.0.0        
+[61] yaml_2.2.1        colorspace_2.0-0  rvest_0.3.6       knitr_1.31       
+[65] haven_2.3.1      </code></pre>
 </div>
 
 

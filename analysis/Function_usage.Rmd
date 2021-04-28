@@ -8,6 +8,9 @@ editor_options:
 
 ```{r, include=FALSE}
 source("code/function.R")
+library(tidyverse)
+library(ggplot2)
+library(kableExtra)
 ```
 
 
@@ -24,13 +27,18 @@ Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
                        a6 = c(3,0,11,0,14,1,13),
                        a7 = c(0,0,7,4,0,1,0),
                        a8 = c(0,0,16,9,0,0,9),
-                       a9 = c(2,0,0,1,11,0,5),
-                       a10 = c(0,0,0,1,13,0,0))
+                       a9 = c(2,0,0,1,11,0,5))
 
 
 rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
-colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9")
+
 ```
+
+```{r}
+kable(Cover, "html") %>% kable_styling()
+```
+
 
 When refering to presence_absence_data, it is data of the form:
 
@@ -43,15 +51,18 @@ PresenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
                                  a6 = c(1,0,1,0,1,1,1),
                                  a7 = c(1,0,1,1,0,1,0),
                                  a8 = c(0,0,1,1,0,0,1),
-                                 a9 = c(1,0,0,1,1,0,1),
-                                 a10 = c(0,0,0,1,1,0,1))
+                                 a9 = c(1,0,0,1,1,0,1))
 
 
 rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
-colnames(PresenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+colnames(PresenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9")
+
 ```
 
 
+```{r}
+kable(PresenceAbsence, "html") %>% kable_styling()
+```
 
 For each function we will use the above data to give an example of the usage of the function.
 
@@ -78,7 +89,9 @@ For further specifications of the function click [link](bayesian_method_describt
 **Calulated example** 
 
 ```{r}
-beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
+res1 <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
+
+kable(res1, "html") %>% kable_styling()
 ```
 
 
@@ -106,7 +119,9 @@ shannon(cover_data, remove_column = NULL)
 **Calulated example** 
 
 ```{r}
-shannon(Cover, remove_column = 0)
+res2 <- shannon(Cover, remove_column = 0)
+
+kable(res2, "html") %>% kable_styling()
 ```
 
 
@@ -130,7 +145,9 @@ simpson(cover_data, remove_column = NULL)
 **Calulated example** 
 
 ```{r}
-simpson(Cover, remove_column = 0)
+res3 <- simpson(Cover, remove_column = 0)
+
+kable(res3, "html") %>% kable_styling()
 ```
 
  
@@ -154,7 +171,9 @@ species_richness(presence_absence_data, remove_column = NULL)
 **Calulated example** 
 
 ```{r}
-species_richness(PresenceAbsence, remove_column = 0)
+res4 <- species_richness(PresenceAbsence, remove_column = 0)
+
+kable(res4, "html") %>% kable_styling()
 ```
 
 
@@ -178,7 +197,9 @@ hill_shannon(cover_data, remove_column = NULL)
 **Calulated example** 
 
 ```{r}
-hill_shannon(Cover, remove_column = 0)
+res5 <- hill_shannon(Cover, remove_column = 0)
+
+kable(res5, "html") %>% kable_styling()
 ```
 
 
@@ -202,7 +223,9 @@ hill_simpson(cover_data, remove_column = NULL)
 **Calulated example** 
 
 ```{r}
-hill_simpson(Cover, remove_column = 0)
+res6 <- hill_simpson(Cover, remove_column = 0)
+
+kable(res6, "html") %>% kable_styling()
 ```
 
 

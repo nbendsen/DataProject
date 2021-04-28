@@ -501,6 +501,7 @@ Ignored files:
 
 Unstaged changes:
     Modified:   analysis/Function_usage.Rmd
+    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -1262,7 +1263,7 @@ Plot 7
 </table>
 <p>For each function we will use the above data to give an example of the usage of the function.</p>
 <h1>
-Bayesian method
+Beta Binomial Cover Update
 </h1>
 <p>Main function of this vignette. The function is an implementation of the method outlined on the home page.</p>
 <p><strong>Usage:</strong></p>
@@ -1280,15 +1281,9 @@ Bayesian method
 </ul>
 <p>For further specifications of the function click <a href="bayesian_method_describtion.html">link</a></p>
 <p><strong>Calulated example</strong></p>
-<pre class="r"><code>res1 &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
-<pre><code>Loading required package: MASS</code></pre>
-<pre><code>
-Attaching package: &#39;MASS&#39;</code></pre>
-<pre><code>The following object is masked from &#39;package:dplyr&#39;:
+<pre class="r"><code>res1 &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
 
-    select</code></pre>
-<pre><code>Loading required package: survival</code></pre>
-<pre class="r"><code>kable(res1, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
+kable(res1, &quot;html&quot;) %&gt;% kable_styling()</code></pre>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1685,7 +1680,7 @@ Plot 1
 Plot 2
 </td>
 <td style="text-align:right;">
-NaN
+0.0000000
 </td>
 </tr>
 <tr>
@@ -1949,7 +1944,7 @@ Plot 1
 Plot 2
 </td>
 <td style="text-align:right;">
-NaN
+Inf
 </td>
 </tr>
 <tr>

@@ -10,14 +10,122 @@ editor_options:
 ```{r, include=FALSE}
 library(tidyverse)
 library(kableExtra)
+library(OpenStreetMap)
+library(magick)
+library(grid)
+library(MASS)
+source("code/function.R")
 ```
 
 <h1>Introduction</h1>
-Many methods for estimating the abundance of species within an area has been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and prensence/absence data. We will be working with a subset of the NOVANA dataset as an example to show how this new method can be applied.
+Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and presence/absence data. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.
 <br><br>
-The NOVANA dataset consists of several parts. We will be using data of cover and presence/absence of species within each plot and also further data about each plot. 
-<br>
-Cover data of species in a given area can be done in many ways. In the NOVANA dataset the pin-point method is used to estimate the abundance of species in a plot. In the center of each plot $n$ pins is placed and the number of pins each specie is hit by is recorded. In the NOVANA dataset $n$ = 16 pins are used. As an example the below dataframe shows what cover data could look like
+NOVANA is a part of (describtion of Novana + link). 
+<br><br>
+The NOVANA datasets consist of information from different "sites" across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat "kalkoverdrev" (engelsk?) from the year of 2009 that were included in the NOVANA dataset
+
+```{r, warning= FALSE, include=FALSE}
+data_6230_2009 <- read.csv("data/abiotiske_data_6210_year2009.csv")
+
+data_6230_2009 <- convert_to_longlat(data_6230_2009, data_6230_2009$UTMx, data_6230_2009$UTMy)
+
+world.map <- map_data ("world")
+map1 <- world.map %>% filter(region == "Denmark")
+
+mean_site_pos <-  data_6230_2009 %>%
+                group_by(site) %>% 
+                  summarise_at(vars(longtitude, latitude),mean,na.rm = TRUE)
+  
+  
+mean_site_pos <-  rename(mean_site_pos, longtitude_mean_site = longtitude, latitude_mean_site = latitude)
+
+data_6230_2009 <-left_join(data_6230_2009,mean_site_pos, by = "site")
+```
+
+```{r, echo = FALSE, warning= FALSE}
+ggplot(map1)+ 
+  geom_map(map = map1, aes(long, lat, map_id = region), fill="white", colour = "black") + 
+  coord_map() + 
+  geom_point(data = data_6230_2009, aes(y=latitude, x = longtitude), alpha = .9, size =1.5, color = "black")
+```
+
+Within each site a number of "plots" are placed. It is data from these plots that we will be using in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site
+
+```{r, echo = FALSE, warning= FALSE}
+#Chose a site
+map_data <-  data_6230_2009[data_6230_2009$site == 1076,] %>%  dplyr::select(longtitude, latitude, longtitude_mean_site, latitude_mean_site)
+
+#Calculate dimensions for a rectangle a little bigger than the site.
+x_min <- min(map_data$longtitude)
+x_max <- max(map_data$longtitude)
+y_min <-  min(map_data$latitude)
+y_max <- max(map_data$latitude)
+
+x_min_proj <-  x_min - (x_max - x_min) *0.2
+x_max_proj <-  x_max + (x_max - x_min) *0.2
+
+y_min_proj <-  y_min - (y_max - y_min) *0.2
+y_max_proj <-  y_max + (y_max - y_min) *0.2
+
+lat_mean <-  map_data$latitude_mean_site[1]
+long_mean <- map_data$longtitude_mean_site[1]
+
+max_diff <- (max((x_max - x_min), (y_max - y_min)))/2
+
+x_min_proj2 <- min(x_min - (x_max - x_min) *0.2, long_mean- max_diff)
+x_max_proj2 <- max(x_max + (x_max - x_min) *0.2, long_mean + max_diff)
+
+y_min_proj2 <- min(y_min - (y_max - y_min) *0.2, lat_mean- max_diff)
+y_max_proj2 <-  max(y_max + (y_max - y_min) *0.2, lat_mean + max_diff)
+
+
+#Load the map
+map_test <- openmap(c(y_max_proj2,x_min_proj2),c(y_min_proj2,x_max_proj2),zoom = NULL, 'bing')
+
+#change the projection to lat/long.
+map_test2 <- openproj(map_test, projection = "+proj=longlat")
+
+#plot the map and add the points for each plot.
+OpenStreetMap::autoplot.OpenStreetMap(map_test2) + geom_point(data = map_data, mapping = aes(x = longtitude, y = latitude), color = "red", size = 2)
+```
+
+
+Each plot consists of cover data, presence/absence data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence of a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1.
+
+In the center of the circle is a square with side length of 0.5 meters. Inside this square 16 pins are placed uniformly. In the more general method $n$ pins are placed, but in the NOVANA dataset only 16 pins are used. The cover data for the plot is the number of pins each species is hit by inside this square. This is called the pinpoint-method and is an estimate of the abundance of a species in a plot.
+
+As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustraion to highlight the characteristics of the two data types described above.
+
+```{r, echo = FALSE, warning= FALSE}
+library(png)
+library(grid)
+plot_img <-  readPNG("analysis/plot3.PNG")
+grid.raster(plot_img)
+```
+
+
+
+
+
+Each colour represent a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species
+```{r, include=FALSE}
+Plot <- data.frame(   col1 = c(0,1,1,1,1),
+                      col2 = c(0,0,16,1,9))
+  
+
+
+rownames(Plot) <- c("Brown species", "Purple species", "Red species", "Yellow species", "Green species")
+colnames(Plot) <- c("Presence/absence data", "Cover data")
+```
+
+```{r}
+kable(Plot, "html") %>% kable_styling()
+```
+
+It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. An important note to make here is that we can have the information that we know a species is present in the plot, but that we don't have any estimate of its cover within the plot. This is shown with the purple species in this case.
+
+Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works 
+
 ```{r, include=FALSE}
 Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
                        a2 = c(0,0,0,2,0,1,10),
@@ -27,21 +135,21 @@ Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
                        a6 = c(3,0,11,0,14,1,13),
                        a7 = c(0,0,7,4,0,1,0),
                        a8 = c(0,0,16,9,0,0,9),
-                       a9 = c(2,0,0,1,11,0,5),
-                       a10 = c(0,0,0,1,13,0,0))
+                       a9 = c(2,0,0,1,11,0,5))
 
 
-rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
-colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+rownames(Cover) <- c("Plot1", "Plot2", "Plot3", "Plot4", "Plot5", "Plot6", "Plot7")
+colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
 ```{r}
 kable(Cover, "html") %>% kable_styling()
 ```
 
-The other part we will use to estimate the abundance of species in each plot is the precense/absence data. Within each plot it is recorded whether a specie is to be found somewhere in the plot. This is indicated by a binary variable with found = 1. Below is an example of what this data could look like
+
 ```{r, include=FALSE}
-PersenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
+PresenceAbsence <- data.frame(   
+                                 a1 = c(1,0,1,0,1,0,1),
                                  a2 = c(1,1,0,1,0,1,1),
                                  a3 = c(0,0,1,1,1,0,1),
                                  a4 = c(1,0,1,1,0,0,1),
@@ -49,24 +157,25 @@ PersenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
                                  a6 = c(1,0,1,0,1,1,1),
                                  a7 = c(1,0,1,1,0,1,0),
                                  a8 = c(0,0,1,1,0,0,1),
-                                 a9 = c(1,0,0,1,1,0,1),
-                                 a10 = c(0,0,0,1,1,0,1))
+                                 a9 = c(1,0,0,1,1,0,1))
 
+rownames(PresenceAbsence) <- c("Plot1", "Plot2", "Plot3", "Plot4", "Plot5", "Plot6", "Plot7")
 
-rownames(PersenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
-colnames(PersenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9", "Specie 10")
+colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
 
 ```{r}
-kable(PersenceAbsence, "html") %>% kable_styling()
+kable(PresenceAbsence, "html") %>% kable_styling()
 ```
 
-Here we also note that a specie can have a 1 in the presence/absence data but a 0 in the cover data as it is also the case in the above examples. We will make use of this property of the data in our method.
+The essence of this vignette is to come up with a method to combine the two datatypes; cover data and presence/absence. Both types of data include properties of the plots that we would like to use.
+
+
 
 <h1>Theoretical discussion </h1>
 
-The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a specie's abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. From the general setup in bayesian statistics we get that
+The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a species' abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. From the general setup in bayesian statistics we get that
 $$
 P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
 $$
@@ -98,10 +207,7 @@ E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
 $$
 From the above theoretical discussion we get a new dataset with updated abundances for each specie in each plot. The next step for users of this method will be, as an xample, to apply some diversity measures for the plots in the new updated dataset. Some of commonly used diversity measures are described in [link](Shannon.html) and will be used in the examples below.
 <h1> Implementation </h1>
-```{r, include=FALSE}
-source("code/function_shannon.R")
-source("code/function.R")
-```
+
 The above theoretical discussions of the beta-binomial model are implemented in the function "bayesian_method". 
 
 **Usage:**
@@ -119,21 +225,39 @@ bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 * The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above. 
 
+**Calculated example**
+
+To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction
+
+```{r}
+kable(Cover, "html") %>% kable_styling()
+```
+```{r}
+kable(PresenceAbsence, "html") %>% kable_styling()
+```
+
+We input the two datasets into our function
+```{r, message=FALSE}
+res <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16, remove_column = 0)
+kable(res, "html") %>% kable_styling()
+```
+
+
 For further specifications of the function click [link](bayesian_method_describtion.html)
 
 <br>
 
 <h1>First example </h1>
-In the this first example we only work with data including the terhabtype = 6230 from the NOVANA dataset and we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
+In the this first example we only work with a subset of the NOVANA data including the tertiary habitat "surt overdrev" (engelsk?) (in the NOVANA dataset this is encoded as terhabtype = 6230). Furthermore, we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
 ```{r}
 cover <- read.csv("data/cover_data_6230_year2014.csv")
 freq <- read.csv("data/frekvens_data_6230_year2014.csv")
 abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 ```
 <br>
-We apply the method function to the cover and freq datasets and obtain a "result" dataset with new abundace values for each species in each plot. 
+We apply the method function to the cover and freq datasets and obtain a "result" dataset with new abundace values for each species in each plot. In the following we will refer to this as the beta binomial updated cover data.
 ```{r message=FALSE, warning=FALSE}
-result <- bayesian_method(cover, freq, n = 16, 3)
+result <- beta_binomial_cover_update(cover, freq, n = 16, 3)
 ```
 
 <h3>Species level </h3>
@@ -142,33 +266,38 @@ beta_fit <- beta(cover, freq)
 a <- as.numeric(beta_fit[beta_fit$species == "X116",]$a)
 b <- as.numeric(beta_fit[beta_fit$species == "X116",]$b)
 ```
-To get a sense of what the method has done, we plot the prior distribution of the species "Agrostis capillaris"
+The following plot is included as an example of a prior distribution used in the beta binomial cover update method. The plot is the prior distribution for the species "Agrostis capillaris"
 ```{r}
 curve(dbeta(x,a,b), xlab = "relative cover", main = "Prior distribution of Agrostis capillaris")
 ```
-It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for all the species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. 
-<br><br>
-Next we want to give a sense of how the the distributions of the number of pins the species Agrostis capillaris is hit by throughout all plots in the datasets change. First, we see the distribution of pins that the species is hit by in the observed cover data
-```{r}
-hist(cover[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the observed cover dataset")
+This plot was built as follows;  for each plot where the species "Agrostis capillaris" had a $1$ in the presence/absence data we saved the number of pins the species had in the cover data and divided these by 16 to get the relative cover. We then fitted a beta distribution to these numbers and thereby obtained the plot. 
+
+It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for many species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. 
+
+
+```{r, eval=FALSE, include=FALSE}
+#Another thing to look at is how the distribution of pins the species Agrostis capillaris is hit by changes from the observed cover data to the beta binomial cover updated data. Again in each plot where Agrostis capillaris has a $1$ in the presence/absence data we save the corresponding number of pins it is hit by in the cover data. As mentioned we do this for both observed and updated datasets
+
+hist(cover[,"X116"][freq[,"X116"]==1], probability = TRUE, xlab = "Number of pins", main = "Agrostis capillaris in the observed cover dataset")
+hist(result[,"X116"][freq[,"X116"]==1], probability = TRUE, xlab = "Number of pins", main = "Agrostis capillaris in the beta binomial cover updated data")
+
+#Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. Especially we note that the bar for $0$ pins is smaller than in the observed cover data.
+
 ```
-It is seen that the species is not observed in a lot of plots, therefore the bar for 0 is quite high compared to the other bars. It is also seen that the other bars are somewhat similar. However, the bars get a bit higher towards the higher number of pins. This is in line with the grouping of a species described above. 
+
+
 <br><br>
-Below we plot the distributions of pins the species is hit by in the new "result" dataset
-```{r}
-hist(result[,"X116"], probability = TRUE, xlab = "Number of pins", main = "Histogram of the species Agrostis capillaris in the new dataset")
-```
-Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. 
-<br><br>
-<h3>Plot level</h3>
-We can also see some of the effects the method has had on the data at plot level. From the [Diversity](Diversity.html) page we have defined the Hill diversity as 
+<h3>Hill Diversity comparison</h3>
+In this section we will use the Hill diversity that is described in [Diversity](Diversity.html), to compare the beta binomial cover updated data with the observed cover data. This will highlight how using our method will change the result depending on how much emphasize rare species are given when calculating the diversity for a plot. Hill diversity is given as
+ 
 $$
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
-$$
-In the below, we look at some plot in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in both the observed cover dataset and the new "result" dataset. This can help to give a feeling for which aspects of the the plot our method has changed. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
+$$ 
+
+where the $l$ exponent determines how much weight rare species is given. For high $l$ values the Hill diversity is more sensitive to rare species. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
+
+In the below we look at some plot in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in the observed cover dataset (red line) and for the same plot in the beta binomial cover updated data (blue line). This can help to give a feeling for which aspects of the the plot the beta binomial cover update method has changed. 
 <br><br>
-
-
 
 For plot 1
 ```{r, warning=FALSE}
@@ -180,18 +309,56 @@ For plot 100
 different_diversities(cover, result, plot = 100, remove_column = 3)
 ```
 
-In both plots we see how the diversity estimates drift apart when $l$ increases. For values of $l$ below zero we emphasize common species higher while values of $l$ above zero emphasize rare species higer.
+
+It should be noted that in practice we would only calculate the species richness with the presence/absence data and not the observed cover data as is done in the plot. If we did calculate the species richness from the observed cover data, we would only get the species richness of the small square in the center of the plot and not of the entire plot. Therefore, one should probably be careful not to interpret too much on the diversity estimates for large values of $l$ for the observed cover data.
+
+When we apply the beta binomial method all species observed in the presence/absence data of the plot will get added a small value in the beta binomial cover updated data even though they have a $0$ in the observed cover data. When we add this small abundance to species that not had any observations in the observed cover data we get a higher diversity estimate as expected. 
 <br>
 
-To get an idea for how the whole data set is we also plot the average for multiple plots.
+In both observed cover data and the beta binomial cover updated data the diversity estimate increases as $l$ increases. However, the diversity estimate for the beta binomial cover updated data has a much higher growth. This can be attributed the fact the the beta binomial cover update method is most important for species that was not seen in the observed cover data. These species are not included in the diversity estimate from the observed cover data but are rare species in the beta binomial cover updated data and therefore included in the diversity estimate obtained from this data. 
+For this reason a Hill diversity that is more sensitive towards rare species will give much higher diversity estimates in the beta binomial cover updated data than in the observed cover data because we in the updated data will have many more rare species than in the observed cover data.
 
 
-```{r, warning=FALSE}
-different_diversities2(cover[1:5,], result[1:5,],  remove_column = 3)
+Instead of only looking at a single plot at a time, we plot the average curve for all plots. The shaded area around the curve visualize the standard deviation at any point along the curve. We do it for all plots in the observed cover data and all the plots in the beta binomial cover updated data.
+
+```{r, warning=FALSE, eval = FALSE, echo = FALSE}
+hill_plot_data <-  different_diversities2(cover, result,  remove_column = 3)
+```
+
+```{r,include = FALSE, eval = FALSE}
+write.csv(hill_plot_data, file = "data/hill_plot_data.csv")
+```
+
+```{r, include=FALSE}
+hill_plot_data <- read.csv("data/hill_plot_data.csv")
 ```
 
 
-...
+```{r, echo = FALSE}
+points <- hill_plot_data[hill_plot_data$l %in% c(-1,0,1),]
+ggplot(data = hill_plot_data, aes(x = l)) +
+geom_line(aes(y = Observed, colour = "Observed cover data"))+
+geom_line(aes(y = Updated, colour = "Beta Binomial Cover Updated data"))+
+geom_point(data = points, mapping = aes(x = as.numeric(l), y = Updated),
+           fill = "blue", shape=15,  size = 2, colour = "blue") +
+geom_point(data = points, mapping = aes(x = as.numeric(l), y = Observed),
+           fill = "red", shape=17, size = 2, colour = "red") +
+geom_ribbon(aes( y = Observed, ymin = Observed_down, ymax = Observed_up),
+            fill = "red", alpha = 0.2) +
+geom_ribbon(aes( y = Updated, ymin = Updated_down, ymax = Updated_up),
+            fill = "cyan", alpha = 0.2) +
+scale_colour_manual("",
+                    values = c("Observed cover data"="red",
+                               "Beta Binomial Cover Updated data"="blue")) +
+labs(y = "Diversity", x = "Exponent l in Hill diveristy formula")+
+ggtitle("Comparison of mean of diversity estimates for all plots")
+
+```
+
+
+Many of the same comments as before also apply to this plot. We note the standard deviation stays roughly the same and only gets bigger for values of $l$ close to 1. However, as stated earlier we would not use cover data to estimate species richness but presence/absence data so we are not too worried about the increased deviation in this part of the plot.
+
+
 
 <h3> Different diversity estimates compared </h3>
 
@@ -265,10 +432,15 @@ data_for_plot$'Hill Shannon' <- hill_shannon(result, 3)
 data_for_plot$'Species richness' <- species_richness(freq, remove_column = 3)
 data_for_plot$'Simpson index' <- simpson(result, 3)
 data_for_plot$'Hill Simpson' <- hill_simpson(result, 3)
+data_for_plot$Ndep <- as.numeric(abiotiske$Ndep)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
 plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "pH", description = "The PH value of the soil for each plot")
+```
+
+```{r, message=FALSE, warning=FALSE}
+plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "Ndep", description = "The Ndep value of the soil for each plot")
 ```
 
 Comments ... 
@@ -287,7 +459,7 @@ With this data, we are especially interested in how the diversity change when pl
 <br><br>
 We apply our function to the data. 
 ```{r}
-new_data <- bayesian_method(cover_6210, freq_6210, n = 16, remove_column = 3)
+new_data <- beta_binomial_cover_update(cover_6210, freq_6210, n = 16, remove_column = 3)
 ```
 
 

@@ -611,7 +611,7 @@ ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x
   ylab("Mean of the beta binomial Hill Shannon diversity") +
   xlab("Mean of the observed Hill Shannon diversity ") +
   ggtitle( "Beta binomial Hill Shannon diversity vs. the observed Hill Shannon diversity for the mean of each site")+xlim(0,18)+ylim(0,18) +
-  theme(plot.title = element_text(size=10))
+  theme(plot.title = element_text(size=8))
 ```
 
 This looks quite similar to what we found when we compared at plot level.
@@ -627,7 +627,7 @@ ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x
   ylab("variance of the beta binomial Hill Shannon diversity ") +
   xlab("variance of the observed Hill Shannon diversity") +
   ggtitle( "Beta binomial Hill Shannon diversity vs. the observed Hill Shannon diversity for the variance of each site")+xlim(0,30)+ylim(0,30) +
-  theme(plot.title = element_text(size=10))
+  theme(plot.title = element_text(size=8))
 
 ```
 

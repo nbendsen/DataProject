@@ -2,6 +2,8 @@
 title: "Presentation of functions"
 site: workflowr::wflow_site
 output: workflowr::wflow_html
+bibliography: references.bib
+csl: brewingscience.csl
 editor_options:
   chunk_output_type: console
 ---
@@ -16,7 +18,7 @@ library(kableExtra)
 
 This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
 
-When refering to cover_data, it is data of the form:
+When referring to cover_data, it is data of the form:
 
 ```{r, include=FALSE}
 Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
@@ -35,12 +37,14 @@ colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5",
 
 ```
 
-```{r}
+Cover data describes how much of the surface area that would be covered by a specific species if all the plats were projected down on the ground. In this example will cover data take the form of integer value from 0 to 16, where 16 is full cover and 0 is no cover, but it is also possible to us a percentage or other forms of cover data.
+
+```{r, echo = FALSE}
 kable(Cover, "html") %>% kable_styling()
 ```
 
 
-When refering to presence_absence_data, it is data of the form:
+When referring to presence_absence_data, it is data of the form:
 
 ```{r, include=FALSE}
 PresenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
@@ -60,13 +64,16 @@ colnames(PresenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "
 ```
 
 
-```{r, message=FALSE}
+```{r, message=FALSE, echo = FALSE}
 kable(PresenceAbsence, "html") %>% kable_styling()
 ```
 
 For each function we will use the above data to give an example of the usage of the function.
 
+------
 <h1>Beta Binomial Cover Update</h1>
+------
+
 Main function of this vignette. The function is an implementation of the method outlined on the home page.
 
 **Usage:**
@@ -86,15 +93,18 @@ beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_co
 
 For further specifications of the function click [link](bayesian_method_describtion.html)
 
-**Calulated example** 
+**Calculated example** 
 
 ```{r, message=FALSE}
 res1 <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
-
-kable(res1, "html") %>% kable_styling()
 ```
 
 
+```{r, message=FALSE, echo = FALSE}
+kable(res1, "html") %>% kable_styling()
+```
+
+------
 <h1> Functions for diversity estimates</h1>
 ------
 
@@ -116,15 +126,18 @@ shannon(cover_data, remove_column = NULL)
 
 * A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
-**Calulated example** 
+**Calculated example** 
 
 ```{r, message=FALSE}
 res2 <- shannon(Cover, remove_column = 0)
-
-kable(res2, "html") %>% kable_styling()
 ```
 
 
+```{r, message=FALSE, echo = FALSE}
+kable(res2, "html") %>% kable_styling()
+```
+
+------
 <h3> Simpson's index</h3>
 ------
 
@@ -142,15 +155,18 @@ simpson(cover_data, remove_column = NULL)
 
 * A vector with simpson's index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.
 
-**Calulated example** 
+**Calculated example** 
 
 ```{r, message=FALSE}
 res3 <- simpson(Cover, remove_column = 0)
+```
 
+
+```{r, message=FALSE, echo = FALSE}
 kable(res3, "html") %>% kable_styling()
 ```
 
- 
+------
 <h3>Species richness </h3>
 ------
 
@@ -168,15 +184,18 @@ species_richness(presence_absence_data, remove_column = NULL)
 
 * A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
-**Calulated example** 
+**Calculated example** 
 
 ```{r, message=FALSE}
 res4 <- species_richness(PresenceAbsence, remove_column = 0)
-
-kable(res4, "html") %>% kable_styling()
 ```
 
 
+```{r, message=FALSE, echo = FALSE}
+kable(res4, "html") %>% kable_styling()
+```
+
+------
 <h3> Hill shannon diveristy </h3>
 ------
 
@@ -194,15 +213,18 @@ hill_shannon(cover_data, remove_column = NULL)
 
 * A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
-**Calulated example** 
+**Calculated example** 
 
 ```{r, message=FALSE}
 res5 <- hill_shannon(Cover, remove_column = 0)
-
-kable(res5, "html") %>% kable_styling()
 ```
 
 
+```{r, message=FALSE, echo = FALSE}
+kable(res5, "html") %>% kable_styling()
+```
+
+------
 <h3> Hill Simpson diversity</h3>
 ------
 
@@ -220,16 +242,19 @@ hill_simpson(cover_data, remove_column = NULL)
 
 * A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
-**Calulated example** 
+**Calculated example** 
 
 ```{r, message=FALSE}
 res6 <- hill_simpson(Cover, remove_column = 0)
+```
 
+
+```{r, message=FALSE, echo = FALSE}
 kable(res6, "html") %>% kable_styling()
 ```
 
 
-
+------
 <h1>Plot of different diversities</h1>
 ------
 
@@ -250,9 +275,27 @@ plot_diversity(data, diversities, plot_info, description = NULL)
 
 * Plots with different diversity estimates mapped against the plot information of interest.
 
-Further documentaion and code implementation at [link](gradient_plot.html)
+Further documentation and code implementation at [link](gradient_plot.html)
 
+**Calculated example** 
 
+We will here use the data:
+
+```{r, echo= FALSE}
+Cover2 <- Cover
+Cover2$pH <- c(4,3,7,4,5,3.5,8)
+Cover2$Hill_simpson <- hill_simpson(Cover, remove_column = 0)
+Cover2$Species_richness <- species_richness(Cover)
+Cover2$Hill_shannon <- hill_shannon(Cover)
+```
+
+```{r, echo = FALSE}
+kable(Cover2[10:13], "html") %>% kable_styling()
+```
+
+```{r, warning= FALSE, message= FALSE}
+plot_diversity(Cover2, c("Hill_simpson", "Species_richness", "Hill_shannon"), "pH", "The pH value of the soil for each plot")
+```
 
 
 ```{r, include=FALSE, eval=FALSE}
@@ -282,4 +325,43 @@ A vector with the diversity for each row in the abundance data.
 ```
 
 
+------
+<h3> Diversity profile comparison</h3>
+------
+
+This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial updated cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
+
+$$
+\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
+$$
+
+**Usage:**
+
+Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL)
+
+**Arguments:**
+
+* **data_observed**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+
+* **data_new**: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial updated data for a given specie in a given plot.
+
+* **plot**: An integer. Which plot should be used in the comparison, ie which row should the data be taken from.
+
+* **remove_column**:  An integer. In case the first columns in the data_observed and data_new contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain data on species.
+
+**Output:**
+
+* A plot with the hill diversity (y-axis) as a function of the exponent $l$ (x-axis). the two lines are from the observed cover data and the beta binomial updated cover data.  
+
+**Calculated example** 
+
+In the example will we use the function beta_binomial_cover_update to get the updated cover data.
+
+```{r}
+beta_binomial_cover_updated_data <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
+```
+
+```{r}
+different_diversities(Cover, beta_binomial_cover_updated_data, plot = 1,  remove_column = 3)
+```
 

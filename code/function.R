@@ -369,10 +369,14 @@ different_diversities <- function(data_observed, data_new, plot, remove_column =
     df[nrow(df)+1, ] <- c(l, obs, upt)
 
   }
-
+  points <- df[df$l %in% c(-1,0,1),]
   ggplot(data = df, aes(x = l)) +
     geom_line(aes(y = Observed, colour = "Observed cover data"))+
     geom_line(aes(y = Updated, colour = "Beta Binomial Cover Updated data"))+
+    geom_point(data = points, mapping = aes(x = as.numeric(l), y = Updated),
+               fill = "blue", shape=15,  size = 2, colour = "blue") +
+    geom_point(data = points, mapping = aes(x = as.numeric(l), y = Observed),
+               fill = "red", shape=17, size = 2, colour = "red") +
     scale_colour_manual("",
                         values = c("Observed cover data"="red",
                                    "Beta Binomial Cover Updated data"="blue")) +

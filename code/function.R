@@ -177,11 +177,11 @@ simpson <- function(cover_data, remove_column = NULL){
 
   if(is.null(remove_column)){
     # If remove_column is NULL we use all og the columns
-    data <- cover_data[,remove_column+1:ncol(cover_data)]
+    data <- cover_data[,1:ncol(cover_data)]
   }
   else{
     # If remove_column is not NULL we remove the columns, not wanted
-    data <- cover_data[,1:ncol(cover_data)]
+    data <- cover_data[,(remove_column+1):ncol(cover_data)]
   }
 
   # We calulate the sum of each row

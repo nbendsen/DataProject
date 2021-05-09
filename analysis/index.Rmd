@@ -14,15 +14,18 @@ library(OpenStreetMap)
 library(magick)
 library(grid)
 library(MASS)
+library(maps)
+source("code/function_shannon.R")
 source("code/function.R")
 ```
 
 <h1>Introduction</h1>
-Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and presence/absence data. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.
+Many methods for estimating the species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate, which account not only for the presence of a species but also its abundance (measured either as  number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). 
+<br>
+While the latter measure (Shannon) often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location.  In this vignette, we will propose a new method with this goal to combine cover (abundance) data often collected in smaller samples, with presence/absence data that are often collected over larger areas but lack the information of individual speceis’ abundance. We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further informations about the the NOVANA can be found at https://novana.au.dk/. 
 <br><br>
-NOVANA is a part of (describtion of Novana + link). 
-<br><br>
-The NOVANA datasets consist of information from different "sites" across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat "kalkoverdrev" (engelsk?) from the year of 2009 that were included in the NOVANA dataset
+The NOVANA datasets consist of information from different "sites" across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat "kalkoverdrev" from the year of 2009 that were included in the NOVANA dataset.
+
 
 ```{r, warning= FALSE, include=FALSE}
 data_6230_2009 <- read.csv("data/abiotiske_data_6210_year2009.csv")
@@ -46,10 +49,10 @@ data_6230_2009 <-left_join(data_6230_2009,mean_site_pos, by = "site")
 ggplot(map1)+ 
   geom_map(map = map1, aes(long, lat, map_id = region), fill="white", colour = "black") + 
   coord_map() + 
-  geom_point(data = data_6230_2009, aes(y=latitude, x = longtitude), alpha = .9, size =1.5, color = "black")
+  geom_point(data = data_6230_2009, aes(y=latitude, x = longtitude), alpha = .9, size =1.5, color = "black")+xlab("Longitude")+ylab("Latitude")
 ```
 
-Within each site a number of "plots" are placed. It is data from these plots that we will be using in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site
+Within each site a number of "plots" are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site
 
 ```{r, echo = FALSE, warning= FALSE}
 #Chose a site
@@ -86,15 +89,18 @@ map_test <- openmap(c(y_max_proj2,x_min_proj2),c(y_min_proj2,x_max_proj2),zoom =
 map_test2 <- openproj(map_test, projection = "+proj=longlat")
 
 #plot the map and add the points for each plot.
-OpenStreetMap::autoplot.OpenStreetMap(map_test2) + geom_point(data = map_data, mapping = aes(x = longtitude, y = latitude), color = "red", size = 2)
+OpenStreetMap::autoplot.OpenStreetMap(map_test2) + geom_point(data = map_data, mapping = aes(x = longtitude, y = latitude), color = "red", size = 2)+xlab("Longitude")+ylab("Latitude")
 ```
 
 
-Each plot consists of cover data, presence/absence data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence of a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1.
+Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1.
 
-In the center of the circle is a square with side length of 0.5 meters. Inside this square 16 pins are placed uniformly. In the more general method $n$ pins are placed, but in the NOVANA dataset only 16 pins are used. The cover data for the plot is the number of pins each species is hit by inside this square. This is called the pinpoint-method and is an estimate of the abundance of a species in a plot.
+In the center of the circle is a square with side length of 0.5 meters.
+Within this square the cover of each present species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is then the proportion of pins each it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square.
+<br>
+This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.
 
-As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustraion to highlight the characteristics of the two data types described above.
+As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustration to highlight the characteristics of the two data types described above.
 
 ```{r, echo = FALSE, warning= FALSE}
 library(png)
@@ -102,9 +108,6 @@ library(grid)
 plot_img <-  readPNG("analysis/plot3.PNG")
 grid.raster(plot_img)
 ```
-
-
-
 
 
 Each colour represent a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species
@@ -118,14 +121,12 @@ rownames(Plot) <- c("Brown species", "Purple species", "Red species", "Yellow sp
 colnames(Plot) <- c("Presence/absence data", "Cover data")
 ```
 
-```{r}
+```{r, echo=FALSE}
 kable(Plot, "html") %>% kable_styling()
 ```
 
-It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. An important note to make here is that we can have the information that we know a species is present in the plot, but that we don't have any estimate of its cover within the plot. This is shown with the purple species in this case.
-
+It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again we note that we can have the information that a species is present in the plot, but that we don't have any estimate of its cover within the plot as it is not present within the small square. This is shown with the purple species in this case.
 Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works 
-
 ```{r, include=FALSE}
 Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
                        a2 = c(0,0,0,2,0,1,10),
@@ -136,16 +137,13 @@ Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
                        a7 = c(0,0,7,4,0,1,0),
                        a8 = c(0,0,16,9,0,0,9),
                        a9 = c(2,0,0,1,11,0,5))
-
-
 rownames(Cover) <- c("Plot1", "Plot2", "Plot3", "Plot4", "Plot5", "Plot6", "Plot7")
 colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
-```{r}
+```{r, echo=FALSE}
 kable(Cover, "html") %>% kable_styling()
 ```
-
 
 ```{r, include=FALSE}
 PresenceAbsence <- data.frame(   
@@ -158,61 +156,56 @@ PresenceAbsence <- data.frame(
                                  a7 = c(1,0,1,1,0,1,0),
                                  a8 = c(0,0,1,1,0,0,1),
                                  a9 = c(1,0,0,1,1,0,1))
-
 rownames(PresenceAbsence) <- c("Plot1", "Plot2", "Plot3", "Plot4", "Plot5", "Plot6", "Plot7")
-
 colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
-
-```{r}
+```{r, echo=FALSE}
 kable(PresenceAbsence, "html") %>% kable_styling()
 ```
-
-The essence of this vignette is to come up with a method to combine the two datatypes; cover data and presence/absence. Both types of data include properties of the plots that we would like to use.
-
-
+The essence of this vignette is to come up with a method to combine the two datatypes; cover data and presence/absence. Both types of data include important information of the plots that we would like to use.
 
 <h1>Theoretical discussion </h1>
-
-The plant diversity is often calculated by only using the presence/absence data. However, in this method we loose a lot of valuable information from the cover data. In the following we propose a method that obtain an estimate of a species' abundance in each plot that takes into account the spatial aggregation of the species which we can estimate using the cover data. This should also lead to better diversity estimates. We will do this by applying a bayesian framework and use a beta-binomial model. From the general setup in bayesian statistics we get that
+As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data where cover data is an example of one type of abundance data.However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. 
+<br>
+In the following we propose a method that for each plot obtain an estimate of a species' abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to better diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. 
+<br><br>
+From the general setup in bayesian statistics we get that
 $$
 P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
 $$
-where $P(Y=y|\theta)$ is the likelihood function and $\pi(\theta)$ is the prior distribution. We are interested in the posterior distribution $P(\theta|Y=y)$ which we can use to estimate the abundance of a specie in a plot. 
+where $P(Y=y|\theta)$ is the likelihood function and $\pi(\theta)$ is some prior distribution. We are interested in the posterior distribution $P(\theta|Y=y)$ which we can use to estimate the abundance of a species in the entire plot. 
 <br><br>
 In the cover data each specie is hit by $y$ pins out of $n$ possible in each plot. A natural distribution to model this is the binomial distribution
 $$
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
 $$
 <br>
-We use the binomial model as the likelihood function in the bayesian framework that we apply.
-<br>
-We can create a prior distribution $\pi(\theta)$ for each specie by using both cover and presence/absence data. This is really the key idea in this method because this makes it possible to get a prior belief of a species spatial aggregation in a plot when we know that the specie is present.
+We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution $\pi(\theta)$ of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species' spatial distribution we assume that we will be able to obtain a better abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot.
 <br><br>
-The beta model is a conjugacy prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by 
+The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by 
 $$
 \pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
 $$
-When working with the bayesian framework, one has to decide on the paramters $\alpha$ and $\beta$. However, this can be difficult and instead we apply the empirical bayes method: For each specie we fit a beta-prior using all the cover data where the corresponding presence/absence data is 1. 
+When working with the bayesian framework, one has to decide on the paramters $\alpha$ and $\beta$. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is $1$. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat.
 <br><br>
-From the likelihood function and the prior distribution we get that the posterior will be an updated beta distribution for each specie in each plot
+From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot
 $$
 P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
 $$
-When the posterior distribution is found for a specie in a given plot, we use the mean posterior as a measure of the abundance for the specie in the plot. <br>
+When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the abundance for the species in the plot. <br>
 The mean posterior for a beta-distribution is given by:
 $$
 E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
 $$
-From the above theoretical discussion we get a new dataset with updated abundances for each specie in each plot. The next step for users of this method will be, as an xample, to apply some diversity measures for the plots in the new updated dataset. Some of commonly used diversity measures are described in [link](Shannon.html) and will be used in the examples below.
+From the above theoretical discussion we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Some of commonly used diversity measures are described in [link](Diversity.html) and will be used in the examples below.
 <h1> Implementation </h1>
 
-The above theoretical discussions of the beta-binomial model are implemented in the function "bayesian_method". 
+The above theoretical discussions of the beta-binomial model are implemented in the function "beta_binomial_cover_update". 
 
 **Usage:**
 
-bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
+beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 
 **Arguments:**
 
@@ -228,36 +221,33 @@ bayesian_method(cover_data, presence_absence_data, n = 16 , remove_column = 0)
 **Calculated example**
 
 To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction
-
-```{r}
+```{r, , echo=FALSE}
 kable(Cover, "html") %>% kable_styling()
 ```
-```{r}
+```{r, , echo=FALSE}
 kable(PresenceAbsence, "html") %>% kable_styling()
 ```
-
 We input the two datasets into our function
-```{r, message=FALSE}
-res <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16, remove_column = 0)
-kable(res, "html") %>% kable_styling()
+```{r, message=FALSE, echo=FALSE}
+beta_binomial_cover <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16, remove_column = 0)
+```
+```{r, echo = FALSE}
+kable(beta_binomial_cover, "html") %>% kable_styling()
+
 ```
 
-
 For further specifications of the function click [link](bayesian_method_describtion.html)
-
 <br>
-
 <h1>First example </h1>
-In the this first example we only work with a subset of the NOVANA data including the tertiary habitat "surt overdrev" (engelsk?) (in the NOVANA dataset this is encoded as terhabtype = 6230). Furthermore, we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
+In the this first example we only work with a subset of the NOVANA data including the tertiary habitat "surt overdrev" (in the NOVANA dataset this is encoded as terhabtype = 6230). Furthermore, we only look at year 2014. Click on this [link](data_6230.html) for further details on how this subset was created.
 ```{r}
 cover <- read.csv("data/cover_data_6230_year2014.csv")
 freq <- read.csv("data/frekvens_data_6230_year2014.csv")
 abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 ```
-<br>
-We apply the method function to the cover and freq datasets and obtain a "result" dataset with new abundace values for each species in each plot. In the following we will refer to this as the beta binomial updated cover data.
+We apply the method function to the cover and freq datasets and obtain a dataset with updated abundace values for each species in each plot. In the following we will refer to this as the beta binomial cover data.
 ```{r message=FALSE, warning=FALSE}
-result <- beta_binomial_cover_update(cover, freq, n = 16, 3)
+beta_binomial_cover <- beta_binomial_cover_update(cover, freq, n = 16, 3)
 ```
 
 <h3>Species level </h3>
@@ -266,79 +256,64 @@ beta_fit <- beta(cover, freq)
 a <- as.numeric(beta_fit[beta_fit$species == "X116",]$a)
 b <- as.numeric(beta_fit[beta_fit$species == "X116",]$b)
 ```
-The following plot is included as an example of a prior distribution used in the beta binomial cover update method. The plot is the prior distribution for the species "Agrostis capillaris"
+The following plot is included as an example of a prior distribution used in the beta binomial update method. The plot is the prior distribution for the species "Agrostis capillaris"
 ```{r}
-curve(dbeta(x,a,b), xlab = "relative cover", main = "Prior distribution of Agrostis capillaris")
+curve(dbeta(x,a,b), xlab = "relative cover", main = "Prior distribution of Agrostis capillaris", ylab = sprintf("Beta(%.3f, %.3f)", a, b))
 ```
-This plot was built as follows;  for each plot where the species "Agrostis capillaris" had a $1$ in the presence/absence data we saved the number of pins the species had in the cover data and divided these by 16 to get the relative cover. We then fitted a beta distribution to these numbers and thereby obtained the plot. 
-
+The above plot was built as follows: for each plot where the species "Agrostis capillaris" had a $1$ in the presence/absence data we saved the number of pins the species had in the cover data and divided these by 16 to get the relative cover. We then fitted a beta distribution to these numbers and thereby obtained the plot. 
+<br>
 It is seen that there it high probability of being either around 0 or around 1. This is not only for this species but a common prior distribution for many species. This is because a lot of species are grouped in a way, such that if they are present, they will cover a lot of the area, or else they are not present at all. 
-
-
 ```{r, eval=FALSE, include=FALSE}
 #Another thing to look at is how the distribution of pins the species Agrostis capillaris is hit by changes from the observed cover data to the beta binomial cover updated data. Again in each plot where Agrostis capillaris has a $1$ in the presence/absence data we save the corresponding number of pins it is hit by in the cover data. As mentioned we do this for both observed and updated datasets
-
 hist(cover[,"X116"][freq[,"X116"]==1], probability = TRUE, xlab = "Number of pins", main = "Agrostis capillaris in the observed cover dataset")
 hist(result[,"X116"][freq[,"X116"]==1], probability = TRUE, xlab = "Number of pins", main = "Agrostis capillaris in the beta binomial cover updated data")
-
 #Here it is seen that bars from 1-16 are in general a bit higher than in the observed cover data. Especially we note that the bar for $0$ pins is smaller than in the observed cover data.
-
 ```
 
-
-<br><br>
 <h3>Hill Diversity comparison</h3>
-In this section we will use the Hill diversity that is described in [Diversity](Diversity.html), to compare the beta binomial cover updated data with the observed cover data. This will highlight how using our method will change the result depending on how much emphasize rare species are given when calculating the diversity for a plot. Hill diversity is given as
+In this section we will use the Hill diversity that is described in [Diversity](Diversity.html) to compare the beta binomial cover data with the observed cover data. This will highlight how using our method will change the result depending on how much emphasize rare species are given when calculating the diversity for a plot. 
+</br>
+Hill diversity is given as
  
 $$
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
 $$ 
-
 where the $l$ exponent determines how much weight rare species is given. For high $l$ values the Hill diversity is more sensitive to rare species. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
-
-In the below we look at some plot in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in the observed cover dataset (red line) and for the same plot in the beta binomial cover updated data (blue line). This can help to give a feeling for which aspects of the the plot the beta binomial cover update method has changed. 
+In the below we look at some plots in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in the observed cover dataset (red line) and for the same plot in the beta binomial cover data (blue line). This can help to give a feeling for which aspects of the the plot the beta binomial cover update method has changed. 
 <br><br>
-
 For plot 1
 ```{r, warning=FALSE}
-different_diversities(cover, result, plot = 1,  remove_column = 3)
+different_diversities(cover, beta_binomial_cover, plot = 1,  remove_column = 3)
 ```
-
 For plot 100
 ```{r, warning=FALSE}
-different_diversities(cover, result, plot = 100, remove_column = 3)
+different_diversities(cover, beta_binomial_cover, plot = 100, remove_column = 3)
 ```
-
-
-It should be noted that in practice we would only calculate the species richness with the presence/absence data and not the observed cover data as is done in the plot. If we did calculate the species richness from the observed cover data, we would only get the species richness of the small square in the center of the plot and not of the entire plot. Therefore, one should probably be careful not to interpret too much on the diversity estimates for large values of $l$ for the observed cover data.
-
-When we apply the beta binomial method all species observed in the presence/absence data of the plot will get added a small value in the beta binomial cover updated data even though they have a $0$ in the observed cover data. When we add this small abundance to species that not had any observations in the observed cover data we get a higher diversity estimate as expected. 
+It should be noted that in practive we would not calculate the species richness for a plot with the observed cover data but rather with the presence/absence data. If we did calculate the species richness from the observed cover data, we would only get the species richness of the small square in the center of the plot and not of the entire plot. In the above plot we want to show how the observed cover data and the beta binomial cover updated data compare. Therefore, we have calculated the species richness from the observed cover data (species richness is $l$ = 1). Of this reason, one should probably be careful and not interpret too much on the diversity estimates for large values of $l$ for the observed cover data as these diversity estimates are not comparable with the ones we get from the beta binomial cover updated data.
+<br><br>
+When we apply the beta binomial cover update method all species observed in the presence/absence data of the plot will get added a small value in the beta binomial cover updated data even though they have a $0$ in the observed cover data. When we add this small abundance to species that did not have any observed abundance in the observed cover data we get a higher diversity estimate as expected. 
+<br><br>
+In both the observed cover data and the beta binomial cover data the diversity estimates increase as $l$ increases. However, the diversity estimate for the beta binomial cover data increases at a much more rapid pace. This can be contributed to the fact that as $l$ increases the diversity estimate gets more sensitive towards rare species.
 <br>
-
-In both observed cover data and the beta binomial cover updated data the diversity estimate increases as $l$ increases. However, the diversity estimate for the beta binomial cover updated data has a much higher growth. This can be attributed the fact the the beta binomial cover update method is most important for species that was not seen in the observed cover data. These species are not included in the diversity estimate from the observed cover data but are rare species in the beta binomial cover updated data and therefore included in the diversity estimate obtained from this data. 
-For this reason a Hill diversity that is more sensitive towards rare species will give much higher diversity estimates in the beta binomial cover updated data than in the observed cover data because we in the updated data will have many more rare species than in the observed cover data.
-
-
-Instead of only looking at a single plot at a time, we plot the average curve for all plots. The shaded area around the curve visualize the standard deviation at any point along the curve. We do it for all plots in the observed cover data and all the plots in the beta binomial cover updated data.
-
+All the species that had a $0$ in the observed cover data will have a small abundance value in the beta binomial cover data implying that these species are rare in this dataset. Thus, the beta binomial data will have a lot more rare species than the observed cover data and it, therefore, makes very good sense that as $l$ increases, the difference in diversity estimates from the beta binomial cover data and the observed cover data increases.
+<br><br>
+Instead of only looking at a single plot at a time, we plot the average curve for all plots. The shaded area around the curve visualize the standard deviation at any point along the curve. We do it for all plots in the observed cover data and all the plots in the beta binomial cover data.
 ```{r, warning=FALSE, eval = FALSE, echo = FALSE}
-hill_plot_data <-  different_diversities2(cover, result,  remove_column = 3)
+hill_plot_data <-  different_diversities2(cover, beta_binomial_cover,  remove_column = 3)
 ```
 
-```{r,include = FALSE, eval = FALSE}
-write.csv(hill_plot_data, file = "data/hill_plot_data.csv")
-```
+
 
 ```{r, include=FALSE}
 hill_plot_data <- read.csv("data/hill_plot_data.csv")
 ```
 
-
 ```{r, echo = FALSE}
 points <- hill_plot_data[hill_plot_data$l %in% c(-1,0,1),]
+
 ggplot(data = hill_plot_data, aes(x = l)) +
 geom_line(aes(y = Observed, colour = "Observed cover data"))+
-geom_line(aes(y = Updated, colour = "Beta Binomial Cover Updated data"))+
+geom_line(aes(y = Updated, colour = "Beta Binomial Cover data"))+
 geom_point(data = points, mapping = aes(x = as.numeric(l), y = Updated),
            fill = "blue", shape=15,  size = 2, colour = "blue") +
 geom_point(data = points, mapping = aes(x = as.numeric(l), y = Observed),
@@ -349,155 +324,313 @@ geom_ribbon(aes( y = Updated, ymin = Updated_down, ymax = Updated_up),
             fill = "cyan", alpha = 0.2) +
 scale_colour_manual("",
                     values = c("Observed cover data"="red",
-                               "Beta Binomial Cover Updated data"="blue")) +
+                               "Beta Binomial Cover data"="blue")) +
 labs(y = "Diversity", x = "Exponent l in Hill diveristy formula")+
 ggtitle("Comparison of mean of diversity estimates for all plots")
-
 ```
 
 
 Many of the same comments as before also apply to this plot. We note the standard deviation stays roughly the same and only gets bigger for values of $l$ close to 1. However, as stated earlier we would not use cover data to estimate species richness but presence/absence data so we are not too worried about the increased deviation in this part of the plot.
 
-
-
 <h3> Different diversity estimates compared </h3>
-
-We can also compare how different diversity estimates differ throughout all the plots in the observed cover data and the new dataset respectively. All the used diversity estimates are defined at [link](Diversity.html).
-In the below we have calculated the shannon index each plot in both the observed cover dataset and in the "result" dataset
-
+This subsection is intended to further study what the effect of the beta binomial cover update function is on the data. For a number of different diversity measures we will plot the diversity measure obtained from the beta binomial cover data against the diversity measure obtained from the observed cover data. This is meant to further visualize the effect of the proposed method.
+<br>
+All the used diversity estimates are defined at [link](Diversity.html). When the Shannon index, Hill Shannon and Hill Simpson are calculated using the beta binomial cover dataset they will be refered to as "beta binomial Shannon index", "beta binomial Hill Shannon" and "beta binomial Hill Simpson" respectivly. 
+<br><br>
+Below we have calculated the shannon index for each plot in both the observed cover dataset and in the beta binomial cover updated dataset and plotted these against each other
 ```{r}
 observed_shannon <- shannon(cover, 3)
 ```
 
 ```{r}
-updated_shannon <- shannon(result, 3)
+beta_binomial_shannon <- shannon(beta_binomial_cover, 3)
 ```
 
-We plot the shannon indexes against each other
 ```{r, echo = FALSE}
-ggplot(mapping = aes(x = observed_shannon, y = updated_shannon))+
+ggplot(mapping = aes(x = observed_shannon, y = beta_binomial_shannon))+
   geom_point() +
   geom_abline(color = "blue") +
-  ylab("Updated shannon index") +
+  ylab("Beta binomial shannon index") +
   xlab("Observed shannon index") +
-  ggtitle("Our shannon index compared with the observed shannon index")
+  ggtitle( "Beta binomial shannon index compared with the observed shannon index")+xlim(0,3)+ylim(0,3)
 ```
-It can be seen in this example, that the shannon index for the updated dataset gives a slightly higher value for most plots. Noticeably are the biggest difference among plots with a shannon value of 0 using the simpler method, that now have a value closer to 1 with our way of calculating the shannon index.
-<br>
-<br>
-Another often used diversity estimate is the simpson's index. We create a similar plot as above
+
+It can be seen in this example that the beta binomial Shannon indexes give a slightly higher value for all plots. Noticeably are the biggest difference among plots with a low Shannon index. 
+<br><br>
+We make a similar plot with the Hill Shannon diversity.
 ```{r}
-observed_simpson <- simpson(cover, 3)
+observed_hill_shannon <- hill_shannon(cover, 3)
+```
+
+
+```{r}
+beta_binomial_hill_shannon <- hill_shannon(beta_binomial_cover, 3)
+```
+
+```{r, echo = FALSE, warning=FALSE}
+ggplot(mapping = aes(x = observed_hill_shannon, y = beta_binomial_hill_shannon))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("Beta binomial Hill Shannon diversity") +
+  xlab("Observed Hill Shannon diversity") +
+  ggtitle( "Beta binomial Hill Shannon diversity vs. the observed Hill Shannon diversity")+xlim(0,18)+ylim(0,18)
+```
+
+Here can it be seen that the difference seems to be largest with the higher value of the hill shannon.
+
+<br>
+Another method to estimate species diversity is to use the Hill Simpson diversity. We create a similar plot as above
+```{r}
+observed_hill_simpson <- hill_simpson(cover, 3)
 ```
 
 ```{r}
-updated_simpson <- simpson(result, 3)
+beta_binomial_simpson <- hill_simpson(beta_binomial_cover, 3)
 ```
 
 ```{r, echo = FALSE}
-ggplot(mapping = aes(x = observed_simpson, y = updated_simpson))+
+ggplot(mapping = aes(x = observed_hill_simpson, y = beta_binomial_simpson))+
   geom_point() +
   geom_abline(color = "blue") +
-  ylab("Updated simpson index") +
-  xlab("Observed simpson index") +
-  ggtitle("Our simpson index compared with the observed shannon index")
+  ylab("Beta binomial Hill Simpson diversity") +
+  xlab("Observed Hill Simpson diversity") +
+  ggtitle("Beta binomial Hill Simpson diversity vs. the observed Hill Simpson diversity")+xlim(0,15)+ylim(0,15)
+
 ```
 
-Small values of simpson index indicate a high diveristy for a plot. It is worth to notice that for plots with high diversity our method does not seem to change the data as much as it did in the plot of the shannon indexes. 
-<br><br>
-...
+The difference between the beta binomial Hill Simpson diversity and the Hill Simpson diversity obtained from the observed cover data is less than than for the Hill Simpson as expected. This fits nicely with what we found in the "Hill Diversity comparison" subsection. It is worth to notice that we in this plot get some diversity estimates that are lower in the beta binomial cover data than in the observed cover data. 
 
 <h3>Species diversity and pH value </h3>
-
-An interesting aspect of the data we work with in this example is how the diversity of a plot is correlated with the pH value of the soil at the plot. 
+One of the reasons you might want to calculate the diversity for a plot/site, is that you want to compare how different variables affect the diversity of the site. An example of this could be that you want to see how the pH value of the soil are related to the diversity of the plot.
+ 
 <br>
-First we see the shannon index from the updated dataset relates to the pH values
+Below we plot the beta binomial Shannon index and the observed Shannon index against the pH value of the soil. This is intended to visualize partly if there seems to be any interesting relationship between Shannon index and pH value of the soil and also whether the use of the beta binomial cover update function changes this conclusion.
+```{r, include = FALSE, warning =FALSE}
+df <- data.frame(matrix(ncol = 3, nrow = 0))
 
-```{r, warning = FALSE}
-ggplot(mapping = aes(x = as.numeric(abiotiske$pHjord), y = updated_shannon)) +
+for (ele in 1:nrow(cover)){
+  df[nrow(df)+1,] <- c("Beta binomial Shannon index", abiotiske$pHjord[ele], beta_binomial_shannon[ele])
+  
+}
+
+for (ele in 1:nrow(cover)){
+  df[nrow(df)+1,] <- c("Observed Shannon index", abiotiske$pHjord[ele], observed_shannon[ele])
+  
+}
+
+colnames(df) <- c("Type", "pH", "diversity")
+df$pH <- as.numeric(df$pH)
+df$diversity <- as.numeric(df$diversity)
+df <- df[complete.cases(df), ]
+```
+
+
+
+```{r, echo = FALSE}
+ggplot(df, aes(x = pH, y = diversity))+
+  geom_point()+
+  ylab("Shannon index")+
+  xlab("pH value of the soil")+
+  facet_wrap(~Type)+theme_minimal()+
+  ylim(0,3)+
+  ggtitle("Shannon index and pH value of soil at each plot")
+
+```
+
+```{r, warning = FALSE, eval =FALSE, include = FALSE}
+ggplot(mapping = aes(x = as.numeric(abiotiske$pHjord), y = beta_binomial_shannon)) +
   geom_point()+
   xlim(3,6.5)+
   theme_classic()+
-  labs(x = "pH value of the soil", y = "Updated shannon index")+
-  ggtitle("Shannon index and pH value of soil at each plot")
+  labs(x = "pH value of the soil", y = "Beta binomial shannon index")+
+  ggtitle("Beta binomial Shannon index and pH value of soil at each plot")
 ```
-
-Next we show how different diversity measures relates to the pH value. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values. 
-
+There does not seem to be any clear relationship between the Shannon index and the pH value. As we also saw in the "Different diversity estimates compared" subsection, the plots with low observed Shannon index get a slightly higher Shannon index when this is calculated from beta binomial cover updated data.
+<br>
+We study the relationship between species diversity and pH value of the soil a bit further. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values of the soil. 
 ```{r, warning = FALSE, include = FALSE}
 data_for_plot <- as.data.frame(as.numeric(abiotiske$pHjord))
 colnames(data_for_plot) <- "pH"
-data_for_plot$'Shannon index' <- shannon(result, 3)
-data_for_plot$'Hill Shannon' <- hill_shannon(result, 3)
+data_for_plot$'Beta binomial shannon index' <- shannon(beta_binomial_cover, 3)
+data_for_plot$'Beta binomial Hill Shannon' <- hill_shannon(beta_binomial_cover, 3)
 data_for_plot$'Species richness' <- species_richness(freq, remove_column = 3)
-data_for_plot$'Simpson index' <- simpson(result, 3)
-data_for_plot$'Hill Simpson' <- hill_simpson(result, 3)
+data_for_plot$'Beta binomial simpson index' <- simpson(beta_binomial_cover, 3)
+data_for_plot$'Beta binomial Hill Simpson' <- hill_simpson(beta_binomial_cover, 3)
 data_for_plot$Ndep <- as.numeric(abiotiske$Ndep)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
-plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "pH", description = "The PH value of the soil for each plot")
+plot_diversity(data_for_plot ,c("Species richness", "Beta binomial Hill Shannon", "Beta binomial Hill Simpson"), "pH", description = "The PH value of the soil for each plot")
 ```
 
-```{r, message=FALSE, warning=FALSE}
-plot_diversity(data_for_plot ,c("Hill Shannon","Species richness", "Hill Simpson"), "Ndep", description = "The Ndep value of the soil for each plot")
+The general trend that can be seen for all three diversities, beta binomial hill shannon, beta binomial hill simpson and spices richness, is that a low pH value is correlated with lower diversity up until a certain point. further analysis will be need to understand whether or not this is a casual relationship.
+
+```{r, message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
+plot_diversity(data_for_plot ,c("Species richness", "Beta binomial Hill Shannon", "Beta binomial Hill Simpson"), "Ndep", description = "The Ndep value for each plot")
 ```
 
-Comments ... 
 
+ 
 <h1> Second example  </h1>
-In the second example we look at terhabtype = 6210 in year 2009 from the NOVANA dataset.
+In the second example we look at the tertiary habitat "kalkoverdrev" (in the NOVANA dataset this is encoded as terhabtype = 6210) from year 2009.
 ```{r}
 cover_6210 <- read.csv("data/cover_data_6210_year2009.csv")
 freq_6210 <- read.csv("data/frekvens_data_6210_year2009.csv")
 abiotiske_6210 <- read.csv("data/abiotiske_data_6210_year2009.csv")
 ```
-
-
-
-With this data, we are especially interested in how the diversity change when plotted against different values of nitrogen in the soil. It is known that increased nitrogen supply can cause changes to the species composition. 
+With this data we are especially interested in how the diversity change when plotted against different values of nitrogen deposition. It is assumed that if the value of nitrogen deposition is high, there is a lot of nitrogen in the soil. It is also known that increased nitrogen supply can cause changes to the species composition. 
+<br>
+Therefore, some illustrations of the relationship between nitrogen deposition and diversity measures can be used as another example of where the beta binomial cover update function can be used.
 <br><br>
 We apply our function to the data. 
 ```{r}
-new_data <- beta_binomial_cover_update(cover_6210, freq_6210, n = 16, remove_column = 3)
+beta_binomial_cover <- beta_binomial_cover_update(cover_6210, freq_6210, n = 16, remove_column = 3)
 ```
 
+Again we refer to this new dataset as the beta binomial cover data.
 
 ```{r, warning = FALSE, include = FALSE}
-data_for_plot <- as.data.frame(as.numeric(abiotiske_6210$Nijord))
+data_for_plot <- as.data.frame(as.numeric(abiotiske_6210$Ndep))
 colnames(data_for_plot) <- "N"
-data_for_plot$'Shannon index' <- shannon(new_data, 3)
-data_for_plot$'Hill Shannon' <- hill_shannon(new_data, 3)
+data_for_plot$'Beta binomial shannon index' <- shannon(beta_binomial_cover, 3)
+data_for_plot$'Beta binomial Hill Shannon' <- hill_shannon(beta_binomial_cover, 3)
 data_for_plot$'Species richness' <- species_richness(freq_6210, remove_column = 3)
-data_for_plot$'Simpson index' <- simpson(new_data, 3)
-data_for_plot$'Hill Simpson' <- hill_simpson(new_data, 3)
-```
-
-We map the shannon index of the new dataset against the nitrogen value of the soil 
-```{r, echo = FALSE, warning=FALSE}
-ggplot(data_for_plot, mapping = aes(x = N, y = `Shannon index`))+
-  geom_point() +
-  ylab("Shannon index") +
-  xlab("Nitrogen in soil") +
-  ggtitle("Our shannon index compared to nitrogen value in the soil")
-```
-
-```{r, warning=FALSE}
-ggplot(data_for_plot, mapping = aes(x = N, y = `Hill Simpson`))+
-  geom_point() +
-  ylab("Hill Simpson") +
-  xlab("Nitrogen in soil") +
-  ggtitle("Hill Simpson compared to nitrogen value in the soil")
-
+data_for_plot$'Beta binomial simpson index' <- simpson(beta_binomial_cover, 3)
+data_for_plot$'Beta binomial Hill Simpson' <- hill_simpson(beta_binomial_cover, 3)
 ```
 
 
-```{r, warning=FALSE}
+Again we start with the Shannon index as this is so often used to estimate species diversity. We plot the observed Shannon index and the beta binomial Shannon index against the nitrogen deposition.
+```{r}
+observed_shannon <- shannon(cover_6210, 3)
+```
+
+
+```{r, include = FALSE, warning =FALSE}
+df <- data.frame(matrix(ncol = 3, nrow = 0))
+
+for (ele in 1:nrow(cover_6210)){
+  df[nrow(df)+1,] <- c("Beta binomial Shannon index", data_for_plot$N[ele], data_for_plot$`Beta binomial shannon index`[ele])
+  
+}
+
+for (ele in 1:nrow(cover_6210)){
+  df[nrow(df)+1,] <- c("Observed Shannon index", data_for_plot$N[ele], observed_shannon[ele])
+  
+}
+
+colnames(df) <- c("Type", "N", "diversity")
+df$N <- as.numeric(df$N)
+df$diversity <- as.numeric(df$diversity)
+df <- df[complete.cases(df), ]
+```
+
+
+
+```{r}
+ggplot(df, aes(x = N, y = diversity))+
+  geom_point()+
+  ylab("Shannon index")+
+  xlab("Nitrogen deposition")+
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~Type)+theme_minimal()
+```
+
+As it can be seen here is there not a big difference between the two plots. It should however be noticed that the beta binomial shannon index is slightly higher for all values of nitrogen deposition. It might also be important for an analysis that fewer plots have a shannon index at 0 for the beta binomial model. Both plots show a slight downwards trend indicating that higher nitrogen deposition might lead to lower diversity.
+
+
+
+The plots below illustrate how some other diversity measures applied to the beta binomial cover data looks like when mapped against the nitrogen deposition
+
+```{r, warning=FALSE, echo = FALSE}
 ggplot(data_for_plot, mapping = aes(x = N, y = `Species richness`))+
   geom_point() +
   ylab("Species Richness") +
-  xlab("Nitrogen in soil") +
-  ggtitle("Species richness compared to nitrogen value in the soil")
+  xlab("Nitrogen deposition") +
+  ggtitle("Species richness against nitrogen deposition")
+```
+
+```{r, echo = FALSE, warning=FALSE}
+ggplot(data_for_plot, mapping = aes(x = N, y = `Beta binomial Hill Shannon`))+
+  geom_point() +
+  ylab("Beta binomial Hill Shannon") +
+  xlab("Nitrogen deposition") +
+  ggtitle("Beta binomial Hill Shannon against nitrogen deposition")
+```
+
+```{r, warning=FALSE}
+ggplot(data_for_plot, mapping = aes(x = N, y = `Beta binomial Hill Simpson`))+
+  geom_point() +
+  ylab("Beta binomial Hill Simpson") +
+  xlab("Nitrogen deposition") +
+  ggtitle("Beta binomial Hill Simpson against nitrogen deposition")
+```
+
+
+There does not seem to be a clear relation between the nitrogen deposition and the diversity for any of the diversity measures.
+
+<h1> Sites </h1>
+
+So far have we just been comparing different plots from the same habitat type against each other. since each plot is just a sample of a larger site, could it be useful to compare how different sites compare using both the beta binomial cover data and the observed cover data. Since taking averages from an diversity index as the shannon index is problematic as explained in [diversity](diversity.html), will we use the hill diversity to compare across different sites.
+
+```{r, echo = FALSE}
+site_aggregate <- function(data, aggregate_list, aggregate_function = mean) {
+  
+  # Aggregate the selected data
+  aggregate_list <- c("site", "year", aggregate_list)
+  
+  site_data <- data[,aggregate_list ]
+  site_data2 <- aggregate.data.frame(site_data, by = list(site_data$site, site_data$year), FUN = aggregate_function)[,aggregate_list]
+  
+  #Count how many plots there is in each site for each year
+  count_data <- site_data %>% count(site, year)
+  count_data <-  rename(count_data, observations = n )
+  
+
+  final_data <- left_join(site_data2, count_data, by = c("site", "year"))
+  return (final_data)
+}
+```
+
+
+```{r,echo= FALSE}
+data_for_plot$site <- beta_binomial_cover$site
+data_for_plot$year <- beta_binomial_cover$year
+data_for_plot$"observed hill shannon" <- hill_shannon(cover_6210, remove_column = 3)
+data_for_plot$"observed hill simpson" <- hill_simpson(cover_6210, remove_column = 3)
+
+aggregate_data <- site_aggregate(data_for_plot, c("Beta binomial Hill Simpson", 'Beta binomial simpson index', "Species richness", 'Beta binomial Hill Shannon', 'Beta binomial shannon index',"N" , "observed hill shannon","observed hill simpson" ), aggregate_function = mean)
+```
+
+We will first plot how beta binomial hill shannon compares with the observed hill shannon, where we for each site has taken the average value for all plots.
+
+```{r, echo = FALSE, warning=FALSE}
+ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x = `observed hill shannon` ))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("Mean of the beta binomial Hill Shannon diversity") +
+  xlab("Mean of the observed Hill Shannon diversity ") +
+  ggtitle( "Beta binomial Hill Shannon diversity vs. the observed Hill Shannon diversity for the mean of each site")+xlim(0,18)+ylim(0,18) +
+  theme(plot.title = element_text(size=10))
+```
+
+This looks quite similar to what we found when we compared at plot level.
+
+An other comparison we can make, is to look at how the variance changes from the observed hill shannon, to the beta binomial hill shannon.
+
+```{r,  echo = FALSE, warning=FALSE}
+aggregate_data <- site_aggregate(data_for_plot, c("Beta binomial Hill Simpson", 'Beta binomial simpson index', "Species richness", 'Beta binomial Hill Shannon', 'Beta binomial shannon index',"N" , "observed hill shannon","observed hill simpson" ), aggregate_function = var)
+
+ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x = `observed hill shannon` ))+
+  geom_point() +
+  geom_abline(color = "blue") +
+  ylab("variance of the beta binomial Hill Shannon diversity ") +
+  xlab("variance of the observed Hill Shannon diversity") +
+  ggtitle( "Beta binomial Hill Shannon diversity vs. the observed Hill Shannon diversity for the variance of each site")+xlim(0,30)+ylim(0,30) +
+  theme(plot.title = element_text(size=10))
 
 ```
+
+From the plot can it be seen that the beta binomial hill shannon has a higher variance an average, and that the variance grows larger with the diversity. This might be expected, as the beta binomial Hill-Shannon has a higher diversity and we might therefore suspect that the variance will also be larger. 
+
 

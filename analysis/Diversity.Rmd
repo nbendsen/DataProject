@@ -19,9 +19,9 @@ In ecology an important aspect of a plot is the diversity. The diversity is a me
 On the main page we will give some examples of how our method perform on the NOVANA dataset with respect to different diversity measures. We will calculate a diversity index for each plot. For this reason, we will define the diversity indexes we have used in our examples below. 
 
 
-To estimate diversity is there generally two types of data: cover data and presence/absence data. Cover data is a measure of how big a fraction of the area would be covered by a given species, if all the plants where projected down on the ground. This data can be obtained by a biologist estimating it at a site, or by using a sampling method like the pin point method that is used in NOVANA.
+To estimate diversity is there generally two types of data: cover data and presence/absence data. Cover data is a measure of how big a fraction of the area would be covered by a given species, if all the plants where projected down on the ground. This data can be obtained by a biologist estimating it at a site, or by using a sampling method like the pin point method that is used in NOVANA. In NOVANA are 16 pins placed in a 0.5m by 0.5 square grid, the proportion of pins hitting a specific species will be the cover for that specie.
 
-The other type is presence/absence data that indicates which species exists in a given area, but gives no information about their abundance. This data is binary and can be used to calculate the species richness of a site.
+The other type is presence/absence data that indicates which species exists in a given area, but gives no information about their abundance. This data is binary and can be used to calculate the species richness of a site. In NOVANA is this data collect in a circle with radius 5m around the 0.5 square.
 
 
 <h2> Shannon index</h2>
@@ -31,7 +31,7 @@ where $S$ is the number of species and $p_i$ is the proportion of all individual
 <br><br>
 However, as it is pointed out in both [@Roswell] and [@Jost] the shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [@Jost].
 <br>
-We can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number og species.
+We can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number of species.
 When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity. It can instead be seen as the uncertainty in the species identity of a sample.
 
 <h2> Simpson index</h2>
@@ -65,7 +65,7 @@ $$
 \text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
 $$
 
-Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species.
+Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species. For this reason will we predominantly have focus on Hill-Shannon as well as Hill-Simpson in our model validation.
 
 <h2> Hill-Simpson diversity </h2>
 If we instead let $l = -1$ in the formula for Hill diversity we get the inverse of the simpson index
@@ -77,5 +77,5 @@ The Hill-Simpson diversity emphasizes the common species more than the rare spec
 As a final note it should also be mentioned, that if we let $l = 1$ in the formula for Hill diversity we get the standard species richness which was also described further above.
 <br><br><br>
 
-## bibloography
+<h1>References </h1>
 

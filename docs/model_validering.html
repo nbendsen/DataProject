@@ -19,15 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -52,9 +43,14 @@ div.section {
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-    </style>
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -67,7 +63,32 @@ if (window.hljs) {
 
 
 
-
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 
 
@@ -77,6 +98,10 @@ if (window.hljs) {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -93,13 +118,40 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
-pre code {
-  padding: 0;
-}
 </style>
 
 
 <style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
 .dropdown-submenu {
   position: relative;
 }
@@ -127,7 +179,7 @@ pre code {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
+  border-left-color: #ffffff;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -139,7 +191,7 @@ pre code {
 }
 </style>
 
-<script type="text/javascript">
+<script>
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -150,23 +202,10 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.tab('show');
+  menuAnchor.parent().addClass('active');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
 });
 </script>
 
@@ -178,6 +217,7 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -303,13 +343,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -342,7 +382,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nbendsen/DataProject">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
     Source code
   </a>
@@ -352,7 +392,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
+<div class="fluid-row" id="header">
 
 
 
@@ -363,7 +403,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -372,7 +412,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -384,10 +424,10 @@ div.tocify {
 <strong>Last updated:</strong> 2021-05-09
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject git (2.0)/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject - ny/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -400,12 +440,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -429,7 +469,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -472,27 +512,28 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb012ce1afd4d28109ec191105d1c69e6143a681btargetblankb012ce1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/b012ce1afd4d28109ec191105d1c69e6143a681b" target="_blank">b012ce1</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreea594d5a9e33fb4da58ab259f0972ea1b24728ae8targetblanka594d5aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/a594d5a9e33fb4da58ab259f0972ea1b24728ae8" target="_blank">a594d5a</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeb012ce1afd4d28109ec191105d1c69e6143a681btargetblankb012ce1a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreea594d5a9e33fb4da58ab259f0972ea1b24728ae8targetblanka594d5aa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/b012ce1afd4d28109ec191105d1c69e6143a681b" target="_blank">b012ce1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/a594d5a9e33fb4da58ab259f0972ea1b24728ae8" target="_blank">a594d5a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
 
 Unstaged changes:
+    Modified:   analysis/Diversity.Rmd
+    Modified:   analysis/index.Rmd
+    Modified:   analysis/model_validering.rmd
     Modified:   code/function.R
 
 </code></pre>
@@ -506,9 +547,239 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/model_validering.rmd</code>) and HTML (<code>docs/model_validering.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/2f79d87cb0c08879b299c1edca0a0f7eee3315ae/docs/model_validering.html" target="_blank">2f79d87</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-05-05
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/8fa9526f9cb5ae3fd30dcf9402817e03daf64ef2/analysis/model_validering.rmd" target="_blank">8fa9526</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-05-05
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/analysis/model_validering.rmd" target="_blank">17d0576</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-28
+</td>
+<td>
+A lot of changed to model validation and added some plots to explroe where the low value p-vlaue are.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/17d057681c5a3c146fcaefae7128732f6491c69e/docs/model_validering.html" target="_blank">17d0576</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-28
+</td>
+<td>
+A lot of changed to model validation and added some plots to explroe where the low value p-vlaue are.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/bb6ab8559f940dac2d89c46ee532a8ab75fa214c/analysis/model_validering.rmd" target="_blank">bb6ab85</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-21
+</td>
+<td>
+Commited index again and changes in model_validering of the assumptions
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/bb6ab8559f940dac2d89c46ee532a8ab75fa214c/docs/model_validering.html" target="_blank">bb6ab85</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-21
+</td>
+<td>
+Commited index again and changes in model_validering of the assumptions
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/8568f450ab91355243e8d27e4f53f89cdcaeedfb/analysis/model_validering.rmd" target="_blank">8568f45</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+HTML of model-validatoin
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/8568f450ab91355243e8d27e4f53f89cdcaeedfb/docs/model_validering.html" target="_blank">8568f45</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+HTML of model-validatoin
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/ae04bc6307c75a33266dbd1e55b0ff16b05603fb/analysis/model_validering.rmd" target="_blank">ae04bc6</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-04-19
+</td>
+<td>
+Changes model_validering.rmd
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/model_validering.rmd" target="_blank">6c0e88a</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-15
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/model_validering.html" target="_blank">1bfbb02</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/model_validering.html" target="_blank">f173714</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-14
+</td>
+<td>
+Add files via upload
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -516,9 +787,9 @@ There are no past versions. Publish this analysis with <code>wflow_publish()</co
 <h1>
 Introduction
 </h1>
-<p>On the home page we introduced the beta binomial update method. The method combines observed cover data from the small square in the center of the plot and the presence/absence data from the entire plot. This gave rise to a new updated dataset that could be used to give diversity estimates of the entire plot. This page is inteded check the goodness-of-fit of the proposed method againsk the observed cover data.</p>
+<p>On the home page we introduced the beta binomial update method. The method combines observed cover data from the small square in the center of the plot and the presence/absence data from the entire plot. This gave rise to a new updated dataset that could be used to give diversity estimates of the entire plot. This page is intended check the goodness-of-fit of the proposed method against the observed cover data.</p>
 <p>When we created the method we assumed that it would describe the data well. Especially, we assumed that the diversity estimates we would get by using the beta binomial update method did not differ too much from the diversity estimates we would achieve by only using the observed cover data. However, this is only an assumption and not necessarily true. We did however assume that the diversity estimates would be a bit higher using the beta binomial update method instead of using the observed data, since we add a small value for species present in the plot, but not observed in the small square of the plot, which the cover data does not. One issue could be that in plots with low diversity, the prior distributions will change the data too much so that our model will estimate the diversity way too high compared to the diversity estimate we would get from the observed cover data of the small square. <br></p>
-<p>The intention of this page is to validate whether this assumption is acceptable. It will be done by using the ideas of posterior predictive checks, which are presented below and further described in [1] and [2].</p>
+<p>The intention of this page is to validate whether this assumption is acceptable. It will be done by using the ideas of posterior predictive checks, which are presented below and further described in <span class="citation">[1]</span> and <span class="citation">[2]</span>.</p>
 <h1>
 Posterior predictive checks
 </h1>
@@ -534,7 +805,7 @@ Posterior predictive checks
 <p><span class="math display">\[
 \text{posterior predictive p-value} = 2\cdot \min\Big(P(T(y^{rep}) \leq T(y)),P(T(y^{rep}) \geq T(y)) \Big)
 \]</span></p>
-<p>A small posterior predictive p-value close to zero indicates that the observed test statistic is not very likely relative to the generated test statistics and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. The reason is, that when generating the test statistics and and forming the histogram, we observe a distribution for the genreated test statistics. When the posterior predictive p-value is small, the observed test statistic will have a small probability of occuring in the genrated distribution for the test statictics, hence will not be likely to occur and thereby is not simmilar to the generated test statistics. <br> As mentioned earlier we will use diversity estimates as test statistics. We saw on the home page that most plots in the beta binomial cover dataset had higher diversity estimates than in the observed dataset. However, that was not the case for all plots. We have defined the posterior predictive p-value as above to take into account when our method returns diversity estimate too high or too low relative to the observed dataset as we see both outcomes as extreme.</p>
+<p>A small posterior predictive p-value close to zero indicates that the observed test statistic is not very likely relative to the generated test statistics and the posterior predictive check suggests that the model is misspecified with respect to the test statistic. The reason is, that when generating the test statistics and and forming the histogram, we observe a distribution for the generated test statistics. When the posterior predictive p-value is small, the observed test statistic will have a small probability of occurring in the generated distribution for the test statistics, hence will not be likely to occur and thereby is not similar to the generated test statistics. <br> As mentioned earlier we will use diversity estimates as test statistics. We saw on the home page that most plots in the beta binomial cover dataset had higher diversity estimates than in the observed dataset. However, that was not the case for all plots. We have defined the posterior predictive p-value as above to take into account when our method returns diversity estimate too high or too low relative to the observed dataset as we see both outcomes as extreme.</p>
 <p>The posterior predictive checks are only intended to highlight if our model is likely given the data, i.e. the model fit the observed data well. This, however, does not mean that the model is “better” to estimate diversity than just using cover or presence/absence data. This is a further assumption we need to make based on considerations within the domain of ecology. <strong>Snak med bodil og christian</strong></p>
 <h1>
 Model validation for 1. example
@@ -544,7 +815,7 @@ Model validation for 1. example
 \text{Hill Simpson = } \frac{1}{\Sigma_{i=1}^S(p_i)^2}
 \]</span> <span class="math display">\[
 \text{Hill Shannon  = } e^{ - \Sigma_{i = 1}^Sp_i\cdot \ln(p_i)}
-\]</span> Further details on the diveristy estimates can be found on <a href="Diversity.html">link</a></p>
+\]</span> Further details on the diversity estimates can be found on <a href="Diversity.html">link</a></p>
 <p>We read in the datasets and remove the first 3 columns, since they do not contain information on species</p>
 <pre class="r"><code>#Here we load the datasets for habitat 6230 in year 2014
 cover &lt;- read.csv(&quot;data/cover_data_6230_year2014.csv&quot;)
@@ -555,191 +826,20 @@ freq_data &lt;- freq[,4:ncol(freq)]</code></pre>
 <p>With the data we make a visual inspection of the first 3 plots where the Hill Shannon diversity is used as a test statistic. A description of the code implementation of the ppc()-function can be found in the section “Code implementation” <a href="model_val.R">link</a>.</p>
 <pre class="r"><code>ppc(1, freq_data, cover_data)</code></pre>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/docs/figure/model_validering.rmd/unnamed-chunk-4-1.png" target="_blank">17d0576</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-28
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <pre class="r"><code>ppc(2, freq_data, cover_data)</code></pre>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
-Past versions of unnamed-chunk-5-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-5-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/docs/figure/model_validering.rmd/unnamed-chunk-5-1.png" target="_blank">17d0576</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-28
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/2a1aa2bb8caeed7b7d31aabc1f61e1ffe739ecb1/docs/figure/model_validering.rmd/unnamed-chunk-5-1.png" target="_blank">2a1aa2b</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <pre class="r"><code>ppc(3, freq_data, cover_data)</code></pre>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
-Past versions of unnamed-chunk-6-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-6-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/docs/figure/model_validering.rmd/unnamed-chunk-6-1.png" target="_blank">17d0576</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-28
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/2a1aa2bb8caeed7b7d31aabc1f61e1ffe739ecb1/docs/figure/model_validering.rmd/unnamed-chunk-6-1.png" target="_blank">2a1aa2b</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <p>All posterior predictive p-values are big in the above histograms which suggests that the model is appropriate for the first three plots viewed through the Hill Shannon diversity. If we run the posterior predictive check on all plots we can get the proportion of posterior predictive p-values that are less than 0.05. We use a posterior predictive p-value of 0.05 as a threshold for when to say that the observed test statistic is not very likely given the model.</p>
 <pre class="r"><code>p_values_hill_shannon &lt;- read.csv(&quot;data/hill_shannon_pval2.csv&quot;)
 sum(p_values_hill_shannon &lt; 0.05) / nrow(cover)</code></pre>
 <pre><code>[1] 0.07873377</code></pre>
 <p>The interpretation is that for around 8% of the plots the posterior predictive check suggests that the beta binomial update method is not appropriate, i.e. the observed Hill Shannon diversity is an outlier compared to the Hill Shannon diversities that the model would generate.</p>
 <p>However, it is important to check if these plots are randomly placed or lumped together for either high or low diversities. To do this we plot the mean of all the generated Hill Shannon diversities for each plot against the observed Hill Shannon diversity for the corresponding plot. We color each point in the scatter plot to visualize the posterior predictive p-value of the plot</p>
-<p><img src="figure/model_validering.rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
-Past versions of unnamed-chunk-9-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-9-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/docs/figure/model_validering.rmd/unnamed-chunk-9-1.png" target="_blank">17d0576</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-28
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>It is worth to notice that it is specially plots with low diversity that our model seems to give diversity estimates that differ a lot from what we would get from the observed cover data. However, this does not necessarily mean that our model is bad. What it does mean is that it is more likely for these plots that the beta binomial update method overestimate the diveristy for the entire plot relative to the observed cover data of the small square. Otherwise the beta binomial update method seems to generate data that is aligned with the observed cover data.</p>
-<p>Lastly, we will create a similar plot but with the Hill Simpson diversity used as test statistic. In the example on the home page we saw that the Hill Simpson diversity was the diversity estimator that gave a diveristy estimate that differed the least between the beta binomial updated cover data and the observed cover data.</p>
+<p><img src="figure/model_validering.rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /> It is worth to notice that it is specially plots with low diversity that our model seems to give diversity estimates that differ a lot from what we would get from the observed cover data. However, this does not necessarily mean that our model is bad. What it does mean is that it is more likely for these plots that the beta binomial update method overestimate the diversity for the entire plot relative to the observed cover data of the small square. Otherwise the beta binomial update method seems to generate data that is aligned with the observed cover data.</p>
+<p>Lastly, we will create a similar plot but with the Hill Simpson diversity used as test statistic. In the example on the home page we saw that the Hill Simpson diversity was the diversity estimator that gave a diversity estimate that differed the least between the beta binomial updated cover data and the observed cover data.</p>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Again we see that it is only for plots with low diversity where the observed Hill Simpson diversity seems unlikely given the model. However, this is only a very small proportion</p>
+<p>Again we see that it is only for plots with low diversity where the observed Hill Simpson diversity seems unlikely given the model. However, this is only a very small proportion.</p>
 <pre class="r"><code>sum(p_values_hill_simpson$p_values &lt; 0.05)/nrow(cover)</code></pre>
 <pre><code>[1] 0.01136364</code></pre>
 <p>This shows that when the Hill Simpson diversity is used as test statistic the model will generate data that looks very much like the observed data. Much more than the case was when we used the Hill Shannon diversity as test statistic.</p>
@@ -751,44 +851,7 @@ Model validation for 2. example
 <p>We also want to include the posterior predictive checks we get when we apply these to the data from tertiary habitat “Kalkoverdrev” from year 2009 that we used in our second example on the home page. We make similar plots as we did above. First with the Hill Shannon diversity as test statistic and then with the Hill Simpson diveristy as test statistic.</p>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
-Past versions of unnamed-chunk-16-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-16-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/docs/figure/model_validering.rmd/unnamed-chunk-16-1.png" target="_blank">17d0576</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-28
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Again we are interested in the proportion of plots where the observed test statistic is an outlier compared to the distribution of generated test statistics. For the Hill Shannon diversity the proporiton is almost 13% if we again use a posterior predicitve p-value of 0.05 as a threshold</p>
+<p>Again we are interested in the proportion of plots where the observed test statistic is an outlier compared to the distribution of generated test statistics. For the Hill Shannon diversity the proportion is almost 13% if we again use a posterior predictive p-value of 0.05 as a threshold</p>
 <pre class="r"><code>sum(p_values$p_values &lt; 0.05)/nrow(cover_6210)</code></pre>
 <pre><code>[1] 0.1278254</code></pre>
 <p>And the proportion of plots where the observed Hill Simpson diversity is an outlier relative to the generated Hill Simpson diversities is only around 2%</p>
@@ -800,65 +863,17 @@ MHPHP
 Comparison of tertiary habitat types
 </h1>
 <p>First of all, we look at some statistics to compare the plots in “kalk overdrev” (6210 in NOVANA) and the plots in “surt overdrev” (6230 in NOVANA). If we compare the two tertiary habitat types we see that the number of species in the habitat type “kalk overdrev” is generally higher than in the habitat type “surt overdrev” at plot level. <br> We look at the presence/absence data for the “surt overdrev” and “kalk overdrev” respectively. For each dataset we sum the number of present species in each plot and take the mean of all these. In the presence/absence data for “kalk overdrev” the mean number of species in a plot is 32.6 species while it is 26.8 species in the presence/absence data for “surt overdrev”. <br></p>
-<p>We do the same with the cover data for both datasets respectively, i.e. we sum the number of species in a plot if the speices is hit by at least one pin and take the mean over all plots. In the observed cover data for “kalkoverdrev” the average observed number of species in a plot is 10.5 while it is 8.3. in the observed cover data for “surt overdrev”. <br></p>
+<p>We do the same with the cover data for both datasets respectively, i.e. we sum the number of species in a plot if the species is hit by at least one pin and take the mean over all plots. In the observed cover data for “kalkoverdrev” the average observed number of species in a plot is 10.5 while it is 8.3. in the observed cover data for “surt overdrev”. <br></p>
 <p>What is really interesting is the the proportion of a plot where a species has a <span class="math inline">\(1\)</span> in the presence/absence data and at least one observation in the corresponding cover data. If this proportion is low we suspect these plots to be the ones where the beta binomial update method has the biggest impact. For each plot we take the number of species found in the cover data and divide this by the number of species found in the presence/absence data for that plot. A species is found in the cover data for a plot if it is hit be at least one pin. If we again just take the average we find that the average proportion for each plot in “kalk overdrev” is 0.33 and the average proportion for each plot in “surt overdrev” is 0.32. Again there are no big differences in the statistics between the two tertiary habitat types. <br><br> However, we want to study this last statistic a bit further. To visualize the distribution of the proportions from the plots in each of the two tertiary habitat types we make the following histograms</p>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-25-1">
-Past versions of unnamed-chunk-25-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-25-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/17d057681c5a3c146fcaefae7128732f6491c69e/docs/figure/model_validering.rmd/unnamed-chunk-25-1.png" target="_blank">17d0576</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-28
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/8568f450ab91355243e8d27e4f53f89cdcaeedfb/docs/figure/model_validering.rmd/unnamed-chunk-25-1.png" target="_blank">8568f45</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-19
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 <p>There are no big differences between the two histograms. The most important thing to notice from this histogram is that the histogram for “kalk overdrev” has more plots with a very low proportion. In “kalkoverdrev” 1.9% of the plots have proportion below 0.1 while this is only the case for 1.2% of the plots in “surt overdrev”. <br></p>
-<p>We suspect that the beta binomial update method has most impact on these plots with low proportion. To illustrate this point we plot posterior predictive p-value for each plot against the proportion of a plot where species are found in both cover data and presence/absence data. The posterior predictive p-values come from the posterior predictive checks where the Hill Shannon was used as test statistic. The y-axis is -log(posterior predictive p-value) and the dashed line is equal to -log(0.05) for comparison. Because we have taken the negative logarithm on the posterior predictive p-value the plots above the dashed line are more extreme</p>
+<p>We suspect that the beta binomial update method has most impact on these plots with low proportion. To illustrate this point we plot posterior predictive p-value for each plot against the proportion of a plot where species are found in both cover data and presence/absence data. The posterior predictive p-values come from the posterior predictive checks where the Hill Shannon was used as test statistic. The y-axis is -log(posterior predictive p-value) and the dashed line is equal to -log(0.05) for comparison. Because we have taken the negative logarithm on the posterior predictive p-value the plots above the dashed line are more extreme.</p>
 <p><img src="figure/model_validering.rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>The above scatterplots nicely visualize the fact that plots with a low proportion are more sensitive to the beta binomial update method. We see that when a plot has a low proportion the observed Hill Shannon diversity is far more likely to be different than the generated Hill Shannon diversities we get from the beta binomial update method. Furthermore, we notice that all plots with a potesterior predictive p-value less than 0.05 have a proportion less than 0.34. This fits nicely with what we expected and is probably the reaseon that our method has a sligthly bigger effect on “kalk overdrev” than “surt overdrev” as “kalk overdrev” has a bit more plots where the proportion of species that are found in the presence/absence data are also found in the cover data is very low.</p>
+<p>The above scatterplots nicely visualize the fact that plots with a low proportion are more sensitive to the beta binomial update method. We see that when a plot has a low proportion the observed Hill Shannon diversity is far more likely to be different than the generated Hill Shannon diversities we get from the beta binomial update method. Furthermore, we notice that all plots with a posterior predictive p-value less than 0.05 have a proportion less than 0.34. This fits nicely with what we expected and is probably the reason that our method has a slightly bigger effect on “kalk overdrev” than “surt overdrev” as “kalk overdrev” has a bit more plots where the proportion of species that are found in the presence/absence data are also found in the cover data is very low.</p>
 <h1>
 Other validations
 </h1>
-<p>By using the posterior predictive checks we studied if the observed data is a likely outcome of our constructed model. It turned out to be the conclussion in most cases. However, the observed data is only a sample for each plot. This means that the “true” diversity of a plot might be rather different than the information we get from the observed cover and presence/absence data. The more correct diversity estimate could be obtained if we had cover data for the entire plot and not only the small square in the center of the plot, this will however be a huge job to collect. The beta binomial update method that we have created should in theory help to give a better diversity estimate based on the sample from the cover data in the small square and the corresponding presence/absence data of the entire plot, since we include all species present in the entire plot.</p>
+<p>By using the posterior predictive checks we studied if the observed data is a likely outcome of our constructed model. It turned out to be the conclusion in most cases. However, the observed data is only a sample for each plot. This means that the “true” diversity of a plot might be rather different than the information we get from the observed cover and presence/absence data. The more correct diversity estimate could be obtained if we had cover data for the entire plot and not only the small square in the center of the plot, this will however be a huge job to collect. The beta binomial update method that we have created should in theory help to give a better diversity estimate based on the sample from the cover data in the small square and the corresponding presence/absence data of the entire plot, since we include all species present in the entire plot.</p>
 <p>An interesting thing to do would be to simulate a dataset (both cover and present/absence) with known diversities for the plots in the dataset. When knowing the true diversity we could have tested how much better our method would be to estimate the diversity rather than only using the cover or presence/absence data. However, this validation of the method has not been possible within the scope of this project and is a topic for further studies in the future. <br><br></p>
 <h1>
 Code implementation
@@ -958,15 +973,15 @@ abline(v = T_static, col = &quot;red&quot; )</code></pre>
 <h1>
 References
 </h1>
-<ul>
-<li>
-[1] <a href="https://www.pnas.org/content/112/26/E3441#ref-19" class="uri">https://www.pnas.org/content/112/26/E3441#ref-19</a>
-</li>
-<li>
-[2] POSTERIOR PREDICTIVE ASSESSMENT OF MODEL FITNESS VIA REALIZED DISCREPANCIES by Andrew Gelman, Xiao-Li Meng and Hal Stern
-</li>
-</ul>
 <p><br><br><br><br></p>
+<div id="refs">
+<div id="ref-MimnoE3441">
+<p>[1] Mimno, D.; Blei, D.M. and Engelhardt, B.E.: Posterior predictive checks to quantify lack-of-fit in admixture models of latent population structure, Proceedings of the National Academy of Sciences, <strong>112</strong> (2015), no. 26, pp. E3441–E3450.</p>
+</div>
+<div id="ref-Gelman">
+<p>[2] Gelman, A.; Meng, X.-L. and Stern, H.: POSTERIOR predictive assessment of model fitness via realized discrepancies, Statistica Sinica, <strong>6</strong> (1996), no. 4, pp. 733–760.</p>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -975,43 +990,44 @@ References
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.4 (2021-02-15)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19042)
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
 
 locale:
-[1] da_DK.UTF-8/da_DK.UTF-8/da_DK.UTF-8/C/da_DK.UTF-8/da_DK.UTF-8
+[1] LC_COLLATE=English_United Kingdom.1252 
+[2] LC_CTYPE=English_United Kingdom.1252   
+[3] LC_MONETARY=English_United Kingdom.1252
+[4] LC_NUMERIC=C                           
+[5] LC_TIME=English_United Kingdom.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] fitdistrplus_1.1-3 forcats_0.5.1      stringr_1.4.0      dplyr_1.0.4       
- [5] purrr_0.3.4        readr_1.4.0        tidyr_1.1.2        tibble_3.1.0      
- [9] ggplot2_3.3.3      tidyverse_1.3.0    survival_3.2-7     MASS_7.3-53.1     
+ [1] fitdistrplus_1.1-3 forcats_0.5.0      stringr_1.4.0      dplyr_1.0.2       
+ [5] purrr_0.3.4        readr_1.4.0        tidyr_1.1.2        tibble_3.0.4      
+ [9] ggplot2_3.3.2      tidyverse_1.3.0    survival_3.2-7     MASS_7.3-53       
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.6        lubridate_1.7.10  lattice_0.20-41   assertthat_0.2.1 
- [5] rprojroot_2.0.2   digest_0.6.27     utf8_1.1.4        R6_2.5.0         
- [9] cellranger_1.1.0  backports_1.2.1   reprex_1.0.0      evaluate_0.14    
-[13] highr_0.8         httr_1.4.2        pillar_1.5.0      rlang_0.4.10     
-[17] readxl_1.3.1      rstudioapi_0.13   whisker_0.4       Matrix_1.3-2     
-[21] rmarkdown_2.7     labeling_0.4.2    splines_4.0.4     munsell_0.5.0    
-[25] broom_0.7.5       compiler_4.0.4    httpuv_1.5.5      modelr_0.1.8     
-[29] xfun_0.21         pkgconfig_2.0.3   mgcv_1.8-34       htmltools_0.5.1.1
-[33] tidyselect_1.1.0  workflowr_1.6.2   fansi_0.4.2       crayon_1.4.1     
-[37] dbplyr_2.1.0      withr_2.4.1       later_1.1.0.1     grid_4.0.4       
-[41] nlme_3.1-152      jsonlite_1.7.2    gtable_0.3.0      lifecycle_1.0.0  
-[45] DBI_1.1.1         git2r_0.28.0      magrittr_2.0.1    scales_1.1.1     
-[49] cli_2.3.1         stringi_1.5.3     farver_2.1.0      fs_1.5.0         
-[53] promises_1.2.0.1  xml2_1.3.2        ellipsis_0.3.1    generics_0.1.0   
-[57] vctrs_0.3.6       tools_4.0.4       glue_1.4.2        hms_1.0.0        
-[61] yaml_2.2.1        colorspace_2.0-0  rvest_0.3.6       knitr_1.31       
-[65] haven_2.3.1      </code></pre>
+ [1] Rcpp_1.0.5       lubridate_1.7.9  lattice_0.20-41  assertthat_0.2.1
+ [5] rprojroot_1.3-2  digest_0.6.25    R6_2.4.1         cellranger_1.1.0
+ [9] backports_1.1.10 reprex_0.3.0     evaluate_0.14    httr_1.4.2      
+[13] pillar_1.4.6     rlang_0.4.8      readxl_1.3.1     rstudioapi_0.11 
+[17] whisker_0.4      blob_1.2.1       Matrix_1.2-18    rmarkdown_2.4   
+[21] labeling_0.4.2   splines_4.0.3    munsell_0.5.0    broom_0.7.2     
+[25] compiler_4.0.3   httpuv_1.5.5     modelr_0.1.8     xfun_0.18       
+[29] pkgconfig_2.0.3  mgcv_1.8-33      htmltools_0.5.0  tidyselect_1.1.0
+[33] workflowr_1.6.2  fansi_0.4.1      crayon_1.3.4     dbplyr_1.4.4    
+[37] withr_2.3.0      later_1.1.0.1    grid_4.0.3       nlme_3.1-149    
+[41] jsonlite_1.7.1   gtable_0.3.0     lifecycle_0.2.0  DBI_1.1.0       
+[45] git2r_0.28.0     magrittr_1.5     scales_1.1.1     cli_2.1.0       
+[49] stringi_1.5.3    farver_2.0.3     fs_1.5.0         promises_1.1.1  
+[53] xml2_1.3.2       ellipsis_0.3.1   generics_0.0.2   vctrs_0.3.4     
+[57] tools_4.0.3      glue_1.4.2       hms_0.5.3        yaml_2.2.1      
+[61] colorspace_1.4-1 rvest_0.3.6      knitr_1.30       haven_2.3.1     </code></pre>
 </div>
 
 
@@ -1037,7 +1053,7 @@ footer is added to webpages before the MathJax javascript. -->
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1055,7 +1071,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+    $(this).parent().toggleClass('nav-tabs-open')
   });
 });
 </script>

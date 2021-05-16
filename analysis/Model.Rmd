@@ -1,0 +1,131 @@
+---
+title: "Bayesian model"
+output:
+  workflowr::wflow_html:
+    toc: true
+    css: style.css
+editor_options:
+  chunk_output_type: console
+---
+```{r, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(OpenStreetMap)
+library(magick)
+library(grid)
+library(MASS)
+library(maps)
+source("code/function_shannon.R")
+source("code/function.R")
+```
+
+```{r, include=FALSE}
+Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
+                       a2 = c(0,0,0,2,0,1,10),
+                       a3 = c(0,0,1,1,16,0,2),
+                       a4 = c(1,0,10,9,0,0,7),
+                       a5 = c(0,0,0,3,0,0,0),
+                       a6 = c(3,0,11,0,14,1,13),
+                       a7 = c(0,0,7,4,0,1,0),
+                       a8 = c(0,0,16,9,0,0,9),
+                       a9 = c(2,0,0,1,11,0,5))
+rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
+```
+
+```{r, include=FALSE}
+PresenceAbsence <- data.frame(   
+                                 a1 = c(1,0,1,0,1,0,1),
+                                 a2 = c(1,1,0,1,0,1,1),
+                                 a3 = c(0,0,1,1,1,0,1),
+                                 a4 = c(1,0,1,1,0,0,1),
+                                 a5 = c(0,0,0,1,0,0,1),
+                                 a6 = c(1,0,1,0,1,1,1),
+                                 a7 = c(1,0,1,1,0,1,0),
+                                 a8 = c(0,0,1,1,0,0,1),
+                                 a9 = c(1,0,0,1,1,0,1))
+rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
+```
+
+The first section of this page will present the ideas behind our proposed model to combine cover data and presence/absence data. The section will present the beta-binomial model for the reader and show how this can be applied to the problem. 
+<br>
+The second section of this page presents an implementation of the model in R. Furthermore, the section also includes a simple example of the use of the model.
+
+<h2>Presentation of Bayesian model </h2>
+As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data where cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. 
+<br>
+In the following we propose a method that for each plot obtain an estimate of a species' abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to better diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. 
+<br><br>
+From the general setup in bayesian statistics we get that
+$$
+P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
+$$
+where $P(Y=y|\theta)$ is the likelihood function and $\pi(\theta)$ is some prior distribution. We are interested in the posterior distribution $P(\theta|Y=y)$ which we can use to estimate the abundance of a species in the entire plot. 
+<br><br>
+In the cover data each specie is hit by $y$ pins out of $n$ possible in each plot. A natural distribution to model this is the binomial distribution
+$$
+P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
+$$
+<br>
+We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution $\pi(\theta)$ of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species' spatial distribution we assume that we will be able to obtain a better abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot.
+<br><br>
+The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by 
+$$
+\pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
+$$
+When working with the bayesian framework, one has to decide on the paramters $\alpha$ and $\beta$. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is $1$. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat.
+<br><br>
+From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot
+$$
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
+$$
+When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the abundance for the species in the plot. <br>
+The mean posterior for a beta-distribution is given by:
+$$
+E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
+$$
+From the above theoretical discussion we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Examples of different common ways to measure diversity for an area are presented at the [Diversity](Diversity.html) page.
+
+<h2> Implementation </h2>
+
+The above theoretical discussions of the beta-binomial model are implemented in the function "beta_binomial_cover_update". 
+
+**Usage:**
+
+beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)
+
+**Arguments:**
+
+* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
+* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
+* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this datasat is applied.
+
+**Output** 
+
+* The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above. 
+
+**Calculated example**
+
+To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction. The cover data look like:
+```{r, , echo=FALSE}
+kable(Cover, "html") %>% kable_styling(font_size = 12)
+```
+
+And the presence/absence data looks like:
+```{r, , echo=FALSE}
+kable(PresenceAbsence, "html") %>% kable_styling(font_size = 12)
+```
+We input the two datasets into our function
+```{r, message=FALSE}
+beta_binomial_cover <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16, remove_column = 0)
+```
+
+The data from the outcome of the function looks like:
+
+```{r, echo = FALSE}
+kable(beta_binomial_cover, "html") %>% kable_styling(font_size = 12)
+```
+
+A more detailed description of the implementation of the model can be found at: [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function.

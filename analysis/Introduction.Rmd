@@ -1,0 +1,172 @@
+---
+title: "Introduction"
+output:
+  workflowr::wflow_html:
+    toc: false
+    #css: style.css
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(OpenStreetMap)
+library(magick)
+library(grid)
+library(MASS)
+library(maps)
+source("code/function_shannon.R")
+source("code/function.R")
+```
+
+
+<h1>Presentation of problem </h1>
+Many methods for estimating the species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate, which account not only for the presence of a species but also its abundance (measured either as  number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). 
+<br>
+While the latter measure (Shannon) often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location.  In this vignette, we will propose a new method with the goal to combine cover (abundance) data often collected in smaller samples, with presence/absence data that are often collected over larger areas but lack the information of individual speceis’ abundance. Both types of data contain important information about the area that we would like to use to obtain better diversity measures for a nature area. 
+
+<h1>Presentation of the NOVANA dataset</h1>
+We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further informations about the the NOVANA can be found at https://novana.au.dk/. The NOVANA datasets consist of information from different "sites" across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat "kalkoverdrev" from the year of 2009 that were included in the NOVANA dataset.
+
+
+```{r, warning= FALSE, include=FALSE}
+data_6230_2009 <- read.csv("data/abiotiske_data_6210_year2009.csv")
+
+data_6230_2009 <- convert_to_longlat(data_6230_2009, data_6230_2009$UTMx, data_6230_2009$UTMy)
+
+world.map <- map_data ("world")
+map1 <- world.map %>% filter(region == "Denmark")
+
+mean_site_pos <-  data_6230_2009 %>%
+                group_by(site) %>% 
+                  summarise_at(vars(longtitude, latitude),mean,na.rm = TRUE)
+  
+  
+mean_site_pos <-  rename(mean_site_pos, longtitude_mean_site = longtitude, latitude_mean_site = latitude)
+
+data_6230_2009 <-left_join(data_6230_2009,mean_site_pos, by = "site")
+```
+
+```{r, echo = FALSE, warning= FALSE}
+ggplot(map1)+ 
+  geom_map(map = map1, aes(long, lat, map_id = region), fill="white", colour = "black") + 
+  coord_map() + 
+  geom_point(data = data_6230_2009, aes(y=latitude, x = longtitude), alpha = .9, size =1.5, color = "black")+xlab("Longitude")+ylab("Latitude")
+```
+
+Within each site a number of "plots" are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site
+
+```{r, echo = FALSE, warning= FALSE}
+#Chose a site
+map_data <-  data_6230_2009[data_6230_2009$site == 1076,] %>%  dplyr::select(longtitude, latitude, longtitude_mean_site, latitude_mean_site)
+
+#Calculate dimensions for a rectangle a little bigger than the site.
+x_min <- min(map_data$longtitude)
+x_max <- max(map_data$longtitude)
+y_min <-  min(map_data$latitude)
+y_max <- max(map_data$latitude)
+
+x_min_proj <-  x_min - (x_max - x_min) *0.2
+x_max_proj <-  x_max + (x_max - x_min) *0.2
+
+y_min_proj <-  y_min - (y_max - y_min) *0.2
+y_max_proj <-  y_max + (y_max - y_min) *0.2
+
+lat_mean <-  map_data$latitude_mean_site[1]
+long_mean <- map_data$longtitude_mean_site[1]
+
+max_diff <- (max((x_max - x_min), (y_max - y_min)))/2
+
+x_min_proj2 <- min(x_min - (x_max - x_min) *0.2, long_mean- max_diff)
+x_max_proj2 <- max(x_max + (x_max - x_min) *0.2, long_mean + max_diff)
+
+y_min_proj2 <- min(y_min - (y_max - y_min) *0.2, lat_mean- max_diff)
+y_max_proj2 <-  max(y_max + (y_max - y_min) *0.2, lat_mean + max_diff)
+
+
+#Load the map
+map_test <- openmap(c(y_max_proj2,x_min_proj2),c(y_min_proj2,x_max_proj2),zoom = NULL, 'bing')
+
+#change the projection to lat/long.
+map_test2 <- openproj(map_test, projection = "+proj=longlat")
+
+#plot the map and add the points for each plot.
+OpenStreetMap::autoplot.OpenStreetMap(map_test2) + geom_point(data = map_data, mapping = aes(x = longtitude, y = latitude), color = "red", size = 2)+xlab("Longitude")+ylab("Latitude")
+```
+
+
+Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1.
+
+In the center of the circle is a square with side length of 0.5 meters.
+Within this square the cover of each present species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is then the proportion of pins each it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square.
+<br>
+This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.
+
+As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustration to highlight the characteristics of the two data types described above.
+
+```{r, echo = FALSE, warning= FALSE}
+library(png)
+library(grid)
+plot_img <-  readPNG("analysis/plot3.PNG")
+grid.raster(plot_img)
+```
+
+
+Each colour represent a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species
+```{r, include=FALSE}
+Plot <- data.frame(   col1 = c(0,1,1,1,1),
+                      col2 = c(0,0,16,1,9))
+  
+
+
+rownames(Plot) <- c("Brown species", "Purple species", "Red species", "Yellow species", "Green species")
+colnames(Plot) <- c("Presence/absence data", "Cover data")
+```
+
+```{r, echo=FALSE}
+kable(Plot, "html") %>% kable_styling()
+```
+
+It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again we note that we can have the information that a species is present in the plot, but that we don't have any estimate of its cover within the plot as it is not present within the small square. This is shown with the purple species in this case.
+Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works 
+```{r, include=FALSE}
+Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
+                       a2 = c(0,0,0,2,0,1,10),
+                       a3 = c(0,0,1,1,16,0,2),
+                       a4 = c(1,0,10,9,0,0,7),
+                       a5 = c(0,0,0,3,0,0,0),
+                       a6 = c(3,0,11,0,14,1,13),
+                       a7 = c(0,0,7,4,0,1,0),
+                       a8 = c(0,0,16,9,0,0,9),
+                       a9 = c(2,0,0,1,11,0,5))
+rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
+```
+
+```{r, echo=FALSE}
+kable(Cover, "html") %>% kable_styling()
+```
+
+```{r, include=FALSE}
+PresenceAbsence <- data.frame(   
+                                 a1 = c(1,0,1,0,1,0,1),
+                                 a2 = c(1,1,0,1,0,1,1),
+                                 a3 = c(0,0,1,1,1,0,1),
+                                 a4 = c(1,0,1,1,0,0,1),
+                                 a5 = c(0,0,0,1,0,0,1),
+                                 a6 = c(1,0,1,0,1,1,1),
+                                 a7 = c(1,0,1,1,0,1,0),
+                                 a8 = c(0,0,1,1,0,0,1),
+                                 a9 = c(1,0,0,1,1,0,1))
+rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
+colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
+```
+
+```{r, echo=FALSE}
+kable(PresenceAbsence, "html") %>% kable_styling()
+```
+
+Once again, the intention of this vignette is to come up with a method to combine the two datatypes; cover data and presence/absence. 
+
+

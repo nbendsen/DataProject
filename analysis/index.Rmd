@@ -9,7 +9,7 @@ editor_options:
 ---
 
 
-Species diversity is an important measure, that can be used to discribe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in progress or decline. Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and presence/absence data, to combine the information from both datasets. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.
+Species diversity is an important measure, that can be used to discribe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in progress or decline. Many methods for estimating the abundance of species within an area have been proposed in the literature. In this vignette we will propose a new method with this goal where we combine cover data and presence/absence data, to combine the information from both datasets. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.
 
 The idear of combining information from both datatypes, is that they do not contain the same sort of information, hence some information will be lost if one were to only use on of them. 
 

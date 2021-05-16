@@ -13,27 +13,21 @@
 
 <title>Code implementation of bayesian method</title>
 
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -45,6 +39,8 @@ div.section {
 }
 </style>
 
+
+
 <style type="text/css">
   code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -55,6 +51,11 @@ div.section {
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -67,7 +68,32 @@ if (window.hljs) {
 
 
 
-
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 
 
@@ -77,6 +103,10 @@ if (window.hljs) {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -93,13 +123,40 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
-pre code {
-  padding: 0;
-}
 </style>
 
 
 <style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
 .dropdown-submenu {
   position: relative;
 }
@@ -127,7 +184,7 @@ pre code {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
+  border-left-color: #ffffff;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -139,7 +196,7 @@ pre code {
 }
 </style>
 
-<script type="text/javascript">
+<script>
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -150,23 +207,10 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.tab('show');
+  menuAnchor.parent().addClass('active');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
 });
 </script>
 
@@ -178,6 +222,7 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -303,13 +348,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -330,10 +375,19 @@ div.tocify {
   <a href="index.html">Home</a>
 </li>
 <li>
+  <a href="Introduction.html">Introduction</a>
+</li>
+<li>
   <a href="Diversity.html">Diversity</a>
 </li>
 <li>
+  <a href="Model.html">Bayesian model</a>
+</li>
+<li>
   <a href="Function_usage.html">Functions</a>
+</li>
+<li>
+  <a href="example.html">Examples</a>
 </li>
 <li>
   <a href="model_validering.html">Model validation</a>
@@ -342,7 +396,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/nbendsen/DataProject">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
     Source code
   </a>
@@ -352,7 +406,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
+<div class="fluid-row" id="header">
 
 
 
@@ -381,13 +435,13 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-04-28
+<strong>Last updated:</strong> 2021-05-15
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>DataProject_git/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>DataProject-14-05/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -429,7 +483,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
 </div>
 </div>
 </div>
@@ -472,30 +526,35 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeccd531e034769cc7ca961ab82c282c328375d6adtargetblankccd531ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/ccd531e034769cc7ca961ab82c282c328375d6ad" target="_blank">ccd531e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree7b30631fa9c179f345edec9da13fd5e338ec4466targetblank7b30631a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/7b30631fa9c179f345edec9da13fd5e338ec4466" target="_blank">7b30631</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreeccd531e034769cc7ca961ab82c282c328375d6adtargetblankccd531ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree7b30631fa9c179f345edec9da13fd5e338ec4466targetblank7b30631a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/ccd531e034769cc7ca961ab82c282c328375d6ad" target="_blank">ccd531e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/7b30631fa9c179f345edec9da13fd5e338ec4466" target="_blank">7b30631</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .DS_Store
-    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/.DS_Store
-    Ignored:    analysis/.RData
-    Ignored:    analysis/.Rhistory
-    Ignored:    code/.Rhistory
-    Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/Introduction.Rmd
+    Untracked:  analysis/Model.Rmd
+    Untracked:  analysis/example.Rmd
+
+Unstaged changes:
+    Modified:   analysis/Diversity.Rmd
+    Modified:   analysis/_site.yml
+    Modified:   analysis/index.Rmd
+    Modified:   analysis/model_validering.rmd
+    Modified:   analysis/plot3.PNG
 
 </code></pre>
 <p>
@@ -536,19 +595,36 @@ Message
 <tbody>
 <tr>
 <td>
-Rmd
+html
 </td>
 <td>
-<a href="https://github.com/nbendsen/DataProject/blob/ccd531e034769cc7ca961ab82c282c328375d6ad/analysis/bayesian_method_describtion.Rmd" target="_blank">ccd531e</a>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/1012d73da05d34051892a58037fe3130990c608a/docs/bayesian_method_describtion.html" target="_blank">1012d73</a>
 </td>
 <td>
-DitteM
+GitHub
 </td>
 <td>
 2021-04-28
 </td>
 <td>
-try
+Add files via upload
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/fcd03742c1a08074cacc310eac38274b0dd5bd72/analysis/bayesian_method_describtion.Rmd" target="_blank">fcd0374</a>
+</td>
+<td>
+GitHub
+</td>
+<td>
+2021-04-28
+</td>
+<td>
+Add files via upload
 </td>
 </tr>
 <tr>
@@ -670,7 +746,7 @@ Introduction
 <li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
 <li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
 <li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1. n is the number of pins used in each blot, so by dividing each entry with n, we normalize the data.</li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year&quot; so remove_column = 3 when this datasat is applied.</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
 </ul>
 <p><strong>Output</strong></p>
 <ul>
@@ -843,30 +919,30 @@ Full code
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.0.4 (2021-02-15)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Big Sur 10.16
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19042)
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
 
 locale:
-[1] da_DK.UTF-8/da_DK.UTF-8/da_DK.UTF-8/C/da_DK.UTF-8/da_DK.UTF-8
+[1] LC_COLLATE=Danish_Denmark.1252  LC_CTYPE=Danish_Denmark.1252   
+[3] LC_MONETARY=Danish_Denmark.1252 LC_NUMERIC=C                   
+[5] LC_TIME=Danish_Denmark.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.6        whisker_0.4       knitr_1.31        magrittr_2.0.1   
- [5] workflowr_1.6.2   R6_2.5.0          rlang_0.4.10      fansi_0.4.2      
- [9] stringr_1.4.0     tools_4.0.4       xfun_0.21         utf8_1.1.4       
-[13] git2r_0.28.0      htmltools_0.5.1.1 ellipsis_0.3.1    rprojroot_2.0.2  
-[17] yaml_2.2.1        digest_0.6.27     tibble_3.1.0      lifecycle_1.0.0  
-[21] crayon_1.4.1      later_1.1.0.1     vctrs_0.3.6       promises_1.2.0.1 
-[25] fs_1.5.0          glue_1.4.2        evaluate_0.14     rmarkdown_2.7    
-[29] stringi_1.5.3     compiler_4.0.4    pillar_1.5.0      httpuv_1.5.5     
-[33] pkgconfig_2.0.3  </code></pre>
+ [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
+ [5] magrittr_1.5     workflowr_1.6.2  R6_2.5.0         rlang_0.4.8     
+ [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
+[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27   
+[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
+[21] later_1.1.0.1    vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0        
+[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.5    stringi_1.5.3   
+[29] compiler_4.0.3   pillar_1.4.6     backports_1.1.10 httpuv_1.5.5    
+[33] pkgconfig_2.0.3 </code></pre>
 </div>
 
 
@@ -881,6 +957,8 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
+
+
 
 
 </div>
@@ -910,7 +988,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+    $(this).parent().toggleClass('nav-tabs-open')
   });
 });
 </script>

@@ -1,7 +1,10 @@
 ---
 title: "Presentation of functions"
 site: workflowr::wflow_site
-output: workflowr::wflow_html
+output:
+  workflowr::wflow_html:
+    toc: true
+    css: style.css
 bibliography: references.bib
 csl: brewingscience.csl
 editor_options:
@@ -16,9 +19,23 @@ library(kableExtra)
 ```
 
 
-This page is intended to provide an overview of the functions that are used in the examples on the home page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
 
-When referring to cover_data, it is data of the form:
+This page is intended to provide an overview of the functions that are used on the [Examples](example.html) page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
+
+The reader can download all the functions following the link below. The link will take the reader to a new page. This page can be saved as a R file.
+
+```{r, echo = FALSE, message= FALSE, warning= FALSE}
+library(downloadthis)
+
+download_link(
+  link = "https://raw.githubusercontent.com/nbendsen/DataProject/master/code/function.R",
+  button_label = "Download HERE",
+  button_type = "succes",
+  has_icon = FALSE,
+  icon = "fa fa-save",
+  self_contained = FALSE
+)
+```
 
 ```{r, include=FALSE}
 Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
@@ -33,18 +50,23 @@ Cover <- data.frame(   a1 = c(2,0,5,0,1,0,16),
 
 
 rownames(Cover) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
-colnames(Cover) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9")
+colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 
 ```
 
-Cover data describes how much of the surface area that would be covered by a specific species if all the plats were projected down on the ground. In this example will cover data take the form of integer value from 0 to 16, where 16 is full cover and 0 is no cover, but it is also possible to us a percentage or other forms of cover data.
+<br>
+
+The presentation of each function will also contain a small example of how the function is applied. To to this, we again use a small constructed cover dataset and presence/absence dataset. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
+
+
+When referring to cover_data, the dataset looks like:
 
 ```{r, echo = FALSE}
 kable(Cover, "html") %>% kable_styling()
 ```
 
 
-When referring to presence_absence_data, it is data of the form:
+When referring to presence_absence_data, the dataset looks like:
 
 ```{r, include=FALSE}
 PresenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
@@ -59,7 +81,7 @@ PresenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
 
 
 rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5", "Plot 6", "Plot 7")
-colnames(PresenceAbsence) <- c("Specie 1", "Specie 2", "Specie 3", "Specie 4", "Specie 5", "Specie 6", "Specie 7", "Specie 8", "Specie 9")
+colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 
 ```
 
@@ -70,9 +92,8 @@ kable(PresenceAbsence, "html") %>% kable_styling()
 
 For each function we will use the above data to give an example of the usage of the function.
 
-------
-<h1>Beta Binomial Cover Update</h1>
-------
+<h2>Beta Binomial Cover Update</h2>
+
 
 Main function of this vignette. The function is an implementation of the method outlined on the home page.
 
@@ -99,16 +120,19 @@ For further specifications of the function click [link](bayesian_method_describt
 res1 <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
 ```
 
+The data from the outcome of the function looks like:
 
-```{r, message=FALSE, echo = FALSE}
-kable(res1, "html") %>% kable_styling()
+```{r, echo = FALSE}
+kable(res1, "html") %>% kable_styling(font_size = 12)
 ```
 
-------
-<h1> Functions for diversity estimates</h1>
-------
+A more detailed description of the implementation of the model can be found at: [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function.
 
-The functions below implement the different diversity estimates defined at [Diversity](Diversity.html). The code implementations of the functions can be found at [link](diversity_functions_code.html)
+
+<h2> Functions for diversity estimates</h2>
+
+
+The functions below implement the different diversity estimates defined at the [Diversity](Diversity.html) page. The code implementations of the functions can be found at [implementation](diversity_functions_code.html)
 
 <h3> Shannon index </h3>
 
@@ -134,12 +158,14 @@ res2 <- shannon(Cover, remove_column = 0)
 
 
 ```{r, message=FALSE, echo = FALSE}
-kable(res2, "html") %>% kable_styling()
+v <- as.data.frame(res2)
+colnames(v) <- "Shannon index"
+kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ```
 
-------
+
 <h3> Simpson's index</h3>
-------
+
 
 **Usage:**
 
@@ -163,12 +189,13 @@ res3 <- simpson(Cover, remove_column = 0)
 
 
 ```{r, message=FALSE, echo = FALSE}
-kable(res3, "html") %>% kable_styling()
+v <- as.data.frame(res3)
+colnames(v) <- "Simpson's index"
+kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ```
 
-------
 <h3>Species richness </h3>
-------
+
 
 **Usage:**
 
@@ -192,12 +219,13 @@ res4 <- species_richness(PresenceAbsence, remove_column = 0)
 
 
 ```{r, message=FALSE, echo = FALSE}
-kable(res4, "html") %>% kable_styling()
+v <- as.data.frame(res4)
+colnames(v) <- "Species richness"
+kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ```
 
-------
+
 <h3> Hill shannon diveristy </h3>
-------
 
 **Usage:**
 
@@ -221,12 +249,13 @@ res5 <- hill_shannon(Cover, remove_column = 0)
 
 
 ```{r, message=FALSE, echo = FALSE}
-kable(res5, "html") %>% kable_styling()
+v <- as.data.frame(res5)
+colnames(v) <- "Hill Shannon diversity"
+kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
+
 ```
 
-------
 <h3> Hill Simpson diversity</h3>
-------
 
 **Usage:**
 
@@ -250,13 +279,16 @@ res6 <- hill_simpson(Cover, remove_column = 0)
 
 
 ```{r, message=FALSE, echo = FALSE}
-kable(res6, "html") %>% kable_styling()
+v <- as.data.frame(res6)
+colnames(v) <- "Hill Simpson diversity"
+kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
+
 ```
 
 
-------
-<h1>Plot of different diversities</h1>
-------
+
+<h2>Plot of different diversities</h2>
+
 
 This function plots different diversity estimates of a plot against some information of interest about the plot. 
 
@@ -325,9 +357,8 @@ A vector with the diversity for each row in the abundance data.
 ```
 
 
-------
-<h3> Diversity profile comparison</h3>
-------
+<h2> Diversity profile comparison</h2>
+
 
 This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial updated cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
 

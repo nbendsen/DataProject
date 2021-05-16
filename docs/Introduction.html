@@ -11,7 +11,7 @@
 
 
 
-<title>A Bayesian method for better plant diversity estimates</title>
+<title>Introduction</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -25,6 +25,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -334,7 +336,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">A Bayesian method for better plant diversity estimates</h1>
+<h1 class="title toc-ignore">Introduction</h1>
 
 </div>
 
@@ -383,7 +385,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -481,7 +483,6 @@ Unstaged changes:
     Modified:   analysis/index.Rmd
     Modified:   analysis/model_validering.rmd
     Modified:   analysis/plot3.PNG
-    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -494,1045 +495,624 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
+<hr>
+</div>
+</div>
+</div>
+<h1>
+Presentation of problem
+</h1>
+<p>Many methods for estimating the species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate, which account not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). <br> While the latter measure (Shannon) often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location. In this vignette, we will propose a new method with the goal to combine cover (abundance) data often collected in smaller samples, with presence/absence data that are often collected over larger areas but lack the information of individual speceis’ abundance. Both types of data contain important information about the area that we would like to use to obtain better diversity measures for a nature area.</p>
+<h1>
+Presentation of the NOVANA dataset
+</h1>
+<p>We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further informations about the the NOVANA can be found at <a href="https://novana.au.dk/" class="uri">https://novana.au.dk/</a>. The NOVANA datasets consist of information from different “sites” across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat “kalkoverdrev” from the year of 2009 that were included in the NOVANA dataset.</p>
+<p><img src="figure/Introduction.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Within each site a number of “plots” are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site</p>
+<p><img src="figure/Introduction.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1.</p>
+<p>In the center of the circle is a square with side length of 0.5 meters. Within this square the cover of each present species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is then the proportion of pins each it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square. <br> This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.</p>
+<p>As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustration to highlight the characteristics of the two data types described above.</p>
+<p><img src="figure/Introduction.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Each colour represent a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th>
-File
+<th style="text-align:left;">
 </th>
-<th>
-Version
+<th style="text-align:right;">
+Presence/absence data
 </th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
+<th style="text-align:right;">
+Cover data
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;">
+Brown species
 </td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/765c719e4e334a817c98ef53063f843e0c9b4b26/analysis/index.Rmd" target="_blank">765c719</a>
+<td style="text-align:right;">
+0
 </td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-index changes
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
-<td>
-html
+<td style="text-align:left;">
+Purple species
 </td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/765c719e4e334a817c98ef53063f843e0c9b4b26/docs/index.html" target="_blank">765c719</a>
+<td style="text-align:right;">
+1
 </td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-index changes
+<td style="text-align:right;">
+0
 </td>
 </tr>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;">
+Red species
 </td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/b9ca680b6ba0281555cbead4ea79846b7c87d2b4/analysis/index.Rmd" target="_blank">b9ca680</a>
+<td style="text-align:right;">
+1
 </td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-docs files
+<td style="text-align:right;">
+16
 </td>
 </tr>
 <tr>
-<td>
-html
+<td style="text-align:left;">
+Yellow species
 </td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/b9ca680b6ba0281555cbead4ea79846b7c87d2b4/docs/index.html" target="_blank">b9ca680</a>
+<td style="text-align:right;">
+1
 </td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-docs files
+<td style="text-align:right;">
+1
 </td>
 </tr>
 <tr>
-<td>
-Rmd
+<td style="text-align:left;">
+Green species
 </td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/31595ee9a79e070543c223fa95d68e301627b038/analysis/index.Rmd" target="_blank">31595ee</a>
+<td style="text-align:right;">
+1
 </td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-29
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/f124bf6b6c4f6dbc3d3405e9938a23cefdde2c74/docs/index.html" target="_blank">f124bf6</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/a067bee45635b58a11f4e11b05bb734dff0c50e0/docs/index.html" target="_blank">a067bee</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/bb6ab8559f940dac2d89c46ee532a8ab75fa214c/analysis/index.Rmd" target="_blank">bb6ab85</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-21
-</td>
-<td>
-Commited index again and changes in model_validering of the assumptions
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/bb6ab8559f940dac2d89c46ee532a8ab75fa214c/docs/index.html" target="_blank">bb6ab85</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-21
-</td>
-<td>
-Commited index again and changes in model_validering of the assumptions
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/33269f8eecabd8062aded6acb660f99301b496ed/analysis/index.Rmd" target="_blank">33269f8</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-21
-</td>
-<td>
-Index changes, and functions changes.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/33269f8eecabd8062aded6acb660f99301b496ed/docs/index.html" target="_blank">33269f8</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-21
-</td>
-<td>
-Index changes, and functions changes.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/524999a6b32cd972634710d5a762a867998b6872/docs/index.html" target="_blank">524999a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-18
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/bc87b52ca5a83dbc3effcf96bce612239bb6b723/analysis/index.Rmd" target="_blank">bc87b52</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-18
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/index.Rmd" target="_blank">6c0e88a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-15
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/index.html" target="_blank">1bfbb02</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/index.html" target="_blank">f173714</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/13425ec1fb0420f8f10e463577b6fd5d49ffc2b4/analysis/index.Rmd" target="_blank">13425ec</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Merge branch ‘master’ into Nikolaj
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/13425ec1fb0420f8f10e463577b6fd5d49ffc2b4/docs/index.html" target="_blank">13425ec</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Merge branch ‘master’ into Nikolaj
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/7a3c9bd1b1444cc2c40b40d9806638bcf145fd65/analysis/index.Rmd" target="_blank">7a3c9bd</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-add stuff
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/7a3c9bd1b1444cc2c40b40d9806638bcf145fd65/docs/index.html" target="_blank">7a3c9bd</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-add stuff
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/29e6e6f87214780226bf6328573463611ce371ce/analysis/index.Rmd" target="_blank">29e6e6f</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added docs for functions
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/29e6e6f87214780226bf6328573463611ce371ce/docs/index.html" target="_blank">29e6e6f</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added docs for functions
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/2e33a66e79311eff1c18687861c7e5d0f6ea7ed4/docs/index.html" target="_blank">2e33a66</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/059ac5866b4b3c3299ae08401bf0ac95a16e3a4b/analysis/index.Rmd" target="_blank">059ac58</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-07
-</td>
-<td>
-wflow_publish(all = TRUE)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/51449f1a4fa61c9feffdb53c4e137eb42a0f1e3e/docs/index.html" target="_blank">51449f1</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-07
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/32f0ec7853d2015a28565cea8185f4f76132f2c7/analysis/index.Rmd" target="_blank">32f0ec7</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-07
-</td>
-<td>
-wflow_publish(all = TRUE)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/e5eedea4d1e66a3e264be0082ed0de8c646d5e95/docs/index.html" target="_blank">e5eedea</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/c434a8c27018b9081c54345c332799f39be1cbaf/docs/index.html" target="_blank">c434a8c</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/568a3c5073806b5df3acae43d5d64dae2f8cf5d6/analysis/index.Rmd" target="_blank">568a3c5</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/713e7fbe7e283e9cde19741496ecbeac985023c1/analysis/index.Rmd" target="_blank">713e7fb</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Merge branch ‘master’ into master
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/713e7fbe7e283e9cde19741496ecbeac985023c1/docs/index.html" target="_blank">713e7fb</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-03-31
-</td>
-<td>
-Merge branch ‘master’ into master
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1caf04d2ed149043f63e6f92885805cc7bd8556d/docs/index.html" target="_blank">1caf04d</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b/analysis/index.Rmd" target="_blank">a2dddd6</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-wflow_publish(all = TRUE)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/a2dddd64cb2bf6618893ba57672cc98b5b0a4f4b/docs/index.html" target="_blank">a2dddd6</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-wflow_publish(all = TRUE)
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/d94576094dcd1862d850337eb93af37f95ec3be8/docs/index.html" target="_blank">d945760</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/b8765a56946b12f6b3e0f505d015e6e6fa27c08b/analysis/index.Rmd" target="_blank">b8765a5</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-30
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd", "analysis/function_shannon.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/96ffa9e1c45d05cdefbf34050dfc7bf45ff9ad8f/docs/index.html" target="_blank">96ffa9e</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/a90c239b5c4054e976c560d4750a857d387ba527/analysis/index.Rmd" target="_blank">a90c239</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-25
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/f3968f6ccbe4c14006c638c8d58094a22049b592/docs/index.html" target="_blank">f3968f6</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-03-25
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/2d04d269a2bdee7023a8a9079d724bf3b175880c/analysis/index.Rmd" target="_blank">2d04d26</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-03-25
-</td>
-<td>
-wflow_publish("analysis/index.Rmd")
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/475c26bdce0676e0012e3c833391c7299ea0f022/docs/index.html" target="_blank">475c26b</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/47a03be70bbc76b4878bc53f1011dddbe5e4f141/analysis/index.Rmd" target="_blank">47a03be</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/9ed2be6c051eab8cfb21fb43e910167147209e41/docs/index.html" target="_blank">9ed2be6</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/d7b7e47f10ef5470ab469830c37c6d61ba56af16/analysis/index.Rmd" target="_blank">d7b7e47</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/a7199316d7615a795ab1afd80e255e6d32a7c81a/docs/index.html" target="_blank">a719931</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/8ec6fcf64c588efcef7cf34deed12ab4902630bc/analysis/index.Rmd" target="_blank">8ec6fcf</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/774387922d826b6d45b6073266c0557f25b38353/docs/index.html" target="_blank">7743879</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/7762b809485598946ef7325ffc8404efd623bbf3/analysis/index.Rmd" target="_blank">7762b80</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/35cf5646eb7b26ced5488f6f5e85497b46d8dea9/docs/index.html" target="_blank">35cf564</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/c1edf4a0c2471c9cf2bc6cfadf766097f58f997a/analysis/index.Rmd" target="_blank">c1edf4a</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/97bf5d58f4aaeb9a5622895ba5ac221700fbb8fe/docs/index.html" target="_blank">97bf5d5</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/103a23787b436b8f58a4ef9c767e3ad9765e5665/analysis/index.Rmd" target="_blank">103a237</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/3967bb22651350199fca19176e10d80ffea3765a/docs/index.html" target="_blank">3967bb2</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/1bc1c06134313c3676324a43120ffcec49c1d3c5/analysis/index.Rmd" target="_blank">1bc1c06</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(c("analysis/index.rmd"))
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/7fcbf352293c663adf1a0a698a26436a4551fad3/docs/index.html" target="_blank">7fcbf35</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/e6d72580b2372fbe6752b9031fb20d0730d9e1c4/analysis/index.Rmd" target="_blank">e6d7258</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-03-24
-</td>
-<td>
-wflow_publish(all = TRUE)
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/fed4b63fd34b0a8a2d557fa0ed377332568632ca/analysis/index.Rmd" target="_blank">fed4b63</a>
-</td>
-<td>
-bendsen
-</td>
-<td>
-2021-03-22
-</td>
-<td>
-Start workflowr project.
+<td style="text-align:right;">
+9
 </td>
 </tr>
 </tbody>
 </table>
-</div>
-<hr>
-</div>
-</div>
-</div>
-<p>Species diversity is an important measure, that can be used to discribe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in progress or decline. Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and presence/absence data, to combine the information from both datasets. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.</p>
-<p>The idear of combining information from both datatypes, is that they do not contain the same sort of information, hence some information will be lost if one were to only use on of them.</p>
-<p>Here you can gain an overview of the pages included in the vignette:</p>
-<ul>
-<li><strong><a href="introduction.html">Introduction</a></strong>
-<ul>
-<li>The introduction page will give you a brief introduction of the data used and the method developed.</li>
-</ul></li>
-<li><strong><a href="Diversity.html">Diversity</a></strong>
-<ul>
-<li>The Diversity page will give you an overview of the different diversity estimates, we have used as examples.</li>
-</ul></li>
-<li><strong><a href="Model.html">Bayesian model</a></strong>
-<ul>
-<li>The Bayesian model page contains a dicribtion of the theory used to develop the model, and why we have choosen the distributions we have.</li>
-</ul></li>
-<li><strong><a href="example.html">Examples</a></strong>
-<ul>
-<li>Examples of use cases for the Bayesian model</li>
-</ul></li>
-<li><strong><a href="model_validering.html">Model validation</a></strong>
-<ul>
-<li>The Model Validation page shows how the developed method is perfoming compared to only using cover data or present/absence data for calculating diversity estimates.<br />
-</li>
-</ul></li>
-<li><strong><a href="function_usage.html">Functions</a></strong>
-<ul>
-<li>The Functions page gives an overview of the functions used, what they take as input, what they give as result and how they perfom on an example dataset.</li>
-</ul></li>
-</ul>
-<h2>
-Download
-</h2>
-<p>To download the main function of this vignette click on button below. This will open a new page that can be saved as a R file.</p>
-<p><a href="https://raw.githubusercontent.com/nbendsen/DataProject/master/code/Beta_binomial_cover_update_function.R">
-<button class="btn btn-success">Download HERE</button>
-</a> <br><br> <br><br> <br><br></p>
+<p>It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again we note that we can have the information that a species is present in the plot, but that we don’t have any estimate of its cover within the plot as it is not present within the small square. This is shown with the purple species in this case. Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Species 1
+</th>
+<th style="text-align:right;">
+Species 2
+</th>
+<th style="text-align:right;">
+Species 3
+</th>
+<th style="text-align:right;">
+Species 4
+</th>
+<th style="text-align:right;">
+Species 5
+</th>
+<th style="text-align:right;">
+Species 6
+</th>
+<th style="text-align:right;">
+Species 7
+</th>
+<th style="text-align:right;">
+Species 8
+</th>
+<th style="text-align:right;">
+Species 9
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Species 1
+</th>
+<th style="text-align:right;">
+Species 2
+</th>
+<th style="text-align:right;">
+Species 3
+</th>
+<th style="text-align:right;">
+Species 4
+</th>
+<th style="text-align:right;">
+Species 5
+</th>
+<th style="text-align:right;">
+Species 6
+</th>
+<th style="text-align:right;">
+Species 7
+</th>
+<th style="text-align:right;">
+Species 8
+</th>
+<th style="text-align:right;">
+Species 9
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Plot 1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Plot 7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>Once again, the intention of this vignette is to come up with a method to combine the two datatypes; cover data and presence/absence.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1553,21 +1133,35 @@ locale:
 [5] LC_TIME=Danish_Denmark.1252    
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
 
 other attached packages:
-[1] downloadthis_0.2.1
+ [1] png_0.1-7           sp_1.4-4            maps_3.3.0         
+ [4] MASS_7.3-53         magick_2.7.1        OpenStreetMap_0.3.4
+ [7] kableExtra_1.3.4    forcats_0.5.0       stringr_1.4.0      
+[10] dplyr_1.0.2         purrr_0.3.4         readr_1.4.0        
+[13] tidyr_1.1.2         tibble_3.0.4        ggplot2_3.3.2      
+[16] tidyverse_1.3.0    
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     workflowr_1.6.2  R6_2.5.0         rlang_0.4.8     
- [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
-[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.27   
-[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
-[21] later_1.1.0.1    vctrs_0.3.4      promises_1.2.0.1 fs_1.5.0        
-[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.5    stringi_1.5.3   
-[29] compiler_4.0.3   pillar_1.4.6     generics_0.1.0   bsplus_0.1.2    
-[33] backports_1.1.10 lubridate_1.7.9  httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 modelr_0.1.8     
+ [5] assertthat_0.2.1  highr_0.8         blob_1.2.1        cellranger_1.1.0 
+ [9] yaml_2.2.1        pillar_1.4.6      backports_1.1.10  lattice_0.20-41  
+[13] glue_1.4.2        digest_0.6.27     promises_1.2.0.1  rvest_0.3.6      
+[17] colorspace_1.4-1  htmltools_0.5.0   httpuv_1.5.5      pkgconfig_2.0.3  
+[21] broom_0.7.2       raster_3.4-5      haven_2.3.1       scales_1.1.1     
+[25] webshot_0.5.2     svglite_2.0.0     later_1.1.0.1     git2r_0.28.0     
+[29] generics_0.1.0    farver_2.0.3      ellipsis_0.3.1    withr_2.3.0      
+[33] cli_2.1.0         magrittr_1.5      crayon_1.3.4      readxl_1.3.1     
+[37] evaluate_0.14     fs_1.5.0          fansi_0.4.1       xml2_1.3.2       
+[41] tools_4.0.3       hms_0.5.3         lifecycle_0.2.0   munsell_0.5.0    
+[45] reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1 rlang_0.4.8      
+[49] rstudioapi_0.11   labeling_0.4.2    rmarkdown_2.5     gtable_0.3.0     
+[53] codetools_0.2-16  DBI_1.1.0         R6_2.5.0          lubridate_1.7.9  
+[57] knitr_1.30        rgdal_1.5-23      workflowr_1.6.2   rprojroot_1.3-2  
+[61] rJava_0.9-13      stringi_1.5.3     Rcpp_1.0.5        vctrs_0.3.4      
+[65] mapproj_1.2.7     dbplyr_1.4.4      tidyselect_1.1.0  xfun_0.18        </code></pre>
 </div>
 
 

@@ -4,6 +4,7 @@ site: workflowr::wflow_site
 output:
   workflowr::wflow_html:
     toc: true
+    css: style.css
 bibliography: references.bib
 csl: brewingscience.csl
 editor_options:
@@ -26,7 +27,7 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 
 On the home page we introduced the beta binomial update method. The method combines observed cover data from the small square in the center of the plot and the presence/absence data from the entire plot. This gave rise to a new updated dataset that could be used to give diversity estimates of the entire plot. This page is intended check the goodness-of-fit of the proposed method against the observed cover data.
 
@@ -36,7 +37,7 @@ did not differ too much from the diversity estimates we would achieve by only us
 The intention of this page is to validate whether this assumption is acceptable. It will be done by using the ideas of posterior predictive checks, which are presented below and further described in [@MimnoE3441] and [@Gelman].
 
 
-<h1>Posterior predictive checks</h1>
+<h2>Posterior predictive checks</h2>
 In each plot we obtain a posterior distribution for each specie that have a $1$ in the corresponding presence/absence data of the plot. These posterior distributions are estimated using the observed cover data and observed presence/absence data.
 
 For a given species in a plot the posterior distribution is given by 
@@ -65,10 +66,9 @@ A small posterior predictive p-value close to zero indicates that the observed t
 <br>
 As mentioned earlier we will use diversity estimates as test statistics. We saw on the home page that most plots in the beta binomial cover dataset had higher diversity estimates than in the observed dataset. However, that was not the case for all plots. We have defined the posterior predictive p-value as above to take into account when our method returns diversity estimate too high or too low relative to the observed dataset as we see both outcomes as extreme. 
 
-The posterior predictive checks are only intended to highlight if our model is likely given the data, i.e. the model fit the observed data well. This, however, does not mean that the model is "better" to estimate diversity than just using cover or presence/absence data. This is a further assumption we need to make based on considerations within the domain of ecology. **Snak med bodil og christian**
+The posterior predictive checks are only intended to highlight if our model is likely given the data, i.e. the model fit the observed data well. This, however, does not mean that the model is "better" to estimate diversity than just using cover or presence/absence data. This is a further assumption we need to make based on considerations within the domain of ecology. 
 
-
-<h1> Model validation for 1. example </h1>
+<h2> Model validation for 1. example </h2>
 In the first example on the home page we worked with a subset of the NOVANA dataset from the tertiary habitat "Surt overdrev". For further details on how this subset was created click [link](data_6230.html). In this subsection we will apply the ideas of posterior predictive checks to see how the beta binomial update method performs on this subset.
 <br>
 
@@ -182,7 +182,7 @@ This matches with what we found in the "Hill Diversity comparison" section on th
 For both test statistics the conclusion is that the model mostly generated data that looks like the observed data. This gives confidence in the fact that the model has captured some good aspects of the observed data and gives sensible and thereby useful result to work with. Again it should be emphasized that it does not mean the the model gives better diversity estimates then what could be obtained by only using the observed cover data.
 
 
-<h1>Model validation for 2. example </h1>
+<h2>Model validation for 2. example </h2>
 We also want to include the posterior predictive checks we get when we apply these to the data from tertiary habitat "Kalkoverdrev" from year 2009 that we used in our second example on the home page. We make similar plots as we did above. First with the Hill Shannon diversity as test statistic and then with the Hill Simpson diveristy as test statistic.
 
 
@@ -249,7 +249,7 @@ In the case of both test statistics we see that a larger proportion of the plots
 
 Below we study if there are some differences in the data from "surt overdrev" and "kalkoverdrev" that could explain why the model perform worse for the "kalkoverdrev" in these posterior predictive checks. 
 
-<h1> Comparison of tertiary habitat types </h1>
+<h2> Comparison of tertiary habitat types </h2>
 
 ```{r, include= FALSE}
 freq_6210 <- read.csv("data/frekvens_data_6210_year2009.csv")
@@ -377,14 +377,14 @@ ggplot() +
 
 The above scatterplots nicely visualize the fact that plots with a low proportion are more sensitive to the beta binomial update method. We see that when a plot has a low proportion the observed Hill Shannon diversity is far more likely to be different than the generated Hill Shannon diversities we get from the beta binomial update method. Furthermore, we notice that all plots with a posterior predictive p-value less than 0.05 have a proportion less than 0.34. This fits nicely with what we expected and is probably the reason that our method has a slightly bigger effect on "kalk overdrev" than "surt overdrev" as "kalk overdrev" has a bit more plots where the proportion of species that are found in the presence/absence data are also found in the cover data is very low.
 
-<h1>Other validations </h1>
+<h2>Other validations </h2>
 By using the posterior predictive checks we studied if the observed data is a likely outcome of our constructed model. It turned out to be the conclusion in most cases. However, the observed data is only a sample for each plot. This means that the "true" diversity of a plot might be rather different than the information we get from the observed cover and presence/absence data. The more correct diversity estimate could be obtained if we had cover data for the entire plot and not only the small square in the center of the plot, this will however be a huge job to collect. The beta binomial update method that we have created should in theory help to give a better diversity estimate based on the sample from the cover data in the small square and the corresponding presence/absence data of the entire plot, since we include all species present in the entire plot.
 
 An interesting thing to do would be to simulate a dataset (both cover and present/absence) with known diversities for the plots in the dataset. When knowing the true diversity we could have tested how much better our method would be to estimate the diversity rather than only using the cover or presence/absence data. However, this validation of the method has not been possible within the scope of this project and is a topic for further studies in the future.
 <br><br>
 
 
-<h1>Code implementation </h1>
+<h2>Code implementation </h2>
 The following is an implementation of the ppc() function that was used in the make visual inspections of the posterior predictive checks for some plots.
 ```{r, eval=FALSE}
 library(fitdistrplus)
@@ -485,6 +485,6 @@ hist(shannon, xlim = c(min_val, max_val), main = sprintf("Histogram of simulated
 legend("topright", legend = "Red line is observed \n Hill Shannon index")
 abline(v = T_static, col = "red" )
 ```
-<h1>References </h1>
+<h2>References </h2>
 
 

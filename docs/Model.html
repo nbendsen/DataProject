@@ -11,7 +11,7 @@
 
 
 
-<title>Presentation of functions</title>
+<title>Bayesian model</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -413,7 +413,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Presentation of functions</h1>
+<h1 class="title toc-ignore">Bayesian model</h1>
 
 </div>
 
@@ -462,7 +462,7 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 </div>
 <div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -560,7 +560,6 @@ Unstaged changes:
     Modified:   analysis/index.Rmd
     Modified:   analysis/model_validering.rmd
     Modified:   analysis/plot3.PNG
-    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -573,371 +572,49 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
-
 <p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Function_usage.Rmd</code>) and HTML (<code>docs/Function_usage.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
 </p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/891b43e2acb59a740be3ad84e2dfaa1ff159eb00/docs/Function_usage.html" target="_blank">891b43e</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-10
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/0e9dbb626e54a664cf9a26260e383bcf282c12d8/docs/Function_usage.html" target="_blank">0e9dbb6</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/a594d5a9e33fb4da58ab259f0972ea1b24728ae8/analysis/Function_usage.Rmd" target="_blank">a594d5a</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-add
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/24355541eb0eb35e257446ef169bf9af5c9c9283/docs/Function_usage.html" target="_blank">2435554</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/042e8d51654d96d6e60b6a313f696ddef36762c5/analysis/Function_usage.Rmd" target="_blank">042e8d5</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1f7890b4b17c0abbbf76656f6ddb19c618e6cf4f/docs/Function_usage.html" target="_blank">1f7890b</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/41e37edb1c1802d03abd2309710c550ee56ff1f6/analysis/Function_usage.Rmd" target="_blank">41e37ed</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1012d73da05d34051892a58037fe3130990c608a/docs/Function_usage.html" target="_blank">1012d73</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/fcd03742c1a08074cacc310eac38274b0dd5bd72/analysis/Function_usage.Rmd" target="_blank">fcd0374</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/dae8962df6ddb419b925daa431bdf658f6451e1c/docs/Function_usage.html" target="_blank">dae8962</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-19
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/da6cf05516f9bb647cb04e2d76e408b24e9ed05a/analysis/Function_usage.Rmd" target="_blank">da6cf05</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-19
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/b12e7eecd12498845ae6d3dc42556a4f95113e87/docs/Function_usage.html" target="_blank">b12e7ee</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-18
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/df33abbf44fc1993433b6c591b9a97ccb2e65c29/analysis/Function_usage.Rmd" target="_blank">df33abb</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-18
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/Function_usage.Rmd" target="_blank">6c0e88a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-15
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/Function_usage.html" target="_blank">1bfbb02</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/Function_usage.html" target="_blank">f173714</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/29e6e6f87214780226bf6328573463611ce371ce/docs/Function_usage.html" target="_blank">29e6e6f</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added docs for functions
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/6df1c173b37d25d8aa0f66fed1436495c654b4f8/analysis/Function_usage.Rmd" target="_blank">6df1c17</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added function usage
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/6df1c173b37d25d8aa0f66fed1436495c654b4f8/docs/Function_usage.html" target="_blank">6df1c17</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added function usage
-</td>
-</tr>
-</tbody>
-</table>
-</div>
 <hr>
 </div>
 </div>
 </div>
-<p>This page is intended to provide an overview of the functions that are used on the <a href="example.html">Examples</a> page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.</p>
-<p>The reader can download all the functions following the link below. The link will take the reader to a new page. This page can be saved as a R file.</p>
-<a href="https://raw.githubusercontent.com/nbendsen/DataProject/master/code/function.R">
-<button class="btn btn-success">Download HERE</button>
-</a>
-<p><br></p>
-<p>The presentation of each function will also contain a small example of how the function is applied. To to this, we again use a small constructed cover dataset and presence/absence dataset. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.</p>
-<p>When referring to cover_data, the dataset looks like:</p>
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<p>The first section of this page will present the ideas behind our proposed model to combine cover data and presence/absence data. The section will present the beta-binomial model for the reader and show how this can be applied to the problem. <br> The second section of this page presents an implementation of the model in R. Furthermore, the section also includes a simple example of the use of the model.</p>
+<h2>
+Presentation of Bayesian model
+</h2>
+<p>As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data where cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. <br> In the following we propose a method that for each plot obtain an estimate of a species’ abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to better diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> From the general setup in bayesian statistics we get that <span class="math display">\[
+P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
+\]</span> where <span class="math inline">\(P(Y=y|\theta)\)</span> is the likelihood function and <span class="math inline">\(\pi(\theta)\)</span> is some prior distribution. We are interested in the posterior distribution <span class="math inline">\(P(\theta|Y=y)\)</span> which we can use to estimate the abundance of a species in the entire plot. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible in each plot. A natural distribution to model this is the binomial distribution <span class="math display">\[
+P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
+\]</span> <br> We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution <span class="math inline">\(\pi(\theta)\)</span> of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species’ spatial distribution we assume that we will be able to obtain a better abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot. <br><br> The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by <span class="math display">\[
+\pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
+\]</span> When working with the bayesian framework, one has to decide on the paramters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is <span class="math inline">\(1\)</span>. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat. <br><br> From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot <span class="math display">\[
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
+\]</span> When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the abundance for the species in the plot. <br> The mean posterior for a beta-distribution is given by: <span class="math display">\[
+E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
+\]</span> From the above theoretical discussion we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Examples of different common ways to measure diversity for an area are presented at the <a href="Diversity.html">Diversity</a> page.</p>
+<h2>
+Implementation
+</h2>
+<p>The above theoretical discussions of the beta-binomial model are implemented in the function “beta_binomial_cover_update”.</p>
+<p><strong>Usage:</strong></p>
+<p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
+<p><strong>Arguments:</strong></p>
+<ul>
+<li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
+<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
+<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
+</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
+</ul>
+<p><strong>Output</strong></p>
+<ul>
+<li>The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above.</li>
+</ul>
+<p><strong>Calculated example</strong></p>
+To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction. The cover data look like:
+<table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1198,8 +875,8 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>When referring to presence_absence_data, the dataset looks like:</p>
-<table class="table" style="margin-left: auto; margin-right: auto;">
+And the presence/absence data looks like:
+<table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1460,27 +1137,8 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>For each function we will use the above data to give an example of the usage of the function.</p>
-<h2>
-Beta Binomial Cover Update
-</h2>
-<p>Main function of this vignette. The function is an implementation of the method outlined on the home page.</p>
-<p><strong>Usage:</strong></p>
-<p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
-<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
-<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1. n is the number of pins used in each blot, so by dividing each entry with n, we normalize the data.</li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
-</ul>
-<p><strong>Output</strong></p>
-<ul>
-<li>The function returns a dataframe with plots as rows and species as columns, and where each entry contain new abundance data for a specie in a plot.</li>
-</ul>
-<p>For further specifications of the function click <a href="bayesian_method_describtion.html">link</a></p>
-<p><strong>Calculated example</strong></p>
-<pre class="r"><code>res1 &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
+<p>We input the two datasets into our function</p>
+<pre class="r"><code>beta_binomial_cover &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16, remove_column = 0)</code></pre>
 <p>The data from the outcome of the function looks like:</p>
 <table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1744,626 +1402,6 @@ Plot 7
 </tbody>
 </table>
 <p>A more detailed description of the implementation of the model can be found at: <a href="bayesian_method_describtion.html">detailed description</a>. This page also includes the full code of the function.</p>
-<h2>
-Functions for diversity estimates
-</h2>
-<p>The functions below implement the different diversity estimates defined at the <a href="Diversity.html">Diversity</a> page. The code implementations of the functions can be found at <a href="diversity_functions_code.html">implementation</a></p>
-<h3>
-Shannon index
-</h3>
-<p><strong>Usage:</strong></p>
-<p>shannon(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
-</ul>
-<p><strong>Calculated example</strong></p>
-<pre class="r"><code>res2 &lt;- shannon(Cover, remove_column = 0)</code></pre>
-<table class="table" style="width: auto !important; ">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Shannon index
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Plot 1
-</td>
-<td style="text-align:right;">
-1.320888
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 2
-</td>
-<td style="text-align:right;">
-0.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 3
-</td>
-<td style="text-align:right;">
-1.603369
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 4
-</td>
-<td style="text-align:right;">
-1.650835
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 5
-</td>
-<td style="text-align:right;">
-1.173739
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 6
-</td>
-<td style="text-align:right;">
-1.098612
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 7
-</td>
-<td style="text-align:right;">
-1.811627
-</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Simpson’s index
-</h3>
-<p><strong>Usage:</strong></p>
-<p>simpson(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with simpson’s index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.</li>
-</ul>
-<p><strong>Calculated example</strong></p>
-<pre class="r"><code>res3 &lt;- simpson(Cover, remove_column = 0)</code></pre>
-<table class="table" style="width: auto !important; ">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Simpson’s index
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Plot 1
-</td>
-<td style="text-align:right;">
-0.2812500
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 2
-</td>
-<td style="text-align:right;">
-0.0000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 3
-</td>
-<td style="text-align:right;">
-0.2208000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 4
-</td>
-<td style="text-align:right;">
-0.2294887
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 5
-</td>
-<td style="text-align:right;">
-0.3253968
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 6
-</td>
-<td style="text-align:right;">
-0.3333333
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 7
-</td>
-<td style="text-align:right;">
-0.1779396
-</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Species richness
-</h3>
-<p><strong>Usage:</strong></p>
-<p>species_richness(presence_absence_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
-</ul>
-<p><strong>Calculated example</strong></p>
-<pre class="r"><code>res4 &lt;- species_richness(PresenceAbsence, remove_column = 0)</code></pre>
-<table class="table" style="width: auto !important; ">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Species richness
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Plot 1
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 2
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 3
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 4
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 5
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 6
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 7
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Hill shannon diveristy
-</h3>
-<p><strong>Usage:</strong></p>
-<p>hill_shannon(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with the Hill Shannon diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
-</ul>
-<p><strong>Calculated example</strong></p>
-<pre class="r"><code>res5 &lt;- hill_shannon(Cover, remove_column = 0)</code></pre>
-<table class="table" style="width: auto !important; ">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Hill Shannon diversity
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Plot 1
-</td>
-<td style="text-align:right;">
-3.746748
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 2
-</td>
-<td style="text-align:right;">
-1.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 3
-</td>
-<td style="text-align:right;">
-4.969749
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 4
-</td>
-<td style="text-align:right;">
-5.211332
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 5
-</td>
-<td style="text-align:right;">
-3.234063
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 6
-</td>
-<td style="text-align:right;">
-3.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 7
-</td>
-<td style="text-align:right;">
-6.120394
-</td>
-</tr>
-</tbody>
-</table>
-<h3>
-Hill Simpson diversity
-</h3>
-<p><strong>Usage:</strong></p>
-<p>hill_simpson(cover_data, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A vector with the Hill Simpson diversity for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
-</ul>
-<p><strong>Calculated example</strong></p>
-<pre class="r"><code>res6 &lt;- hill_simpson(Cover, remove_column = 0)</code></pre>
-<table class="table" style="width: auto !important; ">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Hill Simpson diversity
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Plot 1
-</td>
-<td style="text-align:right;">
-3.555556
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 2
-</td>
-<td style="text-align:right;">
-0.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 3
-</td>
-<td style="text-align:right;">
-4.528986
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 4
-</td>
-<td style="text-align:right;">
-4.357513
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 5
-</td>
-<td style="text-align:right;">
-3.073171
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 6
-</td>
-<td style="text-align:right;">
-3.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 7
-</td>
-<td style="text-align:right;">
-5.619883
-</td>
-</tr>
-</tbody>
-</table>
-<h2>
-Plot of different diversities
-</h2>
-<p>This function plots different diversity estimates of a plot against some information of interest about the plot.</p>
-<p><strong>Usage:</strong></p>
-<p>plot_diversity(data, diversities, plot_info, description = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><strong>data</strong>: A data frame. Contains one or more columns of different diversity estimates of plots and also a column with some information about the plots, could be a plot ID or something like it.</li>
-<li><strong>diversities</strong>: A list of strings. The names of the columns in the data that contain diversity estimates.</li>
-<li><strong>plot_info</strong>: A string. The column name in the data that contains the plot information one wants to plot the diversities against.</li>
-<li><strong>description</strong>: A string. The description of the plot information.</li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>Plots with different diversity estimates mapped against the plot information of interest.</li>
-</ul>
-<p>Further documentation and code implementation at <a href="gradient_plot.html">link</a></p>
-<p><strong>Calculated example</strong></p>
-<p>We will here use the data:</p>
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-pH
-</th>
-<th style="text-align:right;">
-Hill_simpson
-</th>
-<th style="text-align:right;">
-Species_richness
-</th>
-<th style="text-align:right;">
-Hill_shannon
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Plot 1
-</td>
-<td style="text-align:right;">
-4.0
-</td>
-<td style="text-align:right;">
-3.555556
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-3.746748
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 2
-</td>
-<td style="text-align:right;">
-3.0
-</td>
-<td style="text-align:right;">
-0.000000
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 3
-</td>
-<td style="text-align:right;">
-7.0
-</td>
-<td style="text-align:right;">
-4.528986
-</td>
-<td style="text-align:right;">
-50
-</td>
-<td style="text-align:right;">
-4.969749
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 4
-</td>
-<td style="text-align:right;">
-4.0
-</td>
-<td style="text-align:right;">
-4.357513
-</td>
-<td style="text-align:right;">
-29
-</td>
-<td style="text-align:right;">
-5.211332
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 5
-</td>
-<td style="text-align:right;">
-5.0
-</td>
-<td style="text-align:right;">
-3.073171
-</td>
-<td style="text-align:right;">
-42
-</td>
-<td style="text-align:right;">
-3.234063
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 6
-</td>
-<td style="text-align:right;">
-3.5
-</td>
-<td style="text-align:right;">
-3.000000
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-3.000000
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Plot 7
-</td>
-<td style="text-align:right;">
-8.0
-</td>
-<td style="text-align:right;">
-5.619883
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-6.120394
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="r"><code>plot_diversity(Cover2, c(&quot;Hill_simpson&quot;, &quot;Species_richness&quot;, &quot;Hill_shannon&quot;), &quot;pH&quot;, &quot;The pH value of the soil for each plot&quot;)</code></pre>
-<p><img src="figure/Function_usage.Rmd/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
-<h2>
-Diversity profile comparison
-</h2>
-<p>This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial updated cover data. Its output is a plot that shows different hill diversities as a function of the exponent <span class="math inline">\(l\)</span> in:</p>
-<p><span class="math display">\[
-\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
-\]</span></p>
-<p><strong>Usage:</strong></p>
-<p>Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL)</p>
-<p><strong>Arguments:</strong></p>
-<ul>
-<li><p><strong>data_observed</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>data_new</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial updated data for a given specie in a given plot.</p></li>
-<li><p><strong>plot</strong>: An integer. Which plot should be used in the comparison, ie which row should the data be taken from.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the data_observed and data_new contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain data on species.</p></li>
-</ul>
-<p><strong>Output:</strong></p>
-<ul>
-<li>A plot with the hill diversity (y-axis) as a function of the exponent <span class="math inline">\(l\)</span> (x-axis). the two lines are from the observed cover data and the beta binomial updated cover data.</li>
-</ul>
-<p><strong>Calculated example</strong></p>
-<p>In the example will we use the function beta_binomial_cover_update to get the updated cover data.</p>
-<pre class="r"><code>beta_binomial_cover_updated_data &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
-<pre class="r"><code>different_diversities(Cover, beta_binomial_cover_updated_data, plot = 1,  remove_column = 3)</code></pre>
-<p><img src="figure/Function_usage.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div id="refs">
-
-</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -2384,33 +1422,35 @@ locale:
 [5] LC_TIME=Danish_Denmark.1252    
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
 
 other attached packages:
- [1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53        downloadthis_0.2.1
- [5] kableExtra_1.3.4   forcats_0.5.0      stringr_1.4.0      dplyr_1.0.2       
- [9] purrr_0.3.4        readr_1.4.0        tidyr_1.1.2        tibble_3.0.4      
-[13] ggplot2_3.3.2      tidyverse_1.3.0   
+ [1] fitdistrplus_1.1-3  survival_3.2-7      maps_3.3.0         
+ [4] MASS_7.3-53         magick_2.7.1        OpenStreetMap_0.3.4
+ [7] kableExtra_1.3.4    forcats_0.5.0       stringr_1.4.0      
+[10] dplyr_1.0.2         purrr_0.3.4         readr_1.4.0        
+[13] tidyr_1.1.2         tibble_3.0.4        ggplot2_3.3.2      
+[16] tidyverse_1.3.0    
 
 loaded via a namespace (and not attached):
  [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 splines_4.0.3    
- [5] modelr_0.1.8      assertthat_0.2.1  highr_0.8         blob_1.2.1       
- [9] cellranger_1.1.0  yaml_2.2.1        pillar_1.4.6      backports_1.1.10 
-[13] lattice_0.20-41   glue_1.4.2        digest_0.6.27     promises_1.2.0.1 
-[17] rvest_0.3.6       colorspace_1.4-1  htmltools_0.5.0   httpuv_1.5.5     
-[21] Matrix_1.2-18     pkgconfig_2.0.3   broom_0.7.2       haven_2.3.1      
-[25] scales_1.1.1      webshot_0.5.2     svglite_2.0.0     whisker_0.4      
-[29] later_1.1.0.1     git2r_0.28.0      mgcv_1.8-33       generics_0.1.0   
-[33] farver_2.0.3      ellipsis_0.3.1    withr_2.3.0       cli_2.1.0        
-[37] magrittr_1.5      crayon_1.3.4      readxl_1.3.1      evaluate_0.14    
-[41] fs_1.5.0          fansi_0.4.1       nlme_3.1-149      xml2_1.3.2       
-[45] tools_4.0.3       hms_0.5.3         lifecycle_0.2.0   munsell_0.5.0    
-[49] reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1 rlang_0.4.8      
-[53] grid_4.0.3        rstudioapi_0.11   labeling_0.4.2    rmarkdown_2.5    
-[57] gtable_0.3.0      DBI_1.1.0         R6_2.5.0          lubridate_1.7.9  
-[61] knitr_1.30        workflowr_1.6.2   bsplus_0.1.2      rprojroot_1.3-2  
-[65] stringi_1.5.3     Rcpp_1.0.5        vctrs_0.3.4       dbplyr_1.4.4     
-[69] tidyselect_1.1.0  xfun_0.18        </code></pre>
+ [5] modelr_0.1.8      assertthat_0.2.1  sp_1.4-4          highr_0.8        
+ [9] blob_1.2.1        cellranger_1.1.0  yaml_2.2.1        pillar_1.4.6     
+[13] backports_1.1.10  lattice_0.20-41   glue_1.4.2        digest_0.6.27    
+[17] promises_1.2.0.1  rvest_0.3.6       colorspace_1.4-1  htmltools_0.5.0  
+[21] httpuv_1.5.5      Matrix_1.2-18     pkgconfig_2.0.3   broom_0.7.2      
+[25] raster_3.4-5      haven_2.3.1       scales_1.1.1      webshot_0.5.2    
+[29] svglite_2.0.0     later_1.1.0.1     git2r_0.28.0      generics_0.1.0   
+[33] ellipsis_0.3.1    withr_2.3.0       cli_2.1.0         magrittr_1.5     
+[37] crayon_1.3.4      readxl_1.3.1      evaluate_0.14     fs_1.5.0         
+[41] fansi_0.4.1       xml2_1.3.2        tools_4.0.3       hms_0.5.3        
+[45] lifecycle_0.2.0   munsell_0.5.0     reprex_0.3.0      compiler_4.0.3   
+[49] systemfonts_1.0.1 rlang_0.4.8       rstudioapi_0.11   rmarkdown_2.5    
+[53] gtable_0.3.0      codetools_0.2-16  DBI_1.1.0         R6_2.5.0         
+[57] lubridate_1.7.9   knitr_1.30        rgdal_1.5-23      workflowr_1.6.2  
+[61] rprojroot_1.3-2   rJava_0.9-13      stringi_1.5.3     Rcpp_1.0.5       
+[65] vctrs_0.3.4       dbplyr_1.4.4      tidyselect_1.1.0  xfun_0.18        </code></pre>
 </div>
 
 

@@ -30,7 +30,7 @@ An overview of the pages included in the vignette:
 
 
 <h2>Download</h2>
-The main function of this vignette is an implementation of the Bayesian model. To download this function click on the button below. This will open a new page that can be saved as a R file.
+To download the functions from this vignette click on the button below. This will open a new page that can be saved as a R file.
 
 ```{r, echo = FALSE, message= FALSE, warning= FALSE}
 library(downloadthis)
@@ -46,7 +46,7 @@ download_link(
 
 ```
 <br><br>
-A more detailed description of the implementation of the model can be found at: [detailed description](bayesian_method_describtion.html).
+More details of the functions can be found at the [functions page](Function_usage.html).
 
 
 

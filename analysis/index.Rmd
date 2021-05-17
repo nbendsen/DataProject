@@ -46,7 +46,7 @@ download_link(
 
 ```
 <br><br>
-More details of the functions can be found at the [functions page](Function_usage.html).
+More details on the functions can be found at the [functions page](Function_usage.html).
 
 
 

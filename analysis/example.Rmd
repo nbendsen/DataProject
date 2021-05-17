@@ -20,7 +20,11 @@ source("code/function_shannon.R")
 source("code/function.R")
 ```
 
-This page includes two examples of use cases for the beta binomial cover update function presented at the [Bayesian model](Model.html) page.
+This page includes two examples of applications of the beta binomial cover update function presented at the [Bayesian model](Model.html) page. The page should, hopefully, give the reader a further feeling of how the beta binomial cover update function work as well as giving inspiration to use cases where the function can be applied.
+
+The first example works with the tertiary habitat "Nardus grasslands". First, we will study the effect of the beta binomial cover update function on the data viewed through different diversity measures. This will primarily be done by visual inspections. Lastly, the example will include a small study of the relation between pH value of the soil and species diveristy. 
+
+The second example works with the tertiary habitat "Dry calcarous grasslands". This tertiary habitat is included to study the effect of nitrogen deposition on species diversity. In this example we also look at the effect of the beta binomial cover update function at site level as opposed to plot level as we only did in the first example.
 
 ## Examples {.tabset}
 
@@ -212,10 +216,11 @@ ggplot(mapping = aes(x = observed_hill_simpson, y = beta_binomial_simpson))+
 The difference between the beta binomial Hill Simpson diversity and the Hill Simpson diversity obtained from the observed cover data is less than than for the Hill Simpson as expected. This fits nicely with what we found in the "Hill Diversity comparison" subsection. It is worth to notice that we in this plot get some diversity estimates that are lower in the beta binomial cover data than in the observed cover data. 
 
 <h3>Species diversity and pH value </h3>
-One of the reasons you might want to calculate the diversity for a plot/site, is that you want to compare how different variables affect the diversity of the site. An example of this could be that you want to see how the pH value of the soil are related to the diversity of the plot.
- 
-<br>
+One of the reasons one might want to calculate the diversity for a plot or a site is to compare how different variables affect the diversity of the site. An example of this could be that one wants to see how the pH value of the soil are related to the diversity of the plot. The pH value is associated with plants nutrient availability and lots of other stuff. Thus, we might be able to see a change in the diversity for changing pH values. The pH values are additionally of concern due to acidification from precipitation which may alter pH in the soil.
+
+
 Below we plot the beta binomial Shannon index and the observed Shannon index against the pH value of the soil. This is intended to visualize partly if there seems to be any interesting relationship between Shannon index and pH value of the soil and also whether the use of the beta binomial cover update function changes this conclusion.
+
 ```{r, include = FALSE, warning =FALSE}
 df <- data.frame(matrix(ncol = 3, nrow = 0))
 
@@ -259,7 +264,7 @@ There does not seem to be any clear relationship between the Shannon index and t
 
 <br>
 
-We study the relationship between species diversity and pH value of the soil a bit further. The function  [plot_index_gradient](gradient_plot.html) is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values of the soil.
+We study the relationship between species diversity and pH value of the soil a bit further. The function [plot_idiversity](gradient_plot.html) is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values of the soil. From the left we have species richness, Hill Shannon and Hill Simpson, thus, we are less and less sensitive to rare species. 
 
 ```{r, warning = FALSE, include = FALSE}
 data_for_plot <- as.data.frame(as.numeric(abiotiske$pHjord))
@@ -272,15 +277,31 @@ data_for_plot$'Beta binomial Hill Simpson' <- hill_simpson(beta_binomial_cover, 
 data_for_plot$Ndep <- as.numeric(abiotiske$Ndep)
 ```
 
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE,eval=FALSE}
 plot_diversity(data_for_plot ,c("Species richness", "Beta binomial Hill Shannon", "Beta binomial Hill Simpson"), "pH", description = "The PH value of the soil for each plot")
 ```
 
-The general trend that can be seen for all three diversities, beta binomial hill shannon, beta binomial hill simpson and spices richness, is that a low pH value is correlated with lower diversity up until a certain point. further analysis will be need to understand whether or not this is a casual relationship.
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+diversities <- c("Species richness", "Beta binomial Hill Shannon", "Beta binomial Hill Simpson")
+plot_data <-  gather(data_for_plot, key = "type", value = "Diversity", diversities)
+ny <- as.data.frame(transform(plot_data, type=factor(type, levels = c(diversities))))
+plot_info <- "pH"
+description <- "The PH value of the soil for each plot"
+ggplot(data = ny, mapping = aes(x = as.numeric(plot_data[[plot_info]]), y = Diversity)) +
+    geom_point()+
+    geom_smooth(method = "loess", se = FALSE) +
+    facet_wrap(vars(type),scales = "free_y") +
 
-```{r, message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
-plot_diversity(data_for_plot ,c("Species richness", "Beta binomial Hill Shannon", "Beta binomial Hill Simpson"), "Ndep", description = "The Ndep value for each plot")
+    #Label for the x-axis
+    xlab(description) +
+
+    # Label for the y-axis
+    ylab("Diversity estimates") +
+    theme_update(strip.placement = "outside", strip.text.x = element_text(face = "bold"), title = element_text(face = "bold"))
 ```
+
+
+The general trend that can be seen for all three diversities, beta binomial hill shannon, beta binomial hill simpson and spices richness, is that a low pH value is correlated with lower diversity up until a certain point. further analysis will be need to understand whether or not this is a casual relationship.
 
 
  
@@ -294,7 +315,8 @@ freq_6210 <- read.csv("data/frekvens_data_6210_year2009.csv")
 abiotiske_6210 <- read.csv("data/abiotiske_data_6210_year2009.csv")
 ```
 
-With this data we are especially interested in how the diversity change when plotted against different values of nitrogen deposition. It is assumed that if the value of nitrogen deposition is high, there is a lot of nitrogen in the soil. It is also known that increased nitrogen supply can cause changes to the species composition. 
+With this data we are especially interested in how the diversity change when plotted against different values of nitrogen deposition (from atmosphere). This is especially relevant for nature areas close to farm lands. It is assumed that if the value of nitrogen deposition is high, there is a lot of nitrogen in the soil. Increased nitrogen alters competetion and is often associated with species loss (due to increasing dominance of few competetively strong plant species).
+
 <br>
 Therefore, some illustrations of the relationship between nitrogen deposition and diversity measures can be used as another example of where the beta binomial cover update function can be used.
 <br><br>
@@ -387,7 +409,9 @@ There does not seem to be a clear relation between the nitrogen deposition and t
 
 <h2> Comparisons across sites </h2>
 
-So far have we just been comparing different plots from the same habitat type against each other. since each plot is just a sample of a larger site, could it be useful to compare how different sites compare using both the beta binomial cover data and the observed cover data. We will do this be aggregating the data for all the plots from the same site and year. Since the shannon index is not linear as explained in [diversity](diversity.html), can it be misleading to take the average from a group of plots, for this reason will we only focus on the hill shannon diversity in this section. 
+So far have we just been comparing the effect of the beta binomial cover update function at a plot level. Since each plot is just a sample of a larger site, it could interesting to see the effect of the function at a site level instead.
+
+We will do this be aggregating the data for all the plots from the same site. We will use the Hill Shannon diversity to measure the species diversity as this estimator does not favor neither common or rare species.
 
 ```{r, echo = FALSE}
 site_aggregate <- function(data, aggregate_list, aggregate_function = mean) {
@@ -418,7 +442,7 @@ data_for_plot$"observed hill simpson" <- hill_simpson(cover_6210, remove_column 
 aggregate_data <- site_aggregate(data_for_plot, c("Beta binomial Hill Simpson", 'Beta binomial simpson index', "Species richness", 'Beta binomial Hill Shannon', 'Beta binomial shannon index',"N" , "observed hill shannon","observed hill simpson" ), aggregate_function = mean)
 ```
 
-We will first plot how beta binomial hill shannon compares with the observed hill shannon, where we for each site has taken the average value for all plots.
+We will first plot how beta binomial hill shannon compares with the observed hill shannon, where we for each site has taken the average value for all plots within that site.
 
 ```{r, echo = FALSE, warning=FALSE}
 ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x = `observed hill shannon` ))+
@@ -432,29 +456,12 @@ ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x
 
 This looks quite similar to what we found when we compared at plot level.
 
-An other comparison we can make, is to look at how the variance changes from the observed hill shannon, to the beta binomial hill shannon.
-
+An other comparison we can make is to look at how the variance of species diversity changes for a site when we apply the beta binomial cover update function and use the Hill Shannon diversity as a measure.
 
 ```{r,  echo = FALSE, warning=FALSE}
 data_aggregate_long <- gather(aggregate_data, data_from, val, c("observed hill shannon", "Beta binomial Hill Shannon"))
 ```
 
-
-```{r,  echo = FALSE, warning=FALSE}
-ggplot(data = data_aggregate_long, mapping = aes(y = val, fill = data_from))+
-  geom_boxplot() +
-  ggtitle( "Comparison of the variance") +
-  theme(plot.title = element_text(size=10))+
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())+
-  ylab("variance") +
-  labs(fill = "Data")
-```
-
-From the plot can it be seen that the beta binomial hill shannon has a slightly higher variance an average.
-
-If we instead compare it for each site:
 
 ```{r,  echo = FALSE, warning=FALSE}
 aggregate_data <- site_aggregate(data_for_plot, c("Beta binomial Hill Simpson", 'Beta binomial simpson index', "Species richness", 'Beta binomial Hill Shannon', 'Beta binomial shannon index',"N" , "observed hill shannon","observed hill simpson" ), aggregate_function = var)
@@ -469,7 +476,7 @@ ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x
 
 ```
 
-The plot above suggest, that for the sites with a large variance in hill shannon diversity between different plots, will the variance become larger using the beta binomial method. For plot with a low variance, will does we not find the big difference between using the beta binomial method and using the observed cover data.
+The plot above suggest that for the sites with a large variance in Hill Shannon diversity for plots within the site, the variance become larger when the beta binomial cover update function is applied as opposed to the observed cover data. For sites with a low variance the change does not seem to be as big.
 
 
 

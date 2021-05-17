@@ -22,9 +22,9 @@ source("code/function.R")
 
 This page includes two examples of applications of the beta binomial cover update function presented at the [Bayesian model](Model.html) page. The page should, hopefully, give the reader a further feeling of how the beta binomial cover update function work as well as giving inspiration to use cases where the function can be applied.
 
-The first example works with the tertiary habitat "Nardus grasslands". First, we will study the effect of the beta binomial cover update function on the data viewed through different diversity measures. This will primarily be done by visual inspections. Lastly, the example will include a small study of the relation between pH value of the soil and species diveristy. 
+The first example works with the tertiary habitat "Nardus grasslands". First, we will study the effect of the beta binomial cover update function on the data viewed through different diversity measures. This will primarily be done by visual inspections. Lastly, the example will include a small study of the relation between pH value of the soil and species diversity. 
 
-The second example works with the tertiary habitat "Dry calcarous grasslands". This tertiary habitat is included to study the effect of nitrogen deposition on species diversity. In this example we also look at the effect of the beta binomial cover update function at site level as opposed to plot level as we only did in the first example.
+The second example works with the tertiary habitat "Dry calcareous grasslands". This tertiary habitat is included to study the effect of nitrogen deposition on species diversity. In this example we also look at the effect of the beta binomial cover update function at site level as opposed to plot level as we only did in the first example.
 
 ## Examples {.tabset}
 

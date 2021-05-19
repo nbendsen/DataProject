@@ -1,5 +1,5 @@
 ---
-title: "Bayesian model"
+title: "Bayesian model for diversity estimates"
 output:
   workflowr::wflow_html:
     toc: true

@@ -12,14 +12,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-In ecology an important aspect is the diversity. The diversity is a measure of the number of different types of species within a nature area and also how the individuals are distributed among the species A diversity index can be computed in several different ways and puts weight on different aspects of the species within the area. As an example, one could be interested in diversity measure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the diversity of the area. 
+In ecology diversity is an important aspect. The diversity is a measure of the number of different types of species within a nature area and also how the individuals are distributed among the species. A diversity index can be computed in several different ways and puts weight on different aspects of the species within the area. As an example, one could be interested in diversity measure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the diversity of the area. 
 
-When estimating diversity of an area one can generally use two types of data: cover data and presence/absence data. These two types of data are described at the [Introduction](Introduction.html) page. Cover data is a measure of how big a fraction of the area would be covered by a given species if all the plants where projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. 
-<br>
-The other type is presence/absence data that indicates which species exist in a given area, but gives no information about their abundance. 
+When estimating diversity of an area one needs data about the species in the area. This data generally comes in two types: abundance data and presence/absence data. We will use cover data to estimate the species' abundance. These two types of data are described at the [Introduction](Introduction.html) page. Cover data is a measure of how big a fraction of the area would be covered by a given species if it was projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. Presence/absence data only indicates which species exist in a given area, but gives no information about their abundance. 
 
 
-Below a number of different ways to estimate the diversity of an area is presented. All measures use cover data except species richness that uses presence/absence data. The different diversity measures will be applied on the  [Examples](example.html) page.
+Below a number of different ways to estimate the diversity of an area is presented. All measures use cover data except species richness that uses presence/absence data. The different diversity measures will be applied on the [Examples](example.html) page.
 
 <h2> Shannon index</h2>
 A diversity index that traditionally is often used is the shannon index. The shannon index is calculated by the following formula:
@@ -28,8 +26,8 @@ where $S$ is the number of species and $p_i$ is the proportion of all individual
 <br><br>
 However, as it is pointed out in both [@Roswell] and [@Jost] the shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [@Jost].
 <br>
-We can look at to areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the first area would be 8 species and the diversity of the second area would be 16 species. Because when all species is equally common, the diversity should be proportional to the number of species.
-When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because this is not the diversity. It can instead be seen as the uncertainty in the species identity of a sample.
+We can look at two areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the second area would be twice as big as the diversity of the first area. Because when all species is equally common, the diversity should be proportional to the number of species. That would be the intuitve understanding of species diversity.
+When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because the shannnon index is not the diversity but an entropy. Of this reason, the shannon index can be troublesome to use as a measure of species diversity as it is also pointed out in [@Roswell] and [@Jost].
 
 <h2> Simpson index</h2>
 Another commonly used diversity index is the simpson index. This is given by

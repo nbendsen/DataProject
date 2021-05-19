@@ -433,7 +433,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-17
+<strong>Last updated:</strong> 2021-05-19
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
@@ -524,16 +524,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreea4b44df7ae1f8e5fa39b9c37643a6127f8907677targetblanka4b44dfa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/a4b44df7ae1f8e5fa39b9c37643a6127f8907677" target="_blank">a4b44df</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree8d71d2b47854b5a0e249140d9fd01ad175f20f12targetblank8d71d2ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/8d71d2b47854b5a0e249140d9fd01ad175f20f12" target="_blank">8d71d2b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreea4b44df7ae1f8e5fa39b9c37643a6127f8907677targetblanka4b44dfa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree8d71d2b47854b5a0e249140d9fd01ad175f20f12targetblank8d71d2ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/a4b44df7ae1f8e5fa39b9c37643a6127f8907677" target="_blank">a4b44df</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/8d71d2b47854b5a0e249140d9fd01ad175f20f12" target="_blank">8d71d2b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -546,15 +546,12 @@ Ignored files:
     Ignored:    analysis/.Rhistory
 
 Untracked files:
-    Untracked:  analysis/ppc_code.Rmd
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
 
 Unstaged changes:
+    Modified:   analysis/Introduction.Rmd
     Modified:   analysis/Model.Rmd
     Modified:   analysis/example.Rmd
-    Modified:   analysis/index.Rmd
-    Modified:   analysis/model_validering.rmd
-    Modified:   code/function.R
 
 </code></pre>
 <p>
@@ -593,6 +590,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/be9743b0dbd1c7ae4cf8e2d134f9c5090f04a31e/analysis/Model.Rmd" target="_blank">be9743b</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+A lot of small pages to a few pages
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/be9743b0dbd1c7ae4cf8e2d134f9c5090f04a31e/docs/Model.html" target="_blank">be9743b</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+A lot of small pages to a few pages
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -655,13 +686,15 @@ Add files via upload
 <h2>
 Presentation of Bayesian model
 </h2>
-<p>As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data. Cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. <br> In the following we propose a method, where we for each plot obtain an estimate of a species’ abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to more accurate diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> From the general setup in bayesian statistics we get that <span class="math display">\[
+<p>As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data. Cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern.</p>
+<p><br></p>
+<p>In the following we propose a method, where we for each plot obtain an estimate of a species’ abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to more accurate diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> From the general setup in bayesian statistics we get that <span class="math display">\[
 P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
 \]</span> where <span class="math inline">\(P(Y=y|\theta)\)</span> is the likelihood function and <span class="math inline">\(\pi(\theta)\)</span> is some prior distribution. We are interested in the posterior distribution <span class="math inline">\(P(\theta|Y=y)\)</span> which we can use to estimate the abundance of a species in the entire plot. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible in each plot. A natural distribution to model this is the binomial distribution <span class="math display">\[
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
 \]</span> <br> We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution <span class="math inline">\(\pi(\theta)\)</span> of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species’ spatial distribution we assume that we will be able to obtain a more accurate abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot. <br><br> The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by <span class="math display">\[
 \pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
-\]</span> When working with the bayesian framework, one has to decide on the paramters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is <span class="math inline">\(1\)</span>. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat. <br><br> From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot <span class="math display">\[
+\]</span> When working with the bayesian framework, one has to decide on the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is <span class="math inline">\(1\)</span>. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat. <br><br> From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot <span class="math display">\[
 P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
 \]</span> When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the abundance for the species in the plot. <br> The mean posterior for a beta-distribution is given by: <span class="math display">\[
 E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
@@ -678,13 +711,15 @@ Implementation
 <li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
 <li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
 </li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this dataset is applied.</li>
 </ul>
 <p><strong>Output</strong></p>
 <ul>
-<li>The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above.</li>
+<li>The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method described above.</li>
 </ul>
-<p><strong>Calculated example</strong></p>
+<h2>
+Calculated example
+</h2>
 To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction. The cover data look like:
 <table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1473,15 +1508,17 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>It is seen that Plot 2 has 0 observations for all species in the cover data, but has a “1” in the present/abcense data for Specie 2, indicating that the specie is present in the plot, but is not hit by any number of pins. In the beta binomial cover dataset Plot 2 has a small value for Specie 2. Because the specie is present in the plot but not hit by any number of pins, the beta binomial update model assigns a small value to it, corresponding to the mean of the prior distribution for the specie. If a specie is not observed and not present either, then it does assigned a value, this is seen for the other species in Plot 2. The reason for this is because when the specie is present, but not observed in the cover data, the parameters of the likelihood distribution for the spiecie, in the plot, will simply just be 0, hence they will not contribute to the parameters of the posterior distribution. So the only thing contributing to the posterior distribution is the parameters of the speice. Which is why the posterior distribution for that speice in that plot, will just become the prior distribution for the specie. this is simply seen below, where <span class="math inline">\(y\)</span> and <span class="math inline">\(n\)</span> are the parameters of the likelihood distribution, and <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are the parameters of the prior:</p>
+<p>It can be seen that <em>“Plot 2”</em> has 0 observations for all species in the cover data, but has a <em>“1”</em> in the present/absence data for <em>“Specie 2”</em>, indicating that the specie is present in the plot, but is not hit by any of pins. In the beta binomial cover dataset <em>“Plot 2”</em> has a small value of 0.2155853 for <em>“Specie 2”</em>.</p>
+<p>Because the specie is present in the plot but not hit by any number of pins, the beta binomial update model assigns a small value to it. If a specie is not present in the plot, then will the beta_binomial_cover_update function not change the value, and it will stay at 0 , this can be seen for the other species in <em>“Plot 2”</em>.</p>
+<p>When the specie is present, but not observed in the cover data, will <span class="math inline">\(n = 16\)</span> and <span class="math inline">\(Y = 0\)</span>, this means that the posterior becomes:</p>
 <p><span class="math display">\[
-P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 0, \beta + 0-0)=Beta(\alpha , \beta )
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 0, \beta + 16-0)=Beta(\alpha , \beta + 16 )
 \]</span></p>
-<p>The obosite is seen for plot 7 specie 1. This has 16 in the cover data, but only 15,59 in the beta-binomial cover dataset. This is because the prior distribution of the specie also has plays role and contribute to the posterior distribution, hence both the parameters for the likelihood and the prior contributes to the parameters of the posterior. When the number of pins that have hid a specie <span class="math inline">\(y\)</span> (in this case 16), is equal to the number of pins that was used <span class="math inline">\(n\)</span> (in this case 16), the parameters of the likelihood distirbution will not contribute to the <span class="math inline">\(\beta\)</span> parameter of the posterior distribution. Thereby it will only be <span class="math inline">\(y\)</span> that contributes to <span class="math inline">\(\alpha\)</span>. This is seen below:<br />
-<span class="math display">\[
+<p>The opposite is seen for <em>“plot 7”</em> with <em>“specie 1”</em>. This has 16 in the cover data, but only 15,59 in the beta-binomial cover dataset. This is because the prior distribution of the specie also has plays role and contribute to the posterior distribution, hence both the parameters for the likelihood and the prior contributes to the parameters of the posterior. When the number of pins that have hid a specie <span class="math inline">\(y\)</span> (in this case 16), is equal to the number of pins that was used <span class="math inline">\(n\)</span> (in this case 16), the parameters of the likelihood distribution will not contribute to the <span class="math inline">\(\beta\)</span> parameter of the posterior distribution. Thereby it will only be <span class="math inline">\(y\)</span> that contributes to <span class="math inline">\(\alpha\)</span>. This is seen below:</p>
+<p><span class="math display">\[
 P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 16, \beta + 16-16)=Beta(\alpha + 16 , \beta )
-\]</span></p>
-<p>A more detailed description of the implementation of the model can be found at: <a href="bayesian_method_describtion.html">detailed description</a>. This page also includes the full code of the function.</p>
+\]</span> This has the the effect of lowering the cover value, in the plots with a high cover value.</p>
+<p>A more detailed description of the implementation of the model can be found in <a href="bayesian_method_describtion.html">detailed description</a>. This page also includes the full code of the function.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

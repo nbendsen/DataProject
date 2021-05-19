@@ -1,5 +1,5 @@
 ---
-title: "Bayesian model"
+title: "Bayesian model for diversity estimates"
 output:
   workflowr::wflow_html:
     toc: true
@@ -48,14 +48,16 @@ rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5",
 colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
-The first section of this page will present the ideas behind our proposed model to combine cover data and presence/absence data. The section will present the beta-binomial model for the reader and show how this can be applied to the problem. 
+The first section of this page will present the ideas behind our proposed model to combine the information from cover data and presence/absence data. The section will present the beta-binomial cover update model for the reader and show how this can be applied to the problem. 
 <br>
 The second section of this page presents an implementation of the model in R. Furthermore, the section also includes a simple example of the use of the model.
 
 <h2>Presentation of Bayesian model </h2>
-As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data where cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. 
+As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data. Cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. 
+
 <br>
-In the following we propose a method that for each plot obtain an estimate of a species' abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to better diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. 
+
+In the following we propose a method, where we for each plot obtain an estimate of a species' abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to more accurate diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. 
 <br><br>
 From the general setup in bayesian statistics we get that
 $$
@@ -68,13 +70,13 @@ $$
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
 $$
 <br>
-We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution $\pi(\theta)$ of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species' spatial distribution we assume that we will be able to obtain a better abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot.
+We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution $\pi(\theta)$ of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species' spatial distribution we assume that we will be able to obtain a more accurate abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot.
 <br><br>
 The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by 
 $$
 \pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
 $$
-When working with the bayesian framework, one has to decide on the paramters $\alpha$ and $\beta$. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is $1$. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat.
+When working with the bayesian framework, one has to decide on the parameters $\alpha$ and $\beta$. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is $1$. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat.
 <br><br>
 From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot
 $$
@@ -85,11 +87,11 @@ The mean posterior for a beta-distribution is given by:
 $$
 E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
 $$
-From the above theoretical discussion we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Examples of different common ways to measure diversity for an area are presented at the [Diversity](Diversity.html) page.
+From the above we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Examples of different common ways to measure diversity for an area are presented at the [Diversity](Diversity.html) page.
 
 <h2> Implementation </h2>
 
-The above theoretical discussions of the beta-binomial model are implemented in the function "beta_binomial_cover_update". 
+The above theory of the beta-binomial model are implemented in the function "beta_binomial_cover_update". 
 
 **Usage:**
 
@@ -100,13 +102,13 @@ beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_co
 * **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
 * **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
 * **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
-* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this datasat is applied.
+* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this dataset is applied.
 
 **Output** 
 
-* The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above. 
+* The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method described above. 
 
-**Calculated example**
+<h2>Calculated example </h2>
 
 To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction. The cover data look like:
 ```{r, , echo=FALSE}
@@ -128,4 +130,21 @@ The data from the outcome of the function looks like:
 kable(beta_binomial_cover, "html") %>% kable_styling(font_size = 12)
 ```
 
-A more detailed description of the implementation of the model can be found at: [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function.
+It can be seen that *"Plot 2"* has 0 observations for all species in the cover data, but has a *"1"* in the present/absence data for *"Specie 2"*, indicating that the specie is present in the plot, but is not hit by any of pins. In the beta binomial cover dataset *"Plot 2"* has a small value of 0.2155853 for *"Specie 2"*.
+
+Because the specie is present in the plot but not hit by any number of pins, the beta binomial update model assigns a small value to it. If a specie is not present in the plot, then will the beta_binomial_cover_update function not change the value, and it will stay at 0 , this can be seen for the other species in *"Plot 2"*. 
+
+When the specie is present, but not observed in the cover data, will $n = 16$ and $Y = 0$, this means that the posterior becomes: 
+
+$$
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 0, \beta + 16-0)=Beta(\alpha , \beta + 16 )
+$$
+
+The opposite is seen for *"plot 7"*  with *"specie 1"*. This has 16 in the cover data, but only 15,59 in the beta-binomial cover dataset. This is because the prior distribution of the specie also has plays role and contribute to the posterior distribution, hence both the parameters for the likelihood and the prior contributes to the parameters of the posterior. When the number of pins that have hid a specie $y$ (in this case 16), is equal to the number of pins that was used $n$ (in this case 16), the parameters of the likelihood distribution will not contribute to the $\beta$ parameter of the posterior distribution. Thereby it will only be $y$ that contributes to $\alpha$. This is seen below: 
+
+$$
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 16, \beta + 16-16)=Beta(\alpha + 16 , \beta )
+$$
+This has the the effect of lowering the cover value, in the plots with a high cover value.
+
+A more detailed description of the implementation of the model can be found in [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function.

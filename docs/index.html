@@ -336,7 +336,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -345,7 +345,7 @@ $(document).ready(function () {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -354,10 +354,10 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-16
+<strong>Last updated:</strong> 2021-05-17
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject - commit docs/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -373,12 +373,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -445,26 +445,33 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree37f98cd2bfa88ef5dd61d8949adef308fbea9070targetblank37f98cda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/37f98cd2bfa88ef5dd61d8949adef308fbea9070" target="_blank">37f98cd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree37f98cd2bfa88ef5dd61d8949adef308fbea9070targetblank37f98cda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/37f98cd2bfa88ef5dd61d8949adef308fbea9070" target="_blank">37f98cd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
 
 Untracked files:
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
+
+Unstaged changes:
+    Modified:   analysis/Introduction.Rmd
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -503,6 +510,125 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/37f98cd2bfa88ef5dd61d8949adef308fbea9070/analysis/index.Rmd" target="_blank">37f98cd</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+Ændret index download link
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/37f98cd2bfa88ef5dd61d8949adef308fbea9070/docs/index.html" target="_blank">37f98cd</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+Ændret index download link
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/be9743b0dbd1c7ae4cf8e2d134f9c5090f04a31e/analysis/index.Rmd" target="_blank">be9743b</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+A lot of small pages to a few pages
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/be9743b0dbd1c7ae4cf8e2d134f9c5090f04a31e/docs/index.html" target="_blank">be9743b</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+A lot of small pages to a few pages
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/a4b44df7ae1f8e5fa39b9c37643a6127f8907677/analysis/index.Rmd" target="_blank">a4b44df</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-16
+</td>
+<td>
+test
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/a4b44df7ae1f8e5fa39b9c37643a6127f8907677/docs/index.html" target="_blank">a4b44df</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-16
+</td>
+<td>
+test
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/1cffedaa14a2a62f57b96f2840d62022700423ee/docs/index.html" target="_blank">1cffeda</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1513,43 +1639,41 @@ Start workflowr project.
 </div>
 </div>
 </div>
-<p>Species diversity is an important measure, that can be used to discribe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in progress or decline. Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine cover data and presence/absence data, to combine the information from both datasets. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.</p>
-<p>The idear of combining information from both datatypes, is that they do not contain the same sort of information, hence some information will be lost if one were to only use on of them.</p>
-<p>Here you can gain an overview of the pages included in the vignette:</p>
+<p>Species diversity is an important measure that can be used to describe the state of a nature area, and a change in species diversity can be used to study if the state of an area is in progress or decline. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we will propose a new method with the goal to combine the information from a cover dataset with the information from a presence/absence dataset. The idea of combining both datatypes is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. Furthermore, we will be working with a subset of the <a href="https://novana.au.dk/">NOVANA</a> dataset as examples to show how the new method can be applied.</p>
+<p>An overview of the pages included in the vignette:</p>
 <ul>
 <li><strong><a href="introduction.html">Introduction</a></strong>
 <ul>
-<li>The introduction page will give you a brief introduction of the data used and the method developed.</li>
+<li>The page will give a further introduction to the problem and goal of this vignette as well as an introduction to the NOVANA dataset.</li>
 </ul></li>
 <li><strong><a href="Diversity.html">Diversity</a></strong>
 <ul>
-<li>The Diversity page will give you an overview of the different diversity estimates, we have used as examples.</li>
+<li>The page will give an overview of the different ways to estimate species diversity.</li>
 </ul></li>
 <li><strong><a href="Model.html">Bayesian model</a></strong>
 <ul>
-<li>The Bayesian model page contains a dicribtion of the theory used to develop the model, and why we have choosen the distributions we have.</li>
-</ul></li>
-<li><strong><a href="example.html">Examples</a></strong>
-<ul>
-<li>Examples of use cases for the Bayesian model</li>
-</ul></li>
-<li><strong><a href="model_validering.html">Model validation</a></strong>
-<ul>
-<li>The Model Validation page shows how the developed method is perfoming compared to only using cover data or present/absence data for calculating diversity estimates.<br />
-</li>
+<li>The page contains a description of the theory used to develop the Bayesian model and also an implementation of the model in R.</li>
 </ul></li>
 <li><strong><a href="function_usage.html">Functions</a></strong>
 <ul>
-<li>The Functions page gives an overview of the functions used, what they take as input, what they give as result and how they perfom on an example dataset.</li>
+<li>The page gives an overview and presentaion of the functions used on the <a href="example.html">Examples</a> page. This includes a small example for each function.</li>
+</ul></li>
+<li><strong><a href="example.html">Examples</a></strong>
+<ul>
+<li>Examples of use cases for the Bayesian model using the NOVANA dataset</li>
+</ul></li>
+<li><strong><a href="model_validering.html">Model validation</a></strong>
+<ul>
+<li>The page introduces posterior predictive checks and use these these to study the performance of the Bayesian model with respect to the observed cover datasets.</li>
 </ul></li>
 </ul>
 <h2>
 Download
 </h2>
-<p>To download the main function of this vignette click on button below. This will open a new page that can be saved as a R file.</p>
-<p><a href="https://raw.githubusercontent.com/nbendsen/DataProject/master/code/Beta_binomial_cover_update_function.R">
+<p>To download the functions from this vignette click on the button below. This will open a new page that can be saved as a R file.</p>
+<p><a href="https://raw.githubusercontent.com/nbendsen/DataProject/master/code/function.R">
 <button class="btn btn-success">Download HERE</button>
-</a> <br><br> <br><br> <br><br></p>
+</a> <br><br> More details on the functions can be found at the <a href="Function_usage.html">functions page</a>.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1575,18 +1699,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] downloadthis_0.2.1 workflowr_1.6.2   
+[1] downloadthis_0.2.1
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5       rstudioapi_0.11  whisker_0.4      knitr_1.30      
- [5] magrittr_1.5     R6_2.4.1         rlang_0.4.8      stringr_1.4.0   
- [9] tools_4.0.3      xfun_0.18        git2r_0.28.0     htmltools_0.5.0 
-[13] ellipsis_0.3.1   rprojroot_1.3-2  yaml_2.2.1       digest_0.6.25   
-[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
-[21] vctrs_0.3.4      promises_1.1.1   fs_1.5.0         glue_1.4.2      
-[25] evaluate_0.14    rmarkdown_2.4    stringi_1.5.3    compiler_4.0.3  
-[29] pillar_1.4.6     generics_0.0.2   bsplus_0.1.2     backports_1.1.10
-[33] lubridate_1.7.9  httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [5] magrittr_1.5     workflowr_1.6.2  R6_2.4.1         rlang_0.4.8     
+ [9] stringr_1.4.0    tools_4.0.3      xfun_0.18        git2r_0.28.0    
+[13] htmltools_0.5.0  ellipsis_0.3.1   yaml_2.2.1       digest_0.6.25   
+[17] rprojroot_1.3-2  tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4    
+[21] later_1.1.0.1    vctrs_0.3.4      promises_1.1.1   fs_1.5.0        
+[25] glue_1.4.2       evaluate_0.14    rmarkdown_2.4    stringi_1.5.3   
+[29] compiler_4.0.3   pillar_1.4.6     generics_0.0.2   bsplus_0.1.2    
+[33] backports_1.1.10 lubridate_1.7.9  httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
 </div>
 
 

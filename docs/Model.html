@@ -11,7 +11,7 @@
 
 
 
-<title>Bayesian model</title>
+<title>Bayesian model for diversity estimates</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -408,14 +408,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Bayesian model</h1>
+<h1 class="title toc-ignore">Bayesian model for diversity estimates</h1>
 
 </div>
 
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -424,7 +424,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -433,10 +433,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-05-16
+<strong>Last updated:</strong> 2021-05-19
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>DataProject - commit docs/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -452,12 +452,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -524,26 +524,34 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree7d05ed516d6082b3aa89a70f271370a084c57b4btargetblank7d05ed5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/7d05ed516d6082b3aa89a70f271370a084c57b4b" target="_blank">7d05ed5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree7d05ed516d6082b3aa89a70f271370a084c57b4btargetblank7d05ed5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/7d05ed516d6082b3aa89a70f271370a084c57b4b" target="_blank">7d05ed5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
 
 Untracked files:
     Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
+
+Unstaged changes:
+    Modified:   analysis/Introduction.Rmd
+    Modified:   analysis/Model.Rmd
+    Modified:   analysis/example.Rmd
 
 </code></pre>
 <p>
@@ -582,6 +590,91 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/7d05ed516d6082b3aa89a70f271370a084c57b4b/analysis/Model.Rmd" target="_blank">7d05ed5</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-19
+</td>
+<td>
+Model og diversiy små ændringer
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/7d05ed516d6082b3aa89a70f271370a084c57b4b/docs/Model.html" target="_blank">7d05ed5</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-19
+</td>
+<td>
+Model og diversiy små ændringer
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/nbendsen/DataProject/blob/be9743b0dbd1c7ae4cf8e2d134f9c5090f04a31e/analysis/Model.Rmd" target="_blank">be9743b</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+A lot of small pages to a few pages
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/be9743b0dbd1c7ae4cf8e2d134f9c5090f04a31e/docs/Model.html" target="_blank">be9743b</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-17
+</td>
+<td>
+A lot of small pages to a few pages
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/nbendsen/DataProject/1cffedaa14a2a62f57b96f2840d62022700423ee/docs/Model.html" target="_blank">1cffeda</a>
+</td>
+<td>
+MHPHP
+</td>
+<td>
+2021-05-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -623,25 +716,27 @@ Add files via upload
 </div>
 </div>
 </div>
-<p>The first section of this page will present the ideas behind our proposed model to combine cover data and presence/absence data. The section will present the beta-binomial model for the reader and show how this can be applied to the problem. <br> The second section of this page presents an implementation of the model in R. Furthermore, the section also includes a simple example of the use of the model.</p>
+<p>The first section of this page will present the ideas behind our proposed model to combine the information from cover data and presence/absence data. The section will present the beta-binomial cover update model for the reader and show how this can be applied to the problem. <br> The second section of this page presents an implementation of the model in R. Furthermore, the section also includes a simple example of the use of the model.</p>
 <h2>
 Presentation of Bayesian model
 </h2>
-<p>As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data where cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern. <br> In the following we propose a method that for each plot obtain an estimate of a species’ abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to better diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> From the general setup in bayesian statistics we get that <span class="math display">\[
+<p>As mentioned in the introduction, plant diversity is often calculated by species richness using presence/absence data or Shannon index using abundance data. Cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information from the dataset that we do not used. A further factor we want to take into account is that fact that species are not randomly distributed inside a plot or site, but rather species grows in some spatial pattern.</p>
+<p><br></p>
+<p>In the following we propose a method, where we for each plot obtain an estimate of a species’ abundance in the entire plot where we combine both presence/absence data and cover data for the species and take the spatial distribution of the species into account. The assumption is that this should also lead to more accurate diversity estimates of the plots in the dataset. We will do this by applying a bayesian framework and use a beta-binomial model. <br><br> From the general setup in bayesian statistics we get that <span class="math display">\[
 P(\theta|Y=y) \propto P(Y=y|\theta)\cdot \pi(\theta)
 \]</span> where <span class="math inline">\(P(Y=y|\theta)\)</span> is the likelihood function and <span class="math inline">\(\pi(\theta)\)</span> is some prior distribution. We are interested in the posterior distribution <span class="math inline">\(P(\theta|Y=y)\)</span> which we can use to estimate the abundance of a species in the entire plot. <br><br> In the cover data each specie is hit by <span class="math inline">\(y\)</span> pins out of <span class="math inline">\(n\)</span> possible in each plot. A natural distribution to model this is the binomial distribution <span class="math display">\[
 P(Y = y| \theta) = {n \choose y}\theta^y(1-\theta)^{n-y}
-\]</span> <br> We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution <span class="math inline">\(\pi(\theta)\)</span> of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species’ spatial distribution we assume that we will be able to obtain a better abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot. <br><br> The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by <span class="math display">\[
+\]</span> <br> We use the binomial model as the likelihood function for each species in each plot. We can create a prior distribution <span class="math inline">\(\pi(\theta)\)</span> of the spatial distribution for each species by using information from both the cover and presence/absence data. This is really the key idea in this beta binomial method. By using the bayesian framework and including a prior distribution of a species’ spatial distribution we assume that we will be able to obtain a more accurate abundance estimate of species abundance in a plot where we know the species is present from the presence/absence data for the plot. <br><br> The beta model is a conjugate prior for the binomial model and, thus, is ideal to use. The beta-distribution is given by <span class="math display">\[
 \pi(\theta) = \text{beta}(\alpha, \beta) = \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
-\]</span> When working with the bayesian framework, one has to decide on the paramters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is <span class="math inline">\(1\)</span>. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat. <br><br> From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot <span class="math display">\[
+\]</span> When working with the bayesian framework, one has to decide on the parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. However, this can be difficult and instead we apply the empirical bayes method: For each species we fit a beta-prior using all the cover data from the same tertiary habitat type where the corresponding presence/absence data is <span class="math inline">\(1\)</span>. We use all cover data from the same tertiary habitat as we assume that a species follows the same spatial distribution within a tertiary habitat. <br><br> From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution for each species in each plot <span class="math display">\[
 P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)
 \]</span> When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the abundance for the species in the plot. <br> The mean posterior for a beta-distribution is given by: <span class="math display">\[
 E\Big(P(\theta|Y =y)\Big) = \frac{\alpha + y}{\alpha + y+\beta + n-y}
-\]</span> From the above theoretical discussion we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Examples of different common ways to measure diversity for an area are presented at the <a href="Diversity.html">Diversity</a> page.</p>
+\]</span> From the above we get a new dataset with updated abundances for each species in each plot. The next step for users of this method will be, as an example, to apply some diversity measures for the plots using the new updated dataset. Examples of different common ways to measure diversity for an area are presented at the <a href="Diversity.html">Diversity</a> page.</p>
 <h2>
 Implementation
 </h2>
-<p>The above theoretical discussions of the beta-binomial model are implemented in the function “beta_binomial_cover_update”.</p>
+<p>The above theory of the beta-binomial model are implemented in the function “beta_binomial_cover_update”.</p>
 <p><strong>Usage:</strong></p>
 <p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
 <p><strong>Arguments:</strong></p>
@@ -650,13 +745,15 @@ Implementation
 <li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
 <li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
 </li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this dataset is applied.</li>
 </ul>
 <p><strong>Output</strong></p>
 <ul>
-<li>The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method descripted above.</li>
+<li>The function returns a dataframe, similar to the cover data, but now containing new abundance data calculated using the method described above.</li>
 </ul>
-<p><strong>Calculated example</strong></p>
+<h2>
+Calculated example
+</h2>
 To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented in the introduction. The cover data look like:
 <table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1445,7 +1542,17 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>A more detailed description of the implementation of the model can be found at: <a href="bayesian_method_describtion.html">detailed description</a>. This page also includes the full code of the function.</p>
+<p>It can be seen that <em>“Plot 2”</em> has 0 observations for all species in the cover data, but has a <em>“1”</em> in the present/absence data for <em>“Specie 2”</em>, indicating that the specie is present in the plot, but is not hit by any of pins. In the beta binomial cover dataset <em>“Plot 2”</em> has a small value of 0.2155853 for <em>“Specie 2”</em>.</p>
+<p>Because the specie is present in the plot but not hit by any number of pins, the beta binomial update model assigns a small value to it. If a specie is not present in the plot, then will the beta_binomial_cover_update function not change the value, and it will stay at 0 , this can be seen for the other species in <em>“Plot 2”</em>.</p>
+<p>When the specie is present, but not observed in the cover data, will <span class="math inline">\(n = 16\)</span> and <span class="math inline">\(Y = 0\)</span>, this means that the posterior becomes:</p>
+<p><span class="math display">\[
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 0, \beta + 16-0)=Beta(\alpha , \beta + 16 )
+\]</span></p>
+<p>The opposite is seen for <em>“plot 7”</em> with <em>“specie 1”</em>. This has 16 in the cover data, but only 15,59 in the beta-binomial cover dataset. This is because the prior distribution of the specie also has plays role and contribute to the posterior distribution, hence both the parameters for the likelihood and the prior contributes to the parameters of the posterior. When the number of pins that have hid a specie <span class="math inline">\(y\)</span> (in this case 16), is equal to the number of pins that was used <span class="math inline">\(n\)</span> (in this case 16), the parameters of the likelihood distribution will not contribute to the <span class="math inline">\(\beta\)</span> parameter of the posterior distribution. Thereby it will only be <span class="math inline">\(y\)</span> that contributes to <span class="math inline">\(\alpha\)</span>. This is seen below:</p>
+<p><span class="math display">\[
+P(\theta | Y = y) \sim Beta(\alpha + y, \beta + n-y)=Beta(\alpha + 16, \beta + 16-16)=Beta(\alpha + 16 , \beta )
+\]</span> This has the the effect of lowering the cover value, in the plots with a high cover value.</p>
+<p>A more detailed description of the implementation of the model can be found in <a href="bayesian_method_describtion.html">detailed description</a>. This page also includes the full code of the function.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1477,25 +1584,25 @@ other attached packages:
  [7] kableExtra_1.3.4    forcats_0.5.0       stringr_1.4.0      
 [10] dplyr_1.0.2         purrr_0.3.4         readr_1.4.0        
 [13] tidyr_1.1.2         tibble_3.0.4        ggplot2_3.3.2      
-[16] tidyverse_1.3.0     workflowr_1.6.2    
+[16] tidyverse_1.3.0    
 
 loaded via a namespace (and not attached):
- [1] httr_1.4.2        splines_4.0.3     jsonlite_1.7.1    viridisLite_0.3.0
+ [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 splines_4.0.3    
  [5] modelr_0.1.8      assertthat_0.2.1  sp_1.4-4          highr_0.8        
  [9] blob_1.2.1        cellranger_1.1.0  yaml_2.2.1        pillar_1.4.6     
 [13] backports_1.1.10  lattice_0.20-41   glue_1.4.2        digest_0.6.25    
-[17] promises_1.1.1    rvest_0.3.6       colorspace_1.4-1  Matrix_1.2-18    
-[21] htmltools_0.5.0   httpuv_1.5.5      pkgconfig_2.0.3   broom_0.7.2      
+[17] promises_1.1.1    rvest_0.3.6       colorspace_1.4-1  htmltools_0.5.0  
+[21] httpuv_1.5.5      Matrix_1.2-18     pkgconfig_2.0.3   broom_0.7.2      
 [25] raster_3.4-5      haven_2.3.1       scales_1.1.1      webshot_0.5.2    
 [29] svglite_2.0.0     whisker_0.4       later_1.1.0.1     git2r_0.28.0     
 [33] generics_0.0.2    ellipsis_0.3.1    withr_2.3.0       cli_2.1.0        
 [37] magrittr_1.5      crayon_1.3.4      readxl_1.3.1      evaluate_0.14    
-[41] ps_1.4.0          fs_1.5.0          fansi_0.4.1       xml2_1.3.2       
-[45] tools_4.0.3       hms_0.5.3         lifecycle_0.2.0   munsell_0.5.0    
-[49] reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1 rlang_0.4.8      
-[53] rstudioapi_0.11   rmarkdown_2.4     gtable_0.3.0      codetools_0.2-16 
-[57] DBI_1.1.0         R6_2.4.1          lubridate_1.7.9   knitr_1.30       
-[61] rgdal_1.5-23      rprojroot_1.3-2   rJava_0.9-13      stringi_1.5.3    
+[41] fs_1.5.0          fansi_0.4.1       xml2_1.3.2        tools_4.0.3      
+[45] hms_0.5.3         lifecycle_0.2.0   munsell_0.5.0     reprex_0.3.0     
+[49] compiler_4.0.3    systemfonts_1.0.1 rlang_0.4.8       rstudioapi_0.11  
+[53] rmarkdown_2.4     gtable_0.3.0      codetools_0.2-16  DBI_1.1.0        
+[57] R6_2.4.1          lubridate_1.7.9   knitr_1.30        rgdal_1.5-23     
+[61] workflowr_1.6.2   rprojroot_1.3-2   rJava_0.9-13      stringi_1.5.3    
 [65] Rcpp_1.0.5        vctrs_0.3.4       dbplyr_1.4.4      tidyselect_1.1.0 
 [69] xfun_0.18        </code></pre>
 </div>

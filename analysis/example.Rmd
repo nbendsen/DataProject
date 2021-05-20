@@ -20,6 +20,7 @@ source("code/function_shannon.R")
 source("code/function.R")
 ```
 
+
 This page includes a comparison between diversity measures computed using the abundance data and the beta binomial cover data. Further more it includes two examples of applications of the beta binomial update function presented at the [Bayesian model](Model.html) page. The page should, hopefully, give the reader a further feeling of how the beta binomial cover update function works as well as give inspiration to what cases the function can be used for.
 
 The *Comparison* page will use data for the tertiary habitat "Nardus grasslands" to study the effect of the beta binomial cover update function on the data viewed through different diversity measure. We will furthermore use the tertiary habitat "Dry calcareous grasslands" to also look at the effect of the beta binomial cover update function at site level as opposed to plot level as we only did in the first example, but for this part we will use. This will primarily be done by visual inspections.
@@ -41,15 +42,15 @@ cover <- read.csv("data/cover_data_6230_year2014.csv")
 freq <- read.csv("data/frekvens_data_6230_year2014.csv")
 abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 ```
-In the obove the freq dataset, is the present/absence dataset, and will be refered to as freq data trough the example.  
+In the above the freq dataset, is the present/absence dataset, and will be referred to as freq data trough the example.  
 
-We apply the beta_binomial_cover_update function to the cover and freq datasets and obtain a dataset with updated abundace values for each species in each plot. In the following we will refer to this as the beta binomial cover data.
+We apply the beta_binomial_cover_update function to the cover and freq datasets and obtain a dataset with updated abundance values for each species in each plot. In the following we will refer to this as the beta binomial cover data.
 
 ```{r message=FALSE, warning=FALSE}
 beta_binomial_cover <- beta_binomial_cover_update(cover, freq, n = 16, 3)
 ```
 
-If you want to get a futher look at how the functions works on this type of data you can go to the [Bayesian model](Model.html) page.
+If you want to get a further look at how the functions works on this type of data you can go to the [Bayesian model](Model.html) page.
 
 <h3>Species level </h3>
 ```{r, include=FALSE}
@@ -89,7 +90,7 @@ $$
 $$ 
 
 where the $l$ exponent determines how much weight rare species is given. For high $l$ values the Hill diversity is more sensitive to rare species. For $l = -1$ we have the Hill Simpson diversity, for $l = 0$ we have the Hill Shannon diversity and for $l = 1$ we have the species richness.
-In the below we look at some plots in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in the observed cover dataset (red line) and for the same plot in the beta binomial cover data (blue line). This can help to give a feeling of when the beta binomial update method, has the biggest inpact on the computed diversity measures.
+In the below we look at some plots in the dataset. We see how the diversity of the plot changes as a function of the exponent $l$. We do this for the plot in the observed cover dataset (red line) and for the same plot in the beta binomial cover data (blue line). This can help to give a feeling of when the beta binomial update method, has the biggest impact on the computed diversity measures.
 
 <br><br>
 
@@ -156,7 +157,7 @@ This subsection is intended to further study what the effect of the beta binomia
 
 <br>
 
-All the used diversity estimates are defined at the [Diversity](Diversity.html) page. When the Shannon index, Hill Shannon and Hill Simpson are calculated using the beta binomial cover dataset they will be referred to as "beta binomial Shannon index", "beta binomial Hill Shannon" and "beta binomial Hill Simpson" respectivly.
+All the used diversity estimates are defined at the [Diversity](Diversity.html) page. When the Shannon index, Hill Shannon and Hill Simpson are calculated using the beta binomial cover dataset they will be referred to as "beta binomial Shannon index", "beta binomial Hill Shannon" and "beta binomial Hill Simpson" respectively.
 
 <br><br>
 
@@ -180,7 +181,7 @@ ggplot(mapping = aes(x = observed_shannon, y = beta_binomial_shannon))+
 
 It can be seen in this example that the beta binomial Shannon indexes give a slightly higher value for all plots. Noticeably are the biggest difference among plots with a low Shannon index. 
 
-As stated ealier many species grow in lumbs, so for the plots with a low Shannon index, is it not unlikely that the small square is placed around a few species, hence do not cover the species that is growing in the plot but outside of the square. Therfore they are not accounted for in the cover data, but do get assigned a small value in the bete binomial cover data. When this is the case, it makes sence, that the Shannon index, changes a lot, because the all of the species not present in the small square, is now taking into account.
+As stated earlier many species grow in clumps, so for the plots with a low Shannon index, is it not unlikely that the small square is placed around a few species, hence do not cover the species that is growing in the plot but outside of the square. Therefore they are not accounted for in the cover data, but do get assigned a small value in the beta binomial cover data. When this is the case, it makes sense, that the Shannon index, changes a lot, because the all of the species not present in the small square, is now taking into account.
 
 
 <br><br>
@@ -328,14 +329,16 @@ The above suggest that for the sites with a large variance in Hill Shannon diver
 ### Species diversity and pH value 
 
 In the this example we only work with a subset of the NOVANA data including the tertiary habitat "Nardus grasslands" (in the NOVANA dataset this is encoded as terhabtype = 6230). Furthermore, we only look at year 2014. Further details on how this subset was created, can be found at [data 6230](data_6230.html).
+
 ```{r}
 cover <- read.csv("data/cover_data_6230_year2014.csv")
 freq <- read.csv("data/frekvens_data_6230_year2014.csv")
 abiotiske <- read.csv("data/abiotiske_data_6230_year2014.csv")
 ```
-In the obove the freq dataset, is the present/absence dataset, and will be refered to as freq data trough the example.  
 
-We apply the beta_binomial_cover_update function to the cover and freq datasets and obtain a dataset with updated abundace values for each species in each plot. In the following we will refer to this as the beta binomial cover data.
+In the above the freq dataset, is the present/absence dataset, and will be referred to as freq data trough the example.  
+
+We apply the beta_binomial_cover_update function to the cover and freq datasets and obtain a dataset with updated abundance values for each species in each plot. In the following we will refer to this as the beta binomial cover data.
 
 ```{r message=FALSE, warning=FALSE}
 beta_binomial_cover <- beta_binomial_cover_update(cover, freq, n = 16, 3)
@@ -442,7 +445,7 @@ The general trend that can be seen for all three diversities, beta binomial Hill
  
 ### Species diversity and nitrogen deposition
 
-In the second example we look at the tertiary habitat "dry calcarous grasslands" (in the NOVANA dataset this is encoded as terhabtype = 6210) from year 2009. This subset is made in the same way as the subset at [data 6230](data_6230.html).
+In the second example we look at the tertiary habitat "dry calcareous grasslands" (in the NOVANA dataset this is encoded as terhabtype = 6210) from year 2009. This subset is made in the same way as the subset at [data 6230](data_6230.html).
 
 ```{r}
 cover_6210 <- read.csv("data/cover_data_6210_year2009.csv")
@@ -450,11 +453,12 @@ freq_6210 <- read.csv("data/frekvens_data_6210_year2009.csv")
 abiotiske_6210 <- read.csv("data/abiotiske_data_6210_year2009.csv")
 ```
 
-With this data we are especially interested in how the diversity change when plotted against different values of nitrogen deposition (from atmosphere). This is especially relevant for nature areas close to farm lands. It is assumed that if the value of nitrogen deposition is high, there is a lot of nitrogen in the soil. Increased nitrogen alters competetion and is often associated with species loss (due to increasing dominance of few competetively strong plant species).
+With this data we are especially interested in how the diversity change when plotted against different values of nitrogen deposition (from atmosphere). This is especially relevant for nature areas close to farm lands. It is assumed that if the value of nitrogen deposition is high, there is a lot of nitrogen in the soil. Increased nitrogen alters competition and is often associated with species loss (due to increasing dominance of few competitively strong plant species).
 
 <br>
 Therefore, some illustrations of the relationship between nitrogen deposition and diversity measures can be used as another example of where the beta binomial cover update function can be used.
 <br><br>
+
 We apply our function to the data. 
 ```{r, warning= FALSE, message= FALSE}
 beta_binomial_cover <- beta_binomial_cover_update(cover_6210, freq_6210, n = 16, remove_column = 3)
@@ -513,7 +517,7 @@ As it can be seen here is there not a big difference between the two plots. It s
 
 
 
-The plots below illustrate how some other diversity measures applied to the beta binomial cover data looks like when mapped against the nitrogen deposition
+The plots below illustrate how some other diversity measures applied to the beta binomial cover data looks like when mapped against the nitrogen deposition.
 
 ```{r, warning=FALSE, echo = FALSE}
 ggplot(data_for_plot, mapping = aes(x = N, y = `Species richness`))+

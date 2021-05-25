@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "Presentation of problem"
 output:
   workflowr::wflow_html:
     toc: false
@@ -21,7 +21,6 @@ source("code/function.R")
 ```
 
 
-<h1>Presentation of problem </h1>
 Many methods for estimating species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate. It accounts not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). 
 <br>
 While the Shannon index often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location. In this vignette, we will propose a new method with the goal to combine abundance (e.g cover) data often collected in smaller samples, with presence/absence data that is often collected over larger areas but lack the information of individual species’ abundance. Both types of data contain important information about the area that we would like to use to obtain more accurate diversity measures for a nature area. 

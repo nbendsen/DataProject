@@ -32,7 +32,7 @@ Here you can gain an overview of the pages included in the vignette:
 
 
 <h2>Download</h2>
-To download the main function of this vignette click on button below. This will open a new page that can be saved as a R file.
+To download the functions from this vignette click on the button below. This will open a new page that can be saved as a R file.
 
 ```{r, echo = FALSE, message= FALSE, warning= FALSE}
 library(downloadthis)
@@ -48,12 +48,12 @@ download_link(
 
 ```
 <br><br>
-
+More details on the functions can be found at the [functions page](Function_usage.html).
 
 <h2>About us</h2>
 
-The page has been build by Malthe Holst Pedersen og Nikolaj Bjerg Bendsen and Ditte Lønborg Mikkelsen. We are all studying Data Science at Aarhus University, and as part of one of our courses, we were assigned to a project about species diversity. Together with out guidance counselor we were able to narrow the problem down to finding a method for combining abundance data and present/abcense data, for estimating species diversity. 
-To show our work, we have made this vignette, so other people are able to use the devoloped method. The page it build up in a way such that you as a reader, can get a further look at how to use the developed method, what kind of data the method has been tested on, and also get a look at the model validation for the method. 
+The page has been build by Malthe Holst Pedersen, Nikolaj Bjerg Bendsen and Ditte Lønborg Mikkelsen. We are all studying Data Science at Aarhus University and as part of one of our courses we were assigned to a project about species diversity. Together with our supervisor we were able to narrow the problem down to finding a method for combining abundance data and presence/absence data to obtain more accurate estimates for species diversity.
+To show our work, we have made this vignette, so other people are able to use the developed method.
 
 <br><br>
 <br><br>

@@ -148,7 +148,7 @@ ggplot(data = p_values_hill_shannon, mapping = aes(x = observed, y = mean)) +
 
 It is worth to notice that it is especially plots with low diversity that our model seems to give diversity estimates that differ a lot from what we would get from the observed cover data. However, this does not necessarily mean that our model is bad. What it does mean is that it is more likely for these plots that the beta binomial cover update method overestimate the diversity for the entire plot relative to the observed cover data of the small square. Otherwise the beta binomial cover update method seems to generate data that is aligned with the observed cover data.
 
-Lastly, we will create a similar plot but with the Hill Simpson diversity used as test statistic. On the *"Comparison"* page on the [example page](example.html) we saw that the Hill Simpson diversity was the diversity estimator that gave a diversity estimate that differed the least between the beta binomial cover data and the observed cover data. 
+Lastly, we will create a similar plot but with the Hill Simpson diversity used as test statistic. On the *"Comparison"* section on the [Example](example.html)  page we saw that the Hill Simpson diversity was the diversity estimator that gave a diversity estimate that differed the least between the beta binomial cover data and the observed cover data. 
 
 
 ```{r, include = FALSE}
@@ -180,14 +180,14 @@ Again we see that it is only for plots with low diversity where the observed Hil
 sum(p_values_hill_simpson$p_values < 0.05)/nrow(cover)
 ```
 
-This shows that when the Hill Simpson diversity is used as test statistic the model will generate data that looks very much like the observed data. Much more than the case was when we used the Hill Shannon diversity as test statistic.
+This shows that when the Hill Simpson diversity is used as test statistic the model will generate data that looks very much like the observed data. Way more than the case was when we used the Hill Shannon diversity as test statistic.
 
 This matches with what we found in the "Hill Diversity comparison" section on the example page under *"Comparison"*. There we also saw that the beta binomial cover update method has less importance viewed through the Hill Simpson diversity than through the Hill Shannon diversity.
 
 For both test statistics the conclusion is that the model mostly generated data that looks like the observed data. This gives confidence in the fact that the model has captured some good aspects of the observed data and gives sensible and thereby useful result to work with. Again it should be emphasized that it does not mean the the model gives better diversity estimates then what could be obtained by only using the observed cover data.
 
 <h2>Model validation for "dry calcareous grasslands" example </h2>
-We also want to include the posterior predictive checks we get when we apply these to the data from tertiary habitat "dry calcareous grasslands" from year 2009 that we used in our example about "dry calcareous grasslands" on the example page. We make similar plots as we did above. First with the Hill Shannon diversity as test statistic and then with the Hill Simpson diversity as test statistic.
+We also want to include the posterior predictive checks we get when we apply these to the data from tertiary habitat "dry calcareous grasslands" from year 2009. We make similar plots as we did above. First with the Hill Shannon diversity as test statistic and then with the Hill Simpson diversity as test statistic.
 
 
 ```{r, include = FALSE}

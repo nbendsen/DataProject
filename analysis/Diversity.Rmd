@@ -19,31 +19,31 @@ In ecology diversity is an important aspect. The diversity is a measure of the n
 When estimating the diversity of an area one needs data about the species in the area. This data generally comes in two types: abundance data and presence/absence data. We will use cover data to estimate the species' abundance. Cover data is a measure of how big a fraction of an area that would be covered by a given species if it was projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. Presence/absence data only indicates which species exist in a given area, but gives no information about their abundance. These two types of data are described further on the [Introduction](Introduction.html) page.
 
 
-This page is intended to define a number of different ways to estimate the diversity of an area so that it is clear for reader what is meant when we refer to different diversity measures on the [Examples](example.html) page and [Model validation](model_validering.html) page. All measures use cover data except species richness which uses presence/absence data to estimate the diversity. 
+This page is intended to define a number of different ways to estimate the diversity of an area so that it is clear for the reader what is meant when we refer to different diversity measures on the [Examples](example.html) page and [Model validation](model_validering.html) page. All measures use cover data except Species richness which uses presence/absence data to estimate the diversity. 
 
 <h2> Shannon index</h2>
 When estimating the diversity of an area the Shannon index is often used. The Shannon index is calculated by the following formula:
 $$\text{Shannon index =}-\sum_{i=1}^S p_i \log (p_i)$$
-where $S$ is the number of species and $p_i$ is the proportion of all individuals that belong to species $i$. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins species $i$ is hit by divided by the total number of pins that hit some species in the plot. In this way, we get the normalized abundance for each species in the plot. 
+where $S$ is the number of species and $p_i$ is the proportion of all individuals that belong to species $i$. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins species $i$ is hit by divided by the total number of pins that hit some species in the plot. In this way, we get the normalized cover for each species in the plot. 
 <br><br>
-However, as it is pointed out in both [@Roswell] and [@Jost] the Shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [@Jost].
+However, it is pointed out in both [@Roswell] and [@Jost] that the Shannon index is not a diversity, but rather an entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from [@Jost].
 <br>
-We can look at two areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the second area would be twice as big as the diversity of the first area. The reason for this being that when all species are equally common, the diversity should be proportional to the number of species. That would be the intuitive understanding of species diversity.
+We can look at two areas where the first area has 8 species and the second area has 16 species. The species in each area is equally common, so we would assume that the diversity of the second area would be twice as big as the diversity of the first area. The reason for this being that when all species are equally common, the diversity should be proportional to the number of species. That would be the intuitive understanding of species diversity.
 When calculating the Shannon we would get 3.0 for the first area and 4.0 for the second area using base = 2 for the logarithm. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because the Shannon index is not a diversity but an entropy. Of this reason, the Shannon index can be troublesome to use as a measure of species diversity as it does not follow the intuitive understanding of species diversity that most people have. 
 
 <h2> Simpson index</h2>
-Another commonly used diversity index is the Simpson index. This is given by
+Another commonly used method to estimate diversity is the Simpson index. This is given by
 $$
-\text{simpson index = }\Sigma_{i = 1}^S(p_i)^2
+\text{Simpson index = }\Sigma_{i = 1}^S(p_i)^2
 $$
 where the symbols are the same as before. A high diversity corresponds to a low Simpson index and a low diversity corresponds to a high Simpson index. As described in [@Roswell] the Simpson index gives the probability that two individuals, drawn randomly from a sample, will be of same species. Again, this is not a true diversity.
 
 <h2> Species richness </h2>
-A third method for measuring diversity is the species richness. This is simply given by
+A third method for measuring diversity is the Species richness. This is simply given by
 $$
-\text{species richness = }\Sigma_{i=1}^S1
+\text{Species richness = }\Sigma_{i=1}^S1
 $$
-where $S$ is the number of species in our presence/absence data having a one. This means that the species richness is just a count of how many species that is present in a nature area without taking into account the distribution of the individuals among the species types. This diversity measure is very sensitive to rare species.
+where $S$ is the number of species in our presence/absence data having a one. This means that the Species richness is just a count of how many species that is present in a nature area without taking into account the distribution of the individuals among the species types. This diversity measure is very sensitive to rare species.
 
 
 <h2> Hill diversity </h2>
@@ -57,7 +57,7 @@ The Hill diversity calculates the mean of the rarities of the species in the are
 <br>
 
 <h2> Hill-Shannon diversity </h2>
-The Hill-Shannon diversity is defined as the limit of the Hill diversity formula when $l$ approaches 0. We get that the Hill-Shannon diveristy is just the exponential function taken on the Shannon index
+The Hill-Shannon diversity is defined as the limit of the Hill diversity formula when $l$ approaches 0. We get that the Hill-Shannon diversity is just the exponential function taken on the Shannon index
 $$
 \text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
 $$
@@ -71,7 +71,7 @@ $$
 $$
 The Hill-Simpson diversity emphasizes common species more than the rare species. Furthermore, the Hill-Simpson diversity has the more intuitive interpretation that an area with high diversity has a high value of Hill-Simpson as oppose to the traditional Simpson index.
 <h2> Final note on Hill diversity </h2>
-If we let $l = 1$ in the formula for Hill diversity we get the standard species richness which was also described further above. As mentioned in that subsection, the species richness emphasizes rare species more than common species. Thus, we see that when $l$ = 0 we are equally sensitive towards rare and common species, while $l$ > 0 will lead to diversity measures more sensitive towards rare species and $l$ < 0 will lead to diversity measures more sensitive towards common species. 
+If we let $l = 1$ in the formula for Hill diversity we get the standard Species richness which was also described further above. As mentioned in that subsection, the Species richness emphasizes rare species more than common species. Thus, we see that when $l$ = 0 we are equally sensitive towards rare and common species, while $l$ > 0 will lead to diversity measures more sensitive towards rare species and $l$ < 0 will lead to diversity measures more sensitive towards common species. 
 
 
 <h2>References </h2>

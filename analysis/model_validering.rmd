@@ -29,7 +29,7 @@ library(ggplot2)
 
 <h2>Introduction</h2>
 
-On the bayesian model page we introduced the beta binomial update method. The method combines observed cover data from the small square in the center of the plot and the presence/absence data from the entire plot. This gave rise to a new updated dataset that could be used to give diversity estimates of the entire plot. This page is intended check the goodness-of-fit of the proposed method against the observed cover data.
+On the Bayesian model page we introduced the beta binomial update method. The method combines observed cover data from the small square in the center of the plot and the presence/absence data from the entire plot. This gave rise to a new updated dataset that could be used to give diversity estimates of the entire plot. This page is intended check the goodness-of-fit of the proposed method against the observed cover data.
 
 When we created the method we assumed that it would describe the data well. Especially, we assumed that the diversity estimates we would get by using the beta binomial update method
 did not differ too much from the diversity estimates we would achieve by only using the observed cover data. However, this is only an assumption and not necessarily true. We did however assume that the diversity estimates would be a bit higher using the beta binomial update method instead of using the observed data, since we add a small value for species present in the plot, but not observed in the small square of the plot, which the cover data does not. One issue could be that in plots with low diversity, the prior distributions will change the data too much so that our model will estimate the diversity way too high compared to the diversity estimate we would get from the observed cover data of the small square. <br> 
@@ -69,10 +69,10 @@ As mentioned earlier we will use diversity estimates as test statistics. We saw 
 The posterior predictive checks are only intended to highlight if our model is likely given the data, i.e. the model fit the observed data well. This, however, does not mean that the model is "better" to estimate diversity than just using cover or presence/absence data. This is a further assumption we need to make based on considerations within the domain of ecology. 
 
 <h2> Model validation for "Nardus grasslands" </h2>
-In the first example on the [example page](example.html) we worked with a subset of the NOVANA dataset from the tertiary habitat "Nardus grasslands". Further details on how this subset was created can be seen here  [data 6230](data_6230.html). In this subsection we will apply the ideas of posterior predictive checks to see how the beta binomial update method performs on this subset.
+In the two examples *"Comparison"* and *"Species diversity and nitrogen deposition"* on the [example page](example.html) we worked with a subset of the NOVANA dataset from the tertiary habitat "Nardus grasslands". Further details on how this subset was created can be seen here  [data 6230](data_6230.html). In this subsection we will apply the ideas of posterior predictive checks to see how the beta binomial update method performs on this subset.
 <br>
 
-As test statistic we will use the Hill Simpson and Hill Shannon diversities that were also used in the example on the [example page](example.html). Especially, we saw in the example on the example page how the diversity estimates obtained by the beta binomial cover dataset drifted further apart from the diversity estimates of the observed cover data when applying the the Hill Shannon diversity instead of the Hill Simpson diversity. Therefore, it is of interest to see how the properties of the two different ways to estimate diversity unfold when they are used as test statistics in our posterior predictive checks. Once again we define these as 
+As test statistic we will use the Hill Simpson and Hill Shannon diversities that were also used in the example on the [example page](example.html). Especially, we saw in the *"Comparison"* on the example page how the diversity estimates obtained by the beta binomial cover dataset drifted further apart from the diversity estimates of the observed cover data when applying the the Hill Shannon diversity instead of the Hill Simpson diversity. Therefore, it is of interest to see how the properties of the two different ways to estimate diversity unfold when they are used as test statistics in our posterior predictive checks. Once again we define these as 
 $$
 \text{Hill Simpson = } \frac{1}{\Sigma_{i=1}^S(p_i)^2}
 $$
@@ -148,7 +148,7 @@ ggplot(data = p_values_hill_shannon, mapping = aes(x = observed, y = mean)) +
 
 It is worth to notice that it is especially plots with low diversity that our model seems to give diversity estimates that differ a lot from what we would get from the observed cover data. However, this does not necessarily mean that our model is bad. What it does mean is that it is more likely for these plots that the beta binomial update method overestimate the diversity for the entire plot relative to the observed cover data of the small square. Otherwise the beta binomial update method seems to generate data that is aligned with the observed cover data.
 
-Lastly, we will create a similar plot but with the Hill Simpson diversity used as test statistic. In the example on the [example page](example.html) we saw that the Hill Simpson diversity was the diversity estimator that gave a diversity estimate that differed the least between the beta binomial updated cover data and the observed cover data. 
+Lastly, we will create a similar plot but with the Hill Simpson diversity used as test statistic. On the *"Comparison"* page on the [example page](example.html) we saw that the Hill Simpson diversity was the diversity estimator that gave a diversity estimate that differed the least between the beta binomial updated cover data and the observed cover data. 
 
 
 ```{r, include = FALSE}
@@ -182,7 +182,7 @@ sum(p_values_hill_simpson$p_values < 0.05)/nrow(cover)
 
 This shows that when the Hill Simpson diversity is used as test statistic the model will generate data that looks very much like the observed data. Much more than the case was when we used the Hill Shannon diversity as test statistic.
 
-This matches with what we found in the "Hill Diversity comparison" section on the example page under "Nardus grasslands". There we also saw that the beta binomial update method has less importance viewed through the Hill Simpson diversity than through the Hill Shannon diversity.
+This matches with what we found in the "Hill Diversity comparison" section on the example page under *"Comparison"*. There we also saw that the beta binomial update method has less importance viewed through the Hill Simpson diversity than through the Hill Shannon diversity.
 
 For both test statistics the conclusion is that the model mostly generated data that looks like the observed data. This gives confidence in the fact that the model has captured some good aspects of the observed data and gives sensible and thereby useful result to work with. Again it should be emphasized that it does not mean the the model gives better diversity estimates then what could be obtained by only using the observed cover data.
 
@@ -250,9 +250,9 @@ And the proportion of plots where the observed Hill Simpson diversity is an outl
 sum(p_values_simpson$p_values < 0.05)/nrow(cover_6210)
 ```
 
-In the case of both test statistics we see that a larger proportion of the plots have posterior predictive p-values indicating that the observed test statistic is unlikely under the model than in "Nardus grasslands" (first example). As an example, in "Nardus grasslands" the proportion of posterior predictive p-values below 0.05 with the Hill Shannon used as test statistic was only around 8%. However, the proportion of plots is still not so big that it causes concerns regarding the whether the assumptions underlying the model are appropriate. 
+In the case of both test statistics we see that a larger proportion of the plots have posterior predictive p-values indicating that the observed test statistic is more unlikely under the model than in "Nardus grasslands" (first example). As an example, in "Nardus grasslands" the proportion of posterior predictive p-values below 0.05 with the Hill Shannon used as test statistic was only around 8%. However, the proportion of plots is still not so big that it causes concerns regarding the whether the assumptions underlying the model are appropriate. 
 
-Below we study if there are some differences in the data from "Nardus grasslands" and "dry calcareous grasslands" that could explain why the model perform worse for the "dry calcareous grasslands" in these posterior predictive checks. 
+Below we study if there are some differences in the data from "Nardus grasslands" and "dry calcareous grasslands" that could explain why the model perform worse for the "dry calcareous grasslands" in these posterior predictive checks.
 
 <h2> Comparison of tertiary habitat types </h2>
 

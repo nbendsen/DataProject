@@ -336,220 +336,10 @@ $(document).ready(function () {
 </div>
 
 
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</button>
-</p>
-<div id="workflowr-report" class="collapse">
-<ul class="nav nav-tabs">
-<li class="active">
-<a data-toggle="tab" href="#summary">Summary</a>
-</li>
-<li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
-</li>
-<li>
-<a data-toggle="tab" href="#versions">Past versions</a>
-</li>
-</ul>
-<div class="tab-content">
-<div id="summary" class="tab-pane fade in active">
-<p>
-<strong>Last updated:</strong> 2021-05-16
-</p>
-<p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
-</p>
-<p>
-<strong>Knit directory:</strong> <code>DataProject - commit docs/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
-</p>
-<p>
-This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
-</p>
-<hr>
-</div>
-<div id="checks" class="tab-pane fade">
-<div id="workflowr-checks" class="panel-group">
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
-</p>
-</div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
-</p>
-</div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210322code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210322)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
-</p>
-</div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a" class="panel-collapse collapse">
-<div class="panel-body">
-<p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
-</p>
-<p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
-</p>
-<p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
-</p>
-<pre><code>
-Ignored files:
-    Ignored:    .Rproj.user/
-
-Untracked files:
-    Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
-
-</code></pre>
-<p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
-</p>
-</div>
-</div>
-</div>
-</div>
-<hr>
-</div>
-<div id="versions" class="tab-pane fade">
-
-<p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Introduction.Rmd</code>) and HTML (<code>docs/Introduction.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
-</p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/82bea2aef3e08d14e7e3805c71258a62e7e3846a/docs/Introduction.html" target="_blank">82bea2a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/ff0cd9fe13e80d3f47791f6c67ee7e75a95f31a6/analysis/Introduction.Rmd" target="_blank">ff0cd9f</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-</div>
-</div>
-</div>
 <h1>
 Presentation of problem
 </h1>
-<p>Many methods for estimating the species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate, which account not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). <br> While the latter measure (Shannon) often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location. In this vignette, we will propose a new method with the goal to combine cover (abundance) data often collected in smaller samples, with presence/absence data that are often collected over larger areas but lack the information of individual speceis’ abundance. Both types of data contain important information about the area that we would like to use to obtain better diversity measures for a nature area.</p>
+<p>Many methods for estimating species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate, which account not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). <br> While the latter measure (Shannon) often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location. In this vignette, we will propose a new method with the goal to combine cover (abundance) data often collected in smaller samples, with presence/absence data that are often collected over larger areas but lack the information of individual speceis’ abundance. Both types of data contain important information about the area that we would like to use to obtain more accurate diversity measures for a nature area.</p>
 <h1>
 Presentation of the NOVANA dataset
 </h1>
@@ -557,8 +347,8 @@ Presentation of the NOVANA dataset
 <p><img src="figure/Introduction.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Within each site a number of “plots” are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site</p>
 <p><img src="figure/Introduction.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1.</p>
-<p>In the center of the circle is a square with side length of 0.5 meters. Within this square the cover of each present species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is then the proportion of pins each it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square. <br> This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.</p>
+<p>Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1 and 0 otherwise.</p>
+<p>In the center of the circle is a square with side length of 0.5 meters. Within this square the cover of each present species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is then the proportion of pins it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square. <br> This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.</p>
 <p>As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustration to highlight the characteristics of the two data types described above.</p>
 <p><img src="figure/Introduction.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Each colour represent a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species</p>
@@ -633,7 +423,7 @@ Green species
 </tr>
 </tbody>
 </table>
-<p>It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again we note that we can have the information that a species is present in the plot, but that we don’t have any estimate of its cover within the plot as it is not present within the small square. This is shown with the purple species in this case. Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works</p>
+<p>It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again we note that we can have the information that a species is present in the plot, but that we don’t have any estimate of its abundance within the plot as it is not present within the small square. This is shown with the purple species in this case. Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1188,7 +978,7 @@ other attached packages:
  [7] kableExtra_1.3.4    forcats_0.5.0       stringr_1.4.0      
 [10] dplyr_1.0.2         purrr_0.3.4         readr_1.4.0        
 [13] tidyr_1.1.2         tibble_3.0.4        ggplot2_3.3.2      
-[16] tidyverse_1.3.0     workflowr_1.6.2    
+[16] tidyverse_1.3.0    
 
 loaded via a namespace (and not attached):
  [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 modelr_0.1.8     
@@ -1197,18 +987,17 @@ loaded via a namespace (and not attached):
 [13] glue_1.4.2        digest_0.6.25     promises_1.1.1    rvest_0.3.6      
 [17] colorspace_1.4-1  htmltools_0.5.0   httpuv_1.5.5      pkgconfig_2.0.3  
 [21] broom_0.7.2       raster_3.4-5      haven_2.3.1       scales_1.1.1     
-[25] webshot_0.5.2     svglite_2.0.0     whisker_0.4       later_1.1.0.1    
-[29] git2r_0.28.0      farver_2.0.3      generics_0.0.2    ellipsis_0.3.1   
-[33] withr_2.3.0       cli_2.1.0         magrittr_1.5      crayon_1.3.4     
-[37] readxl_1.3.1      evaluate_0.14     ps_1.4.0          fs_1.5.0         
-[41] fansi_0.4.1       xml2_1.3.2        tools_4.0.3       hms_0.5.3        
-[45] lifecycle_0.2.0   munsell_0.5.0     reprex_0.3.0      compiler_4.0.3   
-[49] systemfonts_1.0.1 rlang_0.4.8       rstudioapi_0.11   labeling_0.4.2   
-[53] rmarkdown_2.4     gtable_0.3.0      codetools_0.2-16  DBI_1.1.0        
-[57] R6_2.4.1          lubridate_1.7.9   knitr_1.30        rgdal_1.5-23     
-[61] rprojroot_1.3-2   rJava_0.9-13      stringi_1.5.3     Rcpp_1.0.5       
-[65] vctrs_0.3.4       mapproj_1.2.7     dbplyr_1.4.4      tidyselect_1.1.0 
-[69] xfun_0.18        </code></pre>
+[25] webshot_0.5.2     svglite_2.0.0     later_1.1.0.1     git2r_0.28.0     
+[29] generics_0.0.2    farver_2.0.3      ellipsis_0.3.1    withr_2.3.0      
+[33] cli_2.1.0         magrittr_1.5      crayon_1.3.4      readxl_1.3.1     
+[37] evaluate_0.14     fs_1.5.0          fansi_0.4.1       xml2_1.3.2       
+[41] tools_4.0.3       hms_0.5.3         lifecycle_0.2.0   munsell_0.5.0    
+[45] reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1 rlang_0.4.8      
+[49] rstudioapi_0.11   labeling_0.4.2    rmarkdown_2.4     gtable_0.3.0     
+[53] codetools_0.2-16  DBI_1.1.0         R6_2.4.1          lubridate_1.7.9  
+[57] knitr_1.30        rgdal_1.5-23      workflowr_1.6.2   rprojroot_1.3-2  
+[61] rJava_0.9-13      stringi_1.5.3     Rcpp_1.0.5        vctrs_0.3.4      
+[65] mapproj_1.2.7     dbplyr_1.4.4      tidyselect_1.1.0  xfun_0.18        </code></pre>
 </div>
 
 

@@ -9,34 +9,36 @@ editor_options:
 ---
 
 
-Species diversity is an important measure that can be used to describe the state of a nature area, and a change in species diversity can be used to study if the state of an area is in progress or decline. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we will propose a new method with the goal to combine the information from a cover dataset with the information from a presence/absence dataset. The idea of combining both datatypes is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. Furthermore, we will be working with a subset of the [NOVANA](https://novana.au.dk/) dataset as examples to show how the new method can be applied.
+Species diversity is an important measure, that can be used to discribe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in progress or decline. Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine abundance data and presence/absence data, to combine the information from both datasets. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.
+
+The idear of combining information from both datatypes, is that they do not contain the same sort of information, hence some information will be lost if one were to only use one of them. 
 
 
-An overview of the pages included in the vignette:
+Here you can gain an overview of the pages included in the vignette:
 
 * **[Introduction](introduction.html)**
-  * The page will give a further introduction to the problem and goal of this vignette as well as an introduction to the NOVANA dataset. 
+  * The introduction page will give you a brief introduction of the data used and the method developed. 
 * **[Diversity](Diversity.html)**
-  * The page will give an overview of the different ways to estimate species diversity.
+  * The Diversity page will give you an overview of the different diversity estimates, we have used as examples. 
 * **[Bayesian model](Model.html)**
-  * The page contains a description of the theory used to develop the Bayesian model and also an implementation of the model in R.
-* **[Functions](function_usage.html)**
-  * The page gives an overview and presentaion of the functions used on the [Examples](example.html) page. This includes a small example for each function. 
+  * The Bayesian model page contains a description of the theory used to develop the model, and why we have choosen the distributions we have. 
 * **[Examples](example.html)**
-  * Examples of use cases for the Bayesian model using the NOVANA dataset
+  * Examples of use cases for the Bayesian model and combarison between using the developed method or only using abundance data for estimating species diversity. 
 * **[Model validation](model_validering.html)**
-  * The page introduces posterior predictive checks and use these these to study the performance of the Bayesian model with respect to the observed cover datasets.
+  * The Model Validation page shows how the developed method is perfoming compared to only using abundance data or present/absence data for calculating diversity estimates.  
+* **[Functions](function_usage.html)**
+  * The Functions page gives an overview of the functions used, what they take as input, what they give as result and how they perfom on an example dataset. 
 
 
 
 <h2>Download</h2>
-To download the functions from this vignette click on the button below. This will open a new page that can be saved as a R file.
+To download the main function of this vignette click on button below. This will open a new page that can be saved as a R file.
 
 ```{r, echo = FALSE, message= FALSE, warning= FALSE}
 library(downloadthis)
 
 download_link(
-  link = "https://raw.githubusercontent.com/nbendsen/DataProject/master/code/function.R",
+  link = "https://raw.githubusercontent.com/nbendsen/DataProject/master/code/Beta_binomial_cover_update_function.R",
   button_label = "Download HERE",
   button_type = "succes",
   has_icon = FALSE,
@@ -46,8 +48,15 @@ download_link(
 
 ```
 <br><br>
-More details on the functions can be found at the [functions page](Function_usage.html).
 
+
+<h2>About us</h2>
+
+The page has been build by Malthe Holst Pedersen og Nikolaj Bjerg Bendsen and Ditte Lønborg Mikkelsen. We are all studying Data Science at Aarhus University, and as part of one of our courses, we were assigned to a project about species diversity. Together with out guidance counselor we were able to narrow the problem down to finding a method for combining abundance data and present/abcense data, for estimating species diversity. 
+To show our work, we have made this vignette, so other people are able to use the devoloped method. The page it build up in a way such that you as a reader, can get a further look at how to use the developed method, what kind of data the method has been tested on, and also get a look at the model validation for the method. 
+
+<br><br>
+<br><br>
 
 
 

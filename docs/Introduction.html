@@ -288,21 +288,18 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">DataProject</a>
+      <a class="navbar-brand" href="index.html">Home</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="Introduction.html">Introduction</a>
 </li>
 <li>
-  <a href="Diversity.html">Diversity</a>
+  <a href="Model.html">Bayesian model</a>
 </li>
 <li>
-  <a href="Model.html">Bayesian model</a>
+  <a href="Diversity.html">Diversity</a>
 </li>
 <li>
   <a href="Function_usage.html">Functions</a>
@@ -339,20 +336,20 @@ $(document).ready(function () {
 <h1>
 Presentation of problem
 </h1>
-<p>Many methods for estimating species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate, which account not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). <br> While the latter measure (Shannon) often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location. In this vignette, we will propose a new method with the goal to combine cover (abundance) data often collected in smaller samples, with presence/absence data that are often collected over larger areas but lack the information of individual speceis’ abundance. Both types of data contain important information about the area that we would like to use to obtain more accurate diversity measures for a nature area.</p>
+<p>Many methods for estimating species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given location – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate. It accounts not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). <br> While the Shannon index often will give a better estimate of the diversity in a location, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger location. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the location. In this vignette, we will propose a new method with the goal to combine abundance (e.g cover) data often collected in smaller samples, with presence/absence data that is often collected over larger areas but lack the information of individual species’ abundance. Both types of data contain important information about the area that we would like to use to obtain more accurate diversity measures for a nature area.</p>
 <h1>
 Presentation of the NOVANA dataset
 </h1>
-<p>We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further informations about the the NOVANA can be found at <a href="https://novana.au.dk/" class="uri">https://novana.au.dk/</a>. The NOVANA datasets consist of information from different “sites” across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat “kalkoverdrev” from the year of 2009 that were included in the NOVANA dataset.</p>
+<p>We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further information about the the NOVANA can be found at <a href="https://novana.au.dk/" class="uri">https://novana.au.dk/</a>. The NOVANA datasets consist of information from different “sites” across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat “Dry calcareous grasslands” from the year of 2009 that were included in the NOVANA dataset.</p>
 <p><img src="figure/Introduction.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Within each site a number of “plots” are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots is intended to visualize the plots in this specific site</p>
+<p>Within each site a number of “plots” are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots are intended to visualize the plots in this specific site.</p>
 <p><img src="figure/Introduction.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil in the plot. A plot is given by a circle with a radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with found = 1 and 0 otherwise.</p>
-<p>In the center of the circle is a square with side length of 0.5 meters. Within this square the cover of each present species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is then the proportion of pins it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square. <br> This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.</p>
+<p>Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil. A plot is an area defined as a circle with radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with 1 if found and 0 otherwise.</p>
+<p>In the center of the circle is a square with side length of 0.5 meters. Within this square the cover of each species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is the number of pins it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square. <br> This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.</p>
 <p>As the presence/absence data and cover data are at the center of this vignette we have made the following simple illustration to highlight the characteristics of the two data types described above.</p>
 <p><img src="figure/Introduction.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Each colour represent a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species</p>
-<table class="table" style="margin-left: auto; margin-right: auto;">
+<p>Each colour represents a single species, thus, we have a purple, brown, red, green and yellow species. Following the drawing we get the following cover and presence/absence data for each species.</p>
+<table class="table" style="width: auto !important; ">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -423,7 +420,10 @@ Green species
 </tr>
 </tbody>
 </table>
-<p>It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again we note that we can have the information that a species is present in the plot, but that we don’t have any estimate of its abundance within the plot as it is not present within the small square. This is shown with the purple species in this case. Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works</p>
+<p>It is possible for multiple species to overlap and for a pin to hit more than one species. We have indicated this by the red species overlapping the green and yellow species. In the example the red species is hit by all 16 pins. Again, we note that we can have the information that a species is present in the plot, but that we don’t have any estimate of its abundance within the plot as it is not present within the small square. This is shown with the purple species in this case. Below is a bit larger example of what cover and presence/absence datasets could look like. These datasets will later be used as mini examples to show how the method we create works.</p>
+<h3>
+Cover data
+</h3>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -685,6 +685,9 @@ Plot 7
 </tr>
 </tbody>
 </table>
+<h3>
+Presence/absence data
+</h3>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -946,7 +949,7 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>Once again, the intention of this vignette is to come up with a method to combine the two datatypes; cover data and presence/absence.</p>
+<p><br><br> <br><br></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">

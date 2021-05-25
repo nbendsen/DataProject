@@ -9,9 +9,8 @@ editor_options:
 ---
 
 
-Species diversity is an important measure, that can be used to discribe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in progress or decline. Many methods for estimating the abundance of species within an area have been proposed in the litterature. In this vignette we will propose a new method with this goal where we combine abundance data and presence/absence data, to combine the information from both datasets. We will be working with a subset of the NOVANA dataset as examples to show how this new method can be applied.
+Species diversity is an important measure that can be used to describe the state of a nature area, and the change in the species diversity is used to inform about whether the state of an area is in growth or decline. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we will propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the [NOVANA](https://novana.au.dk) dataset to illustrate how this new method can be applied.
 
-The idear of combining information from both datatypes, is that they do not contain the same sort of information, hence some information will be lost if one were to only use one of them. 
 
 
 Here you can gain an overview of the pages included in the vignette:
@@ -21,13 +20,13 @@ Here you can gain an overview of the pages included in the vignette:
 * **[Diversity](Diversity.html)**
   * The Diversity page will give you an overview of the different diversity estimates, we have used as examples. 
 * **[Bayesian model](Model.html)**
-  * The Bayesian model page contains a description of the theory used to develop the model, and why we have choosen the distributions we have. 
+  * The Bayesian model page contains a description of the theory used to develop the model, and why we have chosen the distributions we have. 
 * **[Examples](example.html)**
-  * Examples of use cases for the Bayesian model and combarison between using the developed method or only using abundance data for estimating species diversity. 
+  * Examples of use cases for the Bayesian model and comparison between using the developed method or only using abundance data for estimating species diversity. 
 * **[Model validation](model_validering.html)**
-  * The Model Validation page shows how the developed method is perfoming compared to only using abundance data or present/absence data for calculating diversity estimates.  
+  * The Model Validation page shows how the developed method is performing compared to only using abundance data or present/absence data for calculating diversity estimates.  
 * **[Functions](function_usage.html)**
-  * The Functions page gives an overview of the functions used, what they take as input, what they give as result and how they perfom on an example dataset. 
+  * The Functions page gives an overview of the functions used, what they take as input, what they give as result and how they perform on an example dataset. 
 
 
 
@@ -48,7 +47,7 @@ download_link(
 
 ```
 <br><br>
-More details on the functions can be found at the [functions page](Function_usage.html).
+More details on the functions can be found at the [Functions](Function_usage.html) page.
 
 <h2>About us</h2>
 

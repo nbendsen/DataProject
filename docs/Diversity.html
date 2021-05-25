@@ -363,21 +363,18 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">DataProject</a>
+      <a class="navbar-brand" href="index.html">Home</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="Introduction.html">Introduction</a>
 </li>
 <li>
-  <a href="Diversity.html">Diversity</a>
+  <a href="Model.html">Bayesian model</a>
 </li>
 <li>
-  <a href="Model.html">Bayesian model</a>
+  <a href="Diversity.html">Diversity</a>
 </li>
 <li>
   <a href="Function_usage.html">Functions</a>
@@ -411,356 +408,49 @@ div.tocify {
 </div>
 
 
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
-</button>
-</p>
-<div id="workflowr-report" class="collapse">
-<ul class="nav nav-tabs">
-<li class="active">
-<a data-toggle="tab" href="#summary">Summary</a>
-</li>
-<li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
-</li>
-<li>
-<a data-toggle="tab" href="#versions">Past versions</a>
-</li>
-</ul>
-<div class="tab-content">
-<div id="summary" class="tab-pane fade in active">
-<p>
-<strong>Last updated:</strong> 2021-05-19
-</p>
-<p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 1 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
-</p>
-<p>
-<strong>Knit directory:</strong> <code>DataProject - commit docs/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
-</p>
-<p>
-This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
-</p>
-<hr>
-</div>
-<div id="checks" class="tab-pane fade">
-<div id="workflowr-checks" class="panel-group">
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
-</p>
-</div>
-<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree8d71d2b47854b5a0e249140d9fd01ad175f20f12targetblank8d71d2ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/8d71d2b47854b5a0e249140d9fd01ad175f20f12" target="_blank">8d71d2b</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttree8d71d2b47854b5a0e249140d9fd01ad175f20f12targetblank8d71d2ba" class="panel-collapse collapse">
-<div class="panel-body">
-<p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
-</p>
-<p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/8d71d2b47854b5a0e249140d9fd01ad175f20f12" target="_blank">8d71d2b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
-</p>
-<p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
-</p>
-<pre><code>
-Ignored files:
-    Ignored:    .Rhistory
-    Ignored:    .Rproj.user/
-    Ignored:    analysis/.RData
-    Ignored:    analysis/.Rhistory
-
-Untracked files:
-    Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
-
-Unstaged changes:
-    Modified:   analysis/Diversity.Rmd
-    Modified:   analysis/Introduction.Rmd
-    Modified:   analysis/Model.Rmd
-    Modified:   analysis/example.Rmd
-
-</code></pre>
-<p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
-</p>
-</div>
-</div>
-</div>
-</div>
-<hr>
-</div>
-<div id="versions" class="tab-pane fade">
-
-<p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Diversity.Rmd</code>) and HTML (<code>docs/Diversity.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
-</p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1cffedaa14a2a62f57b96f2840d62022700423ee/docs/Diversity.html" target="_blank">1cffeda</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/82bea2aef3e08d14e7e3805c71258a62e7e3846a/docs/Diversity.html" target="_blank">82bea2a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/ff0cd9fe13e80d3f47791f6c67ee7e75a95f31a6/analysis/Diversity.Rmd" target="_blank">ff0cd9f</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/b9ca680b6ba0281555cbead4ea79846b7c87d2b4/analysis/Diversity.Rmd" target="_blank">b9ca680</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-docs files
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/b9ca680b6ba0281555cbead4ea79846b7c87d2b4/docs/Diversity.html" target="_blank">b9ca680</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-docs files
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/a594d5a9e33fb4da58ab259f0972ea1b24728ae8/analysis/Diversity.Rmd" target="_blank">a594d5a</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-add
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/Diversity.Rmd" target="_blank">6c0e88a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-15
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/Diversity.html" target="_blank">1bfbb02</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/Diversity.html" target="_blank">f173714</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/7a3c9bd1b1444cc2c40b40d9806638bcf145fd65/docs/Diversity.html" target="_blank">7a3c9bd</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-add stuff
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/dc4bed504e2814fe49cae5b5e83487b5674a28dd/analysis/Diversity.Rmd" target="_blank">dc4bed5</a>
-</td>
-<td>
-nbendsen
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-asd
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-</div>
-</div>
-</div>
-<p>In ecology diversity is an important aspect. The diversity is a measure of the number of different types of species within a nature area and also how the individuals are distributed among the species. A diversity index can be computed in several different ways and puts weight on different aspects of the species within the area. As an example, one could be interested in diversity measure that emphasizes common species higher than rare species or vice versa as this reflects different characteristics of the diversity of the area.</p>
-<p>When estimating diversity of an area one needs data about the species in the area. This data generally comes in two types: abundance data and presence/absence data. We will use cover data to estimate the species’ abundance. These two types of data are described at the <a href="Introduction.html">Introduction</a> page. Cover data is a measure of how big a fraction of the area would be covered by a given species if it was projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. Presence/absence data only indicates which species exist in a given area, but gives no information about their abundance.</p>
-<p>Below a number of different ways to estimate the diversity of an area is presented. All measures use cover data except species richness that uses presence/absence data. The different diversity measures will be applied on the <a href="example.html">Examples</a> page.</p>
+<p><br></p>
+<p>In ecology diversity is an important aspect. The diversity is a measure of the number of different types of species within a nature area and also how the individuals are distributed among the species. A diversity index can be computed in several different ways and puts weight on different aspects of the species within the area. As an example, one could be interested in a diversity measure that emphasizes common species higher than rare species or the opposite as this reflects different characteristics of the diversity of the area.</p>
+<p>When estimating the diversity of an area one needs data about the species in the area. This data generally comes in two types: abundance data and presence/absence data. We will use cover data to estimate the species’ abundance. Cover data is a measure of how big a fraction of an area that would be covered by a given species if it was projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. Presence/absence data only indicates which species exist in a given area, but gives no information about their abundance. These two types of data are described further on the <a href="Introduction.html">Introduction</a> page.</p>
+<p>This page is intended to define a number of different ways to estimate the diversity of an area so that it is clear for reader what is meant when we refer to different diversity measures on the <a href="example.html">Examples</a> page and <a href="model_validering.html">Model validation</a> page. All measures use cover data except species richness which uses presence/absence data to estimate the diversity.</p>
 <h2>
 Shannon index
 </h2>
-<p>A diversity index that traditionally is often used is the shannon index. The shannon index is calculated by the following formula: <span class="math display">\[\text{shannon index =}-\sum_{i=1}^S p_i \ln (p_i)\]</span> where <span class="math inline">\(S\)</span> is the number of species and <span class="math inline">\(p_i\)</span> is the proportion of all individuals that belong to species <span class="math inline">\(i\)</span>. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins species <span class="math inline">\(i\)</span> is hit by divided by the total number of pins that hit some species in the plot. <br><br> However, as it is pointed out in both <span class="citation">[1]</span> and <span class="citation">[2]</span> the shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from <span class="citation">[2]</span>. <br> We can look at two areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the second area would be twice as big as the diversity of the first area. Because when all species is equally common, the diversity should be proportional to the number of species. That would be the intuitve understanding of species diversity. When calculating the shannon we would get 3.0 for the first area and 4.0 for the second area. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because the shannnon index is not the diversity but an entropy. Of this reason, the shannon index can be troublesome to use as a measure of species diversity as it is also pointed out in <span class="citation">[1]</span> and <span class="citation">[2]</span>.</p>
+<p>When estimating the diversity of an area the Shannon index is often used. The Shannon index is calculated by the following formula: <span class="math display">\[\text{Shannon index =}-\sum_{i=1}^S p_i \log (p_i)\]</span> where <span class="math inline">\(S\)</span> is the number of species and <span class="math inline">\(p_i\)</span> is the proportion of all individuals that belong to species <span class="math inline">\(i\)</span>. In the NOVANA dataset where the cover data is made of pin-point data, we calculate this proportion by the number of pins species <span class="math inline">\(i\)</span> is hit by divided by the total number of pins that hit some species in the plot. In this way, we get the normalized abundance for each species in the plot. <br><br> However, as it is pointed out in both <span class="citation">[1]</span> and <span class="citation">[2]</span> the Shannon index is not a diversity, but rather a entropy giving the uncertainty in the outcome of a sampling process. This issue is highlighted in the following example taken from <span class="citation">[2]</span>. <br> We can look at two areas where one has 8 species and one has 16 species. The species in each area is equally common, so we would assume that the diversity of the second area would be twice as big as the diversity of the first area. The reason for this being that when all species are equally common, the diversity should be proportional to the number of species. That would be the intuitive understanding of species diversity. When calculating the Shannon we would get 3.0 for the first area and 4.0 for the second area using base = 2 for the logarithm. It is clearly seen that the value for the second area is not twice as big as the value of the first area. This is because the Shannon index is not a diversity but an entropy. Of this reason, the Shannon index can be troublesome to use as a measure of species diversity as it does not follow the intuitive understanding of species diversity that most people have.</p>
 <h2>
 Simpson index
 </h2>
-<p>Another commonly used diversity index is the simpson index. This is given by <span class="math display">\[
+<p>Another commonly used diversity index is the Simpson index. This is given by <span class="math display">\[
 \text{simpson index = }\Sigma_{i = 1}^S(p_i)^2
-\]</span> where the symbols mean the same as before. A high diversity corresponds to a low simpson index and a low diversity corresponds to a high simpson index. As described in <span class="citation">[1]</span> the simpson index gives the probability that two individuals, drawn randomly from a sample, will be of same specie. Again, this is not a true diversity.</p>
+\]</span> where the symbols are the same as before. A high diversity corresponds to a low Simpson index and a low diversity corresponds to a high Simpson index. As described in <span class="citation">[1]</span> the Simpson index gives the probability that two individuals, drawn randomly from a sample, will be of same species. Again, this is not a true diversity.</p>
 <h2>
 Species richness
 </h2>
 <p>A third method for measuring diversity is the species richness. This is simply given by <span class="math display">\[
 \text{species richness = }\Sigma_{i=1}^S1
-\]</span> where <span class="math inline">\(S\)</span> is the number of species in our presence/absence data having a one. This means that the species richness is just a count of how many species that is present in the plot without taking into account the distribution of the individuals among the specie types. This measure is very sensitive to rare species.</p>
+\]</span> where <span class="math inline">\(S\)</span> is the number of species in our presence/absence data having a one. This means that the species richness is just a count of how many species that is present in a nature area without taking into account the distribution of the individuals among the species types. This diversity measure is very sensitive to rare species.</p>
 <h2>
 Hill diversity
 </h2>
-<p>To account for the problemes with the shannon index and the simpson index both <span class="citation">[1]</span> and <span class="citation">[2]</span> introduce the Hill diversity as a solution. Following the notation from <span class="citation">[1]</span> we get that <span class="math display">\[
+<p>To account for the problems with the Shannon index and the Simpson index both <span class="citation">[1]</span> and <span class="citation">[2]</span> introduce the Hill diversity as a solution. Following the notation from <span class="citation">[1]</span> we get that <span class="math display">\[
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
-\]</span> The symbols of <span class="math inline">\(S\)</span> and <span class="math inline">\(p_i\)</span> are the same as previous, while <span class="math inline">\(r_i\)</span> is how rare the i’th species is in a plot. We can calculate how rare a species is by using the equation <span class="math display">\[r_i = \frac{1}{p_i}\]</span> The Hill diversity calculates the mean of the rarities of the species in the plot. A plot with many species, all rare, has a high mean rarity, while a plot with few species, non of them rare, has a low mean rarity and low diversity. The <span class="math inline">\(l\)</span> determines the rarity scale, which is how we calculate the mean rarity, and by adjusting this we get different Hill diversities. The different ways we can calculate the mean rarity differs in the way we scale the values of the common and rare species, i.e. the different values of <span class="math inline">\(l\)</span> emphasize common or rare species. As an example the Hill-Shannon (defined below) uses the arithmetic mean while the Hill-Simpson (defined below) uses the geometric mean. <br></p>
+\]</span> The symbols of <span class="math inline">\(S\)</span> and <span class="math inline">\(p_i\)</span> are the same as previous, while <span class="math inline">\(r_i\)</span> is how rare species <span class="math inline">\(i\)</span> is in a nature area. We can calculate how rare a species is by using the equation <span class="math display">\[r_i = \frac{1}{p_i}\]</span> The Hill diversity calculates the mean of the rarities of the species in the area. An area with many species, all rare, has a high mean rarity, while an area with few species, non of them rare, has a low mean rarity and low diversity. The <span class="math inline">\(l\)</span> determines the rarity scale, which is how we calculate the mean rarity. By adjusting <span class="math inline">\(l\)</span> we get different Hill diversities. The different ways we can calculate the mean rarity differs in the way we scale the values of the common and rare species, i.e. the different values of <span class="math inline">\(l\)</span> emphasize common or rare species. As an example the Hill-Shannon (defined below) uses the arithmetic mean while the Hill-Simpson (defined below) uses the geometric mean. Of this reason, we will get different species diversities for a nature area depending on the <span class="math inline">\(l\)</span> that we chooses. The choice of <span class="math inline">\(l\)</span> depends on what characteristics of the area that we are interested in. <br></p>
 <h2>
 Hill-Shannon diversity
 </h2>
-<p>If we let <span class="math inline">\(l\)</span> approach 0 then in the limit we get the exponential function taken on the shannon index <span class="math display">\[
+<p>The Hill-Shannon diversity is defined as the limit of the Hill diversity formula when <span class="math inline">\(l\)</span> approaches 0. We get that the Hill-Shannon diveristy is just the exponential function taken on the Shannon index <span class="math display">\[
 \text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
 \]</span></p>
-<p>Opposite to the shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species. For this reason will we predominantly have focus on Hill-Shannon as well as Hill-Simpson in our model validation.</p>
+<p>Opposite to the Shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species. For this reason, we will focus on the Hill-Shannon diversity both on the <a href="example.html">Examples</a> page and especially on the <a href="model_validering.html">Model validation</a> page.</p>
 <h2>
 Hill-Simpson diversity
 </h2>
-<p>If we instead let <span class="math inline">\(l = -1\)</span> in the formula for Hill diversity we get the inverse of the simpson index <span class="math display">\[
+If we instead let <span class="math inline">\(l = -1\)</span> in the formula for Hill diversity we get the inverse of the Simpson index <span class="math display">\[
 \text{Hill-Simpson =} \frac{1}{\Sigma_{i=1}^S(p_i)^2}
-\]</span> The Hill-Simpson diversity emphasizes the common species more than the rare species. Furthermore, the Hill-Simpson diversity has the more intuitive interpretation that a plot with high diversity has a high value of Hill-Simpson as oppose to the traditional simpson index. <br><br> As a final note it should also be mentioned, that if we let <span class="math inline">\(l = 1\)</span> in the formula for Hill diversity we get the standard species richness which was also described further above.</p>
+\]</span> The Hill-Simpson diversity emphasizes common species more than the rare species. Furthermore, the Hill-Simpson diversity has the more intuitive interpretation that an area with high diversity has a high value of Hill-Simpson as oppose to the traditional Simpson index.
+<h2>
+Final note on Hill diversity
+</h2>
+<p>If we let <span class="math inline">\(l = 1\)</span> in the formula for Hill diversity we get the standard species richness which was also described further above. As mentioned in that subsection, the species richness emphasizes rare species more than common species. Thus, we see that when <span class="math inline">\(l\)</span> = 0 we are equally sensitive towards rare and common species, while <span class="math inline">\(l\)</span> &gt; 0 will lead to diversity measures more sensitive towards rare species and <span class="math inline">\(l\)</span> &lt; 0 will lead to diversity measures more sensitive towards common species.</p>
 <h2>
 References
 </h2>

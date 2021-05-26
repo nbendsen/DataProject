@@ -21,3 +21,8 @@ h5{
   padding-top: 2em !important; /*adding so much padding because theme adds a margin-top: -65px by default */
   margin-bottom: 0.25em;
 }
+
+
+.tocify-header {
+    text-indent: initial;
+}

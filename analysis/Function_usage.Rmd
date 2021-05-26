@@ -20,7 +20,7 @@ library(kableExtra)
 
 
 
-This page is intended to provide an overview of the functions that are used on the [Examples](example.html) page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
+This page is intended to provide an overview of the functions that are used on the [Examples](example.html) page. The structure of the page is the following; each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
 
 The reader can download all the functions following the link below. The link will take the reader to a new page. This page can be saved as a R file.
 
@@ -56,17 +56,17 @@ colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Specie
 
 <br>
 
-The presentation of each function will also contain a small example of how the function is applied. To to this, we again use a small constructed cover dataset and presence/absence dataset. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
+The presentation of each function will also contain a small example of how the function is applied. To do this, we again use a small constructed cover dataset and presence/absence dataset that was presented at the [Introduction](introduction.html) page. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
 
-
-When referring to cover_data, the dataset looks like:
+An example of cover data could be:
 
 ```{r, echo = FALSE}
 kable(Cover, "html") %>% kable_styling()
 ```
 
+<br>
 
-When referring to presence_absence_data, the dataset looks like:
+An example of presence/absence data could be:
 
 ```{r, include=FALSE}
 PresenceAbsence <- data.frame(   a1 = c(1,0,1,0,1,0,1),
@@ -92,10 +92,10 @@ kable(PresenceAbsence, "html") %>% kable_styling()
 
 For each function we will use the above data to give an example of the usage of the function.
 
-<h2>Beta Binomial Cover Update</h2>
+<h2>Beta Binomial cover Update</h2>
 
 
-Main function of this vignette. The function is an implementation of the method outlined on the home page.
+Main function of this vignette. The function is an implementation of the method outlined on the [Bayesian model](Model.html) page.
 
 **Usage:**
 
@@ -103,16 +103,15 @@ beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_co
 
 **Arguments:**
 
-* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
-* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
-* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1. n is the number of pins used in each blot, so by dividing each entry with n, we normalize the data.
-* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this datasat is applied.
+* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.
+* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
+* **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this dataset is applied.
 
 **Output** 
 
-* The function returns a dataframe with plots as rows and species as columns, and where each entry contain new abundance data for a specie in a plot.
+* The function returns a data frame similar to the cover data but now containing new cover data. 
 
-For further specifications of the function click [link](bayesian_method_describtion.html)
 
 **Calculated example** 
 
@@ -142,13 +141,13 @@ shannon(cover_data, remove_column = NULL)
 
 **Arguments:**
 
-* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
 **Output:**
 
-* A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
+* A vector with the Shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 **Calculated example** 
 
@@ -173,13 +172,13 @@ simpson(cover_data, remove_column = NULL)
 
 **Arguments:**
 
-* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
 **Output:**
 
-* A vector with simpson's index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.
+* A vector with Simpson index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 **Calculated example** 
 
@@ -209,7 +208,7 @@ species_richness(presence_absence_data, remove_column = NULL)
 
 **Output:**
 
-* A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.
+* A vector with Species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.
 
 **Calculated example** 
 
@@ -225,7 +224,7 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ```
 
 
-<h3> Hill shannon diveristy </h3>
+<h3> Hill Shannon diveristy </h3>
 
 **Usage:**
 
@@ -233,7 +232,7 @@ hill_shannon(cover_data, remove_column = NULL)
 
 **Arguments:**
 
-* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
@@ -263,7 +262,7 @@ hill_simpson(cover_data, remove_column = NULL)
 
 **Arguments:**
 
-* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 

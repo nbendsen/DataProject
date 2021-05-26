@@ -365,21 +365,18 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">DataProject</a>
+      <a class="navbar-brand" href="index.html">Home</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
   <a href="Introduction.html">Introduction</a>
 </li>
 <li>
-  <a href="Diversity.html">Diversity</a>
+  <a href="Model.html">Bayesian model</a>
 </li>
 <li>
-  <a href="Model.html">Bayesian model</a>
+  <a href="Diversity.html">Diversity</a>
 </li>
 <li>
   <a href="Function_usage.html">Functions</a>
@@ -413,547 +410,14 @@ div.tocify {
 </div>
 
 
-<p>
-<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</button>
-</p>
-<div id="workflowr-report" class="collapse">
-<ul class="nav nav-tabs">
-<li class="active">
-<a data-toggle="tab" href="#summary">Summary</a>
-</li>
-<li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
-</li>
-<li>
-<a data-toggle="tab" href="#versions">Past versions</a>
-</li>
-</ul>
-<div class="tab-content">
-<div id="summary" class="tab-pane fade in active">
-<p>
-<strong>Last updated:</strong> 2021-05-16
-</p>
-<p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
-</p>
-<p>
-<strong>Knit directory:</strong> <code>DataProject - commit docs/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
-</p>
-<p>
-This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
-  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
-</p>
-<hr>
-</div>
-<div id="checks" class="tab-pane fade">
-<div id="workflowr-checks" class="panel-group">
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
-</p>
-</div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
-</p>
-</div>
-<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20210322code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20210322)</code> </a>
-</p>
-</div>
-<div id="strongSeedstrongcodesetseed20210322code" class="panel-collapse collapse">
-<div class="panel-body">
-<p>The command <code>set.seed(20210322)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
-</p>
-</div>
-<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
-</p>
-</div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
-</p>
-</div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
-<div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a> </a>
-</p>
-</div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomnbendsenDataProjecttreebd74b257daac45f0ddc114a3801f710a242209batargetblankbd74b25a" class="panel-collapse collapse">
-<div class="panel-body">
-<p>
-Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
-</p>
-<p>
-The results in this page were generated with repository version <a href="https://github.com/nbendsen/DataProject/tree/bd74b257daac45f0ddc114a3801f710a242209ba" target="_blank">bd74b25</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
-</p>
-<p>
-Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
-</p>
-<pre><code>
-Ignored files:
-    Ignored:    .Rproj.user/
-
-Untracked files:
-    Untracked:  figure/Animation.Rmd/unnamed-chunk-11-1.gif
-
-</code></pre>
-<p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
-</p>
-</div>
-</div>
-</div>
-</div>
-<hr>
-</div>
-<div id="versions" class="tab-pane fade">
-
-<p>
-These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/Function_usage.Rmd</code>) and HTML (<code>docs/Function_usage.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
-</p>
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-File
-</th>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-<th>
-Message
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/82bea2aef3e08d14e7e3805c71258a62e7e3846a/docs/Function_usage.html" target="_blank">82bea2a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/ff0cd9fe13e80d3f47791f6c67ee7e75a95f31a6/analysis/Function_usage.Rmd" target="_blank">ff0cd9f</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-16
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/891b43e2acb59a740be3ad84e2dfaa1ff159eb00/docs/Function_usage.html" target="_blank">891b43e</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-10
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/0e9dbb626e54a664cf9a26260e383bcf282c12d8/docs/Function_usage.html" target="_blank">0e9dbb6</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/a594d5a9e33fb4da58ab259f0972ea1b24728ae8/analysis/Function_usage.Rmd" target="_blank">a594d5a</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-05-09
-</td>
-<td>
-add
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/24355541eb0eb35e257446ef169bf9af5c9c9283/docs/Function_usage.html" target="_blank">2435554</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/042e8d51654d96d6e60b6a313f696ddef36762c5/analysis/Function_usage.Rmd" target="_blank">042e8d5</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1f7890b4b17c0abbbf76656f6ddb19c618e6cf4f/docs/Function_usage.html" target="_blank">1f7890b</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/41e37edb1c1802d03abd2309710c550ee56ff1f6/analysis/Function_usage.Rmd" target="_blank">41e37ed</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1012d73da05d34051892a58037fe3130990c608a/docs/Function_usage.html" target="_blank">1012d73</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/fcd03742c1a08074cacc310eac38274b0dd5bd72/analysis/Function_usage.Rmd" target="_blank">fcd0374</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-28
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/dae8962df6ddb419b925daa431bdf658f6451e1c/docs/Function_usage.html" target="_blank">dae8962</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-19
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/da6cf05516f9bb647cb04e2d76e408b24e9ed05a/analysis/Function_usage.Rmd" target="_blank">da6cf05</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-19
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/b12e7eecd12498845ae6d3dc42556a4f95113e87/docs/Function_usage.html" target="_blank">b12e7ee</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-18
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/df33abbf44fc1993433b6c591b9a97ccb2e65c29/analysis/Function_usage.Rmd" target="_blank">df33abb</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-18
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/6c0e88a7bfbd9c36e25d48491bbb1a309477d4b6/analysis/Function_usage.Rmd" target="_blank">6c0e88a</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-15
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/1bfbb028da6b72fa5c1e0c104b13bf880ea2e226/docs/Function_usage.html" target="_blank">1bfbb02</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/f1737141417ab177317f192f8bb619ec5fd6b00f/docs/Function_usage.html" target="_blank">f173714</a>
-</td>
-<td>
-GitHub
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Add files via upload
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/29e6e6f87214780226bf6328573463611ce371ce/docs/Function_usage.html" target="_blank">29e6e6f</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added docs for functions
-</td>
-</tr>
-<tr>
-<td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/nbendsen/DataProject/blob/6df1c173b37d25d8aa0f66fed1436495c654b4f8/analysis/Function_usage.Rmd" target="_blank">6df1c17</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added function usage
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/nbendsen/DataProject/6df1c173b37d25d8aa0f66fed1436495c654b4f8/docs/Function_usage.html" target="_blank">6df1c17</a>
-</td>
-<td>
-MHPHP
-</td>
-<td>
-2021-04-14
-</td>
-<td>
-Added function usage
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-</div>
-</div>
-</div>
-<p>This page is intended to provide an overview of the functions that are used on the <a href="example.html">Examples</a> page. The structure of the page is that each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.</p>
+<p>This page is intended to provide an overview of the functions that are used on the <a href="example.html">Examples</a> page. The structure of the page is the following; each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.</p>
 <p>The reader can download all the functions following the link below. The link will take the reader to a new page. This page can be saved as a R file.</p>
 <a href="https://raw.githubusercontent.com/nbendsen/DataProject/master/code/function.R">
 <button class="btn btn-success">Download HERE</button>
 </a>
 <p><br></p>
-<p>The presentation of each function will also contain a small example of how the function is applied. To to this, we again use a small constructed cover dataset and presence/absence dataset. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.</p>
-<p>When referring to cover_data, the dataset looks like:</p>
+<p>The presentation of each function will also contain a small example of how the function is applied. To do this, we again use a small constructed cover dataset and presence/absence dataset that was presented at the <a href="introduction.html">Introduction</a> page. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.</p>
+<p>An example of cover data could be:</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1215,7 +679,8 @@ Plot 7
 </tr>
 </tbody>
 </table>
-<p>When referring to presence_absence_data, the dataset looks like:</p>
+<p><br></p>
+<p>An example of presence/absence data could be:</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1479,23 +944,23 @@ Plot 7
 </table>
 <p>For each function we will use the above data to give an example of the usage of the function.</p>
 <h2>
-Beta Binomial Cover Update
+Beta Binomial cover Update
 </h2>
-<p>Main function of this vignette. The function is an implementation of the method outlined on the home page.</p>
+<p>Main function of this vignette. The function is an implementation of the method outlined on the <a href="Model.html">Bayesian model</a> page.</p>
 <p><strong>Usage:</strong></p>
 <p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</li>
-<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</li>
-<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1. n is the number of pins used in each blot, so by dividing each entry with n, we normalize the data.</li>
-<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this datasat is applied.</li>
+<li><strong>cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</li>
+<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.</li>
+<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
+</li>
+<li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this dataset is applied.</li>
 </ul>
 <p><strong>Output</strong></p>
 <ul>
-<li>The function returns a dataframe with plots as rows and species as columns, and where each entry contain new abundance data for a specie in a plot.</li>
+<li>The function returns a data frame similar to the cover data but now containing new cover data.</li>
 </ul>
-<p>For further specifications of the function click <a href="bayesian_method_describtion.html">link</a></p>
 <p><strong>Calculated example</strong></p>
 <pre class="r"><code>res1 &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
 <p>The data from the outcome of the function looks like:</p>
@@ -1772,12 +1237,12 @@ Shannon index
 <p>shannon(cover_data, remove_column = NULL)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
+<li><p><strong>cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</p></li>
 <li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
 </ul>
 <p><strong>Output:</strong></p>
 <ul>
-<li>A vector with the shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
+<li>A vector with the Shannon index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calculated example</strong></p>
 <pre class="r"><code>res2 &lt;- shannon(Cover, remove_column = 0)</code></pre>
@@ -1857,12 +1322,12 @@ Simpson’s index
 <p>simpson(cover_data, remove_column = NULL)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
+<li><p><strong>cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</p></li>
 <li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
 </ul>
 <p><strong>Output:</strong></p>
 <ul>
-<li>A vector with simpson’s index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_dataand so on.</li>
+<li>A vector with Simpson index for each plot in the input cover_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calculated example</strong></p>
 <pre class="r"><code>res3 &lt;- simpson(Cover, remove_column = 0)</code></pre>
@@ -1947,7 +1412,7 @@ Species richness
 </ul>
 <p><strong>Output:</strong></p>
 <ul>
-<li>A vector with species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
+<li>A vector with Species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
 </ul>
 <p><strong>Calculated example</strong></p>
 <pre class="r"><code>res4 &lt;- species_richness(PresenceAbsence, remove_column = 0)</code></pre>
@@ -2021,13 +1486,13 @@ Plot 7
 </tbody>
 </table>
 <h3>
-Hill shannon diveristy
+Hill Shannon diveristy
 </h3>
 <p><strong>Usage:</strong></p>
 <p>hill_shannon(cover_data, remove_column = NULL)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
+<li><p><strong>cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</p></li>
 <li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
 </ul>
 <p><strong>Output:</strong></p>
@@ -2112,7 +1577,7 @@ Hill Simpson diversity
 <p>hill_simpson(cover_data, remove_column = NULL)</p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><p><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
+<li><p><strong>cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</p></li>
 <li><p><strong>remove_column</strong>: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
 </ul>
 <p><strong>Output:</strong></p>
@@ -2409,7 +1874,7 @@ other attached packages:
  [1] fitdistrplus_1.1-3 survival_3.2-7     MASS_7.3-53        downloadthis_0.2.1
  [5] kableExtra_1.3.4   forcats_0.5.0      stringr_1.4.0      dplyr_1.0.2       
  [9] purrr_0.3.4        readr_1.4.0        tidyr_1.1.2        tibble_3.0.4      
-[13] ggplot2_3.3.2      tidyverse_1.3.0    workflowr_1.6.2   
+[13] ggplot2_3.3.2      tidyverse_1.3.0   
 
 loaded via a namespace (and not attached):
  [1] httr_1.4.2        jsonlite_1.7.1    viridisLite_0.3.0 splines_4.0.3    
@@ -2418,18 +1883,18 @@ loaded via a namespace (and not attached):
 [13] lattice_0.20-41   glue_1.4.2        digest_0.6.25     promises_1.1.1   
 [17] rvest_0.3.6       colorspace_1.4-1  htmltools_0.5.0   httpuv_1.5.5     
 [21] Matrix_1.2-18     pkgconfig_2.0.3   broom_0.7.2       haven_2.3.1      
-[25] scales_1.1.1      webshot_0.5.2     svglite_2.0.0     whisker_0.4      
-[29] later_1.1.0.1     git2r_0.28.0      mgcv_1.8-33       farver_2.0.3     
-[33] generics_0.0.2    ellipsis_0.3.1    withr_2.3.0       cli_2.1.0        
-[37] magrittr_1.5      crayon_1.3.4      readxl_1.3.1      evaluate_0.14    
-[41] ps_1.4.0          fs_1.5.0          fansi_0.4.1       nlme_3.1-149     
-[45] xml2_1.3.2        tools_4.0.3       hms_0.5.3         lifecycle_0.2.0  
-[49] munsell_0.5.0     reprex_0.3.0      compiler_4.0.3    systemfonts_1.0.1
-[53] rlang_0.4.8       grid_4.0.3        rstudioapi_0.11   labeling_0.4.2   
-[57] rmarkdown_2.4     gtable_0.3.0      DBI_1.1.0         R6_2.4.1         
-[61] lubridate_1.7.9   knitr_1.30        bsplus_0.1.2      rprojroot_1.3-2  
-[65] stringi_1.5.3     Rcpp_1.0.5        vctrs_0.3.4       dbplyr_1.4.4     
-[69] tidyselect_1.1.0  xfun_0.18        </code></pre>
+[25] scales_1.1.1      webshot_0.5.2     svglite_2.0.0     later_1.1.0.1    
+[29] git2r_0.28.0      mgcv_1.8-33       generics_0.0.2    farver_2.0.3     
+[33] ellipsis_0.3.1    withr_2.3.0       cli_2.1.0         magrittr_1.5     
+[37] crayon_1.3.4      readxl_1.3.1      evaluate_0.14     fs_1.5.0         
+[41] fansi_0.4.1       nlme_3.1-149      xml2_1.3.2        tools_4.0.3      
+[45] hms_0.5.3         lifecycle_0.2.0   munsell_0.5.0     reprex_0.3.0     
+[49] compiler_4.0.3    systemfonts_1.0.1 rlang_0.4.8       grid_4.0.3       
+[53] rstudioapi_0.11   labeling_0.4.2    rmarkdown_2.4     gtable_0.3.0     
+[57] DBI_1.1.0         R6_2.4.1          lubridate_1.7.9   knitr_1.30       
+[61] workflowr_1.6.2   bsplus_0.1.2      rprojroot_1.3-2   stringi_1.5.3    
+[65] Rcpp_1.0.5        vctrs_0.3.4       dbplyr_1.4.4      tidyselect_1.1.0 
+[69] xfun_0.18        </code></pre>
 </div>
 
 

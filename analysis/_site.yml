@@ -1,16 +1,14 @@
 name: DataProject
 output_dir: ../docs
 navbar:
-  title: DataProject
+  title: Home
   left:
-  - text: Home
-    href: index.html
   - text: Introduction
     href: Introduction.html
-  - text: Diversity
-    href: Diversity.html
   - text: Bayesian model
     href: Model.html
+  - text: Diversity
+    href: Diversity.html
   - text: Functions
     href: Function_usage.html
   - text: Examples

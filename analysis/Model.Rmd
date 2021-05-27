@@ -51,7 +51,7 @@ rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5",
 colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
-The first section of this page will present the ideas behind our proposed model to combine the information from cover data and presence/absence data of a plot. This section will present the beta-binomial cover update model for the reader and show how this can be applied to the problem described at the [Introduction](Introduction.html) page. The second section of this page presents an introduction to the R function that implements the beta binomial cover update model. The last section of the page will include a simple example of the use of the model.
+The first section of this page will present the ideas behind our proposed model to combine the information from cover data and presence/absence data of a plot. This section will present the beta binomial cover update model for the reader and show how this can be applied to the problem described at the [Introduction](Introduction.html) page. The second section of this page presents an introduction to the R function that implements the beta binomial cover update model. The last section of the page will include a simple example of the use of the model.
 
 <h2>Presentation of Bayesian model </h2>
 As mentioned on the [Introduction](Introduction.html) page, plant diversity is often calculated by species richness using presence/absence data or some other diversity measure using abundance data. Cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information about the nature area that we are studying. Furthermore, we also want to take into account the fact that a species does not grow in a uniform distribution throughout an area but follow some spatially aggregated distribution. Each species has its own spatially aggregated distribution and we assume that these are independent of each other.
@@ -169,3 +169,6 @@ $$
 This has the the effect of lowering the relative cover estimate of the entire plot slightly compared to the observed cover we have of the species within the small square. The level at which the cover estimate is lowered depends on the estimated value of $\beta$. The higher we have estimated the value of $\beta$ for the species compared to $\alpha$, the less we will estimate the relative cover of the species in the entire plot.
 
 A more detailed description of the implementation of the model can be found at [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function with explanatory comments.
+
+<br> <br>
+<br> <br>

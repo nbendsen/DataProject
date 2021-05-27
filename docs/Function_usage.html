@@ -1408,11 +1408,11 @@ Species richness
 <p><strong>Arguments:</strong></p>
 <ul>
 <li><p><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.</p></li>
-<li><p><strong>remove_column</strong>: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.</p></li>
+<li><p><strong>remove_column</strong>: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain presence_absence_data on species.</p></li>
 </ul>
 <p><strong>Output:</strong></p>
 <ul>
-<li>A vector with Species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.</li>
+<li>A vector with Species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the presence_absence_data and so on.</li>
 </ul>
 <p><strong>Calculated example</strong></p>
 <pre class="r"><code>res4 &lt;- species_richness(PresenceAbsence, remove_column = 0)</code></pre>
@@ -1610,7 +1610,7 @@ Plot 1
 Plot 2
 </td>
 <td style="text-align:right;">
-Inf
+0.000000
 </td>
 </tr>
 <tr>
@@ -1720,7 +1720,7 @@ Plot 2
 3.0
 </td>
 <td style="text-align:right;">
-Inf
+0.000000
 </td>
 <td style="text-align:right;">
 0
@@ -1821,7 +1821,7 @@ Plot 7
 <h2>
 Diversity profile comparison
 </h2>
-<p>This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial updated cover data. Its output is a plot that shows different hill diversities as a function of the exponent <span class="math inline">\(l\)</span> in:</p>
+<p>This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial cover data. Its output is a plot that shows different hill diversities as a function of the exponent <span class="math inline">\(l\)</span> in:</p>
 <p><span class="math display">\[
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
 \]</span></p>
@@ -1830,18 +1830,18 @@ Diversity profile comparison
 <p><strong>Arguments:</strong></p>
 <ul>
 <li><p><strong>data_observed</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.</p></li>
-<li><p><strong>data_new</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial updated data for a given specie in a given plot.</p></li>
+<li><p><strong>data_new</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial cover data for a given specie in a given plot.</p></li>
 <li><p><strong>plot</strong>: An integer. Which plot should be used in the comparison, ie which row should the data be taken from.</p></li>
 <li><p><strong>remove_column</strong>: An integer. In case the first columns in the data_observed and data_new contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain data on species.</p></li>
 </ul>
 <p><strong>Output:</strong></p>
 <ul>
-<li>A plot with the hill diversity (y-axis) as a function of the exponent <span class="math inline">\(l\)</span> (x-axis). the two lines are from the observed cover data and the beta binomial updated cover data.</li>
+<li>A plot with the hill diversity (y-axis) as a function of the exponent <span class="math inline">\(l\)</span> (x-axis). the two lines are from the observed cover data and the beta binomial cover data.</li>
 </ul>
 <p><strong>Calculated example</strong></p>
 <p>In the example will we use the function beta_binomial_cover_update to get the updated cover data.</p>
-<pre class="r"><code>beta_binomial_cover_updated_data &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
-<pre class="r"><code>different_diversities(Cover, beta_binomial_cover_updated_data, plot = 1,  remove_column = 3)</code></pre>
+<pre class="r"><code>beta_binomial_cover_data &lt;- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)</code></pre>
+<pre class="r"><code>different_diversities(Cover, beta_binomial_cover_data, plot = 1,  remove_column = 3)</code></pre>
 <p><img src="figure/Function_usage.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="refs">
 

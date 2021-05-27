@@ -204,11 +204,11 @@ species_richness(presence_absence_data, remove_column = NULL)
 
 * **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
 
-* **remove_column**: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
+* **remove_column**: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain presence_absence_data on species.
 
 **Output:**
 
-* A vector with Species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the cover_data and so on.
+* A vector with Species richness for each plot in the input presence_absence_data. First value in the vector corresponds to the first plot in the presence_absence_data and so on.
 
 **Calculated example** 
 
@@ -359,7 +359,7 @@ A vector with the diversity for each row in the abundance data.
 <h2> Diversity profile comparison</h2>
 
 
-This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial updated cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
+This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
 
 $$
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
@@ -373,7 +373,7 @@ Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL
 
 * **data_observed**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
 
-* **data_new**: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial updated data for a given specie in a given plot.
+* **data_new**: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial cover data for a given specie in a given plot.
 
 * **plot**: An integer. Which plot should be used in the comparison, ie which row should the data be taken from.
 
@@ -381,17 +381,17 @@ Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL
 
 **Output:**
 
-* A plot with the hill diversity (y-axis) as a function of the exponent $l$ (x-axis). the two lines are from the observed cover data and the beta binomial updated cover data.  
+* A plot with the hill diversity (y-axis) as a function of the exponent $l$ (x-axis). the two lines are from the observed cover data and the beta binomial cover data.  
 
 **Calculated example** 
 
 In the example will we use the function beta_binomial_cover_update to get the updated cover data.
 
 ```{r}
-beta_binomial_cover_updated_data <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
+beta_binomial_cover_data <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)
 ```
 
 ```{r}
-different_diversities(Cover, beta_binomial_cover_updated_data, plot = 1,  remove_column = 3)
+different_diversities(Cover, beta_binomial_cover_data, plot = 1,  remove_column = 3)
 ```
 

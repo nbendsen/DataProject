@@ -212,3 +212,85 @@ diversity_index <- function(abundance_data, remove_columns = 0, l = 0) {
   return(shannon_list)
 }
 
+
+convert_to_longlat <- function(data_frame_input, UTMx, UTMy, projection = "+proj=utm +zone=32 +ellps=intl +units=m +no_defs +datum=WGS84") {
+  #Load Libraries
+  library(sp)
+
+  # Create a new data frame with only the UTM data
+  df <- data.frame(UTMx, UTMy)
+  # turn na to 0 for calculations and save which points are na
+  df_na <- df
+  df[is.na(df)] <- 0
+
+
+  #Make it a SP object and specify the projection
+  coordinates(df) <-  ~ UTMx + UTMy
+  proj4string(df) <- CRS(projection)
+
+  #Transform the data to long lat
+  df1 <- spTransform(df, CRS("+init=epsg:4326"))
+
+  # Write the long lat
+  data_frame_input$latitude <-  df1@coords[,2]
+  data_frame_input$longtitude <-  df1@coords[,1]
+
+  # Turn na back to na
+  data_frame_input$latitude[is.na(df_na[1]) ] <- NA
+  data_frame_input$longtitude[is.na(df_na[2]) ] <- NA
+
+  return(data_frame_input)
+}
+
+
+different_diversities2 <- function(data_observed, data_new, remove_column = NULL){
+  observed <- data_observed[,(remove_column+1):ncol(data_observed)]
+  update <- data_new[,(remove_column+1):ncol(data_new)]
+
+  df <- data.frame(matrix(ncol = 3, nrow = 0))
+  colnames(df) <- c("l", "Observed", "Updated")
+
+  for (plot in 1:nrow(data_observed)) {
+    for (l in seq(-1, 1, 0.1)){
+      df[nrow(df)+1, ] <- c(l, diversity_index(observed[plot,],l = l) , diversity_index(update[plot,], l = l) )
+    }
+  }
+  #Create data frame for sd.
+  sds <- data.frame(matrix(ncol = 3, nrow = 0))
+  colnames(sds) <- c("l", "Observed_sd", "Updated_sd")
+
+  #calculate sd for each point
+  for (g in unique(df$l)) {
+    tmp <- df[df$l == g,]
+    sds[nrow(sds) +1 ,] <-  c(g, sd(tmp$Observed), sd(tmp$Updated) )
+  }
+  # Aggregating for all the different point
+  df <- aggregate(df, list(df$l), mean )
+  df <-  merge(df, sds, by = "l")
+  df$Observed_up <- df$Observed + df$Observed_sd
+  df$Observed_down <- df$Observed - df$Observed_sd
+  df$Updated_up <- df$Updated + df$Updated_sd
+  df$Updated_down <- df$Updated - df$Updated_sd
+
+  points <- df[df$l %in% c(-1,0,1),]
+  plot1 <-  ggplot(data = df, aes(x = l)) +
+    geom_line(aes(y = Observed, colour = "Observed cover data"))+
+    geom_line(aes(y = Updated, colour = "Beta binomial cover data"))+
+    geom_point(data = points, mapping = aes(x = as.numeric(l), y = Updated),
+               fill = "blue", shape=15,  size = 2, colour = "blue") +
+    geom_point(data = points, mapping = aes(x = as.numeric(l), y = Observed),
+               fill = "red", shape=17, size = 2, colour = "red") +
+    geom_ribbon(aes( y = Observed, ymin = Observed_down, ymax = Observed_up),
+                fill = "red", alpha = 0.2) +
+    geom_ribbon(aes( y = Updated, ymin = Updated_down, ymax = Updated_up),
+                fill = "cyan", alpha = 0.2) +
+    scale_colour_manual("",
+                        values = c("Observed cover data"="red",
+                                   "Beta binomial cover data"="blue")) +
+
+    labs(y = "Diversity", x = "Exponent l in Hill diveristy formula")+
+    ggtitle(sprintf("Comparison of diversity estimates for mean of %d plots", plot))
+
+  plot1
+  return(df)
+}

@@ -20,7 +20,7 @@ library(kableExtra)
 
 
 
-This page is intended to provide an overview of the functions that are used on the [Examples](example.html) page. The structure of the page is the following; each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
+This page is intended to provide an overview of the functions that are used on [Examples](example.html). The structure of the page is the following; each function is presented with a short description of the input arguments and the output. To each function there will be a link to a page that include a further detailed description of the function and where the code is also presented.
 
 The reader can download all the functions following the link below. The link will take the reader to a new page. This page can be saved as a R file.
 
@@ -56,7 +56,7 @@ colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Specie
 
 <br>
 
-The presentation of each function will also contain a small example of how the function is applied. To do this, we again use a small constructed cover dataset and presence/absence dataset that was presented at the [Introduction](introduction.html) page. We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
+The presentation of each function will also contain a small example of how the function is applied. To do this, we again use a small constructed cover dataset and presence/absence dataset that was presented at [Introduction](introduction.html). We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
 
 An example of cover data could be:
 
@@ -92,10 +92,11 @@ kable(PresenceAbsence, "html") %>% kable_styling()
 
 For each function we will use the above data to give an example of the usage of the function.
 
+
 <h2>Beta Binomial cover Update</h2>
+------
 
-
-Main function of this vignette. The function is an implementation of the method outlined on the [Bayesian model](Model.html) page.
+Main function of this vignette. The function `beta_binomial_cover_update` is an implementation of the method outlined on [Bayesian model](Model.html).
 
 **Usage:**
 
@@ -131,9 +132,10 @@ A more detailed description of the implementation of the model can be found at: 
 <h2> Functions for diversity estimates</h2>
 
 
-The functions below implement the different diversity estimates defined at the [Diversity](Diversity.html) page. The code implementations of the functions can be found at [implementation](diversity_functions_code.html)
+The functions below implement the different diversity estimates defined at [Diversity](Diversity.html). The code implementations of the functions can be found at [implementation](diversity_functions_code.html)
 
 <h3> Shannon index </h3>
+------
 
 **Usage:**
 
@@ -164,7 +166,7 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 
 
 <h3> Simpson's index</h3>
-
+------
 
 **Usage:**
 
@@ -194,7 +196,7 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ```
 
 <h3>Species richness </h3>
-
+------
 
 **Usage:**
 
@@ -225,7 +227,7 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 
 
 <h3> Hill Shannon diveristy </h3>
-
+------
 **Usage:**
 
 hill_shannon(cover_data, remove_column = NULL)
@@ -255,7 +257,7 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ```
 
 <h3> Hill Simpson diversity</h3>
-
+------
 **Usage:**
 
 hill_simpson(cover_data, remove_column = NULL)
@@ -287,7 +289,7 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 
 
 <h2>Plot of different diversities</h2>
-
+------
 
 This function plots different diversity estimates of a plot against some information of interest about the plot. 
 
@@ -357,7 +359,7 @@ A vector with the diversity for each row in the abundance data.
 
 
 <h2> Diversity profile comparison</h2>
-
+------
 
 This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
 
@@ -375,7 +377,7 @@ Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL
 
 * **data_new**: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial cover data for a given specie in a given plot.
 
-* **plot**: An integer. Which plot should be used in the comparison, ie which row should the data be taken from.
+* **plot**: An integer. Which plot should be used in the comparison, ie. which row should the data be taken from.
 
 * **remove_column**:  An integer. In case the first columns in the data_observed and data_new contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain data on species.
 

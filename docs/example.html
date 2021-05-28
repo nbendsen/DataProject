@@ -398,7 +398,7 @@ Different diversity estimates compared
 <p><br> <br> Another method to estimate species diversity is to use the Hill Simpson diversity. We create a similar plot as above.</p>
 <pre class="r"><code>observed_hill_simpson &lt;- hill_simpson(cover, 3)</code></pre>
 <pre class="r"><code>beta_binomial_simpson &lt;- hill_simpson(beta_binomial_cover, 3)</code></pre>
-<p><img src="figure/example.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/example.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The difference between the beta binomial Hill Simpson diversity and the Hill Simpson diversity obtained from the observed cover data is less than when we applied the Hill Simpson estimate. This fits nicely with what we found in the “Hill Diversity comparison” subsection. It is worth to notice that we in this plot get some diversity estimates that are lower in the beta binomial cover data than in the observed cover data.</p>
 <p>We investigate this last point a bit further, i.e. we want to study why some plots obtain a lower Hill Simpson estimate after the application of the beta binomial cover update function. To do this we compare the point furthest above and furthest below the line <span class="math inline">\(y = x\)</span>. These points are colored purple in the plot above. We will refer to the plot corresponding to the point furthest below the line as the “low plot” and the plot corresponding to the point furthest above the line as “high plot”.</p>
 <p>We first look at the “low plot”. In the table below each column corresponds to the normalized cover of a species in the plot. All species with a <span class="math inline">\(1\)</span> in the presence/absence data for the plot are included. We are interested in the normalized cover for each species as we use these when calculating the diversity measure. Additionally, we can use this information to see which species are rare and which are common in the plot. We have calculated the normalized cover for a species as the cover of the species divided by the total cover for all species in the plot. <br> We decided not to include the name of each present species as column names to keep the table as simple as possible. Additionally, the reason is that we are not interested in some specific species but rather at the effect of the beta binomial cover update function on a plot level.</p>
@@ -1022,11 +1022,11 @@ abiotiske_6210 &lt;- read.csv(&quot;data/abiotiske_data_6210_year2009.csv&quot;)
 <p>So far, we have just been comparing the effect of the beta binomial cover update function at plot level (a circle with 5 meter radius). Since each plot is just a sample of a larger site, it could be interesting to see the effect of the beta binomial cover update function at site level instead.</p>
 <p>We will use the Hill Shannon diversity to measure the species diversity as this estimator does not favor neither common or rare species. We will aggregate the Hill Shannon for all the plots from the same site and take the mean and variance for each site.</p>
 <p>We will first plot how beta binomial Hill Shannon compares with the observed Hill Shannon, where we for each site has taken the average value for all plots within that site.</p>
-<p><img src="figure/example.Rmd/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/example.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>This looks quite similar to what we found when we compared at plot level.</p>
-<p>Another comparison we can make is to look at how the variance of species diversity changes for a site when we apply the beta binomial cover update function and use the Hill Shannon diversity as a measure. We only look at sites with at least 10 plots.</p>
-<p><img src="figure/example.Rmd/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>The above suggest that for the sites with a large variance in Hill Shannon diversity, the variance become larger when the beta binomial cover update function is applied as opposed to the observed cover data. For sites with a low variance the change does not seem to be as big.</p>
+<p>Another comparison we can make is to look at how the variance of species diversity changes for a site when we apply the <code>beta_binomial_cover_update</code> function and use the Hill Shannon diversity as a measure. The points are colour scaled after the number of plots within a site.</p>
+<p><img src="figure/example.Rmd/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The above suggest that for the sites with a large variance in Hill Shannon diversity, the variance become larger when the <code>beta_binomial_cover_update</code> function is applied as opposed to the observed cover data. For sites with a low variance the change does not seem to be as big. It is worth noticing that a large part of the sites with a low variance have few plots.</p>
 </div>
 <div id="species-diversity-and-ph-value" class="section level3">
 <h3>Species diversity and pH value</h3>
@@ -1042,12 +1042,12 @@ abiotiske &lt;- read.csv(&quot;data/abiotiske_data_6230_year2014.csv&quot;)</cod
 <pre class="r"><code>observed_shannon &lt;- shannon(cover, 3)</code></pre>
 <pre class="r"><code>beta_binomial_shannon &lt;- shannon(beta_binomial_cover, 3)</code></pre>
 <p>Below we plot the beta binomial Shannon index and the observed Shannon index against the pH value of the soil. This is intended to visualize partly if there seems to be any interesting relationship between Shannon index and pH value of the soil and also whether the use of the beta binomial cover update function changes this conclusion.</p>
-<p><img src="figure/example.Rmd/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/example.Rmd/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>There does not seem to be any clear relationship between the Shannon index and the pH value. As we also saw in the “Different diversity estimates compared” subsection under the comparison section, the plots with low observed Shannon index get a slightly higher Shannon index when this is calculated from beta binomial cover data.</p>
 <p><br></p>
 <p>We study the relationship between species diversity and pH value of the soil a bit further. The function <a href="gradient_plot.html">plot_idiversity</a> is used to visualize how different ways of calculating diversities compare against each other when mapped against the pH values of the soil. From the left we have Species richness, Hill Shannon and Hill Simpson, thus, we get less sensitive to rare species.</p>
 <pre class="r"><code>plot_diversity(data_for_plot ,c(&quot;Species richness&quot;, &quot;Beta binomial Hill Shannon&quot;, &quot;Beta binomial Hill Simpson&quot;), &quot;pH&quot;, description = &quot;The PH value of the soil for each plot&quot;)</code></pre>
-<p><img src="figure/example.Rmd/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/example.Rmd/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The general trend that can be seen for all three diversities is that a low pH value is correlated with lower diversity up until a certain point. However, the relationship is clearly not strong, so one should be careful to read too much form the plot. Further analysis will be needed to understand whether or not this is a casual relationship.</p>
 </div>
 <div id="species-diversity-and-nitrogen-deposition" class="section level3">
@@ -1063,7 +1063,7 @@ abiotiske_6210 &lt;- read.csv(&quot;data/abiotiske_data_6210_year2009.csv&quot;)
 <p>Again we refer to this new dataset as the beta binomial cover data.</p>
 <p>Again we start with the Shannon index as this is so often used to estimate species diversity. We plot the observed Shannon index and the beta binomial Shannon index against the nitrogen deposition.</p>
 <pre class="r"><code>observed_shannon &lt;- shannon(cover_6210, 3)</code></pre>
-<p><img src="figure/example.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/example.Rmd/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre><code>&lt;ggproto object: Class FacetWrap, Facet, gg&gt;
     compute_layout: function
     draw_back: function
@@ -1082,9 +1082,9 @@ abiotiske_6210 &lt;- read.csv(&quot;data/abiotiske_data_6210_year2009.csv&quot;)
     super:  &lt;ggproto object: Class FacetWrap, Facet, gg&gt;</code></pre>
 <p>As it can be seen here is there not a big difference between the two plots. It should however be noticed that the beta binomial Shannon index is slightly higher for all values of nitrogen deposition. It might also be important for an analysis to notice that fewer plots have a Shannon index at 0 for the beta binomial model. Both plots show a slight downwards trend indicating that higher nitrogen deposition might lead to lower diversity as expected. However, one should not read too much into it, since there is a high variation of Shannon index values around each value of nitrogen deposition.</p>
 <p>The plots below illustrate how some other diversity measures applied to the beta binomial cover data looks like when mapped against the nitrogen deposition.</p>
+<p><img src="figure/example.Rmd/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/example.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><img src="figure/example.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/example.Rmd/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p><img src="figure/example.Rmd/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>There does not seem to be a clear relation between the nitrogen deposition and the diversity for any of the diversity measures. Hence, even though we have used different diversity estimates, the conclusion has not changed.</p>
 <br>
 <p>

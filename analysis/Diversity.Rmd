@@ -16,10 +16,10 @@ editor_options:
 
 In ecology diversity is an important aspect. The diversity is a measure of the number of different types of species within a nature area and also how the individuals are distributed among the species. A diversity index can be computed in several different ways and puts weight on different aspects of the species within the area. As an example, one could be interested in a diversity measure that emphasizes common species higher than rare species or the opposite as this reflects different characteristics of the diversity of the area. 
 
-When estimating the diversity of an area one needs data about the species in the area. This data generally comes in two types: abundance data and presence/absence data. We will use cover data to estimate the species' abundance. Cover data is a measure of how big a fraction of an area that would be covered by a given species if it was projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. Presence/absence data only indicates which species exist in a given area, but gives no information about their abundance. These two types of data are described further on the [Introduction](Introduction.html) page.
+When estimating the diversity of an area one needs data about the species in the area. This data generally comes in two types: abundance data and presence/absence data. We will use cover data to estimate the species' abundance. Cover data is a measure of how big a fraction of an area that would be covered by a given species if it was projected down on the ground. This data can be obtained by a biologist estimating it or by using a sampling method like the pin point method that is used in NOVANA. Presence/absence data only indicates which species exist in a given area, but gives no information about their abundance. These two types of data are described further on [Introduction](Introduction.html).
 
 
-This page is intended to define a number of different ways to estimate the diversity of an area so that it is clear for the reader what is meant when we refer to different diversity measures on the [Examples](example.html) page and [Model validation](model_validering.html) page. All measures use cover data except Species richness which uses presence/absence data to estimate the diversity. 
+This page is intended to define a number of different ways to estimate the diversity of an area so that it is clear for the reader what is meant when we refer to different diversity measures on [Examples](example.html) and [Model validation](model_validering.html). All measures use cover data except Species richness which uses presence/absence data to estimate the diversity. 
 
 <h2> Shannon index</h2>
 When estimating the diversity of an area the Shannon index is often used. The Shannon index is calculated by the following formula:
@@ -62,7 +62,7 @@ $$
 \text{Hill-Shannon = } e^{-\sum_{i=1}^S p_i ln (p_i)}
 $$
 
-Opposite to the Shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species. For this reason, we will focus on the Hill-Shannon diversity both on the [Examples](example.html) page and especially on the [Model validation](model_validering.html) page.
+Opposite to the Shannon index, the Hill-Shannon is not an entropy but a diversity. The Hill-Shannon diversity has the advantage that it emphasizes neither rare or common species. For this reason, we will focus on the Hill-Shannon diversity both on [Examples](example.html) and especially on [Model validation](model_validering.html).
 
 <h2> Hill-Simpson diversity </h2>
 If we instead let $l = -1$ in the formula for Hill diversity we get the inverse of the Simpson index

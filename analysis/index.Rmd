@@ -7,9 +7,9 @@ output:
 editor_options:
   chunk_output_type: console
 ---
+<br>
 
-
-Species diversity is an important measure that can be used to describe the state of a nature area, and a change in the species diversity can be used to inform about whether the state of an area is in growth or decline. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we will propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the [NOVANA](https://novana.au.dk) dataset to illustrate how this new method can be applied.
+Species diversity is an important measure that can be used to describe the state of a nature area, and a change in the species diversity can be used to inform about the state of an area. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the [NOVANA](https://novana.au.dk) dataset to illustrate how this new method can be applied.
 
 
 
@@ -48,7 +48,7 @@ download_link(
 
 ```
 <br><br>
-More details on the functions can be found at the [Functions](Function_usage.html) page.
+More details on the functions can be found at [Functions](Function_usage.html).
 
 <h2>About us</h2>
 

@@ -212,10 +212,13 @@ beta_binomial_simpson <- hill_simpson(beta_binomial_cover, 3)
 
 
 ```{r, include=FALSE}
+
+# We find the plots with the smallest and highest number in distance
 v <- beta_binomial_simpson-observed_hill_simpson
 max_v <- which.max(v)
 min_v <- which.min(v)
 
+# These are the vectors with cover data for present species in the plot with smallest and highest difference
 cover_min_values_obs <- c()
 cover_max_values_obs <- c()
 
@@ -223,11 +226,13 @@ cover_min_values_beta <- c()
 cover_max_values_beta <- c()
 
 for (n in colnames(beta_binomial_cover)){
+  # If the specie in the plot is present the cover value would be added to the vector
   if (freq[min_v,n] == 1){
     cover_min_values_obs <- c(cover_min_values_obs, cover[min_v,n])
     cover_min_values_beta <- c(cover_min_values_beta, round(as.numeric(beta_binomial_cover[min_v,n]),3))
   }
   
+  # If the specie in the plot is present the cover value would be added to the vector
   if (freq[max_v,n] == 1){
     cover_max_values_obs <- c(cover_max_values_obs, cover[max_v, n])
     cover_max_values_beta <- c(cover_max_values_beta, round(as.numeric(beta_binomial_cover[max_v,n]),3))
@@ -245,27 +250,6 @@ val[2,] <- c(observed_hill_simpson[max_v],beta_binomial_simpson[max_v])
 
 colnames(val) <- c("obs", "beta")
 
-```
-
-
-```{r, include=FALSE, eval=FALSE}
-min_val_norm <- data.frame(matrix(ncol = 2, nrow = 0))
-
-for (n in 1:length(cover_min_values_beta)){
-  min_val_norm[n,] <- c((cover_min_values_obs/total_obs)[n], (cover_min_values_beta/total_beta)[n])
-}
-```
-
-```{r, include = FALSE}
-total_obs_max <- sum(cover_max_values_obs)
-total_beta_max <- sum(cover_max_values_beta)
-
-max_val_norm <- data.frame(matrix(ncol = 2, nrow = 0))
-max_val_norm[1,] <- c(simpson(cover[max_v,4:ncol(cover)]), simpson(beta_binomial_cover[max_v,4:ncol(beta_binomial_cover)])) 
-
-for (n in 1:length(cover_max_values_beta)){
-  max_val_norm[n+1,] <- c((cover_max_values_obs/total_obs_max)[n], (cover_max_values_beta/total_beta_max)[n])
-}
 ```
 
 
@@ -365,7 +349,10 @@ site_aggregate <- function(data, aggregate_list, aggregate_function = mean) {
   aggregate_list <- c("site", "year", aggregate_list)
   
   site_data <- data[,aggregate_list ]
-  site_data2 <- aggregate.data.frame(site_data, by = list(site_data$site, site_data$year), FUN = aggregate_function)[,aggregate_list]
+  site_data2 <- aggregate.data.frame(site_data, by = list(site_data$site, site_data$year), FUN = aggregate_function)
+  site_data2$site <- site_data2$Group.1 
+  site_data2$year <- site_data2$Group.2
+  site_data2 <- site_data2[,aggregate_list ]
   
   #Count how many plots there is in each site for each year
   count_data <- site_data %>% count(site, year)
@@ -403,7 +390,7 @@ ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x
 
 This looks quite similar to what we found when we compared at plot level.
 
-Another comparison we can make is to look at how the variance of species diversity changes for a site when we apply the beta binomial cover update function and use the Hill Shannon diversity as a measure. We only look at sites with at least 10 plots.
+Another comparison we can make is to look at how the variance of species diversity changes for a site when we apply the `beta_binomial_cover_update` function and use the Hill Shannon diversity as a measure. The points are colour scaled after the number of plots within a site.
 
 ```{r,  echo = FALSE, warning=FALSE}
 data_aggregate_long <- gather(aggregate_data, data_from, val, c("observed hill shannon", "Beta binomial Hill Shannon"))
@@ -411,21 +398,21 @@ data_aggregate_long <- gather(aggregate_data, data_from, val, c("observed hill s
 
 
 ```{r,  echo = FALSE, warning=FALSE}
-aggregate_data2 <- aggregate_data[aggregate_data$observations > 9,]
+aggregate_data <- site_aggregate(data_for_plot, c("Beta binomial Hill Simpson", 'Beta binomial simpson index', "Species richness", 'Beta binomial Hill Shannon', 'Beta binomial shannon index',"N" , "observed hill shannon","observed hill simpson" ), aggregate_function = var)
 
-ggplot(data = aggregate_data2, mapping = aes(y = `Beta binomial Hill Shannon` , x = `observed hill shannon`, colour = observations ))+
+ggplot(data = aggregate_data, mapping = aes(y = `Beta binomial Hill Shannon` , x = `observed hill shannon`, colour = observations ))+
   scale_color_gradient(low="blue", high="red") +
   geom_point() +
   geom_abline(color = "blue") +
   ylab("variance of the beta binomial Hill Shannon diversity ") +
   xlab("variance of the observed Hill Shannon diversity") +
-  ggtitle( "Comparison of variance for plots within each site")+xlim(0,13)+ylim(0,17) +
+  ggtitle( "Comparison of variance for plots within each site")+xlim(0,20)+ylim(0,30) +
   labs(colour = "Number of plots \n in a site") +
   theme(plot.title = element_text(size=12))
 ```
 
-The above suggest that for the sites with a large variance in Hill Shannon diversity, the variance become larger when the beta binomial cover update function is applied as opposed to the observed cover data. For sites with a low variance the change does not seem to be as big.
 
+The above suggest that for the sites with a large variance in Hill Shannon diversity, the variance become larger when the `beta_binomial_cover_update` function is applied as opposed to the observed cover data. For sites with a low variance the change does not seem to be as big. It is worth noticing that a large part of the sites with a low variance have few plots.
 
 
 ### Species diversity and pH value 

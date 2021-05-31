@@ -33,7 +33,7 @@ On [Bayesian model](Model.html) we introduced the beta binomial cover update met
 
 For all species present in a plot, we update the abundance estimate in the cover data as we assume that this will lead to a more accurate estimate of the species diversity within the plot. We assume that the diversity estimates we get by using the beta binomial cover update method do not differ too much from the diversity estimates we obtain by only using the observed cover data. This is however only an assumption and not necessarily true. <br>
 
-One important assumption for the model is that species within the same tertiary habitat will follow the same spatial aggregated distribution. This assumption is used to develop the prior distribution for each species. <br>
+One important assumption for the model is that species within the same tertiary habitat will follow the same spatially aggregated distribution. This assumption is used to develop the prior distribution for each species. <br>
 
 The intention of this page is to check whether the diversity estimates obtained using the data from the beta binomial cover update model is somewhat similar to those obtained using the cover data. It will be done by using the ideas of posterior predictive checks which are presented below and further described in [@MimnoE3441] and [@Gelman].
 
@@ -50,7 +50,7 @@ $$
 where $a$ and $b$ are the parameters from the estimated prior distribution for the species and $y$ is the number of pins the species is hit by in the cover data out of $n$ possible. In the case of the NOVANA dataset we have $n = 16$.
 
 
-In our model we use the mean of the posterior distribution as an estimate of the species cover in the entire plot. When we apply the posterior predictive checks we draw one sample from the posterior distribution for each species present in the plot and use this as the estimate of the species cover in the entire the plot. We will refer to this as generated cover data. Next, we apply some test statistic of interest on the generated cover data for the plot. This test statistic should capture some aspects of the data we are interested in. In our case we want the method to be used to estimate species diversity, so using some sort of diversity estimator as test statistic is natural. We do this for all plots in the dataset.
+In our model we use the mean of the posterior distribution as an estimate of the species cover in the entire plot. When we apply the posterior predictive checks we draw one sample from the posterior distribution for each species present in the plot and use this as the estimate of the species relative cover in the entire the plot. We will refer to this as generated cover data. Next, we apply some test statistic of interest on the generated cover data for the plot. This test statistic should capture some aspects of the data we are interested in. In our case we want the method to be used to estimate species diversity, so using some sort of diversity estimator as test statistic is natural. We do this for all plots in the dataset.
 
 We repeat the above process 1000 times so that we get a distribution of generated test statistics for each plot. Lastly, we compare the test statistic we would get by using the observed cover data for a plot with the distribution of generated test statistics for the same plot. Again we do this for each plot. We refer to the test statistic we get from the observed cover data as the observed test statistic. 
 
@@ -189,8 +189,8 @@ This matches with what we found in the "Hill Diversity comparison" section on th
 
 For both test statistics the conclusion is that the model mostly generated data that looks like the observed data. This gives confidence in the fact that the model has captured some good aspects of the observed data and gives sensible and thereby useful result to work with. Again it should be emphasized that it does not mean the the model gives better diversity estimates than what could be obtained by only using the observed cover data.
 
-<h2>Model validation for "dry calcareous grasslands" example </h2>
-We also want to apply the posterior predictive checks to the data from tertiary habitat "dry calcareous grasslands" from year 2009. This was the other subset of the NOVANA data that we used on [Examples](example.html). We make similar plots as we did above. First with the Hill Shannon diversity as test statistic and then with the Hill Simpson diversity as test statistic.
+<h2>Model validation for "Dry calcareous grasslands" example </h2>
+We also want to apply the posterior predictive checks to the data from tertiary habitat "Dry calcareous grasslands" from year 2009. This was the other subset of the NOVANA data that we used on [Examples](example.html). We make similar plots as we did above. First with the Hill Shannon diversity as test statistic and then with the Hill Simpson diversity as test statistic.
 
 
 ```{r, include = FALSE}
@@ -255,7 +255,7 @@ sum(p_values_simpson$p_values < 0.05)/nrow(cover_6210)
 
 In the case of both test statistics we see that a larger proportion of the plots have posterior predictive p-values indicating that the observed test statistic is more unlikely under the model than in "Nardus grasslands" (first example). As an example, in "Nardus grasslands" the proportion of posterior predictive p-values below 0.05 with the Hill Shannon used as test statistic was only around 8%. However, the proportion of plots is still not so big that it causes concerns regarding the whether the assumptions underlying the model are appropriate. Especially if we take into account that it is again plots with a small diversity that have a low posterior predictive p-value. This is in line with what we expected from the model.
 
-Below we study if there are some differences in the data between "Nardus grasslands" and "dry calcareous grasslands" that could explain why the model lead to more plots with extreme posterior predictive p-values for the "dry calcareous grasslands".
+Below we study if there are some differences in the data between "Nardus grasslands" and "Dry calcareous grasslands" that could explain why the model lead to more plots with extreme posterior predictive p-values for the "Dry calcareous grasslands".
 
 <h2> Comparison of tertiary habitat types </h2>
 
@@ -298,19 +298,16 @@ mean(p_values_hill_shannon$observed)
 mean(p_values$observed)
 ```
 
-```{r, include=FALSE, eval=FALSE}
-#For simplicity we will only be using the Hill Shannon to estimate #diversity in the following. Applying the Hill Shannon diversity to the #observed cover data for "dry calcareous grasslands" we get that the average diversity #in the plots is 7.5 while the average Hill Shannon diversity for the #plots in "Nardus grasslands" is 5.9. This is a rather big difference and one #would might suspect that the beta binomial update method would have had #an bigger impact for more plots in "Nardus grasslands" than in "dry calcareous grasslands" #because it on average has less diversity.
-```
 
-First of all, we look at some statistics to compare the plots in "dry calcareous grasslands" (6210 in NOVANA) and the plots in "Nardus grasslands" (6230 in NOVANA). If we compare the two tertiary habitat types we see that the number of species in the habitat type "dry calcareous grasslands" is generally higher than in the habitat type "Nardus grasslands"  at plot level. 
+First of all, we look at some statistics to compare the plots in "Dry calcareous grasslands" and the plots in "Nardus grasslands". If we compare the two tertiary habitat types we see that the number of species in the habitat type "Dry calcareous grasslands" is generally higher than in the habitat type "Nardus grasslands"  at plot level. 
 <br>
-We look at the presence/absence data for the "Nardus grasslands" and "dry calcareous grasslands" respectively. For each dataset we sum the number of present species in each plot and take the mean of all these. In the presence/absence data for "dry calcareous grasslands" the mean number of species in a plot is 32.6 species while it is 26.8 species in the presence/absence data for "Nardus grasslands".
+We look at the presence/absence data for the "Nardus grasslands" and "Dry calcareous grasslands" respectively. For each dataset we sum the number of present species in each plot and take the mean of all these. In the presence/absence data for "Dry calcareous grasslands" the mean number of species in a plot is 32.6 species while it is 26.8 species in the presence/absence data for "Nardus grasslands".
 <br>
 
-We do the same with the cover data for both datasets respectively, i.e. we sum the number of species spotted in the cover data for a plot. A species is spotted in the cover data if it is hit by at least one pin. Again we take the mean over all plots. In the observed cover data for "dry calcareous grasslands" the average number of species spotted in a plot is 10.5 while it is 8.3. in the observed cover data for "Nardus grasslands".
+We do the same with the cover data for both datasets respectively, i.e. we sum the number of species spotted in the cover data for a plot. A species is spotted in the cover data if it is hit by at least one pin. Again we take the mean over all plots. In the observed cover data for "Dry calcareous grasslands" the average number of species spotted in a plot is 10.5 while it is 8.3. in the observed cover data for "Nardus grasslands".
 <br>
 
-What is really interesting is the the proportion of a plot where a species has a $1$ in the presence/absence data and at least one observation in the corresponding cover data. If this proportion is low  we suspect these plots to be the ones where the beta binomial cover update method has the biggest impact. For each plot we take the number of species found in the cover data and divide this by the number of species found in the presence/absence data for that plot. A species is found in the cover data for a plot if it is hit be at least one pin. If we again just take the average we find that the average proportion for each plot in "dry calcareous grasslands" is 0.33 and the average proportion for each plot in "Nardus grasslands" is 0.32. Again there are no big differences in the statistics between the two tertiary habitat types. 
+What is really interesting is the the proportion of a plot where a species has a $1$ in the presence/absence data and at least one observation in the corresponding cover data. If this proportion is low  we suspect these plots to be the ones where the beta binomial cover update method has the biggest impact. For each plot we take the number of species found in the cover data and divide this by the number of species found in the presence/absence data for that plot. A species is found in the cover data for a plot if it is hit be at least one pin. If we again just take the average we find that the average proportion for each plot in "Dry calcareous grasslands" is 0.33 and the average proportion for each plot in "Nardus grasslands" is 0.32. Again there are no big differences in the statistics between the two tertiary habitat types. 
 <br><br>
 However, we want to study this last statistic a bit further. To visualize the distribution of the proportions from the plots in each of the two tertiary habitat types we make the following histograms
 
@@ -341,10 +338,10 @@ ggplot()+
   xlab("Proportion")
 ```
 
-There are no big differences between the two histograms. The most important thing to notice from this histogram is that the histogram for "dry calcareous grasslands" has more plots with a very low proportion. In "dry calcareous grasslands" 1.9% of the plots have proportion below 0.1 while this is only the case for 1.2% of the plots in "Nardus grasslands".
+There are no big differences between the two histograms. The most important thing to notice from this histogram is that the histogram for "Dry calcareous grasslands" has more plots with a very low proportion. In "Dry calcareous grasslands" 1.9% of the plots have proportion below 0.1 while this is only the case for 1.2% of the plots in "Nardus grasslands".
 <br>
 
-We suspect that the beta binomial cover update method has most impact on the plots with low proportion. To illustrate this point we plot posterior predictive p-value for each plot against the proportion of species found in both cover data and presence/absence data for that plot. The posterior predictive p-values come from the posterior predictive checks where the Hill Shannon was used as test statistic. The y-axis is -log(posterior predictive p-value) and the dashed line is equal to -log(0.05) for comparison. Because we have taken the negative logarithm on the posterior predictive p-value the plots above the dashed line are more extreme.
+We suspect that the beta binomial cover update method has most impact on the plots with low proportion. To illustrate this point we plot the posterior predictive p-value for each plot against the proportion of species found in both cover data and presence/absence data for that plot. The posterior predictive p-values come from the posterior predictive checks where the Hill Shannon was used as test statistic. The y-axis is -log(posterior predictive p-value) and the dashed line is equal to -log(0.05) for comparison. Because we have taken the negative logarithm on the posterior predictive p-value the plots above the dashed line are more extreme.
 
 ```{r,include=FALSE}
 stats_6230$pval1 <- -log(stats_6230$pval)
@@ -384,7 +381,7 @@ ggplot() +
 ```
 
 
-The above scatter plots nicely visualize the fact that plots with a low proportion are more sensitive to the beta binomial cover update method. We see that when a plot has a low proportion the observed Hill Shannon diversity is far more likely to be extreme relative to the generated Hill Shannon diversities we get from the beta binomial cover update method, i.e. the model has had a big effect on the plot. Furthermore, we notice that all plots with a posterior predictive p-value less than 0.05 have a proportion less than 0.34. This fits nicely with what we expected and is probably the reason that our method has a slightly bigger effect on "dry calcareous grasslands" than "Nardus grasslands" as "dry calcareous grasslands" has a bit more plots where the proportion of species that are found in the presence/absence data and also found in the cover data is very low. 
+The above scatter plots nicely visualize the fact that plots with a low proportion are more sensitive to the beta binomial cover update method. We see that when a plot has a low proportion the observed Hill Shannon diversity is far more likely to be extreme relative to the generated Hill Shannon diversities we get from the beta binomial cover update method, i.e. the model has had a big effect on the plot. Furthermore, we notice that all plots with a posterior predictive p-value less than 0.05 have a proportion less than 0.34. This fits nicely with what we expected and is probably the reason that our method has a slightly bigger effect on "Dry calcareous grasslands" than "Nardus grasslands" as "Dry calcareous grasslands" has a bit more plots where the proportion of species that are found in the presence/absence data and also found in the cover data is very low. 
 
 Additionally, this last discussion is in line with some of the findings we made under the *Comparing diversity measures* section on [Examples](example.html). Here we also saw that the `beta_binomial_cover_update` function does not seem to have a big effect on plots where most species are spotted on both the cover data and the presence/absence data.
 
@@ -400,7 +397,7 @@ Building the model we assumed that a species follow the same spatially aggregate
 
 <h2> Code implementation </h2>
 
-The code for the implementation of the ppc can be found here: ["Code implementation"](ppc_code.html).
+The code for the implementation of the `ppc` function can be found here: ["Code implementation"](ppc_code.html).
 
 <h2>References </h2>
 

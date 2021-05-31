@@ -332,10 +332,10 @@ $(document).ready(function () {
 
 
 <p><br></p>
-<p>Species diversity is an important measure that can be used to describe the state of a nature area, and a change in the species diversity can be used to inform about the state of an area. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the <a href="https://novana.au.dk">NOVANA</a> dataset to illustrate how this new method can be applied.</p>
-<p>Here you can gain an overview of the pages included in the vignette:</p>
+<p>Species diversity is an important measure that can be used to describe the state of a nature area. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the <a href="https://novana.au.dk">NOVANA</a> dataset to illustrate how this new method can be applied.</p>
+<p>Here the reader can gain an overview of the pages included in the vignette:</p>
 <ul>
-<li><strong><a href="introduction.html">Introduction</a></strong>
+<li><strong><a href="Introduction.html">Introduction</a></strong>
 <ul>
 <li>The page will give a further introduction to the problem and an introduction to the NOVANA dataset.</li>
 </ul></li>
@@ -345,15 +345,15 @@ $(document).ready(function () {
 </ul></li>
 <li><strong><a href="Diversity.html">Diversity</a></strong>
 <ul>
-<li>The page will give you an overview of the different ways to estimate diversity.</li>
+<li>The page will give an overview of the different ways to estimate diversity.</li>
 </ul></li>
-<li><strong><a href="function_usage.html">Functions</a></strong>
+<li><strong><a href="Function_usage.html">Functions</a></strong>
 <ul>
-<li>The page gives an overview of the functions used, what they take as input, what they give as result and how they can be used on an example dataset.</li>
+<li>The page gives an overview of the functions used, what they take as input, what they give as output and how they can be used on an example dataset.</li>
 </ul></li>
 <li><strong><a href="example.html">Examples</a></strong>
 <ul>
-<li>Examples of use cases for the Bayesian model using the NOVANA dataset. This will also include a comparison between using the developed method or only using observed abundance data for estimating species diversity.</li>
+<li>Examples of applications of the Bayesian model using the NOVANA dataset. This will also include a comparison between using the developed method or only using observed abundance data for estimating species diversity.</li>
 </ul></li>
 <li><strong><a href="model_validering.html">Model validation</a></strong>
 <ul>
@@ -370,7 +370,7 @@ Download
 <h2>
 About us
 </h2>
-<p>The page has been build by Malthe Holst Pedersen, Nikolaj Bjerg Bendsen and Ditte Lønborg Mikkelsen. We are all studying Data Science at Aarhus University and as part of one of our courses we were assigned to a project about species diversity. Together with our supervisors we were able to narrow the problem down to finding a method for combining abundance data and presence/absence data to obtain more accurate estimates for species diversity. To show our work, we have made this vignette, so other people are able to use the developed method.</p>
+<p>The page has been build by Malthe Holst Pedersen, Nikolaj Bjerg Bendsen and Ditte Lønborg Mikkelsen. We are all studying Data Science at Aarhus University and as part of one of our courses we were assigned to a project about species diversity. Together with our supervisors we were able to narrow the problem down to finding a method for combining abundance data and presence/absence data to obtain more accurate estimates for species diversity. To show our work we have made this vignette, so the reader is able to use the developed method.</p>
 <p><br><br> <br><br></p>
 <br>
 <p>
@@ -397,18 +397,18 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] downloadthis_0.2.1 workflowr_1.6.2   
+[1] downloadthis_0.2.1
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5       rstudioapi_0.11  knitr_1.30       magrittr_1.5    
- [5] R6_2.4.1         rlang_0.4.8      stringr_1.4.0    tools_4.0.3     
- [9] xfun_0.18        git2r_0.28.0     htmltools_0.5.0  ellipsis_0.3.1  
-[13] rprojroot_1.3-2  yaml_2.2.1       digest_0.6.25    tibble_3.0.4    
-[17] lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1    vctrs_0.3.4     
-[21] promises_1.1.1   fs_1.5.0         glue_1.4.2       evaluate_0.14   
-[25] rmarkdown_2.4    stringi_1.5.3    compiler_4.0.3   pillar_1.4.6    
-[29] generics_0.0.2   bsplus_0.1.2     backports_1.1.10 lubridate_1.7.9 
-[33] httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [5] workflowr_1.6.2  R6_2.4.1         rlang_0.4.8      stringr_1.4.0   
+ [9] tools_4.0.3      xfun_0.18        git2r_0.28.0     htmltools_0.5.0 
+[13] ellipsis_0.3.1   yaml_2.2.1       digest_0.6.25    rprojroot_1.3-2 
+[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
+[21] vctrs_0.3.4      promises_1.1.1   fs_1.5.0         glue_1.4.2      
+[25] evaluate_0.14    rmarkdown_2.4    stringi_1.5.3    compiler_4.0.3  
+[29] pillar_1.4.6     generics_0.0.2   bsplus_0.1.2     backports_1.1.10
+[33] lubridate_1.7.9  httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
 </div>
 
 

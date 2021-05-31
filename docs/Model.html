@@ -440,11 +440,11 @@ Introduction to function
 </h2>
 <p>The above theory of the beta binomial model is implemented in the function <code>beta_binomial_cover_update</code>.</p>
 <p><strong>Usage:</strong></p>
-<p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
+<p><code>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</code></p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><strong>cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</li>
-<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.</li>
+<li><strong>cover_data</strong>: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</li>
+<li><strong>presence_absence_data</strong>: A data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.</li>
 <li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
 </li>
 <li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this dataset is applied.</li>

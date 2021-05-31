@@ -56,7 +56,7 @@ colnames(Cover) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Specie
 
 <br>
 
-The presentation of each function will also contain a small example of how the function is applied. To do this, we again use a small constructed cover dataset and presence/absence dataset that was presented at [Introduction](introduction.html). We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
+The presentation of each function will also contain a small example of how the function is applied. To do this, we again use a small constructed cover dataset and presence/absence dataset that was presented at [Introduction](Introduction.html). We remind the reader that cover data describes how much of the surface area that would be covered by a specific species if it is projected down on the ground. In this example cover data will take the form of an integer value between 0 and 16, where 16 is full cover and 0 is no cover.
 
 An example of cover data could be:
 
@@ -100,12 +100,12 @@ Main function of this vignette. The function `beta_binomial_cover_update` is an 
 
 **Usage:**
 
-beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)
+`beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)`
 
 **Arguments:**
 
-* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
-* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **presence_absence_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.
 * **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
 * **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this dataset is applied.
 
@@ -126,24 +126,24 @@ The data from the outcome of the function looks like:
 kable(res1, "html") %>% kable_styling(font_size = 12)
 ```
 
-A more detailed description of the implementation of the model can be found at: [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function.
+A more detailed description of the implementation of the model can be found [here](bayesian_method_describtion.html). This page also includes the full code of the function.
 
 
 <h2> Functions for diversity estimates</h2>
 
 
-The functions below implement the different diversity estimates defined at [Diversity](Diversity.html). The code implementations of the functions can be found at [implementation](diversity_functions_code.html)
+The functions below implement the different diversity estimates defined at [Diversity](Diversity.html). The code implementations of the functions can be found at [Implementation](diversity_functions_code.html).
 
 <h3> Shannon index </h3>
 ------
 
 **Usage:**
 
-shannon(cover_data, remove_column = NULL)
+`shannon(cover_data, remove_column = NULL)`
 
 **Arguments:**
 
-* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
@@ -170,11 +170,11 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 
 **Usage:**
 
-simpson(cover_data, remove_column = NULL)
+`simpson(cover_data, remove_column = NULL)`
 
 **Arguments:**
 
-* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
@@ -200,11 +200,11 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 
 **Usage:**
 
-species_richness(presence_absence_data, remove_column = NULL)
+`species_richness(presence_absence_data, remove_column = NULL)`
 
 **Arguments:**
 
-* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
+* **presence_absence_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the specie is absent in the plot.
 
 * **remove_column**: An integer. In case the first columns in the presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain presence_absence_data on species.
 
@@ -230,11 +230,11 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ------
 **Usage:**
 
-hill_shannon(cover_data, remove_column = NULL)
+`hill_shannon(cover_data, remove_column = NULL)`
 
 **Arguments:**
 
-* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
@@ -260,11 +260,11 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 ------
 **Usage:**
 
-hill_simpson(cover_data, remove_column = NULL)
+`hill_simpson(cover_data, remove_column = NULL)`
 
 **Arguments:**
 
-* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
 
 * **remove_column**: An integer. In case the first columns in the cover_data contain data not about the species but rather information on the plots, these columns have to be removed. If remove_column is left empty it is assumed that all columns contain cover_data on species.
 
@@ -291,11 +291,11 @@ kable(v, "html") %>% kable_styling(full_width = FALSE, position = "left")
 <h2>Plot of different diversities</h2>
 ------
 
-This function plots different diversity estimates of a plot against some information of interest about the plot. 
+This function plots different diversity estimates of a nature area against other kinds of information about the nature area. 
 
 **Usage:**
 
-plot_diversity(data, diversities, plot_info, description = NULL)
+`plot_diversity(data, diversities, plot_info, description = NULL)`
 
 **Arguments:**
 
@@ -308,7 +308,7 @@ plot_diversity(data, diversities, plot_info, description = NULL)
 
 * Plots with different diversity estimates mapped against the plot information of interest.
 
-Further documentation and code implementation at [link](gradient_plot.html)
+Further documentation and code implementation can be found [here](gradient_plot.html).
 
 **Calculated example** 
 
@@ -331,37 +331,11 @@ plot_diversity(Cover2, c("Hill_simpson", "Species_richness", "Hill_shannon"), "p
 ```
 
 
-```{r, include=FALSE, eval=FALSE}
-<h1>diversity_index</h1>
-------
-
-A function using abundance data to calculate a diversity index using:
-
-$$
-\text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
-$$
-
-**Usage:**
-
-diversity_index(abundance_data, remove_columns = 0, l = 1)
-
-**Arguments:**
-
-* **abundance_data**: Abundance data in a data frame, with plots as rows and species as columns.
-* **remove_columns**: Exclude n column from the data analysis. i.e if the first 3 columns include data about the plot, and is not data about a species can they be excluded.
-* **l**: A number that specifies l in the formula.
-
-**Output**
-
-A vector with the diversity for each row in the abundance data.
-
-```
-
 
 <h2> Diversity profile comparison</h2>
 ------
 
-This function takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
+The function `Diversity_profile_comparison` takes in two data frames with cover data, one with the observed cover data, and one with the beta binomial cover data. Its output is a plot that shows different hill diversities as a function of the exponent $l$ in:
 
 $$
 \text{Hill diversity = }\left( \sum_{i=1}^{S} p_i (r_i)^{l}\right)^{1/l}
@@ -369,13 +343,13 @@ $$
 
 **Usage:**
 
-Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL)
+`Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL)`
 
 **Arguments:**
 
-* **data_observed**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
+* **data_observed**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given specie in a given plot.
 
-* **data_new**: Data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial cover data for a given specie in a given plot.
+* **data_new**: A data frame with plots as rows and species as columns. Each cell in the data frame contains the beta binomial cover data for a given specie in a given plot.
 
 * **plot**: An integer. Which plot should be used in the comparison, ie. which row should the data be taken from.
 
@@ -387,7 +361,7 @@ Diversity_profile_comparison(data_observed, data_new, plot, remove_column = NULL
 
 **Calculated example** 
 
-In the example will we use the function beta_binomial_cover_update to get the updated cover data.
+In the example we will use the function `beta_binomial_cover_update` to get the updated cover data.
 
 ```{r}
 beta_binomial_cover_data <- beta_binomial_cover_update(Cover, PresenceAbsence, n = 16 , remove_column = 0)

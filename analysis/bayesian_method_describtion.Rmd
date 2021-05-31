@@ -17,13 +17,13 @@ The implementation of the function "beta_binomial_cover_update" has the followin
 
 **Usage:**
 
-beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)
+`beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)`
 
 **Arguments:**
 
-* **Cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in a given plot.
-* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the species is absent in the plot.
-* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **presence_absence_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.
+* **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
 * **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this dataset is applied.
 
 **Output** 

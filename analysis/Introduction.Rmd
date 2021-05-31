@@ -21,12 +21,12 @@ source("code/function.R")
 ```
 
 
-Many methods for estimating species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given area – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate. It accounts not only for the presence of a species but also its abundance (measured either as number of individuals or for plants often as cover, i.e. how much of the ground area is covered by a given species). 
+Many methods for estimating species diversity within an area have been proposed in the literature, and which ones are used depends on the data available. For example, a common diversity measure is “Species richness” that is a count of the number of species present in a given area – irrespective of whether a species is common or rare. To include information on the abundance of individual species in the diversity measure, the Shannon index is a frequently used estimate. It accounts not only for the presence of a species but also its abundance (measured either as number of individuals, or for plants often as cover, i.e. how much of the ground area is covered by a given species). 
 <br>
 While the Shannon index often will give a better estimate of the diversity in a area, it requires available data of not only presence of a species but also of its abundance. In reality, such data are collected as samples of smaller areas meant to represent a larger area. In smaller areas, the abundance of each species present may be well sampled, but rarely do smaller areas contain all species present in the area. In this vignette, we will propose a new method with the goal to combine abundance (e.g cover) data often collected in smaller samples, with presence/absence data that is often collected over larger areas but lack the information of individual species’ abundance. Both types of data contain important information about the area that we would like to use to obtain more accurate diversity measures for a nature area. 
 
 <h1>Presentation of the NOVANA dataset</h1>
-We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further information about the the NOVANA can be found at https://novana.au.dk/. The NOVANA datasets consist of information from different "sites" across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat "Dry calcareous grasslands" from the year of 2009 that were included in the NOVANA dataset.
+We will be working with a subset of the Danish national survey NOVANA dataset as examples to show how this new method can be applied. Further information about the the NOVANA can be found at https://novana.au.dk/. The NOVANA datasets consist of information from different "sites" across Denmark. Each site is an area with some tertiary habitat. Below we have plotted all the sites with tertiary habitat "Dry calcareous grasslands" from the year of 2009 that are included in the NOVANA dataset.
 
 
 ```{r, warning= FALSE, include=FALSE}
@@ -54,7 +54,7 @@ ggplot(map1)+
   geom_point(data = data_6230_2009, aes(y=latitude, x = longtitude), alpha = .9, size =1.5, color = "black")+xlab("Longitude")+ylab("Latitude")
 ```
 
-Within each site a number of "plots" are placed. It is data from these plots that we will be studying in this vignette. Below we zoom in on a single site. The red dots are intended to visualize the plots in this specific site.
+Within each site a number of "plots" are placed. It is data from these plots we will be studying in this vignette. Below we zoom in on a single site. The red dots are intended to visualize the plots in this specific site.
 
 ```{r, echo = FALSE, warning= FALSE}
 #Chose a site
@@ -98,7 +98,7 @@ OpenStreetMap::autoplot.OpenStreetMap(map_test2) + geom_point(data = map_data, m
 Each plot consists of presence/absence data, cover data and a dataset including other metrics of the plot such as pH value of the soil. A plot is an area defined as a circle with radius of 5 meters. For each species included in the NOVANA dataset the presence/absence data for a plot keeps information on whether the species is found within the circle or not. This is indicated by a binary variable with 1 if found and 0 otherwise.
 
 In the center of the circle is a square with side length of 0.5 meters.
-Within this square the cover of each species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for each species is the number of pins it is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square.
+Within this square the cover of each species is projected down on the surface. A number of pins are placed uniformly onto the projection. The cover data for a species is the number of pins its projection is hit by. Thus, the cover data is a sample of the 2 dimensional projection of each species down on the surface. In the NOVANA dataset 16 pins are placed uniformly within the square.
 <br>
 This is called the pinpoint-method and is an estimate of the abundance of a species in the plot. However, this is only a small sample of the entire plot. As mentioned earlier this pinpoint-method may estimate the abundance of species within the square well, but it is unlikely that each species present in the plot is also present in the square.
 

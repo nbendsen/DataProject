@@ -51,12 +51,12 @@ rownames(PresenceAbsence) <- c("Plot 1", "Plot 2", "Plot 3", "Plot 4", "Plot 5",
 colnames(PresenceAbsence) <- c("Species 1", "Species 2", "Species 3", "Species 4", "Species 5", "Species 6", "Species 7", "Species 8", "Species 9")
 ```
 
-The first section of this page will present the ideas behind our proposed model to combine the information from cover data and presence/absence data of a plot. This section will present the beta-binomial cover update model for the reader and show how this can be applied to the problem described at [Introduction](Introduction.html). The second section of this page presents an introduction to the R function that implements the beta binomial cover update model. The last section of the page will include a simple example of the use of the model.
+The first section of this page will present the ideas behind our proposed model to combine the information from cover data and presence/absence data of a plot. This section will present the beta binomial cover update model for the reader and show how this can be applied to the problem described at [Introduction](Introduction.html). The second section of this page presents an introduction to the R function that implements the beta binomial cover update model. The last section of the page will include a simple example of the use of the model.
 
 <h2>Presentation of Bayesian model </h2>
 As mentioned on [Introduction](Introduction.html), plant diversity is often calculated by species richness using presence/absence data or some other diversity measure using abundance data. Cover data is an example of one type of abundance data. However, when we only use either the presence/absence data or the cover data we loose valuable information about the nature area that we are studying. Furthermore, we also want to take into account the fact that a species does not grow in a uniform distribution throughout an area but follow some spatially aggregated distribution. Each species has its own spatially aggregated distribution and we assume that these are independent of each other.
 
-In the following a nature area is defined as plots in NOVANA data (see  [Introduction](Introduction.html)). We will propose a method that uses the cover data from the small square in the plot and the presence/absence data of the entire plot to obtain an estimate of the species' cover in the entire plot. This will be done for each species that we know are present in the plot. Furthermore, the method will take the species spatially aggregated distribution into account. The assumption is that the proposed method will lead to a more accurate diversity estimate of the entire plot than if we only estimated the species diversity from the cover data of the small square or the presence/absence data of the entire plot. To achieve this goal we will apply a Bayesian framework and use a beta-binomial model. 
+In the following a nature area is defined as plots in NOVANA data (see  [Introduction](Introduction.html)). We will propose a method that uses the cover data from the small square in the plot and the presence/absence data of the entire plot to obtain an estimate of the species' cover in the entire plot. This will be done for each species that we know is present in the plot. Furthermore, the method will take the species spatially aggregated distribution into account. The assumption is that the proposed method will lead to a more accurate diversity estimate of the entire plot than if we only estimated the species diversity from the cover data of the small square or the presence/absence data of the entire plot. To achieve this goal we will apply a Bayesian framework and use a beta binomial model. 
 <br><br>
 From the general setup in Bayesian inference we get 
 $$
@@ -74,17 +74,17 @@ We use the binomial model as the likelihood function for each species that is pr
 $$
 \pi(\theta)= \frac{\Gamma (\alpha+\beta)}{\Gamma (\alpha) \Gamma(\beta)}\theta^{\alpha -1}(1-\theta)^{\beta-1}
 $$
-where both parameters $\alpha$, $\beta$ > 0. The beta distribution is defined on the interval $[0,1]$ and can therefore be used to model a species relative cover in a plot where we know that the species is present. This is a way to include the spatially aggregated distribution of a species in the model. The fact that we are able to include a spatially aggregated distribution for each species in the form of the prior is really the key idea of using the Bayesian framework.
+where both parameters $\alpha$, $\beta$ > 0. The beta distribution is defined on the interval $[0,1]$ and can therefore be used to model a species relative cover in a plot. This is a way to include the spatially aggregated distribution of a species in the model. The fact that we are able to include a spatially aggregated distribution for each species in the form of the prior is really the key idea of using the Bayesian framework.
 
-When working with Bayesian inference, one has to decide on the parameters $\alpha$ and $\beta$ in the prior distribution. This can be difficult and one will often choose the prior to be uninformative. However, we are interested in having the prior to reflect the spatial aggregated distribution of a species, and have therefore chosen to apply the empirical Bayes method. This works as follow: For each species we fit a beta distribution to all the cover data from all the plots where the species has a $1$ in the corresponding presence/absence data. That means we use cover data for the species from all the plots where the species is present. However, we only use the plots from the same tertiary habitat type as we assume that a species follows the same spatial aggregated distribution within a tertiary habitat. In the NOVANA data the cover data is a number between $0$ and $16$. Therefore, for us to be able to fit a beta distribution to this data we have to first divide the data by $16$ so that we get the relative cover for each species in the plot.
+When working with Bayesian inference, the parameters $\alpha$ and $\beta$ in the prior distribution has to be decided. This can be difficult and an uninformative prior will often be chosen. However, we are interested in having the prior to reflect the spatial aggregated distribution of a species, and have therefore chosen to apply the empirical Bayes method. This works as follows: For each species we fit a beta distribution to all the cover data from all the plots where the species has a $1$ in the corresponding presence/absence data. That means we use cover data for the species from all the plots where the species is present. However, we only use the plots from the same tertiary habitat type as we assume that a species follows the same spatial aggregated distribution within a tertiary habitat. In the NOVANA data the cover data is a number between $0$ and $16$. Therefore, for us to be able to fit a beta distribution to this data we have to first divide the data by $16$ so that we get the relative cover for a species in all plots where it is present.
 <br><br>
-On [Introduction](introduction.html) we mentioned that the cover of a species, if it is present in the small square of a plot, may be well sampled, but not all species within the entire plot is present in the small square. By fitting a beta distribution to the cover data from all the plots where the species is present, we should, hopefully, have enough cover data from plots where the species is present in the small square, that we are able to fit a beta distribution that reflects a reasonable spatial aggregated distribution of the species. We, thus, obtain a distribution that reflects our uncertainty about a species cover in a plot where the species is present. By following the ideas of Bayesian inference we can use our likelihood function of the observed cover data to update our prior belief of the cover of a species in the entire plot.
+On [Introduction](introduction.html) we mentioned that the cover of a species, if it is present in the small square of a plot, may be well sampled. However, not all species within the entire plot are present in the small square. By fitting a beta distribution to the cover data from all the plots where the species is present, we should, hopefully, have enough cover data from plots where the species is present in the small square, to fit a beta distribution that reflects a reasonable spatial aggregated distribution of the species. We, thus, obtain a distribution that reflects our uncertainty about a species cover in a plot where the species is present. By following the ideas of Bayesian inference we can use our likelihood function of the observed cover data to update our prior belief of the cover of a species in the entire plot.
 <br><br>
 From the likelihood function and the prior distribution we get that the posterior distribution will be an updated beta distribution. One posterior distribution for each species present in the plot. 
 $$
 \theta | (Y = y) \sim \text{Beta}(\alpha + y, \beta + n-y)
 $$
-When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the relative abundance for the species in the entire plot. 
+When the posterior distribution is found for a species in a given plot, we use the mean posterior as an estimate of the relative cover for the species in the entire plot. 
 
 <br>
 The mean of the posterior distribution is given by:
@@ -92,7 +92,7 @@ $$
 E\Big[\theta|(Y =y)\Big] = \frac{\alpha + y}{\alpha + y+\beta + n-y} = \frac{\alpha +y}{\alpha+\beta+n}
 $$
 
-The interpretation of the mean of the posterior distribution is that it is an estimator of the proportion of a plot that a species cover. We will multiply this with $n$ so that it is easier to compare with cover data from the small square. Thus, for each species present in the plot we will obtain a new cover estimate of the entire plot given by 
+The mean of the posterior distribution is interpreted as an estimator of the proportion of a plot that a species cover. We will multiply this with $n$ so that it is easier to compare with cover data from the small square. Thus, for each species present in the plot we will obtain a new cover estimate of the entire plot given by 
 
 $$
 \text{updated cover estimate} = n\cdot E\Big[\theta|(Y =y)\Big] = n\cdot \frac{\alpha +y}{\alpha+\beta+n}
@@ -105,16 +105,16 @@ The next step for users of this method will be, as an example, to apply some div
 
 <h2> Introduction to function </h2>
 
-The above theory of the beta-binomial model is implemented in the function `beta_binomial_cover_update`. 
+The above theory of the beta binomial model is implemented in the function `beta_binomial_cover_update`. 
 
 **Usage:**
 
-beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)
+`beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)`
 
 **Arguments:**
 
-* **cover_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
-* **presence_absence_data**: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.
+* **cover_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.
+* **presence_absence_data**: A data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.
 * **n**: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval $[0,1]$. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval $[0,1]$, one can just let n = 1.  
 * **remove_column**: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the  output. In the NOVANA dataset the first columns are "site", "plot", year" so remove_column = 3 when this dataset is applied.
 
@@ -124,7 +124,7 @@ beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_co
 
 <h2>Calculated example </h2>
 
-To illustrate how to use this function we use the mini examples of cover data and presence/absence data that we presented on [Introduction](Introduction.html). The cover data look like:
+To illustrate how to use this function we use the examples of cover data and presence/absence data that we presented on [Introduction](Introduction.html). The cover data looks like:
 <br>
 
 ```{r, , echo=FALSE}
@@ -158,7 +158,7 @@ E\Big[\theta|(Y = 0)\Big] = \frac{\alpha}{\alpha+\beta+16}
 $$
 Because both $\alpha$ and $\beta$ are positive, we will get a small value as the relative cover of the species in the plot. The higher we have estimated the value of $\alpha$ in the prior distribution compared to the $\beta$, the higher a value we will give the relative cover of the species in the plot despite the species not being observed in the small square.
 
-The opposite is seen for *"plot 7"*  with *"species 1"*. This has 16 in the cover data but only 15,59 in the beta-binomial cover dataset, i.e. even though we know the species cover all of the small square we don't believe that it covers the entire plot. This is because the prior distribution of the species plays role and contributes to the posterior distribution by taking the species' spatially aggregated distribution into account.
+The opposite is seen for *"plot 7"*  with *"species 1"*. This has 16 in the cover data but only 15,59 in the beta binomial cover dataset, i.e. even though we know that the species cover all of the small square we don't believe that it covers the entire plot. This is because the prior distribution of the species plays role and contributes to the posterior distribution by taking the species' spatially aggregated distribution into account.
 
 When the number of pins that hits a species is equal to the number of pins that was used we have $n$ = 16 and $y$ = 16. We can again find the mean of the posterior distribution for this case: 
 
@@ -166,6 +166,6 @@ $$
 E\Big[\theta|(Y = 16)\Big] = \frac{\alpha +16}{\alpha+\beta+16}
 $$
 
-This has the the effect of lowering the relative cover estimate of the entire plot slightly compared to the observed cover we have of the species within the small square. The level at which the cover estimate is lowered depends on the estimated value of $\beta$. The higher we have estimated the value of $\beta$ for the species compared to $\alpha$, the less we will estimate the relative cover of the species in the entire plot.
+This lowers the relative cover estimate of the entire plot slightly compared to the observed cover we have of the species within the small square. The level at which the cover estimate is lowered depends on the estimated value of $\beta$. The higher we have estimated the value of $\beta$ for the species compared to $\alpha$, the less we will estimate the relative cover of the species in the entire plot.
 
 A more detailed description of the implementation of the model can be found at [detailed description](bayesian_method_describtion.html). This page also includes the full code of the function with explanatory comments.

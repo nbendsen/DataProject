@@ -10,7 +10,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-The following is an implementation of the ppc() function that was used in the make visual inspections of the posterior predictive checks for some plots in [Model validatoin](model_validering.rmd).
+The following is an implementation of the `ppc` function that was used in the make visual inspections of the posterior predictive checks for some plots in [Model validatoin](model_validering.html).
 
 ```{r, eval=FALSE}
 library(fitdistrplus)

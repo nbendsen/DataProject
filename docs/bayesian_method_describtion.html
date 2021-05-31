@@ -410,12 +410,12 @@ div.tocify {
 
 <p>The implementation of the function “beta_binomial_cover_update” has the following properties.</p>
 <p><strong>Usage:</strong></p>
-<p>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</p>
+<p><code>beta_binomial_cover_update(cover_data, presence_absence_data, n = 16 , remove_column = 0)</code></p>
 <p><strong>Arguments:</strong></p>
 <ul>
-<li><strong>Cover_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in a given plot.</li>
-<li><strong>presence_absence_data</strong>: Data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the specie is present in the plot or a 0 if the species is absent in the plot.</li>
-<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not in the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
+<li><strong>cover_data</strong>: A data frame with plots as rows and species as columns. Each cell in the data frame contains cover data for a given species in the small square of a given plot.</li>
+<li><strong>presence_absence_data</strong>: A data frame with plots as rows and species as columns. Each cell in the data frame contains a 1 if the species is present in the plot or a 0 if the species is absent in the plot.</li>
+<li><strong>n</strong>: An integer. A number each cell in the cover data gets divided by if the cover data is not on the interval <span class="math inline">\([0,1]\)</span>. In the NOVANA dataset n = 16 secures this property. If the cover data is already on the interval <span class="math inline">\([0,1]\)</span>, one can just let n = 1.<br />
 </li>
 <li><strong>remove_column</strong>: An integer. In case the first columns in the cover_data and presence_absence_data contain data not about the species but rather information on the plots, these columns have to be removed. The numbers of columns to be removed must be the same in the cover_data and presence/absence_data. The removed columns will be included again in the output. In the NOVANA dataset the first columns are “site”, “plot”, year" so remove_column = 3 when this dataset is applied.</li>
 </ul>
@@ -607,18 +607,15 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
-other attached packages:
-[1] workflowr_1.6.2
-
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.5       rstudioapi_0.11  knitr_1.30       magrittr_1.5    
- [5] R6_2.4.1         rlang_0.4.8      stringr_1.4.0    tools_4.0.3     
- [9] xfun_0.18        git2r_0.28.0     htmltools_0.5.0  ellipsis_0.3.1  
-[13] rprojroot_1.3-2  yaml_2.2.1       digest_0.6.25    tibble_3.0.4    
-[17] lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1    vctrs_0.3.4     
-[21] promises_1.1.1   fs_1.5.0         glue_1.4.2       evaluate_0.14   
-[25] rmarkdown_2.4    stringi_1.5.3    compiler_4.0.3   pillar_1.4.6    
-[29] backports_1.1.10 httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
+ [5] workflowr_1.6.2  R6_2.4.1         rlang_0.4.8      stringr_1.4.0   
+ [9] tools_4.0.3      xfun_0.18        git2r_0.28.0     htmltools_0.5.0 
+[13] ellipsis_0.3.1   yaml_2.2.1       digest_0.6.25    rprojroot_1.3-2 
+[17] tibble_3.0.4     lifecycle_0.2.0  crayon_1.3.4     later_1.1.0.1   
+[21] vctrs_0.3.4      promises_1.1.1   fs_1.5.0         glue_1.4.2      
+[25] evaluate_0.14    rmarkdown_2.4    stringi_1.5.3    compiler_4.0.3  
+[29] pillar_1.4.6     backports_1.1.10 httpuv_1.5.5     pkgconfig_2.0.3 </code></pre>
 </div>
 
 

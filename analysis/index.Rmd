@@ -9,22 +9,22 @@ editor_options:
 ---
 <br>
 
-Species diversity is an important measure that can be used to describe the state of a nature area, and a change in the species diversity can be used to inform about the state of an area. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the [NOVANA](https://novana.au.dk) dataset to illustrate how this new method can be applied.
+Species diversity is an important measure that can be used to describe the state of a nature area. Often, species diversity is estimated based on either a presence/absence dataset from a larger area or an abundance dataset, e.g. cover data from a smaller area. In this vignette we propose a new method with the goal to combine the information from an abundance dataset with the information from a presence/absence dataset. The idea of combining both types of data is that they contain different information about species within a nature area, hence some information will be lost if only one type of data is used. We will be working with a subset of the [NOVANA](https://novana.au.dk) dataset to illustrate how this new method can be applied.
 
 
 
-Here you can gain an overview of the pages included in the vignette:
+Here the reader can gain an overview of the pages included in the vignette:
 
-* **[Introduction](introduction.html)**
+* **[Introduction](Introduction.html)**
   * The page will give a further introduction to the problem and an introduction to the NOVANA dataset. 
 * **[Bayesian model](Model.html)**
   * The page contains a description of the theory used to develop the model and a small introduction of how to use the model. 
 * **[Diversity](Diversity.html)**
-  * The page will give you an overview of the different ways to estimate diversity.
-* **[Functions](function_usage.html)**
-  * The page gives an overview of the functions used, what they take as input, what they give as result and how they can be used on an example dataset.
+  * The page will give an overview of the different ways to estimate diversity.
+* **[Functions](Function_usage.html)**
+  * The page gives an overview of the functions used, what they take as input, what they give as output and how they can be used on an example dataset.
 * **[Examples](example.html)**
-  * Examples of use cases for the Bayesian model using the NOVANA dataset. This will also include a comparison between using the developed method or only using observed abundance data for estimating species diversity. 
+  * Examples of applications of the Bayesian model using the NOVANA dataset. This will also include a comparison between using the developed method or only using observed abundance data for estimating species diversity. 
 * **[Model validation](model_validering.html)**
   * The page shows how the developed method is performing compared to the observed abundance data when calculating diversity estimates. This is accomplished by using posterior predictive checks.
 
@@ -53,7 +53,7 @@ More details on the functions can be found at [Functions](Function_usage.html).
 <h2>About us</h2>
 
 The page has been build by Malthe Holst Pedersen, Nikolaj Bjerg Bendsen and Ditte Lønborg Mikkelsen. We are all studying Data Science at Aarhus University and as part of one of our courses we were assigned to a project about species diversity. Together with our supervisors we were able to narrow the problem down to finding a method for combining abundance data and presence/absence data to obtain more accurate estimates for species diversity.
-To show our work, we have made this vignette, so other people are able to use the developed method.
+To show our work we have made this vignette, so the reader is able to use the developed method.
 
 <br><br>
 <br><br>

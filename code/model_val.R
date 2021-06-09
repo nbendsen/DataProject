@@ -75,8 +75,8 @@ ppc <- function(m, freq_data, cover_data){
   pvalue <- 2*min(sum(shannon>= T_static)/j, sum(shannon<= T_static)/j)
 
 
-  hist(shannon, xlim = c(min_val, max_val), main = sprintf("Histogram of simulated Shannon index for plot %d", n), xlab = "Shannon index")
-  legend("topright", legend = sprintf("Red line is \nobserved Shannon index\n\n The posterior predictive \n p-value = %.3f", pvalue),box.lty=0)
+  hist(shannon, xlim = c(min_val, max_val), main = sprintf("Histogram of simulated Hill Shannon diversity for plot %d", n), xlab = "Hill Shannon diversity")
+  legend("topright", legend = sprintf("Red line is observed \nHill Shannon diversity \n\n The posterior predictive \n p-value = %.3f", pvalue),box.lty=0)
   abline(v = T_static, col = "red" )
 
 }

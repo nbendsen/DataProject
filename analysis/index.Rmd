@@ -38,7 +38,7 @@ To download the functions from this vignette click on the button below. This wil
 library(downloadthis)
 
 download_link(
-  link = "https://raw.githubusercontent.com/nbendsen/DataProject/master/code/Beta_binomial_cover_update_function.R",
+  link = "https://raw.githubusercontent.com/nbendsen/DataProject/master/code/function.R",
   button_label = "Download HERE",
   button_type = "succes",
   has_icon = FALSE,
